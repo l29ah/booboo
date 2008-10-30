@@ -1,0 +1,79 @@
+9
+
+dir
+6244
+http://overlays.gentoo.org/svn/proj/sunrise/reviewed/media-video/sn9c1xx
+http://overlays.gentoo.org/svn/proj/sunrise
+
+
+
+2008-01-19T00:56:24.559778Z
+5469
+jokey
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+12608f7e-a915-0410-b2f3-ce240db1b126
+
+metadata.xml
+file
+
+
+
+
+2008-03-06T17:08:08.000000Z
+1e678929a9fec6632e227bdf2262e9a1
+2007-06-11T20:05:39.870590Z
+3887
+jokey
+
+files
+dir
+
+Manifest
+file
+
+
+
+
+2008-03-06T17:08:08.000000Z
+822d07d479c5bc8ee1320abec136c96b
+2008-01-19T00:56:24.559778Z
+5469
+jokey
+
+ChangeLog
+file
+
+
+
+
+2008-03-06T17:08:08.000000Z
+78190744df5450dfe7fd078192eab222
+2007-06-16T11:56:32.430764Z
+3951
+jakub
+
+sn9c1xx-1.48.ebuild
+file
+
+
+
+
+2008-03-06T17:08:08.000000Z
+17ec050b51c39fd6604213d14c836d23
+2008-01-19T00:56:24.559778Z
+5469
+jokey
+

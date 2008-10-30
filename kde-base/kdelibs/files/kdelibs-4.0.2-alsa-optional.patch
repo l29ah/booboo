@@ -1,0 +1,51 @@
+--- a/cmake/modules/FindAlsa.cmake
++++ b/cmake/modules/FindAlsa.cmake
+@@ -13,10 +13,14 @@
+ # Redistribution and use is allowed according to the terms of the BSD license.
+ # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+ 
++OPTION(WITH_Alsa "Support for the ALSA sound system." ON)
++
+ include(CheckIncludeFiles)
+ include(CheckIncludeFileCXX)
+ include(CheckLibraryExists)
+ 
++if(WITH_Alsa)
++
+ # Already done by toplevel
+ find_library(ASOUND_LIBRARY asound)
+ check_library_exists(asound snd_seq_create_simple_port ${ASOUND_LIBRARY} HAVE_LIBASOUND2)
+@@ -29,19 +33,22 @@
+ 
+ find_path(ALSA_INCLUDES alsa/version.h)
+ 
++endif(WITH_Alsa)
++
+ macro(ALSA_VERSION_STRING _result)
+     # check for version in alsa/version.h
+-    if(ALSA_INCLUDES)
++    if(WITH_Alsa AND ALSA_INCLUDES)
+         file(READ "${ALSA_INCLUDES}/alsa/version.h" _ALSA_VERSION_CONTENT)
+         string(REGEX REPLACE ".*SND_LIB_VERSION_STR.*\"(.*)\".*" "\\1" ${_result} ${_ALSA_VERSION_CONTENT})
+-    else(ALSA_INCLUDES)
++    else(WITH_Alsa AND ALSA_INCLUDES)
+         message(STATUS "ALSA version not known. ALSA output will probably not work correctly.")
+-    endif(ALSA_INCLUDES)
++    endif(WITH_Alsa AND ALSA_INCLUDES)
+ endmacro(ALSA_VERSION_STRING _result)
+ 
+ 
+ get_filename_component(_FIND_ALSA_MODULE_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
+ macro(ALSA_CONFIGURE_FILE _destFile)
++	if(WITH_Alsa)
+     check_include_files(sys/soundcard.h HAVE_SYS_SOUNDCARD_H)
+     check_include_files(machine/soundcard.h HAVE_MACHINE_SOUNDCARD_H)
+ 
+@@ -58,6 +65,7 @@
+         set(HAVE_SND_PCM_RESUME 1)
+     endif(ASOUND_HAS_SND_PCM_RESUME)
+ 
++	endif(WITH_Alsa)
+     configure_file(${_FIND_ALSA_MODULE_DIR}/config-alsa.h.cmake ${_destFile})
+ endmacro(ALSA_CONFIGURE_FILE _destFile)
+ 

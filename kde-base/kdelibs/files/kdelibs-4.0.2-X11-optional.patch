@@ -1,0 +1,102 @@
+ cmake/modules/FindX11.cmake |   44 +++++++++++++++++++++++++++++++++++++-----
+ 1 files changed, 38 insertions(+), 6 deletions(-)
+
+diff --git a/cmake/modules/FindX11.cmake b/cmake/modules/FindX11.cmake
+index 5fdbe82..b56f594 100644
+--- a/cmake/modules/FindX11.cmake
++++ b/cmake/modules/FindX11.cmake
+@@ -39,6 +39,34 @@
+ # Copyright (c) 2002 Kitware, Inc., Insight Consortium.  All rights reserved.
+ # See Copyright.txt or http://www.cmake.org/HTML/Copyright.html for details.
+ 
++
++# Look for an optional X11 package, and provide a cmake switch to disable searching for it.
++# 
++# Example usage: FIND_X11(X11_Xinerama X11/extensions/Xinerama.h Xinerama)
++# which provides: `cmake -DWITH_X11_Xinerama=OFF` to disable the check.
++#
++# You need to pass a header _and_ a library, in that order.
++MACRO (FIND_X11 _name _header _library )
++   OPTION(WITH_${_name} "Search for X11 package ${_name}" ON)
++
++   IF (WITH_${_name})
++      FIND_PATH(${_name}_INCLUDE_PATH  ${_header}    ${X11_INC_SEARCH_PATH})
++
++      FIND_LIBRARY(${_name}_LIB        ${_library}   ${X11_LIB_SEARCH_PATH})
++
++      IF (${_name}_INCLUDE_PATH AND ${_name}_LIB)
++         SET(${_name}_FOUND TRUE)
++         SET(_temp ${${_name}_INCLUDE_PATH})
++         SET(X11_INCLUDE_DIR ${X11_INCLUDE_DIR} ${_temp})
++      ENDIF (${_name}_INCLUDE_PATH AND ${_name}_LIB)
++
++   ELSE (WITH_${_name})
++      SET(${_name}_FOUND         FALSE     CACHE  BOOL      "${_name} found")
++      SET(${_name}_LIB           NOTFOUND  CACHE  FILEPATH  "Path to ${_name} library")
++      SET(${_name}_INCLUDE_PATH  NOTFOUND  CACHE  PATH      "Path to ${_name}")
++   ENDIF (WITH_${_name})
++ENDMACRO (FIND_X11)
++
+ IF (UNIX)
+   SET(X11_FOUND 0)
+   # X11 is never a framework and some header files may be
+@@ -75,7 +103,7 @@ IF (UNIX)
+   FIND_PATH(X11_Xaccessrules_INCLUDE_PATH X11/extensions/XKBrules.h  ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xaccessstr_INCLUDE_PATH X11/extensions/XKBstr.h      ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xau_INCLUDE_PATH X11/Xauth.h                         ${X11_INC_SEARCH_PATH})
+-  FIND_PATH(X11_Xcomposite_INCLUDE_PATH X11/extensions/Xcomposite.h  ${X11_INC_SEARCH_PATH})
++  #FIND_PATH(X11_Xcomposite_INCLUDE_PATH X11/extensions/Xcomposite.h  ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xcursor_INCLUDE_PATH X11/Xcursor/Xcursor.h           ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xdamage_INCLUDE_PATH X11/extensions/Xdamage.h        ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xdmcp_INCLUDE_PATH X11/Xdmcp.h                       ${X11_INC_SEARCH_PATH})
+@@ -84,7 +112,7 @@ IF (UNIX)
+   FIND_PATH(X11_xf86vmode_INCLUDE_PATH X11/extensions/xf86vmode.h    ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xfixes_INCLUDE_PATH X11/extensions/Xfixes.h          ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xft_INCLUDE_PATH X11/Xft/Xft.h                       ${X11_INC_SEARCH_PATH})
+-  FIND_PATH(X11_Xinerama_INCLUDE_PATH X11/extensions/Xinerama.h      ${X11_INC_SEARCH_PATH})
++  #FIND_PATH(X11_Xinerama_INCLUDE_PATH X11/extensions/Xinerama.h      ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xinput_INCLUDE_PATH X11/extensions/XInput.h          ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xkb_INCLUDE_PATH X11/extensions/XKB.h                ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xkblib_INCLUDE_PATH X11/XKBlib.h                     ${X11_INC_SEARCH_PATH})
+@@ -94,7 +122,7 @@ IF (UNIX)
+   FIND_PATH(X11_XShm_INCLUDE_PATH X11/extensions/XShm.h              ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xrandr_INCLUDE_PATH X11/extensions/Xrandr.h          ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xrender_INCLUDE_PATH X11/extensions/Xrender.h        ${X11_INC_SEARCH_PATH})
+-  FIND_PATH(X11_Xscreensaver_INCLUDE_PATH X11/extensions/scrnsaver.h ${X11_INC_SEARCH_PATH})
++  #FIND_PATH(X11_Xscreensaver_INCLUDE_PATH X11/extensions/scrnsaver.h ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xshape_INCLUDE_PATH X11/extensions/shape.h           ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xutil_INCLUDE_PATH X11/Xutil.h                       ${X11_INC_SEARCH_PATH})
+   FIND_PATH(X11_Xt_INCLUDE_PATH X11/Intrinsic.h                      ${X11_INC_SEARCH_PATH})
+@@ -107,25 +135,29 @@ IF (UNIX)
+   # Find additional X libraries. Keep list sorted by library name.
+   FIND_LIBRARY(X11_ICE_LIB ICE               ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xau_LIB Xau               ${X11_LIB_SEARCH_PATH})
+-  FIND_LIBRARY(X11_Xcomposite_LIB Xcomposite ${X11_LIB_SEARCH_PATH})
++  #FIND_LIBRARY(X11_Xcomposite_LIB Xcomposite ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xcursor_LIB Xcursor       ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xdamage_LIB Xdamage       ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xdmcp_LIB Xdmcp           ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xext_LIB Xext             ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xfixes_LIB Xfixes         ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xft_LIB Xft               ${X11_LIB_SEARCH_PATH})
+-  FIND_LIBRARY(X11_Xinerama_LIB Xinerama     ${X11_LIB_SEARCH_PATH})
++  #FIND_LIBRARY(X11_Xinerama_LIB Xinerama     ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xinput_LIB Xi             ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xkbfile_LIB xkbfile       ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xpm_LIB Xpm               ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xrandr_LIB Xrandr         ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xrender_LIB Xrender       ${X11_LIB_SEARCH_PATH})
+-  FIND_LIBRARY(X11_Xscreensaver_LIB Xss      ${X11_LIB_SEARCH_PATH})
++  #FIND_LIBRARY(X11_Xscreensaver_LIB Xss      ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xt_LIB Xt                 ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_XTest_LIB Xtst            ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xv_LIB Xv                 ${X11_LIB_SEARCH_PATH})
+   FIND_LIBRARY(X11_Xxf86misc_LIB Xxf86misc   ${X11_LIB_SEARCH_PATH})
+ 
++  FIND_X11(X11_Xcomposite X11/extensions/Xcomposite.h Xcomposite)
++  FIND_X11(X11_Xinerama X11/extensions/Xinerama.h Xinerama)
++  FIND_X11(X11_Xscreensaver X11/extensions/scrnsaver.h Xss)
++
+   SET(X11_LIBRARY_DIR "")
+   IF(X11_X11_LIB)
+     GET_FILENAME_COMPONENT(X11_LIBRARY_DIR ${X11_X11_LIB} PATH)

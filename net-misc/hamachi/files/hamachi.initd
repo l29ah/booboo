@@ -1,0 +1,58 @@
+#!/sbin/runscript
+# Copyright 1999-2006 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+opts="start stop status init"
+
+startup="-c $CONFDIR start &>${LOG} &"
+
+depend() {
+        need net tuncfg
+}
+
+start() {
+	check_config
+	ebegin "Starting hamachi"
+	start-stop-daemon --quiet --start -c ${USER} --exec /usr/bin/hamachi -- $startup
+                result=$?
+
+	if [ $result == 0 ]; then
+                sleep 1
+                chown -R $USER:$GROUP $CONFDIR/ipc_sock
+                chmod g+rwx $CONFDIR/ipc_sock
+                /usr/bin/hamachi -c $CONFDIR login 
+                if [ -z "$(/usr/bin/hamachi -c $CONFDIR | grep 'logged in')" ]; then
+                        result=1
+                        /usr/bin/hamachi -c $CONFDIR stop &>${LOG}
+                fi
+	fi;
+	eend $result
+}
+
+stop() {
+	ebegin "Stopping hamachi"
+	/usr/bin/hamachi -c $CONFDIR logout &>${LOG}
+	/usr/bin/hamachi -c $CONFDIR stop &>${LOG}
+	eend $?
+}
+
+init() {
+	ebegin "Making initial configuration"
+	/usr/bin/hamachi-init -c $CONFDIR 2>&1> /dev/null
+        chown -R $USER:$GROUP $CONFDIR
+        chmod g+rx $CONFDIR
+	eend $?
+}
+
+check_config() { 
+	if [ ! -d $CONFDIR ] ; then
+		einfo "It seems you don't have configured hamachi yet. Running init now"
+		init
+	fi
+}
+
+status() {
+	service_started "${myservice}" || return 0
+        /usr/bin/hamachi -c $CONFDIR
+        /usr/bin/hamachi -c $CONFDIR list
+}

@@ -1,0 +1,34 @@
+# ChangeLog for media-video/sn9c1xx
+# Copyright 1999-2007 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  15 Jun 2007; Ali Polatel (hawking) <polatel@gmail.com>
+  -sn9c1xx-1.47.ebuild, -files/sn9c1xx-1.47-destdir.patch,
+  -files/sn9c1xx-1.47-kbuild.patch:
+  drop old
+
+  12 Jun 2007; Auke Booij (tulcod) <auke.booij@gmail.com>
+  +sn9c1xx-1.48.ebuild, +files/sn9c1xx-1.48-kbuild.patch:
+  Ebuild update 1.47 -> 1.48
+
+  11 Jun 2007; Auke Booij (tulcod) <auke.booij@gmail.com>
+  sn9c1xx-1.47.ebuild, files/sn9c1xx-1.47-destdir.patch:
+  =media-video/sn9c1xx-1.47 is now hosted by DrEeevil, thx! (still
+  corresponding with the maker too look for options)
+
+  11 Jun 2007; Auke Booij (tulcod) <auke.booij@gmail.com>
+  +files/sn9c1xx-1.47-destdir.patch, +files/sn9c1xx-1.47-kbuild.patch:
+  Ebuild updated. 1.45 seems to be outdated and did not work when I uploaded
+  the ebuild. This is 1.47, I am corresponding with the maker to see if more
+  versions can be kept online
+
+  11 Jun 2007; Auke Booij (tulcod) <auke.booij@gmail.com>
+  -sn9c1xx-1.45.ebuild, +sn9c1xx-1.47.ebuild:
+  Update for media-video/sn9c1xx, this should be the latest. 1.45 is out of
+  date and cannot be installed because the tarball was removed from the server
+
+  11 Jun 2007; Auke Booij (tulcod) <auke.booij@gmail.com>
+  +sn9c1xx-1.45.ebuild, +files/sn9c1xx-1.45-destdir.patch,
+  +files/sn9c1xx-1.45-kbuild.patch, +metadata.xml:
+  New Ebuild for bug 180853 thanks to shillelagh and DrEevil
+

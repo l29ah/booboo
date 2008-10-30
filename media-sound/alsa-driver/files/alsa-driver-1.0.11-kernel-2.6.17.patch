@@ -1,0 +1,30 @@
+In kernel 2.6.17 non-counting semaphores are replaced by mutexes, this patch
+makes serialmidi driver to work with the changes.
+Index: alsa-driver-1.0.11/drivers/serialmidi.c
+===================================================================
+--- alsa-driver-1.0.11.orig/drivers/serialmidi.c
++++ alsa-driver-1.0.11/drivers/serialmidi.c
+@@ -314,12 +314,12 @@ static void tx_loop(serialmidi_t *serial
+ 	if (driver == NULL)
+ 		return;
+ 
+-	if (down_trylock(&tty->atomic_write))
++	if (!mutex_trylock(&tty->atomic_write_lock))
+ 		return;
+ 	while (1) {
+ 		count = driver->write_room(tty);
+ 		if (count <= 0) {
+-			up(&tty->atomic_write);
++			mutex_unlock(&tty->atomic_write_lock);
+ 			return;
+ 		}
+ 		count = count > TX_BUF_SIZE ? TX_BUF_SIZE : count;
+@@ -336,7 +336,7 @@ static void tx_loop(serialmidi_t *serial
+ 			break;
+ 		}
+ 	}
+-	up(&tty->atomic_write);
++	mutex_unlock(&tty->atomic_write_lock);
+ }
+ 
+ static void ldisc_write_wakeup(struct tty_struct *tty)

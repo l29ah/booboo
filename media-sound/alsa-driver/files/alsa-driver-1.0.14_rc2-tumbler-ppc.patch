@@ -1,0 +1,41 @@
+Index: alsa-driver-1.0.14rc2/ppc/tumbler.patch
+===================================================================
+--- alsa-driver-1.0.14rc2.orig/ppc/tumbler.patch
++++ alsa-driver-1.0.14rc2/ppc/tumbler.patch
+@@ -5,7 +5,7 @@
+  /*
+   * PMac Tumbler/Snapper lowlevel functions
+   *
+-@@ -940,7 +941,11 @@
++@@ -940,8 +941,12 @@
+  	}
+  }
+  
+@@ -14,6 +14,7 @@
+ +#else
+  static struct work_struct device_change;
+ +#endif
++ static struct snd_pmac *device_change_chip;
+  
+  static void device_change_handler(void *self)
+  {
+@@ -29,15 +30,16 @@
+  	}
+  }
+  #endif /* PMAC_SUPPORT_AUTOMUTE */
+-@@ -1416,7 +1425,11 @@
++@@ -1416,8 +1425,12 @@
+  	chip->resume = tumbler_resume;
+  #endif
+  
+ +#if LINUX_VERSION_CODE < KERNEL_VERSION(2,5,0)
+-+	INIT_TQUEUE(&device_change, device_change_handler, (void *)chip);
+++	INIT_TQUEUE(&device_change, device_change_handler);
+ +#else
+- 	INIT_WORK(&device_change, device_change_handler, (void *)chip);
++ 	INIT_WORK(&device_change, device_change_handler);
+ +#endif
++ 	device_change_chip = chip;
+  
+  #ifdef PMAC_SUPPORT_AUTOMUTE
+  	if ((mix->headphone_irq >=0 || mix->lineout_irq >= 0)

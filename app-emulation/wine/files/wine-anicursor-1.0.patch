@@ -1,0 +1,501 @@
+diff -Naur wine-1.0/dlls/user32/cursoricon.c wine-1.0-cursor-patch/dlls/user32/cursoricon.c
+--- wine-1.0/dlls/user32/cursoricon.c	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/user32/cursoricon.c	2008-06-27 11:25:37.000000000 +1200
+@@ -660,6 +660,93 @@
+     return &dir->idEntries[n];
+ }
+ 
++/* 
++ * Functions for decoding animated cursors.
++ * Currently doesn't support well ANIs with SEQUENCE or RATE chunks.
++ * see: http://www.oreilly.com/www/centers/gff/formats/micriff/
++ */
++
++typedef DWORD FOURCC;
++typedef FOURCC CKID;
++typedef DWORD CKSIZE;
++
++typedef struct {
++    CKID     ckID;
++    CKSIZE   ckSize;
++    BYTE     ckData[1];
++} CK;
++
++typedef struct
++{
++    DWORD HeaderSize;   /* Size of the subchunk data in bytes */
++    DWORD NumFrames;    /* Number of icon or cursor frames */
++    DWORD NumSteps;     /* Number of steps in the animation */
++    DWORD Width;        /* Width of frame in pixels */
++    DWORD Height;       /* Height of frame in pixels */
++    DWORD BitCount;     /* Number of bits in the frame pixels */
++    DWORD NumPlanes;    /* Number of color planes in the frame data */
++    DWORD DisplayRate;  /* Default frame display rate */
++    DWORD Flags;        /* File attributes flags */
++} ANIHEADER;
++
++typedef struct 
++{
++    ANIHEADER *anih;
++    LPBYTE *ani_frames;
++    DWORD ani_frame_idx;
++} ANIRIFFDATA;
++
++static void decodeRIFF(LPBYTE bytes, DWORD size, ANIRIFFDATA *data)
++{
++    CK *chunk = (CK*)bytes;
++    CKSIZE sizeWithPad = chunk->ckSize % 2 ? chunk->ckSize + 1 : chunk->ckSize;
++    switch(chunk->ckID) 
++    {
++    case 0x46464952:  /* RIFF */
++        decodeRIFF(chunk->ckData + 4, chunk->ckSize - 4, data);
++        break;
++    case 0x5453494c:  /* LIST */
++        decodeRIFF(chunk->ckData + 4, chunk->ckSize - 4, data);
++        break;
++    case 0x68696e61: /* anih */
++        data->anih = (ANIHEADER*)chunk->ckData;
++        data->ani_frames = (LPBYTE *)HeapAlloc( GetProcessHeap(), 0, sizeof(LPBYTE) * data->anih->NumFrames );
++        break;
++    case 0x6e6f6369: /* icon */
++        if (data->anih && data->ani_frame_idx < data->anih->NumFrames)
++            data->ani_frames[data->ani_frame_idx++] = chunk->ckData;
++        break;
++    }
++    if (sizeWithPad + 8 < size)
++        decodeRIFF(bytes + 8 + sizeWithPad, size - 8 - sizeWithPad, data);
++}
++
++/* frames and nFrames are out parameters, it is the caller's responsibility to 
++ * free *frames when done.  Do not use *frames after freeing data.
++ */
++static void decodeAnimatedCursor(LPBYTE bits, DWORD size, LPBYTE **frames, DWORD *nFrames, DWORD *delay)
++{
++    ANIRIFFDATA data;
++    data.anih = NULL;
++    data.ani_frames = NULL;
++    data.ani_frame_idx = 0;
++
++    decodeRIFF(bits, size, &data);
++
++    *nFrames = 0;
++    if (data.anih) 
++    {
++        *frames = data.ani_frames;
++        *nFrames = data.anih->NumFrames;
++        *delay = data.anih->DisplayRate * 1000 / 60;
++    }
++}
++
++static BOOL isAnimatedCursor(LPBYTE bits)
++{
++    return bits[0] == 'R' && bits[1] == 'I' && bits[2] == 'F' && bits[3] == 'F';
++}
++
+ /**********************************************************************
+  *		CreateIconFromResourceEx (USER32.@)
+  *
+@@ -694,8 +781,72 @@
+     }
+ 
+     if (bIcon)
++    {
+         bmi = (BITMAPINFO *)bits;
+-    else /* get the hotspot */
++        hotspot.x = 0;
++        hotspot.y = 0;
++    }
++    else if (isAnimatedCursor(bits))
++    {
++        HICON hFirstIcon = 0;
++        LPBYTE *frames = NULL;
++        DWORD nFrames;
++        DWORD delay;
++
++        decodeAnimatedCursor(bits, cbSize, &frames, &nFrames, &delay);
++
++        if (frames) 
++        {
++            DWORD i;
++            HICON hCurIcon = 0;
++
++            for (i = 0; i < nFrames; i++) 
++            {
++                CURSORICONFILEDIR *dir;
++                CURSORICONFILEDIRENTRY *entry;
++                LPBYTE bits = frames[i];
++
++                dir = (CURSORICONFILEDIR*) bits;
++                entry = CURSORICON_FindBestCursorFile( dir, width, height, 1 );
++                if (entry) 
++                {
++                    HICON hNextIcon = CreateIconFromResourceEx( &bits[entry->dwDIBOffset], entry->dwDIBSize, TRUE, 0x00030000, 0, 0, 0 );
++
++                    if (hNextIcon == NULL) 
++                    {
++                        continue;
++                    } 
++                    else 
++                    {
++                        if (hCurIcon) 
++                        {
++                            CURSORICONINFO *info = (CURSORICONINFO *)GlobalLock16( HICON_16(hCurIcon) );
++                            CURSORICONINFO_NEXT(info) = HICON_16(hNextIcon);
++                            CURSORICONINFO_DELAY(info) = delay;
++                            GlobalUnlock16( HICON_16(hCurIcon) );
++                        }
++                        hCurIcon = hNextIcon;
++                    }
++                    
++                    if (i == 0)
++                        hFirstIcon = hNextIcon;
++                }
++            }
++
++            if (hCurIcon) 
++            {
++                CURSORICONINFO *info = (CURSORICONINFO *)GlobalLock16( HICON_16(hCurIcon) );
++                CURSORICONINFO_DELAY(info) = delay;
++                GlobalUnlock16( HICON_16(hCurIcon) );
++            }
++
++            /* and cleanup */
++            HeapFree( GetProcessHeap(), 0, frames );
++        }
++
++        return hFirstIcon;
++    }
++    else /* get the hotspot */ 
+     {
+         POINT16 *pt = (POINT16 *)bits;
+         hotspot = *pt;
+@@ -845,7 +996,8 @@
+     sizeAnd = bmpAnd.bmHeight * bmpAnd.bmWidthBytes;
+ 
+     hObj = GlobalAlloc16( GMEM_MOVEABLE,
+-                     sizeof(CURSORICONINFO) + sizeXor + sizeAnd );
++                     sizeof(CURSORICONINFO) + sizeXor + sizeAnd + 
++                     sizeof(HICON16) + sizeof(DWORD) );
+     if (hObj)
+     {
+         CURSORICONINFO *info;
+@@ -860,9 +1012,13 @@
+         info->bBitsPerPixel = bmpXor.bmBitsPixel;
+ 
+         /* Transfer the bitmap bits to the CURSORICONINFO structure */
+-
+         GetBitmapBits( hAndBits, sizeAnd, (char *)(info + 1) );
+         GetBitmapBits( hXorBits, sizeXor, (char *)(info + 1) + sizeAnd );
++
++        /* Set animated sequence info to none */
++        CURSORICONINFO_NEXT(info) = 0;
++        CURSORICONINFO_DELAY(info) = 0;
++
+         GlobalUnlock16( hObj );
+     }
+ 
+@@ -881,7 +1037,6 @@
+     return CreateIconFromResourceEx( bits, cbSize, bIcon, dwVersion, 0,0,0);
+ }
+ 
+-
+ static HICON CURSORICON_LoadFromFile( LPCWSTR filename,
+                              INT width, INT height, INT colors,
+                              BOOL fCursor, UINT loadflags)
+@@ -898,10 +1053,10 @@
+     if (!bits)
+         return hIcon;
+ 
+-    /* Check for .ani. */
+-    if (memcmp( bits, "RIFF", 4 ) == 0)
++    if (isAnimatedCursor(bits))
+     {
+-        FIXME("No support for .ani cursors.\n");
++        hIcon = CreateIconFromResourceEx( bits, filesize, !fCursor, 0x00030000, 
++                                            0, 0, loadflags );
+         goto end;
+     }
+ 
+@@ -1468,7 +1623,8 @@
+     /* Change the cursor shape only if it is visible */
+     if (thread_info->cursor_count >= 0)
+     {
+-        USER_Driver->pSetCursor( (CURSORICONINFO*)GlobalLock16(HCURSOR_16(hCursor)) );
++        CURSORICONINFO *info = (CURSORICONINFO*)GlobalLock16(HCURSOR_16(hCursor));
++        USER_Driver->pSetCursor( info );
+         GlobalUnlock16(HCURSOR_16(hCursor));
+     }
+     return hOldCursor;
+diff -Naur wine-1.0/dlls/wined3d/drawprim.c wine-1.0-cursor-patch/dlls/wined3d/drawprim.c
+--- wine-1.0/dlls/wined3d/drawprim.c	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/wined3d/drawprim.c	2008-06-27 11:25:37.000000000 +1200
+@@ -769,10 +769,12 @@
+     /* TODO: Make this work for modes other than FBO */
+     if (wined3d_settings.offscreen_rendering_mode != ORM_FBO) return;
+ 
++#if 0
+     if (depth_stencil->current_renderbuffer) {
+         FIXME("Not supported with fixed up depth stencil\n");
+         return;
+     }
++#endif
+ 
+     if (This->render_offscreen) {
+         GLint old_binding = 0;
+diff -Naur wine-1.0/dlls/wined3d/glsl_shader.c wine-1.0-cursor-patch/dlls/wined3d/glsl_shader.c
+--- wine-1.0/dlls/wined3d/glsl_shader.c	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/wined3d/glsl_shader.c	2008-06-27 11:25:37.000000000 +1200
+@@ -54,7 +54,7 @@
+ } glsl_sample_function_t;
+ 
+ /** Prints the GLSL info log which will contain error messages if they exist */
+-void print_glsl_info_log(WineD3D_GL_Info *gl_info, GLhandleARB obj) {
++void print_glsl_info_log(WineD3D_GL_Info *gl_info, GLhandleARB obj, char *from) {
+     
+     int infologLength = 0;
+     char *infoLog;
+@@ -95,9 +95,9 @@
+             }
+         }
+         if(is_spam) {
+-            TRACE("Spam received from GLSL shader #%u: %s\n", obj, debugstr_a(infoLog));
++            TRACE("Spam received from GLSL shader[%s] #%u: %s\n", from, obj, debugstr_a(infoLog));
+         } else {
+-            FIXME("Error received from GLSL shader #%u: %s\n", obj, debugstr_a(infoLog));
++            FIXME("Error received from GLSL shader[%s] #%u: %s\n", from, obj, debugstr_a(infoLog));
+         }
+         HeapFree(GetProcessHeap(), 0, infoLog);
+     }
+@@ -3184,7 +3184,7 @@
+     /* Link the program */
+     TRACE("Linking GLSL shader program %u\n", programId);
+     GL_EXTCALL(glLinkProgramARB(programId));
+-    print_glsl_info_log(&GLINFO_LOCATION, programId);
++    print_glsl_info_log(&GLINFO_LOCATION, programId, "set_glsl_shader_program");
+ 
+     entry->vuniformF_locations = HeapAlloc(GetProcessHeap(), 0, sizeof(GLhandleARB) * GL_LIMITS(vshader_constantsF));
+     for (i = 0; i < GL_LIMITS(vshader_constantsF); ++i) {
+@@ -3291,7 +3291,7 @@
+     GL_EXTCALL(glAttachObjectARB(program_id, pshader_id));
+     GL_EXTCALL(glLinkProgramARB(program_id));
+ 
+-    print_glsl_info_log(&GLINFO_LOCATION, program_id);
++    print_glsl_info_log(&GLINFO_LOCATION, program_id, "create_glsl_blt_shader");
+ 
+     /* Once linked we can mark the shaders for deletion. They will be deleted once the program
+      * is destroyed
+@@ -3501,7 +3501,7 @@
+     TRACE("Compiling shader object %u\n", shader_obj);
+     GL_EXTCALL(glShaderSourceARB(shader_obj, 1, (const char**)&buffer->buffer, NULL));
+     GL_EXTCALL(glCompileShaderARB(shader_obj));
+-    print_glsl_info_log(&GLINFO_LOCATION, shader_obj);
++    print_glsl_info_log(&GLINFO_LOCATION, shader_obj, "shader_glsl_generate_pshader");
+ 
+     /* Store the shader object */
+     This->baseShader.prgId = shader_obj;
+@@ -3556,7 +3556,7 @@
+     TRACE("Compiling shader object %u\n", shader_obj);
+     GL_EXTCALL(glShaderSourceARB(shader_obj, 1, (const char**)&buffer->buffer, NULL));
+     GL_EXTCALL(glCompileShaderARB(shader_obj));
+-    print_glsl_info_log(&GLINFO_LOCATION, shader_obj);
++    print_glsl_info_log(&GLINFO_LOCATION, shader_obj , "shader_glsl_generate_vshader");
+ 
+     /* Store the shader object */
+     This->baseShader.prgId = shader_obj;
+diff -Naur wine-1.0/dlls/wined3d/state.c wine-1.0-cursor-patch/dlls/wined3d/state.c
+--- wine-1.0/dlls/wined3d/state.c	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/wined3d/state.c	2008-06-27 11:25:37.000000000 +1200
+@@ -976,7 +976,7 @@
+     if (use_vs(stateblock->wineD3DDevice)
+             && ((IWineD3DVertexShaderImpl *)stateblock->vertexShader)->baseShader.reg_maps.fog) {
+         if( stateblock->renderState[WINED3DRS_FOGTABLEMODE] != WINED3DFOG_NONE ) {
+-            if(!is_ps3) FIXME("Implement table fog for foggy vertex shader\n");
++/*            if(!is_ps3) FIXME("Implement table fog for foggy vertex shader\n");*/
+             /* Disable fog */
+             fogenable = FALSE;
+         } else {
+diff -Naur wine-1.0/dlls/wined3d/surface.c wine-1.0-cursor-patch/dlls/wined3d/surface.c
+--- wine-1.0/dlls/wined3d/surface.c	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/wined3d/surface.c	2008-06-27 11:25:37.000000000 +1200
+@@ -896,6 +896,7 @@
+     ENTER_GL();
+ 
+     glGetIntegerv(GL_READ_BUFFER, &prevRead);
++    checkGLcall("glGetIntegerv");
+ 
+     /* Select the correct read buffer, and give some debug output.
+      * There is no need to keep track of the current read buffer or reset it, every part of the code
+@@ -907,6 +908,7 @@
+          */
+         TRACE("Locking offscreen render target\n");
+         glReadBuffer(device->offscreenBuffer);
++        checkGLcall("glReadBuffer");
+     } else {
+         GLenum buffer = surface_get_gl_buffer((IWineD3DSurface *) This, (IWineD3DSwapChain *)swapchain);
+         TRACE("Locking %#x buffer\n", buffer);
+@@ -929,6 +931,7 @@
+      * this code from getting called in such cases or perhaps
+      * we can use FBOs */
+ 
++    checkGLcall("before glCopyTexSubImage2D");
+     glCopyTexSubImage2D(This->glDescription.target,
+                         This->glDescription.level,
+                         0, 0, 0, 0,
+@@ -4184,9 +4187,10 @@
+             /* The only place where LoadTexture() might get called when isInDraw=1
+              * is ActivateContext where lastActiveRenderTarget is preloaded.
+              */
++#if 0
+             if(iface == device->lastActiveRenderTarget && device->isInDraw)
+                 ERR("Reading back render target but SFLAG_INDRAWABLE not set\n");
+-
++#endif
+             /* Otherwise: System memory copy must be most up to date */
+ 
+             if(This->CKeyFlags & WINEDDSD_CKSRCBLT) {
+diff -Naur wine-1.0/dlls/wined3d/wined3d_private.h wine-1.0-cursor-patch/dlls/wined3d/wined3d_private.h
+--- wine-1.0/dlls/wined3d/wined3d_private.h	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/wined3d/wined3d_private.h	2008-06-27 11:25:37.000000000 +1200
+@@ -2199,7 +2199,8 @@
+ 
+ extern void print_glsl_info_log(
+     WineD3D_GL_Info *gl_info,
+-    GLhandleARB obj);
++    GLhandleARB obj,
++    char *from);
+ 
+ static inline int shader_get_regtype(const DWORD param) {
+     return (((param & WINED3DSP_REGTYPE_MASK) >> WINED3DSP_REGTYPE_SHIFT) |
+diff -Naur wine-1.0/dlls/winex11.drv/mouse.c wine-1.0-cursor-patch/dlls/winex11.drv/mouse.c
+--- wine-1.0/dlls/winex11.drv/mouse.c	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/dlls/winex11.drv/mouse.c	2008-06-27 11:25:37.000000000 +1200
+@@ -32,6 +32,9 @@
+ MAKE_FUNCPTR(XcursorImageCreate);
+ MAKE_FUNCPTR(XcursorImageDestroy);
+ MAKE_FUNCPTR(XcursorImageLoadCursor);
++MAKE_FUNCPTR(XcursorImagesCreate);
++MAKE_FUNCPTR(XcursorImagesDestroy);
++MAKE_FUNCPTR(XcursorImagesLoadCursor);
+ # undef MAKE_FUNCPTR
+ #endif /* SONAME_LIBXCURSOR */
+ 
+@@ -112,6 +115,9 @@
+     LOAD_FUNCPTR(XcursorImageCreate);
+     LOAD_FUNCPTR(XcursorImageDestroy);
+     LOAD_FUNCPTR(XcursorImageLoadCursor);
++    LOAD_FUNCPTR(XcursorImagesCreate);
++    LOAD_FUNCPTR(XcursorImagesDestroy);
++    LOAD_FUNCPTR(XcursorImagesLoadCursor);
+ #undef LOAD_FUNCPTR
+ #endif /* SONAME_LIBXCURSOR */
+ }
+@@ -542,7 +548,6 @@
+     return image;
+ }
+ 
+-
+ /***********************************************************************
+  *              create_xcursor_cursor
+  *
+@@ -552,6 +557,9 @@
+ {
+     Cursor cursor;
+     XcursorImage *image;
++    XcursorImages *images;
++    int nframes;
++    HICON16 hNext, hNextNext;
+ 
+     if (!ptr) /* Create an empty cursor */
+     {
+@@ -565,6 +573,70 @@
+         return cursor;
+     }
+ 
++    nframes = 0;
++    hNext = 0;
++    do {
++         if (hNext == 0)
++             hNext = CURSORICONINFO_NEXT(ptr);
++         else 
++         {
++             CURSORICONINFO *p = GlobalLock16(hNext);
++             if (p)
++             {
++                 hNextNext = CURSORICONINFO_NEXT(p);
++                 GlobalUnlock16(hNext);
++                 hNext = hNextNext;
++             }
++             else
++                 hNext = 0;
++         }
++     
++         nframes++;
++     } while (hNext);
++ 
++     images = pXcursorImagesCreate( nframes ); 
++ 
++     hNext = 0;
++     do {
++         CURSORICONINFO *info = ptr;
++         if (hNext)
++         {
++             info = GlobalLock16(hNext);
++             if (!info)
++                 break;
++         }
++ 
++         image = create_cursor_image( info );
++         if (!image) 
++         {
++             pXcursorImagesDestroy( images );
++             GlobalUnlock16(hNext);
++             return 0;
++         }
++ 
++         /* Make sure hotspot is valid */        
++         image->xhot = info->ptHotSpot.x;
++         image->yhot = info->ptHotSpot.y;
++
++         if (image->xhot >= image->width ||
++             image->yhot >= image->height)
++         {
++             image->xhot = image->width / 2;
++             image->yhot = image->height / 2;
++         }
++ 
++         image->delay = CURSORICONINFO_DELAY(info);
++ 
++         images->images[images->nimage++] = image;
++  
++         hNextNext = CURSORICONINFO_NEXT(info);
++         GlobalUnlock16(hNext);
++         hNext = hNextNext;
++     } while (hNext);
++  
++     cursor = pXcursorImagesLoadCursor( display, images );
++     pXcursorImagesDestroy( images );
++#if 0
+     image = create_cursor_image( ptr );
+     if (!image) return 0;
+ 
+@@ -582,6 +654,7 @@
+ 
+     cursor = pXcursorImageLoadCursor( display, image );
+     pXcursorImageDestroy( image );
++#endif
+ 
+     return cursor;
+ }
+diff -Naur wine-1.0/include/wine/winuser16.h wine-1.0-cursor-patch/include/wine/winuser16.h
+--- wine-1.0/include/wine/winuser16.h	2008-06-18 02:07:31.000000000 +1200
++++ wine-1.0-cursor-patch/include/wine/winuser16.h	2008-06-27 11:25:37.000000000 +1200
+@@ -157,6 +157,9 @@
+     BYTE    bPlanes;
+     BYTE    bBitsPerPixel;
+ } CURSORICONINFO;
++#define CURSORICONINFO_END(x) ((BYTE*)(x) + sizeof(CURSORICONINFO) + (x)->nHeight * (x)->nWidthBytes + (x)->nHeight * (x)->nWidth / 8)
++#define CURSORICONINFO_NEXT(x) *(HICON16*)(CURSORICONINFO_END(x))
++#define CURSORICONINFO_DELAY(x) *(DWORD*)(CURSORICONINFO_END(x) + sizeof(HICON16))
+ 
+ typedef struct {
+ 	BOOL16		fIcon;

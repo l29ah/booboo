@@ -1,0 +1,9 @@
+--- Kbuild_old	2007-02-16 17:32:54.000000000 +0100
++++ Kbuild	2007-06-04 15:47:37.000000000 +0200
+@@ -31,6 +31,3 @@ sn9c102-objs := sn9c102_core.o \
+                 sn9c102_tas5110c1b.o \
+                 sn9c102_tas5110d.o \
+                 sn9c102_tas5130d1b.o
+-
+-# Enable /sysfs interface overriding the kernel configuration option
+-EXTRA_CFLAGS := -DCONFIG_VIDEO_ADV_DEBUG

@@ -1,0 +1,40 @@
+9
+
+dir
+6244
+http://overlays.gentoo.org/svn/proj/sunrise/reviewed/media-video/sn9c1xx/files
+http://overlays.gentoo.org/svn/proj/sunrise
+
+
+
+2007-07-07T18:42:44.438810Z
+4194
+jokey
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+12608f7e-a915-0410-b2f3-ce240db1b126
+
+sn9c1xx-1.48-kbuild.patch
+file
+
+
+
+
+2008-03-06T17:08:07.000000Z
+3a0a7975224ad1f2853548782688d8d2
+2007-06-13T20:09:12.740387Z
+3906
+jokey
+

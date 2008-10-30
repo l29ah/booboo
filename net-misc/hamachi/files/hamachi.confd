@@ -1,0 +1,16 @@
+# Copyright 1999-2006 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header$
+
+# /etc/conf.d/hamachi
+# Config file for hamachi control script
+
+# owner of hamachi process (don't change, must be existing)
+USER="hamachi"
+GROUP="hamachi"
+
+# Location of config files
+CONFDIR=/etc/hamachi/
+
+# logfile (/dev/null for nowhere)
+LOG="/var/log/hamachi/hamachi.log"
