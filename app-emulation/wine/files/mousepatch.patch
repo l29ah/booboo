@@ -1,0 +1,11 @@
+--- a/dlls/dinput/mouse.c
++++ b/dlls/dinput/mouse.c
+@@ -330,7 +330,7 @@ static void dinput_mouse_hook( LPDIRECTINPUTDEVICE8A iface, WPARAM wparam, LPARA
+             }
+ 
+             This->need_warp = This->warp_override != WARP_DISABLE &&
+-                              (pt.x || pt.y) &&
++                              (hook->pt.x<2 || hook->pt.y<2 || hook->pt.x>((2 * This->win_centerX)-2) || hook->pt.y>((2 * This->win_centerY)-2) ) &&
+                               (dwCoop & DISCL_EXCLUSIVE || This->warp_override == WARP_FORCE_ON);
+             break;
+         }
