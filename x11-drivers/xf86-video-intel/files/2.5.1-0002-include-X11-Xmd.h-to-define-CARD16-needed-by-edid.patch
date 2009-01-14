@@ -1,0 +1,31 @@
+From cd63414bc0efa0b9f1691e28be9ddfca9fef0486 Mon Sep 17 00:00:00 2001
+From: =?utf-8?q?R=C3=A9mi=20Cardona?= <remi@gentoo.org>
+Date: Mon, 24 Nov 2008 13:31:20 +0100
+Subject: [PATCH] include <X11/Xmd.h> to define CARD16 needed by edid.h
+
+---
+ src/bios_reader/bios_reader.c |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/src/bios_reader/bios_reader.c b/src/bios_reader/bios_reader.c
+index 2a6906d..1e41778 100644
+--- a/src/bios_reader/bios_reader.c
++++ b/src/bios_reader/bios_reader.c
+@@ -38,9 +38,11 @@
+ 
+ #include "../i830_bios.h"
+ 
+-typedef uint8_t CARD8;
+-typedef uint16_t CARD16;
+-typedef uint32_t CARD32;
++/* backwards compatibility with edid.h from xorg-server 1.5 and older */
++#ifndef CARD16
++#include <X11/Xmd.h>
++#endif
++
+ #define _PARSE_EDID_
+ #include "edid.h"
+ 
+-- 
+1.6.0.4
+
