@@ -1,0 +1,131 @@
+diff -Nur synaptics-0.14.6-org/synaptics.c synaptics-0.14.6-patched/synaptics.c
+--- synaptics-0.14.6-org/synaptics.c	2006-07-15 17:54:29.000000000 +0200
++++ synaptics-0.14.6-patched/synaptics.c	2008-06-28 17:52:54.000000000 +0200
+@@ -61,10 +61,18 @@
+ 
+ #include <unistd.h>
+ #include <sys/ioctl.h>
++#include <string.h>
++#include <sys/ipc.h>
++#include <sys/shm.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++#include <stdio.h>
++#include <math.h>
++#include <errno.h>
+ #include <misc.h>
+ #include <xf86.h>
+ #define NEED_XF86_TYPES
+-#include <xf86_ansic.h>
+ #include <xf86_OSproc.h>
+ #include <xf86Xinput.h>
+ #include "mipointer.h"
+@@ -224,14 +232,14 @@
+ 	return TRUE;			    /* Already allocated */
+ 
+     if (priv->shm_config) {
+-	if ((shmid = xf86shmget(SHM_SYNAPTICS, 0, 0)) != -1)
+-	    xf86shmctl(shmid, XF86IPC_RMID, NULL);
+-	if ((shmid = xf86shmget(SHM_SYNAPTICS, sizeof(SynapticsSHM),
+-				0777 | XF86IPC_CREAT)) == -1) {
++	if ((shmid = shmget(SHM_SYNAPTICS, 0, 0)) != -1)
++	    shmctl(shmid, IPC_RMID, NULL);
++	if ((shmid = shmget(SHM_SYNAPTICS, sizeof(SynapticsSHM),
++				0777 | IPC_CREAT)) == -1) {
+ 	    xf86Msg(X_ERROR, "%s error shmget\n", local->name);
+ 	    return FALSE;
+ 	}
+-	if ((priv->synpara = (SynapticsSHM*)xf86shmat(shmid, NULL, 0)) == NULL) {
++	if ((priv->synpara = (SynapticsSHM*)shmat(shmid, NULL, 0)) == NULL) {
+ 	    xf86Msg(X_ERROR, "%s error shmat\n", local->name);
+ 	    return FALSE;
+ 	}
+@@ -257,8 +265,8 @@
+ 	return;
+ 
+     if (priv->shm_config) {
+-	if ((shmid = xf86shmget(SHM_SYNAPTICS, 0, 0)) != -1)
+-	    xf86shmctl(shmid, XF86IPC_RMID, NULL);
++	if ((shmid = shmget(SHM_SYNAPTICS, 0, 0)) != -1)
++	    shmctl(shmid, IPC_RMID, NULL);
+     } else {
+ 	xfree(priv->synpara);
+     }
+@@ -272,7 +280,7 @@
+     char *str_par;
+     double value;
+     str_par = xf86FindOptionValue(options, optname);
+-    if ((!str_par) || (xf86sscanf(str_par, "%lf", &value) != 1))
++    if ((!str_par) || (sscanf(str_par, "%lf", &value) != 1))
+ 	return default_value;
+     return value;
+ }
+@@ -437,8 +445,8 @@
+     priv->fifofd = -1;
+     if (repeater) {
+ 	/* create repeater fifo */
+-	if ((xf86mknod(repeater, 666, XF86_S_IFIFO) != 0) &&
+-	    (xf86errno != xf86_EEXIST)) {
++	if ((mknod(repeater, 666, S_IFIFO) != 0) &&
++	    (errno != EEXIST)) {
+ 	    xf86Msg(X_ERROR, "%s can't create repeater fifo\n", local->name);
+ 	} else {
+ 	    /* open the repeater fifo */
+@@ -447,7 +455,7 @@
+ 		xf86Msg(X_ERROR, "%s repeater device open failed\n", local->name);
+ 	    }
+ 	}
+-	xf86free(repeater);
++	free(repeater);
+     }
+ 
+     if (!QueryHardware(local)) {
+@@ -634,7 +642,7 @@
+ static int
+ move_distance(int dx, int dy)
+ {
+-    return xf86sqrt((dx * dx) + (dy * dy));
++    return sqrt((dx * dx) + (dy * dy));
+ }
+ 
+ /*
+@@ -669,14 +677,14 @@
+     double xCenter = (priv->synpara->left_edge + priv->synpara->right_edge) / 2.0;
+     double yCenter = (priv->synpara->top_edge + priv->synpara->bottom_edge) / 2.0;
+ 
+-    return xf86atan2(-(y - yCenter), x - xCenter);
++    return atan2(-(y - yCenter), x - xCenter);
+ }
+ 
+ /* return angle difference */
+ static double
+ diffa(double a1, double a2)
+ {
+-    double da = xf86fmod(a2 - a1, 2 * M_PI);
++    double da = fmod(a2 - a1, 2 * M_PI);
+     if (da < 0)
+ 	da += 2 * M_PI;
+     if (da > M_PI)
+@@ -784,7 +792,7 @@
+ 	int c;
+ 	while ((c = XisbRead(priv->comm.buffer)) >= 0) {
+ 	    unsigned char u = (unsigned char)c;
+-	    xf86write(priv->fifofd, &u, 1);
++	    write(priv->fifofd, &u, 1);
+ 	    if (++count >= 3)
+ 		break;
+ 	}
+@@ -1280,10 +1288,10 @@
+ 
+ 	    /* save the fraction, report the integer part */
+ 	    tmpf = dx * speed + x_edge_speed * dtime + priv->frac_x;
+-	    priv->frac_x = xf86modf(tmpf, &integral);
++	    priv->frac_x = modf(tmpf, &integral);
+ 	    dx = integral;
+ 	    tmpf = dy * speed + y_edge_speed * dtime + priv->frac_y;
+-	    priv->frac_y = xf86modf(tmpf, &integral);
++	    priv->frac_y = modf(tmpf, &integral);
+ 	    dy = integral;
+ 	}
+ 
