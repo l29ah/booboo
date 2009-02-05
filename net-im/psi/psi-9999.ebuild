@@ -75,7 +75,8 @@ src_compile() {
 	use xscreensaver || myconf="${myconf} --disable-xss"
 
 	# cannot use econf because of non-standard configure script
-	./configure ${myconf} || die "configure failed"
+	use jingle || ./configure ${myconf} || die "configure failed"
+	use jingle && ./configure-jingle ${myconf} || die "configure failed"
 
 	eqmake4 ${PN}.pro
 
