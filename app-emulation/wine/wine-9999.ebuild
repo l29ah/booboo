@@ -82,7 +82,7 @@ src_unpack() {
 	cd "${S}"
 
 	sed -i '/^UPDATE_DESKTOP_DATABASE/s:=.*:=true:' tools/Makefile.in
-	epatch "${FILESDIR}"/wine-gentoo-no-ssp.patch #66002
+#	epatch "${FILESDIR}"/wine-gentoo-no-ssp.patch #66002 # Patch failed
 #	epatch "${FILESDIR}"/mousepatch.patch #http://bugs.winehq.org/show_bug.cgi?id=6971
 	epatch "${FILESDIR}"/wine-srgb-hack.patch #http://bugs.winehq.org/show_bug.cgi?id=12453
 	sed -i '/^MimeType/d' tools/wine.desktop || die #117785
