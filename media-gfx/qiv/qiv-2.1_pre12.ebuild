@@ -13,7 +13,7 @@ HOMEPAGE="http://www.klografx.net/qiv/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha ~amd64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="xinerama"
 
 DEPEND="media-libs/libpng
@@ -25,6 +25,11 @@ DEPEND="media-libs/libpng
 	virtual/x11 )"
 
 src_unpack() {
+	if ! built_with_use "media-libs/imlib" gtk; then
+		eerror "You have to build media-libs/imlib with USE gtk."
+		die 
+	fi
+																					
 	unpack ${A}
 	cd "${S}"
 #	epatch "${FILESDIR}"/qiv-2.0-composite.patch
