@@ -4,35 +4,34 @@
 
 EAPI="2"
 ETYPE="sources"
+KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+HOMEPAGE="http://l29ah.ru/"
+DESCRIPTION="Full sources with some useful patches."
 #UNIPATCH_STRICTORDER="yes"
 
-K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="2"
+GENPATCHESV="2"
 R4V=""
 POHMELFSV="12"
-TUXONICE_VERSION="3.0-rc8"
-TUXONICE_TARGET="2.6.28"
-TUXONICE_SRC="tuxonice-${TUXONICE_VERSION}-for-${TUXONICE_TARGET}"
+TUXONICEV="3.0-rc8"
+
+TUXONICE_SRC="tuxonice-${TUXONICEV}-for-${PV}"
 TUXONICE_URI="http://www.tuxonice.net/downloads/all/${TUXONICE_SRC}.patch.bz2"
 
+IUSE="${IUSE} reiser4 tuxonice pohmelfs +genpatches"	
+# Defaults to gentoo-sources
 
-IUSE="${IUSE} +reiser4 tuxonice +pohmelfs"
+SRC_URI="${KERNEL_URI} ${ARCH_URI}"
 
-RDEPEND="${RDEPEND}
-   	tuxonice? ( >=sys-apps/tuxonice-userui-0.7.3
-	>=sys-power/hibernate-script-1.99 )"
-
+if use genpatches; then
+	SRC_URI="${SRC_URI} ${GENPATCHES_URI}"
+	K_WANT_GENPATCHES="base extras"
+	K_GENPATCHES_VER="${GENPATCHESV}"
+fi
 
 inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
-HOMEPAGE="http://l29ah.ru/"
-
-DESCRIPTION="Full sources with some useful patches."
-
-SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
 if use reiser4; then 
 	SRC_URI="${SRC_URI}
 	http://www.kernel.org/pub/linux/kernel/people/edward/reiser4/reiser4-for-${KV_MAJOR}.${KV_MINOR}/reiser4-for-${PV}.patch.bz2"
