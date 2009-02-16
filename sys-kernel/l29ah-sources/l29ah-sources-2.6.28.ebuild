@@ -13,7 +13,7 @@ inherit kernel-2
 detect_version
 detect_arch
 
-GENPATCHESV="2"
+GENPATCHESV="1"
 R4V=""
 POHMELFSV="12"
 TUXONICEV="3.0-rc8"
@@ -38,7 +38,6 @@ if use genpatches; then
 	K_GENPATCHES_VER="${GENPATCHESV}"
 fi
 if use reiser4; then 
-	eerror ".28 >= r1 is incompatible w/ reiser4 patch"
 	UNIPATCH_LIST="${UNIPATCH_LIST}
 	${DISTDIR}/reiser4-for-${PV}${R4V}.patch.bz2"
 fi
