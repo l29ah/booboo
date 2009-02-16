@@ -1,0 +1,11 @@
+diff -urN a.orig/mm/filemap.c a/mm/filemap.c
+--- a.orig/mm/filemap.c	2009-02-16 08:29:08.000000000 +0300
++++ a/mm/filemap.c	2009-02-16 08:30:17.000000000 +0300
+@@ -515,7 +515,6 @@
+ 	}
+ 	return ret;
+ }
+-EXPORT_SYMBOL_GPL(add_to_page_cache_lru);
+ 
+ #ifdef CONFIG_NUMA
+ struct page *__page_cache_alloc(gfp_t gfp)

@@ -7,7 +7,7 @@ ETYPE="sources"
 KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 HOMEPAGE="http://l29ah.ru/"
 DESCRIPTION="Full sources with some useful patches."
-#UNIPATCH_STRICTORDER="yes"
+UNIPATCH_STRICTORDER="yes"
 
 inherit kernel-2
 detect_version
@@ -39,7 +39,8 @@ if use genpatches; then
 fi
 if use reiser4; then 
 	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/reiser4-for-${PV}${R4V}.patch.bz2"
+	${DISTDIR}/reiser4-for-${PV}${R4V}.patch.bz2
+	${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
 fi
 if use pohmelfs; then 
 	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/pohmelfs.${POHMELFSV}.patch"
