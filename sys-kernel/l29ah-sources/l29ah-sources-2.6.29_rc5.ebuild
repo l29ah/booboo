@@ -15,21 +15,18 @@ detect_arch
 
 #GENPATCHESV="2"
 R4V=""
-POHMELFSV="12"
 TUXONICEV="3.0-rc8"
 
 REISER4_SRC="reiser4-for-2.6.28.patch.bz2"
 REISER4_URI="http://www.kernel.org/pub/linux/kernel/people/edward/reiser4/reiser4-for-${KV_MAJOR}.${KV_MINOR}/${REISER4_SRC}"
 TUXONICE_SRC="tuxonice-${TUXONICEV}-for-2.6.28.patch.bz2"
 TUXONICE_URI="http://www.tuxonice.net/downloads/all/${TUXONICE_SRC}"
-POHMELFS_URI="http://tservice.net.ru/~s0mbre/archive/pohmelfs/pohmelfs.${POHMELFSV} -> pohmelfs.${POHMELFSV}.patch"
 
-IUSE="${IUSE} reiser4 tuxonice pohmelfs +genpatches"	
+IUSE="${IUSE} reiser4 tuxonice +genpatches"	
 # Defaults to gentoo-sources
 
 SRC_URI="${KERNEL_URI} ${ARCH_URI}
 	reiser4? ( ${REISER4_URI} )
-	pohmelfs? ( ${POHMELFS_URI} )
 	tuxonice? ( ${TUXONICE_URI} )
 "
 
@@ -43,9 +40,6 @@ if use reiser4; then
 	UNIPATCH_LIST="${UNIPATCH_LIST}
 	${DISTDIR}/${REISER4_SRC}
 	${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
-fi
-if use pohmelfs; then 
-	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/pohmelfs.${POHMELFSV}.patch"
 fi
 if use tuxonice; then 
 	ewarn "Using TuxOnIce for .28"
