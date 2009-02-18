@@ -27,7 +27,6 @@ IUSE="${IUSE} reiser4 tuxonice +genpatches"
 
 SRC_URI="${KERNEL_URI} ${ARCH_URI}
 	reiser4? ( ${REISER4_URI} )
-	tuxonice? ( ${TUXONICE_URI} )
 "
 
 if use genpatches; then
@@ -42,8 +41,8 @@ if use reiser4; then
 	${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
 fi
 if use tuxonice; then 
-	ewarn "Using TuxOnIce for .28"
-	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${TUXONICE_SRC}"
+	ewarn "No TuxOnIce for .29 yet, and TuxOnIce for .28 fails to patch."
+	#UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${TUXONICE_SRC}"
 fi
 
 pkg_postinst() {
