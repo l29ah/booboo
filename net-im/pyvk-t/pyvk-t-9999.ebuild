@@ -58,8 +58,8 @@ src_install() {
 #		"s:<pid>[^\<]*</pid>:<pid>/var/run/jabber/${PN}.pid</pid>:" \
 #		/etc/jabber/${PN}.xml
 
-#	newinitd "${FILESDIR}/${PN}-0.8-initd" ${PN}
-#	dosed "s:INSPATH:${inspath}:" /etc/init.d/${PN}
+	newinitd "${FILESDIR}/initd" ${PN}
+	dosed "s:INSPATH:${inspath}:" /etc/init.d/${PN}
 }
 
 pkg_postinst() {
