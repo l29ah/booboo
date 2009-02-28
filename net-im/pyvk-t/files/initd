@@ -1,4 +1,7 @@
 #!/sbin/runscript
+# Gentoo init script for pyvk-t jabber transport
+# Version 0.2
+# Made by Sb0y (www.bagrincev.ru)
 
 depend() {
 need net
@@ -7,14 +10,23 @@ use jabber-server
 
 start() {
 ebegin "Starting Vkontakte.Ru Jabber Transport"
-start-stop-daemon --start --quiet --pidfile /var/run/jabber/pyvk.pid --chuid jabber:jabber \
---exec /usr/bin/python /usr/lib/python2.5/site-packages/pyvk/pyvk-t.py
+export PYTHONPATH="/usr/lib/python2.5/site-packages/pyvk-t/"
+start-stop-daemon --start --quiet --pidfile /var/run/jabber/pyvk-t.pid --chuid jabber:jabber \
+--exec /usr/bin/twistd -- --pidfile=/var/run/jabber/twistd.pid \
+--logfile=/var/log/jabber/pyvk-t.log -y /usr/lib/python2.5/site-packages/pyvk/pyvkt_new.tac
 eend $?
 }
 
 stop() {
 ebegin "Stopping Vkontakte.Ru Jabber Transport"
 start-stop-daemon --stop --quiet --pidfile /var/run/jabber/pyvk.pid \
---exec /usr/bin/killall pyvk-t*
+--exec /usr/bin/killall -15 /usr/bin/python /usr/bin/twistd \
+--pidfile=/var/run/jabber/twistd.pid --logfile=/var/log/jabber/pyvk-t.log \
+-y /usr/lib/python2.5/site-packages/pyvk/pyvkt_new.tac
+#проверка есть ли PID twistd'а. Если находим - удаляем.
+local result=$(ls /var/run/jabber/twistd.pid)
+if [ "${result}" = "/var/run/jabber/twistd.pid" ]; then
+rm /var/run/jabber/twistd.pid
+fi
 eend $?
 }
