@@ -1,0 +1,35 @@
+--- /tmp/configure.ac.orig	2008-04-19 20:47:55.000000000 -0700
++++ /tmp/configure.ac	2008-04-19 21:10:12.000000000 -0700
+@@ -106,13 +106,16 @@
+     AC_DEFINE([HAVE_GIO], 1)
+ fi
+ 
+-PKG_CHECK_MODULES([LIBNOTIFY],
+-                  [libnotify >= $LIBNOTIFY_MINIMUM],
+-                  [use_libnotify=yes],
+-                  [use_libnotify=no])
+-AC_SUBST(LIBNOTIFY_LIBS)
+-AC_SUBST(LIBNOTIFY_CFLAGS)
+-if test "x$use_libnotify" = "xyes"; then
++AC_ARG_ENABLE([libnotify],
++              AS_HELP_STRING([--enable-libnotify], [enable notifications]),,
++              [enable_libnotify=yes])
++
++if test x$enable_libnotify = xyes ; then
++    PKG_CHECK_MODULES([LIBNOTIFY], [libnotify >= $LIBNOTIFY_MINIMUM])
++
++    AC_SUBST(LIBNOTIFY_LIBS)
++    AC_SUBST(LIBNOTIFY_CFLAGS)
++
+     AC_DEFINE([HAVE_LIBNOTIFY], 1)
+ fi
+ 
+@@ -288,7 +291,7 @@
+         Build Daemon:               ${build_daemon}
+         Build BeOS client:          ${build_beos}
+         Build GTK+ client:          ${build_gtk}
+-          ... libnotify support:    ${use_libnotify}
++          ... libnotify support:    ${enable_libnotify}
+           ... gio support:          ${use_gio}
+         Build OS X client:          ${build_darwin}
+         Build wxWidgets client:     ${build_wx}

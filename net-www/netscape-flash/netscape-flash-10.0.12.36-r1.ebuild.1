@@ -1,0 +1,63 @@
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-www/netscape-flash/netscape-flash-10.0.12.36-r1.ebu
+ild,v 1.3 2008/10/23 18:25:19 maekke Exp $
+
+DESCRIPTION="Adobe Flash Player"
+SRC_URI="http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.d20.7.linux-x86_64.so.tar.gz"
+HOMEPAGE="http://www.adobe.com/"
+IUSE=""
+SLOT="0"
+
+KEYWORDS="amd64"
+LICENSE="AdobeFlash-10"
+RESTRICT="strip mirror"
+
+S="${WORKDIR}"
+
+RDEPEND="x11-libs/libXext
+        x11-libs/libX11
+        x11-libs/libXt
+        =x11-libs/gtk+-2*
+        media-libs/freetype
+        media-libs/fontconfig
+        dev-libs/nss
+        net-misc/curl
+        >=sys-libs/glibc-2.4 
+    media-fonts/corefonts"
+
+src_install() {
+    pushd "${S}/usr/lib/flash-plugin"
+    exeinto /opt/netscape/plugins
+    doexe libflashplayer.so
+    inst_plugin /opt/netscape/plugins/libflashplayer.so
+    popd
+
+    insinto "/etc/adobe"
+    doins "${FILESDIR}/mms.cfg"
+
+    if [[ "`which firefox 2>/dev/null`" != "" ]]; then
+        mkdir -p "${D}/usr/lib/mozilla-firefox/plugins"
+        ln -s --target-directory="${D}/usr/lib/mozilla-firefox/plugins" \
+            /opt/netscape/plugins/libflashplayer.so
+    fi
+
+    if [[ "`which seamonkey 2>/dev/null`" != "" ]]; then
+         mkdir -p "${D}/usr/lib/seamonkey/plugins"
+        ln -s --target-directory="${D}/usr/lib/seamonkey/plugins" \
+            /opt/netscape/plugins/libflashplayer.so
+    fi
+
+    if [[ "`which opera 2>/dev/null`" != "" ]] || \
+       [[ "`which konqueror 2>/dev/null`" != "" ]]; then
+         mkdir -p "${D}/usr/lib/netscape/plugins"
+        ln -s --target-directory="${D}/usr/lib/netscape/plugins" \
+            /opt/netscape/plugins/libflashplayer.so
+    fi
+}
+
+pkg_postinst() {
+    ewarn "Flash player is closed-source, with a long history of security"
+    ewarn "issues.  Please consider only running flash applets you know to"
+    ewarn "be safe."
+}

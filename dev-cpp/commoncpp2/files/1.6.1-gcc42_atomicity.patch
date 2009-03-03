@@ -61,4 +61,3 @@ diff -Naur commoncpp2-1.6.1.orig/m4/ost_pthread.m4 commoncpp2-1.6.1/m4/ost_pthre
  #define HAVE_ATOMIC
  #endif
  #endif
-
