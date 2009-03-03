@@ -1,0 +1,12 @@
+Index: configure.in.in
+===================================================================
+--- configure.in.in	(revision 6293)
++++ configure.in.in	(working copy)
+@@ -38,6 +38,7 @@
+ AC_PROG_CC()
+ AC_PROG_LD()
+ AC_PROG_INSTALL()
++AC_PROG_LIBTOOL()
+ AC_PROG_INTLTOOL()
+ 
+ dnl **********************************

@@ -1,0 +1,12 @@
+# Copyright 1999-2008 Gentoo Foundation.
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+# This file contains descriptions of local USE flags, and the ebuilds which
+# contain them.
+
+# Keep it sorted.
+
+media-gfx/ristretto:xfce - Enable wallpaper changing support in xfce4.6
+x11-misc/notification-daemon-xfce:mcs - Enable support for the deprecated mcs manager
+xfce-base/xfce4-panel:mcs - Enable support for the deprecated mcs manager

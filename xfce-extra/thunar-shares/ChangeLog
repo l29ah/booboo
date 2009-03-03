@@ -1,0 +1,10 @@
+# ChangeLog for xfce-extra/thunar-shares
+# Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*thunar-shares-9999 (01 Dec 2008)
+
+  01 Dec 2008; Christoph Mende <angelos@gentoo.org>
+  +thunar-shares-9999.ebuild:
+  Initial import
+

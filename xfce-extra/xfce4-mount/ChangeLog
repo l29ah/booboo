@@ -1,0 +1,8 @@
+# ChangeLog for xfce-extra/xfce4-mount
+# Copyright 1999-2007 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  08 Jun 2007; Christoph Mende <angelos@gentoo.org>
+  +xfce4-mount-9999.ebuild:
+  Initial import
+
