@@ -37,8 +37,9 @@ fi
 if use reiser4; then 
 	ewarn "Using Reiser4 for .28"
 	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/${REISER4_SRC}
-	${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
+	${DISTDIR}/${REISER4_SRC}"
+	# Strange stuff in -rc6
+	#${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
 fi
 if use tuxonice; then 
 	ewarn "No TuxOnIce for .29 yet, and TuxOnIce for .28 fails to patch."
