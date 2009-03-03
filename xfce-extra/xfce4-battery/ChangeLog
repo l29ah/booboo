@@ -1,0 +1,16 @@
+# ChangeLog for xfce-extra/xfce4-battery
+# Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  26 Sep 2008; Christoph Mende <angelos@gentoo.org>
+  xfce4-battery-9999.ebuild:
+  Drop ppc64
+
+  04 Dec 2007; Christoph Mende <angelos@gentoo.org>
+  xfce4-battery-9999.ebuild:
+  Unrestrict tests
+
+  08 Jun 2007; Christoph Mende <angelos@gentoo.org>
+  +xfce4-battery-9999.ebuild:
+  Initial import
+

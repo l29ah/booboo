@@ -1,0 +1,11 @@
+# ChangeLog for xfce-extra/xfswitch
+# Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*xfswitch-9999 (08 Feb 2009)
+*xfswitch-0.0.1 (08 Feb 2009)
+
+  08 Feb 2009; Christoph Mende <angelos@gentoo.org> +xfswitch-0.0.1.ebuild,
+  +xfswitch-9999.ebuild:
+  Initial import
+

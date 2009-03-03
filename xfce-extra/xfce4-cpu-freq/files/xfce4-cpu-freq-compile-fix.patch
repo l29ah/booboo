@@ -1,0 +1,198 @@
+Index: panel-plugin/xfce4-cpufreq-overview.c
+===================================================================
+--- panel-plugin/xfce4-cpufreq-overview.c	(Revision 3967)
++++ panel-plugin/xfce4-cpufreq-overview.c	(Arbeitskopie)
+@@ -28,11 +28,12 @@
+ #include "xfce4-cpufreq-linux.h"
+ #endif /* __linux__ */
+ #include "xfce4-cpufreq-overview.h"
++#include "xfce4-cpufreq-utils.h"
+ 
+ static void
+ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
+ {
+-	gint	  i, j;
++	gint	  i = 0, j;
+ 	gchar	  *text;
+ 	GtkWidget *hbox, *dialog_vbox, *combo, *label, *icon;
+ 	GList 	  *list;
+@@ -175,7 +176,7 @@
+ {
+ 	gint 	  i;
+ 	GtkWidget *dialog, *dialog_vbox, *window;
+-	GtkWidget *header, *dialog_hbox, *separator;
++	GtkWidget *dialog_hbox, *separator;
+ 
+ 	if (ev->button != 1)
+ 		return FALSE;
+Index: panel-plugin/xfce4-cpufreq-plugin.c
+===================================================================
+--- panel-plugin/xfce4-cpufreq-plugin.c	(Revision 3967)
++++ panel-plugin/xfce4-cpufreq-plugin.c	(Arbeitskopie)
+@@ -39,14 +39,12 @@
+ cpufreq_update_label (CpuInfo *cpu)
+ {
+ 	gchar *label, *freq;
+-	gboolean small;
+ 
+ 	if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq)
+ 		return TRUE;
+ 	
+ 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
+-	label = g_strconcat (small ? "<span size=\"xx-small\">" : "<span size=\"x-small\">",
+-		
++	label = g_strconcat (
+ 		cpuFreq->options->show_label_freq ? freq : "",
+ 		
+ 		cpu->cur_governor != NULL &&
+@@ -55,7 +53,6 @@
+ 		cpu->cur_governor != NULL &&
+ 		cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+ 		
+-		"</span>",
+ 		NULL);
+ 
+ 	gtk_label_set_label (GTK_LABEL(cpuFreq->label), label);
+@@ -108,7 +105,7 @@
+ 	return TRUE;
+ }
+ 
+-gboolean
++void
+ cpufreq_restart_timeout (void)
+ {
+ 	g_source_remove (cpuFreq->timeoutHandle);
+@@ -118,7 +115,7 @@
+ 			NULL);
+ }
+ 
+-gboolean
++void
+ cpufreq_widgets (void)
+ {
+ 	gint		size;
+@@ -254,8 +251,7 @@
+ static void
+ cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation)
+ {
+-	if (cpufreq_widgets () == FALSE)
+-		xfce_err (_("Could not create widgets !"));
++	cpufreq_widgets ();
+ }
+ 
+ static void
+@@ -276,8 +272,7 @@
+ 	if (cpufreq_linux_init () == FALSE)
+ 		xfce_err (_("Your system is not configured correctly to support cpu frequency scaling !"));
+ 
+-	if (cpufreq_widgets () == FALSE)
+-		xfce_err (_("Could not create widgets !"));
++	cpufreq_widgets ();
+ 
+ 	cpuFreq->timeoutHandle = g_timeout_add (
+ 			cpuFreq->options->timeout,
+Index: panel-plugin/xfce4-cpufreq-linux.c
+===================================================================
+--- panel-plugin/xfce4-cpufreq-linux.c	(Revision 3967)
++++ panel-plugin/xfce4-cpufreq-linux.c	(Arbeitskopie)
+@@ -21,7 +21,9 @@
+ #include <config.h>
+ #endif
+ 
++#include <stdlib.h>
+ #include <dirent.h>
++#include <libxfcegui4/libxfcegui4.h>
+ #include "xfce4-cpufreq-plugin.h"
+ #include "xfce4-cpufreq-linux.h"
+ 
+@@ -57,7 +59,7 @@
+ 		{
+ 			gint freq = atoi (tokens[i]);
+ 			cpu->available_freqs = g_list_append (
+-				cpu->available_freqs, freq);
++				cpu->available_freqs, GINT_TO_POINTER(freq));
+ 			i++;
+ 		}
+ 		g_strfreev (tokens);
+@@ -272,7 +274,7 @@
+ {
+ 	CpuInfo *cpu;
+ 	FILE	*file;
+-	gint	i;
++	gint	i, dummy;
+ 	gchar	*filePath, *fileContent;
+ 
+ 	filePath = g_strdup ("/proc/cpufreq");
+@@ -298,9 +300,9 @@
+ 
+ 				sscanf (fileContent, 
+ 					"CPU %d %d kHz (%d %%) - %d kHz (%d %%) - %20s",
+-					NULL, &cpu->min_freq,
+-					NULL, &cpu->max_freq,
+-					NULL, cpu->cur_governor);
++					&dummy, &cpu->min_freq,
++					&dummy, &cpu->max_freq,
++					&dummy, cpu->cur_governor);
+ 				cpu->min_freq *= 1000;
+ 				cpu->max_freq *= 1000;
+ 
+Index: panel-plugin/xfce4-cpufreq-utils.c
+===================================================================
+--- panel-plugin/xfce4-cpufreq-utils.c	(Revision 3967)
++++ panel-plugin/xfce4-cpufreq-utils.c	(Arbeitskopie)
+@@ -21,6 +21,7 @@
+ #include <config.h>
+ #endif
+ 
++#include <stdlib.h>
+ #include "xfce4-cpufreq-plugin.h"
+ #include "xfce4-cpufreq-utils.h"
+ 
+Index: panel-plugin/xfce4-cpufreq-configure.c
+===================================================================
+--- panel-plugin/xfce4-cpufreq-configure.c	(Revision 3967)
++++ panel-plugin/xfce4-cpufreq-configure.c	(Arbeitskopie)
+@@ -69,7 +69,7 @@
+ static void
+ spinner_changed (GtkWidget *spinner, CpuFreqPluginConfigure *configure)
+ {
+-	gdouble timeout = gtk_spin_button_get_value (spinner);
++	gdouble timeout = gtk_spin_button_get_value (GTK_SPIN_BUTTON (spinner));
+ 	timeout *= 100;
+ 	cpuFreq->options->timeout = timeout;
+ 	
+@@ -93,7 +93,7 @@
+ {
+ 	gint i;
+ 	gchar *cpu_name;
+-	GtkWidget *dialog, *dialog_vbox, *header;
++	GtkWidget *dialog, *dialog_vbox;
+ 	GtkWidget *frame, *align, *label, *vbox, *hbox;
+ 	GtkWidget *combo, *spinner, *button;
+ 	CpuFreqPluginConfigure *configure;
+@@ -142,7 +142,7 @@
+ 
+ 	spinner = configure->spinner_timeout = 
+ 		gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
+-	gtk_spin_button_set_value (spinner, (gdouble)cpuFreq->options->timeout / 100);
++	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble)cpuFreq->options->timeout / 100);
+ 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
+ 	g_signal_connect (G_OBJECT (spinner), "value-changed", G_CALLBACK (spinner_changed), configure);
+ 
+Index: panel-plugin/xfce4-cpufreq-plugin.h
+===================================================================
+--- panel-plugin/xfce4-cpufreq-plugin.h	(Revision 3967)
++++ panel-plugin/xfce4-cpufreq-plugin.h	(Arbeitskopie)
+@@ -67,10 +67,10 @@
+ gboolean
+ cpufreq_update_plugin (void);
+ 
+-gboolean
++void
+ cpufreq_restart_timeout (void);
+ 
+-gboolean
++void
+ cpufreq_widgets (void);
+ 
+ void

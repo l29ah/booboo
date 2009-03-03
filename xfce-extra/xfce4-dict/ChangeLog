@@ -1,0 +1,13 @@
+# ChangeLog for xfce-extra/xfce4-dict
+# Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  25 May 2008; Christoph Mende <angelos@gentoo.org> xfce4-dict-9999.ebuild:
+  Changed from panel_plugin to goodies
+
+  04 Dec 2007; Christoph Mende <angelos@gentoo.org> xfce4-dict-9999.ebuild:
+  Add DOCS
+
+  08 Jun 2007; Christoph Mende <angelos@gentoo.org> +xfce4-dict-9999.ebuild:
+  Initial import
+
