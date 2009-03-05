@@ -4,7 +4,7 @@
 
 NEED_PYTHON=2.3
 
-inherit eutils multilib python subversion
+inherit eutils multilib python git
 
 MY_P="${P/pyicq-t/pyicqt}"
 
@@ -12,7 +12,9 @@ DESCRIPTION="Python based jabber transport for ICQ"
 HOMEPAGE="http://code.google.com/p/pyicqt/"
 #SRC_URI="http://pyicqt.googlecode.com/files/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
-ESVN_REPO_URI="http://pyicqt.googlecode.com/svn/trunk"
+#ESVN_REPO_URI="http://pyicqt.googlecode.com/svn/trunk"
+EGIT_REPO_URI="git://gitorious.org/pyicqt/mainline.git"
+EGIT_BRANCH="unstable"
 
 LICENSE="GPL-2"
 SLOT="0"
