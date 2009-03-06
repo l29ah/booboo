@@ -35,14 +35,13 @@ if use genpatches; then
 	#K_GENPATCHES_VER="${GENPATCHESV}"
 fi
 if use reiser4; then 
-	ewarn "Using Reiser4 for .28"
-	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/${REISER4_SRC}"
-	# Strange stuff in -rc6
+	ewarn "No Reiser4 for .29 yet, and .28 fails to apply"
+	#UNIPATCH_LIST="${UNIPATCH_LIST}
+	#${DISTDIR}/${REISER4_SRC}"
 	#${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
 fi
 if use tuxonice; then 
-	ewarn "No TuxOnIce for .29 yet, and TuxOnIce for .28 fails to patch."
+	ewarn "No TuxOnIce for .29 yet, and TuxOnIce for .28 fails to apply."
 	#UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${TUXONICE_SRC}"
 fi
 
