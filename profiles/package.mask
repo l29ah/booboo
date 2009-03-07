@@ -1,5 +1,5 @@
-# Xfce Team <xfce@gentoo.org>
-# Masking live ebuilds
+# Live ebuilds
+>=dev-cpp/commoncpp2-9999
 =app-arch/squeeze-9999
 =app-arch/xarchiver-9999
 =app-cdr/xfburn-9999
@@ -78,3 +78,9 @@
 =xfce-extra/xfmedia-remote-9999
 =xfce-extra/xfswitch-9999
 =xfce-extra/xfvnc-9999
+
+# Non-release kernels
+=sys-kernel/l29ah-sources-2.6.29_rc5
+=sys-kernel/l29ah-sources-2.6.29_rc6
+=sys-kernel/l29ah-sources-2.6.29_rc7
+
