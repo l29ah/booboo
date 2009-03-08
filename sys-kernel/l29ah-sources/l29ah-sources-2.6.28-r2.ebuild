@@ -39,8 +39,11 @@ if use genpatches; then
 fi
 if use reiser4; then 
 	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/reiser4-for-${PV}${R4V}.patch.bz2
+	${DISTDIR}/reiser4-for-${PV}${R4V}.patch.bz2"
+	if use pohmelfs; then
+	UNIPATCH_LIST="${UNIPATCH_LIST}
 	${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
+	fi
 fi
 if use pohmelfs; then 
 	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/pohmelfs.${POHMELFSV}.patch"
