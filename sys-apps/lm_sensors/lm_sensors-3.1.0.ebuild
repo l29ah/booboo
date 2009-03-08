@@ -47,7 +47,7 @@ src_unpack() {
 	unpack ${A}
 
 	cd "${S}"
-	epatch "${FILESDIR}"/${PN}-3.0.3-sensors-detect-gentoo.patch
+#	epatch "${FILESDIR}"/${PN}-3.1.0-sensors-detect-gentoo.patch
 
 	if use sensord; then
 		sed -i -e 's:^# \(PROG_EXTRA\):\1:' "${S}"/Makefile
