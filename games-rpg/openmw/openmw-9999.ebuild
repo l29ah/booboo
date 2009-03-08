@@ -4,7 +4,7 @@
 
 inherit subversion
 
-ESVN_REPO_URI="https://openmw.svn.sourceforge.net/svnroot/openmw/"
+ESVN_REPO_URI="https://openmw.svn.sourceforge.net/svnroot/openmw/trunk/"
 
 DESCRIPTION="OpenMW is an attempt to reimplement the popular role playing game
 Morrowind. It aims to be a fully playable, open source implementation of the
@@ -29,7 +29,7 @@ RDEPEND="
 	"
 src_compile() 
 {
-	make cpp || die "make cpp failed"
+	emake cpp || die "make cpp failed"
 	emake all || die "emake failed"
 }
 
