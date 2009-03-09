@@ -24,8 +24,7 @@ src_compile()
 {
 	chmod +x bootstrap
 	./bootstrap || die "bootstrap failed"
-	chmod +x configure
-	./configure || die "configure failed"
+	econf || die "econf failed"
 	emake || die "emake failed"
 }
 
