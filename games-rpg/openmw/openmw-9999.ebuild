@@ -29,7 +29,13 @@ RDEPEND="
 	"
 src_compile() 
 {
-	emake cpp || die "make cpp failed"
+#	sudo env-update
+#	source /etc/profile
+	mkdir -p include
+	cd include
+	ln -s /usr/include/bullet bullet
+	cd ..
+	epatch "${FILESDIR}""/include_dmd.diff" || die "epatch failed"
 	emake all || die "emake failed"
 }
 

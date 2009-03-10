@@ -1,0 +1,28 @@
+Index: bullet/cpp_bullet.cpp
+===================================================================
+--- bullet/cpp_bullet.cpp	(revision 93)
++++ bullet/cpp_bullet.cpp	(working copy)
+@@ -21,7 +21,7 @@
+ 
+  */
+ 
+-#include "btBulletDynamicsCommon.h"
++#include "bullet/btBulletDynamicsCommon.h"
+ 
+ #include <iostream>
+ 
+Index: Makefile
+===================================================================
+--- Makefile	(revision 93)
++++ Makefile	(working copy)
+@@ -2,8 +2,8 @@
+ 
+ # Compiler settings
+ CXXFLAGS?= -g
+-DMD=gdmd -version=Posix
+-#DMD=dmd -version=Posix
++#DMD=gdmd -version=Posix
++DMD=dmd -version=Posix
+ 
+ # Some extra flags for niftool and bsatool
+ NIFFLAGS=-debug=warnstd -debug=check -debug=statecheck -debug=strict -debug=verbose
