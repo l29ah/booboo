@@ -1,7 +1,7 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $ booboo/games-rpg/openmw/openmw-9999.ebuild
-# modified at < 11-03-09/01:10 > 
+# modified at < 11-03-09/21:40 > 
 # email < MiklerGM@gmail.com >
 
 
@@ -18,9 +18,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
-# if you want to use GDC you need to edit the patch (remove the changes in Makefile). later i'll fix this.
-#I="/usr/share/games/openmw"
+IUSE="dmd"
 DEPEND="$RDEPEND"
 RDEPEND="
 	>=dev-games/ogre-1.4.5
@@ -43,8 +41,11 @@ src_compile()
 	ln -s /usr/include/bullet bullet
 	cd ..
 	cp /usr/lib/*bullet* bullet/
-	epatch "${FILESDIR}""/include_dmd.diff" || die "epatch failed"
-	emake all || die "emake failed"
+	epatch "${FILESDIR}""/bullet.diff" || die "epatch bullet failed"
+	if use dmd; then
+	epatch  "${FILESDIR}""/dmd.diff" || die "epatch dmd failed"
+	fi
+		emake all || die "emake failed"
 	touch ogre.cgf Ogre.log MyGUI.log openmw.ini
 }
 
