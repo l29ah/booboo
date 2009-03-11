@@ -33,7 +33,7 @@ RDEPEND="
 # use overlay "d" to install dmd-bin
 # http://www.dsource.org/projects/tango/wiki/GentooLinux read this manual,
 # but i use the "phobos" library as primary. Later, i think, i add use-flags to
-# control the dmd version. Maybe and dmd ebuild in this overlay
+# control the dmd version.
 
 src_compile() 
 {
@@ -44,6 +44,10 @@ src_compile()
 	cp /usr/lib/*bullet* bullet/
 	epatch "${FILESDIR}""/include_dmd.diff" || die "epatch failed"
 	emake all || die "emake failed"
+	rm COMPILE* && rm *.d && rm dsss.conf && rm Makefile
+	rm -rf *.o* && rm -rf include && rm -rf objs && rm -rf ogre
+	rm -rf	nif && rm -rf nifobjs && rm -rf core && rm -rf util
+	rm -rf sound && rm -rf scene
 }
 
 src_install() 
@@ -51,10 +55,45 @@ src_install()
 	dodir /share/games/openmw/
 		insinto /usr/share/games/openmw/
 		doins -r * 
-#	dobin /usr/share/games/openmw/openmw
+	fperms +rwx /usr/share/games/openmw/bored \
+				/usr/share/games/openmw/bsatool \
+				/usr/share/games/openmw/esmtool \
+				/usr/share/games/openmw/niftool \
+				/usr/share/games/openmw/openmw
+	dobin /usr/share/games/openmw/openmw
+	fowners root:games /usr/share/games/openmw
+	dodir /usr/share/games/openmw/data
+#	need to give all right's to user to files openmw.ini Ogre.log ogre.cfg
+#	MyGUI.log
 }
-# here i need to save permission's for each file but i don't now how i can do
-# this correctly. Maybe try such thing as 'fowners' or 'fperms'. 
-# or use the patch to repair permissions
+pkg_postinst()
+{
+	einfo "	Before you can run OpenMW, you have to help it find the Morrowind
+	data files. The 'openmw' program needs the files Morrowind.esm and
+	Morrowind.bsa, and the directories Sound/ and Music/ from your
+	<Morrowind\Data Files\> directory. By default it expects to find these
+	in the data/ directory. (This can be changed in openmw.ini)
+	I recommend creating a symbolic link to your original Morrowind
+	install. For example, if you have Morrowind installed in:'
+	'c:\Program Files\Bethesda Softworks\Morrowind\'
+	and your windows c: drive is mounted on /media/hda1, then run the
+	following command:
+
+	ln -s '/media/hda1/Program Files/Bethesda Softworks/Morrowind/Data Files/'
+	/usr/share/games/data'
+
+	Also, if you have OGRE installed in a non-standard directory (ie. NOT
+	in /usr/lib/OGRE), you have to change the PluginFolder in the file
+	plugins.cfg.linux.
+	The first time you run openmw you will be asked to set screen
+	resolution and other graphics settings. You can bring this dialogue up
+	at any time with the -oc command line switch. I don't recommend using
+	fullscreen mode yet, since it might mess up your screen and input
+	settings if the program crashes.
+	"
+	}
+
+
+
 
 
