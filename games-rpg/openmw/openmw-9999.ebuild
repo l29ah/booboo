@@ -20,6 +20,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 # if you want to use GDC you need to edit the patch (remove the changes in Makefile). later i'll fix this.
+#I="/usr/share/games/openmw"
 DEPEND="$RDEPEND"
 RDEPEND="
 	>=dev-games/ogre-1.4.5
@@ -44,27 +45,31 @@ src_compile()
 	cp /usr/lib/*bullet* bullet/
 	epatch "${FILESDIR}""/include_dmd.diff" || die "epatch failed"
 	emake all || die "emake failed"
-	rm COMPILE* && rm *.d && rm dsss.conf && rm Makefile
-	rm -rf *.o* && rm -rf include && rm -rf objs && rm -rf ogre
-	rm -rf	nif && rm -rf nifobjs && rm -rf core && rm -rf util
-	rm -rf sound && rm -rf scene
+	touch ogre.cgf Ogre.log MyGUI.log openmw.ini
 }
 
 src_install() 
 {
-	dodir /share/games/openmw/
+	dodir /usr/share/games/openmw/
 		insinto /usr/share/games/openmw/
-		doins -r * 
-	fperms +rwx /usr/share/games/openmw/bored \
+		doins -r esmtool openmw niftool bsatool bored mscripts media_mygui \
+		plugins.cfg.linux ogre.cgf Ogre.log MyGUI.log openmw.ini
+
+
+			dodir /usr/share/games/openmw/data
+			fperms 777 /usr/share/games/openmw/data \
+					/usr/share/games/openmw/ogre.cfg \
+	                /usr/share/games/openmw/openmw.ini \
+	                /usr/share/games/openmw/Ogre.log \
+	                /usr/share/games/openmw/MyGUI.log
+
+			fperms +x /usr/share/games/openmw/bored \
 				/usr/share/games/openmw/bsatool \
 				/usr/share/games/openmw/esmtool \
 				/usr/share/games/openmw/niftool \
 				/usr/share/games/openmw/openmw
-	dobin /usr/share/games/openmw/openmw
-	fowners root:games /usr/share/games/openmw
-	dodir /usr/share/games/openmw/data
-#	need to give all right's to user to files openmw.ini Ogre.log ogre.cfg
-#	MyGUI.log
+				dobin usr/share/games/openmw/openmw
+
 }
 pkg_postinst()
 {
@@ -79,7 +84,7 @@ pkg_postinst()
 	and your windows c: drive is mounted on /media/hda1, then run the
 	following command:
 
-	ln -s '/media/hda1/Program Files/Bethesda Softworks/Morrowind/Data Files/'
+	ln -s '/media/hda1/Program Files/Bethesda Softworks/Morrowind/Data Files/*'
 	/usr/share/games/data'
 
 	Also, if you have OGRE installed in a non-standard directory (ie. NOT
