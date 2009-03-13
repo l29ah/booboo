@@ -18,21 +18,20 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="dmd"
+IUSE="dmd gdc"
 DEPEND="$RDEPEND"
 RDEPEND="
 	>=dev-games/ogre-1.4.5
 	>=dev-games/ois-1.0.0
 	>=sci-physics/bullet-2.72
 	media-libs/openal
-	|| ( dev-lang/dmd-bin >=dev-lang/gdc-4.1.3 )
+	dmd? ( <=dev-lang/dmd-bin-1.99 )
+	gdc? ( >=dev-lang/gdc-4.1.3 )
 	media-video/ffmpeg
 	dev-games/mygui
 	"
 # use overlay "d" to install dmd-bin
 # http://www.dsource.org/projects/tango/wiki/GentooLinux read this manual,
-# but i use the "phobos" library as primary. Later, i think, i add use-flags to
-# control the dmd version.
 
 src_compile() 
 {
@@ -42,10 +41,8 @@ src_compile()
 	cd ..
 	cp /usr/lib/*bullet* bullet/
 	epatch "${FILESDIR}""/bullet.diff" || die "epatch bullet failed"
-	if use dmd; then
-	epatch  "${FILESDIR}""/dmd.diff" || die "epatch dmd failed"
-	fi
-		emake all || die "emake failed"
+	use dmd && epatch  "${FILESDIR}""/dmd.diff" || die "epatch dmd failed"
+	emake all || die "emake failed"
 	touch ogre.cgf Ogre.log MyGUI.log openmw.ini
 }
 
