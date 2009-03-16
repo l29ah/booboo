@@ -16,7 +16,8 @@ DEPEND="=dev-lang/python-2.5*
 		dev-python/twisted-words
 		dev-db/mysql
 		dev-python/demjson
-		net-im/ejabberd"
+		net-im/ejabberd
+		dev-python/mysql-python"
 RDEPEND="${DEPEND}"
 
 ESVN_REPO_URI="http://pyvk-t.googlecode.com/svn/trunk/"
@@ -26,7 +27,8 @@ src_install()
 	dodir /usr/share/pyvk-t 
 	insinto /usr/share/pyvk-t
 	doins -r *
-	fperms +x /usr/share/pyvk-t/pyvkt_new.py /usr/share/pyvk-t/pyvkt_new.tac
+	fperms +x /usr/share/pyvk-t/pyvkt_new.tac
+	dobin "${FILESDIR}""/pyvk"
 }
 pkg_postinst()
 {
