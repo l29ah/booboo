@@ -43,8 +43,10 @@ einfo 'Then add the MYSQL dump'
 einfo 'cd /usr/lib/python2.5/site-packages/pyvk-t && mysql basename < pyvk-t_new.sql'
 einfo 'Now edit /usr/lib/python2.5/site-packages/pyvk-t/pyvk-t_new.cfg'
 einfo 'To start pyvk-t on local machine you need to configure ejabberd or jabberd'
-einfo 'Now you can start it only from user. To run write this'
-einfo 'twistd -y pyvkt_new.tac -l <logfile> or twistd -y pyvkt_new.tac -n'
-einfo 'You may try to use "chmod -R -h user:user /usr/lib/python2.5/site-packages/pyvk-t"'
+einfo 'After all run from root' 
+einfo '/etc/init.d/pyvk-t start' # now, i thit, it's work.
+#einfo 'Now you can start it only from user. To run write this'
+#einfo 'twistd -y pyvkt_new.tac -l <logfile> or twistd -y pyvkt_new.tac -n'
+#einfo 'You may try to use "chmod -R -h user:user /usr/lib/python2.5/site-packages/pyvk-t"'
 }
 

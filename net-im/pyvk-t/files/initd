@@ -13,7 +13,7 @@ ebegin "Starting Vkontakte.Ru Jabber Transport"
 export PYTHONPATH="/usr/lib/python2.5/site-packages/pyvk-t/"
 start-stop-daemon --start --quiet --pidfile /var/run/jabber/pyvk-t.pid --chuid jabber:jabber \
 --exec /usr/bin/twistd -- --pidfile=/var/run/jabber/twistd.pid \
---logfile=/var/log/jabber/pyvk-t.log -y /usr/lib/python2.5/site-packages/pyvk/pyvkt_new.tac
+--logfile=/var/log/jabber/pyvk-t.log -y /usr/lib/python2.5/site-packages/pyvk-t/pyvkt_new.tac
 eend $?
 }
 
@@ -22,7 +22,7 @@ ebegin "Stopping Vkontakte.Ru Jabber Transport"
 start-stop-daemon --stop --quiet --pidfile /var/run/jabber/pyvk.pid \
 --exec /usr/bin/killall -15 /usr/bin/python /usr/bin/twistd \
 --pidfile=/var/run/jabber/twistd.pid --logfile=/var/log/jabber/pyvk-t.log \
--y /usr/lib/python2.5/site-packages/pyvk/pyvkt_new.tac
+-y /usr/lib/python2.5/site-packages/pyvk-t/pyvkt_new.tac
 #проверка есть ли PID twistd'а. Если находим - удаляем.
 local result=$(ls /var/run/jabber/twistd.pid)
 if [ "${result}" = "/var/run/jabber/twistd.pid" ]; then
