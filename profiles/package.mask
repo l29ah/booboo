@@ -86,6 +86,3 @@
 =sys-kernel/l29ah-sources-2.6.29_rc5
 =sys-kernel/l29ah-sources-2.6.29_rc6
 =sys-kernel/l29ah-sources-2.6.29_rc7
-
-# dummy ebuild
-=sys-kernel/vanilla-sources-2.6.29
