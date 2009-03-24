@@ -13,7 +13,7 @@ inherit kernel-2
 detect_version
 detect_arch
 
-#GENPATCHESV="2"
+GENPATCHESV="1"
 R4V=""
 TUXONICEV="3.0-rc8"
 
@@ -29,9 +29,8 @@ SRC_URI="${KERNEL_URI} ${ARCH_URI}"
 #	reiser4? ( ${REISER4_URI} )"
 
 if use genpatches; then
-	ewarn "No genpatches for .29 yet"
-	#K_WANT_GENPATCHES="base extras"
-	#K_GENPATCHES_VER="${GENPATCHESV}"
+	K_WANT_GENPATCHES="base extras"
+	K_GENPATCHES_VER="${GENPATCHESV}"
 fi
 if use reiser4; then 
 	ewarn "No Reiser4 patch for .29 yet"
