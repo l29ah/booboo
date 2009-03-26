@@ -1,6 +1,5 @@
 # Live ebuilds
 =app-misc/kanatest-9999
-=net-im/psi-9999
 =games-rpg/openmw-9999
 =dev-games/mygui-9999
 =dev-cpp/commoncpp2-9999
