@@ -1,15 +1,18 @@
-DESCRIPTION=""
-HOMEPAGE="http://dev.chromium.org/"
-SRC_URI=""
-ESVN_REPO_URI="http://src.chromium.org/svn/trunk/src"
+inherit subversion
 
-LICENSE=""
+DESCRIPTION="Chromium is the open-source project behind Google Chrome."
+HOMEPAGE="http://dev.chromium.org/"
+SRC_URI=""		# TODO: tarball builds
+ESVN_REPO_URI="http://src.chromium.org/svn/trunk/src"
+# TODO: not to download lots of junk lying around in trunk/src/
+
+LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 x86"	# Warning: no amd64 support!?
 IUSE="debug"
 
 # Info from http://code.google.com/p/chromium/wiki/LinuxBuildInstructionsPrerequisites
-# WTF is 'pkg-config >= 0.20'?
+# TODO: WTF is 'pkg-config >= 0.20'?
 DEPEND=">=dev-lang/python-2.4.0
 		>=dev-lang/perl-5.0.0
 		>=sys-devel/gcc-4.2.0
@@ -19,7 +22,7 @@ DEPEND=">=dev-lang/python-2.4.0
 		>=dev-libs/nss-3.12.0
 		>=dev-libs/nspr-4.7.1
 		media-fonts/corefonts"
-RDEPEND=$DEPEND
+RDEPEND="${DEPEND}"
 
 src_unpack() {
 		subversion_src_unpack
@@ -35,6 +38,7 @@ src_compile() {
 		fi
 }
 
+# TODO: saner install paths
 src_install() {
 		dobin "${S}"/src/chrome/Hammer/*
 }
