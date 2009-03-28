@@ -5,6 +5,7 @@ HOMEPAGE="http://dev.chromium.org/"
 SRC_URI=""		# TODO: tarball builds
 ESVN_REPO_URI="http://src.chromium.org/svn/trunk/src"
 # TODO: not to download lots of junk lying around in trunk/src/
+# like third-party sources and test suites
 
 LICENSE="BSD"
 SLOT="0"
@@ -12,7 +13,7 @@ KEYWORDS="~amd64 x86"	# Warning: no amd64 support!?
 IUSE="debug"
 
 # Info from http://code.google.com/p/chromium/wiki/LinuxBuildInstructionsPrerequisites
-# TODO: WTF is 'pkg-config >= 0.20'?
+# TODO: need Hammer (WTF is this!?)
 DEPEND=">=dev-lang/python-2.4.0
 		>=dev-lang/perl-5.0.0
 		>=sys-devel/gcc-4.2.0
@@ -21,7 +22,9 @@ DEPEND=">=dev-lang/python-2.4.0
 		>=dev-util/gperf-3.0.3
 		>=dev-libs/nss-3.12.0
 		>=dev-libs/nspr-4.7.1
-		media-fonts/corefonts"
+		media-fonts/corefonts
+		>=dev-util/pkgconfig-0.20
+		dev-util/scons"
 RDEPEND="${DEPEND}"
 
 src_unpack() {
