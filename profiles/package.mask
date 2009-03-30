@@ -5,6 +5,7 @@
 =dev-cpp/commoncpp2-9999
 =dev-libs/ghal-9999
 =app-arch/squeeze-9999
+=app-cdr/xfburn-9999
 =xfce-extra/xfce4-notes-9999
 
 # Somebody fix please
