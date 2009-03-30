@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/actiongame/${MY_PN}_v${PV}.tar.bz2"
 LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="client server"
+IUSE="+client server"
 RESTRICT="strip"
 
 DEPEND="sys-libs/glibc

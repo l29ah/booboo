@@ -81,7 +81,7 @@
 =xfce-extra/xfmedia-remote-9999
 =xfce-extra/xfswitch-9999
 =xfce-extra/xfvnc-9999
-/* Somebody fix please */
+# Somebody fix please
 =app-arch/squeeze-9999   
 
 # Non-release kernels
