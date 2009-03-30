@@ -81,6 +81,8 @@
 =xfce-extra/xfmedia-remote-9999
 =xfce-extra/xfswitch-9999
 =xfce-extra/xfvnc-9999
+/* Somebody fix please */
+=app-arch/squeeze-9999   
 
 # Non-release kernels
 =sys-kernel/l29ah-sources-2.6.29_rc5
