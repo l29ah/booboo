@@ -4,11 +4,13 @@
 =dev-games/mygui-9999
 =dev-cpp/commoncpp2-9999
 =dev-libs/ghal-9999
-=app-arch/squeeze-9999
 =app-cdr/xfburn-9999
 =xfce-extra/xfce4-notes-9999
 
-# Somebody fix please
+# Somebody please fix this ebuild
+=net-p2p/transmission-9999
+
+# And this too =))
 =app-arch/squeeze-9999   
 
 # Non-release kernels
