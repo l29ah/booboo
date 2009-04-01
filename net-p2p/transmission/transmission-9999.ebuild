@@ -17,7 +17,6 @@ ESVN_REPO_URI="svn://svn.m0k.org/Transmission/trunk"
 LICENSE="MIT GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="gtk libnotify"
 
 RDEPEND=">=dev-libs/openssl-0.9.4
 || ( >=net-misc/curl-7.16.3[ssl] >=net-misc/curl-7.16.3[gnutls] )
@@ -43,10 +42,6 @@ src_prepare() {
 src_configure() {
 	local myconf="--disable-dependency-tracking --with-wx-config=no"
 	
-	#econf \
-	#$(use_enable gtk) \
-	#$(use_enable libnotify) \
-	#${myconf}
         ./autogen.sh
 }
 
