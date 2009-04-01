@@ -43,10 +43,11 @@ src_prepare() {
 src_configure() {
 	local myconf="--disable-dependency-tracking --with-wx-config=no"
 	
-	econf \
-	$(use_enable gtk) \
-	$(use_enable libnotify) \
-	${myconf}
+	#econf \
+	#$(use_enable gtk) \
+	#$(use_enable libnotify) \
+	#${myconf}
+        ./autogen.sh
 }
 
 pkg_preinst() {
