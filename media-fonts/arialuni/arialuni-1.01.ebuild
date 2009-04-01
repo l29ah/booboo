@@ -7,8 +7,7 @@ inherit font
 DESCRIPTION="Arial Unicode MS Font is an extended version of font Arial"
 
 # I think we can rely on this link
-SRC_URI="http://download211.mediafire.com/izt1957jyhtg/yz0t4mwkgdv/arialuni.ttf.lzma"
-#"http://download185.mediafire.com/od42yumc9mug/ztzqzvjnqw4/arialuni.tar.gz"
+SRC_URI="http://www.hotlinkfiles.com/files/2422358_inmst/arialuni.ttf.lzma"
 HOMEPAGE="http://support.microsoft.com/?scid=kb%3Bru%3B287247"
 KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 SLOT="0"
