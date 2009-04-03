@@ -41,8 +41,9 @@ if use genpatches; then
 	K_GENPATCHES_VER="${GENPATCHESV}"
 fi
 if use reiser4; then 
-	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/${REISER4_SRC}"
+	ewarn "${REISER4_SRC} can't apply to ${GIT_PATCH_SRC}"
+#	UNIPATCH_LIST="${UNIPATCH_LIST}
+#	${DISTDIR}/${REISER4_SRC}"
 fi
 if use tuxonice; then 
 	ewarn "Trying to use TuxOnIce for git-kernel"
