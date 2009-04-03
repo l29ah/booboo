@@ -26,7 +26,7 @@ TUXONICE_URI="http://www.tuxonice.net/downloads/all/${TUXONICE_SRC}"
 IUSE="${IUSE} reiser4 tuxonice +genpatches"	
 # Defaults to gentoo-sources
 
-SRC_URI="${KERNEL_URI} ${ARCH_URI} ${GIT_UPDATE_7_URI}
+SRC_URI="${KERNEL_URI} ${ARCH_URI} ${GIT_PATCH_URI}
 	reiser4? ( ${REISER4_URI} )
 	tuxonice? ( ${TUXONICE_URI} )
 "
