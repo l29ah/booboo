@@ -40,7 +40,6 @@ src_install()
 	insinto /opt/sulci
 	doins -r sulci/*
 	fperms +x /opt/sulci/sulci
-	dobin /opt/sulci/sulci
 }
 
 pkg_postinst()
@@ -49,6 +48,6 @@ pkg_postinst()
 	einfo "http://home.ermine.pp.ru/svn/ocaml/trunk/doc/sulci/cmdlist.ru.txt"
 	einfo "Now create your own config like /opt/sulci/sulci.conf.example"
 	einfo "When you make your own config you can run sulci like this"
-	einfo "'# cd /opt/sulci && ./sulcu &' or '# sulci'"
+	einfo "'# cd /opt/sulci && ./sulcu &"
 	einfo "If you have some troubles with sulci - read '/opt/sulci/report.log'"
 }

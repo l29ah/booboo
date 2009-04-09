@@ -27,6 +27,10 @@ src_install()
 pkg_postinst()
 {
 einfo "hatexmpp is a xmpp-client featuring ii-like interface"
-einfo "synopsis: hatexmpp <mountpoint> -d"
+einfo "to run: hatexmpp <mountpoint> -d"
+einfo "to configure: echo 'username' > <mountpoint>/config/username"
+einfo "The same operation you need to do with other settings like"
+einfo "server, password, resource, muc_default_nick, jiv_name, jiv_os,
+jiv_version"
 einfo "to scream, go to hatexmpp@conference.jabber.ru"
 }
