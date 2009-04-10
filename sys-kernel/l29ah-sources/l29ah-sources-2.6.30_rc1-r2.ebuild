@@ -44,8 +44,8 @@ if use genpatches; then
 fi
 if use reiser4; then 
 	eerror "${REISER4_SRC} can't apply to ${GIT_PATCH_SRC}"
-	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/${REISER4_SRC}"
+	#UNIPATCH_LIST="${UNIPATCH_LIST}
+	#${DISTDIR}/${REISER4_SRC}"
 fi
 if use tuxonice; then 
 	ewarn "Trying to use TuxOnIce for git-kernel"
