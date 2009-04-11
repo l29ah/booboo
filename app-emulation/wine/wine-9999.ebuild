@@ -90,13 +90,8 @@ src_unpack() {
 
 	epatch "${FILESDIR}"/wine-srgb-hack.patch #http://bugs.winehq.org/show_bug.cgi?id=12453
 	sed -i '/^MimeType/d' tools/wine.desktop || die #117785
-<<<<<<< HEAD:app-emulation/wine/wine-9999.ebuild
 # Added by MiklerGM
 	use acceptex && epatch "${FILESDIR}"/acceptex.patch || die #http://bugs.winehq.org/show_bug.cgi?id=9787
-=======
-# Added by MiklerGM and commented by lp3 later =))
-#	use acceptex && epatch "${FILESDIR}"/acceptex.patch || die "patch +AcceptEX failed"
->>>>>>> 9c31cd55009a8ecec8b5f091ed63050ef197a61e:app-emulation/wine/wine-9999.ebuild
 }
 
 config_cache() {
