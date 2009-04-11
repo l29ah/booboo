@@ -22,7 +22,7 @@ SRC_URI="${SRC_URI}
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="alsa cups dbus esd +gecko hal jack jpeg lcms ldap nas ncurses +opengl oss samba scanner xml +X acceptex"
+IUSE="alsa cups dbus esd +gecko hal jack jpeg lcms ldap nas ncurses +opengl oss samba scanner xml +X"
 RESTRICT="test" #72375
 
 RDEPEND=">=media-libs/freetype-2.0.0
@@ -90,8 +90,8 @@ src_unpack() {
 
 	epatch "${FILESDIR}"/wine-srgb-hack.patch #http://bugs.winehq.org/show_bug.cgi?id=12453
 	sed -i '/^MimeType/d' tools/wine.desktop || die #117785
-# Added by MiklerGM
-	use acceptex && epatch "${FILESDIR}"/acceptex.patch || die "patch +AcceptEX failed"
+# Added by MiklerGM and commented by lp3 later =))
+#	use acceptex && epatch "${FILESDIR}"/acceptex.patch || die "patch +AcceptEX failed"
 }
 
 config_cache() {
