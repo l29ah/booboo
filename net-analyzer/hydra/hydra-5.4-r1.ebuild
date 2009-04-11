@@ -1,6 +1,6 @@
 # Copyright 1999-2007 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/hydra/hydra-5.4.ebuild,v 1.3 2007/08/13 21:22:10 dertobi123 Exp $
+# $Header: $
 
 inherit eutils
 
@@ -23,9 +23,8 @@ S="${WORKDIR}/${P}-src"
 
 src_unpack() {
 	unpack ${A}
-        cd "${S}/hydra-gtk/src"
-        epatch "${FILESDIR}/o_creat.patch"
 	cd "${S}"
+	epatch "${FILESDIR}/o_creat.patch"
 	sed -i "s:-O2:${CFLAGS}:" Makefile.am || die "sed failed"
 }
 
