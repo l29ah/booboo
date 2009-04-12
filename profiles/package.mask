@@ -6,6 +6,9 @@
 =dev-libs/ghal-9999
 =app-cdr/xfburn-9999
 =xfce-extra/xfce4-notes-9999
+# my recommendation is to emerge this ebuild with '-O' option
+# there are some problems with install prefix so you are to modify your $PATH
+=kde-misc/krusader-9999
 
 # Somebody please fix this ebuild
 =net-p2p/transmission-9999
