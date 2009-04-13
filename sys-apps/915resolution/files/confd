@@ -1,0 +1,16 @@
+# Copyright 1999-2006 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/915resolution/files/confd,v 1.3 2007/04/17 16:52:24 genstef Exp $
+
+# Config file for /etc/init.d/915resolution
+# based on the config file included with sys-apps/855resolution
+
+# this example will replace mode "4d" with 1280x768x24
+replace="'4d 1280 768 24'"
+
+# to replace more than one mode do something like this
+#replace="'4d 1280 768 24' '5c 1400 1050 16'"
+
+# if you want to log the output add the file here.
+# this will be overwritten at every boot
+log="/var/log/915resolution"
