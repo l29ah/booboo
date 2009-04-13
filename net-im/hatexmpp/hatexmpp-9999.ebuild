@@ -1,11 +1,12 @@
 inherit git
+
 DESCRIPTION="hatexmpp is a xmpp-client featuring ii-like interface"
 HOMEPAGE="http://github.com/l29ah/hatexmpp"
 SRC_URI=""
 
-LICENSE="GLP-3"
+LICENSE="GPL"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="x86 amd64"
 IUSE=""
 EGIT_REPO_URI="git://github.com/l29ah/hatexmpp.git"
 RDEPEND="
@@ -22,6 +23,7 @@ src_compile()
 src_install()
 {
 	dobin hatexmpp
+	dodoc README
 }
 
 pkg_postinst()
