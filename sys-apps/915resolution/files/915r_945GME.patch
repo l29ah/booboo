@@ -1,0 +1,54 @@
+--- 915resolution-0.5.3/915resolution.c	2007-04-15 11:46:56.000000000 +0100
++++ 915resolution.c.new	2008-09-11 19:55:00.000000000 +0100
+@@ -55,12 +55,12 @@
+ typedef unsigned int cardinal;
+ 
+ typedef enum {
+-    CT_UNKWN, CT_830, CT_845G, CT_855GM, CT_865G, CT_915G, CT_915GM, CT_945G, CT_945GM,
++    CT_UNKWN, CT_830, CT_845G, CT_855GM, CT_865G, CT_915G, CT_915GM, CT_945G, CT_945GM, CT_945GME,
+     CT_946GZ, CT_G965, CT_Q965
+ } chipset_type;
+ 
+ char * chipset_type_names[] = {
+-    "UNKNOWN", "830",  "845G", "855GM", "865G", "915G", "915GM", "945G", "945GM",
++    "UNKNOWN", "830",  "845G", "855GM", "865G", "915G", "915GM", "945G", "945GM", "945GME",
+     "946GZ",   "G965", "Q965"
+ };
+ 
+@@ -213,6 +213,10 @@
+         type = CT_945GM;
+         break;
+ 
++    case 0x27ac8086:
++        type = CT_945GME;
++        break;
++
+     case 0x29708086:
+         type = CT_946GZ;
+         break;
+@@ -508,6 +512,7 @@
+     case CT_915GM:
+     case CT_945G:
+     case CT_945GM:
++    case CT_945GME:
+     case CT_946GZ:
+     case CT_G965:
+     case CT_Q965:
+@@ -548,6 +553,7 @@
+     case CT_915GM:
+     case CT_945G:
+     case CT_945GM:
++    case CT_945GME:
+     case CT_946GZ:
+     case CT_G965:
+     case CT_Q965:
+@@ -803,6 +809,9 @@
+         else if (!strcmp(argv[index], "945GM")) {
+             *forced_chipset = CT_945GM;
+         }
++        else if (!strcmp(argv[index], "945GME")) {
++            *forced_chipset = CT_945GME;
++        }
+         else if (!strcmp(argv[index], "946GZ")) {
+             *forced_chipset = CT_946GZ;
+         }

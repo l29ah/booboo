@@ -1,0 +1,47 @@
+#!/sbin/runscript
+
+depend() {
+    before xdm
+}
+
+# Credit to David Leverton for this function which handily maps a bash array
+# structure to positional parameters so existing configs work :)
+# We'll deprecate arrays at some point though.
+_get_array() {
+    if [ -n "${BASH}" ] ; then
+		case "$(declare -p "$1" 2>/dev/null)" in
+	    	"declare -a "*)
+	    	echo "set -- \"\${$1[@]}\""
+	    	return
+	    	;;
+		esac
+    fi
+
+    echo "eval set -- \"\$$1\""
+}
+
+checkconfig() {
+    if [[ -z "${replace[*]}" ]]; then
+        eerror "You need to have at least one resolution to replace"
+        eerror "/etc/conf.d/915resolution"
+        return 1
+    fi
+
+    [[ "${log}" && -f "${log}" ]] && echo > "${log}"
+
+    return 0
+}
+
+start() {
+    checkconfig || return 1
+
+    ebegin "Patching video BIOS with new video modes."
+
+    eval $(_get_array replace)
+    for mode in "$@"; do
+        915resolution ${mode} >> ${log:-/dev/null}; retval=$?
+    done
+
+    eend ${retval}
+}
+
