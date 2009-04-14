@@ -3,7 +3,6 @@
 =games-rpg/openmw-9999
 =dev-games/mygui-9999
 =dev-cpp/commoncpp2-9999
-=dev-libs/ghal-9999
 =app-cdr/xfburn-9999
 =xfce-extra/xfce4-notes-9999
 # my recommendation is to emerge this ebuild with '-O' option
