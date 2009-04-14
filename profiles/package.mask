@@ -18,3 +18,5 @@
 =sys-kernel/l29ah-sources-2.6.29_rc7
 
 =net-wireless/crda-1.0.1-r1
+
+=games-misc/qlife-1.1
