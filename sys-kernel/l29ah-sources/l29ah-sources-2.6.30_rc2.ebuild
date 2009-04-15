@@ -9,6 +9,9 @@ HOMEPAGE="http://wiki.github.com/l29ah/booboo"
 DESCRIPTION="Full sources with some useful patches."
 UNIPATCH_STRICTORDER="yes"
 
+# yandex mirror sucks, maybe others too
+RESTRICT="nomirror"
+
 inherit kernel-2
 detect_version
 detect_arch
