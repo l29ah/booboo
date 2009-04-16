@@ -2,6 +2,7 @@
 
 inherit eutils
 
+EAPI="2"
 DESCRIPTION="mplayer with extra performance"
 HOMEPAGE="http://mplayerxp.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
@@ -9,7 +10,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="openmp"
 
 DEPEND="
 	sys-libs/glibc
@@ -18,6 +19,7 @@ DEPEND="
 	media-video/ffmpeg
 	media-video/dirac
 	x11-base/xorg-server
+	openmp? ( >=sys-devel/gcc-4.3.0 )
 "
 RDEPEND=$DEPEND
 
@@ -36,7 +38,7 @@ src_install() {
 	# Kludging around homemade configure script
 	CSI=$(pkg-config --cflags dirac schroedinger-1.0)
 	LIBS="$LIBS -ltiff"
-	CC="${CC} ${CFLAGS} $CSI"
+	CFLAGS="$CFLAGS $CSI"
 	myconf="--prefix=/usr \
 			--datadir=/usr/share/mplayerxp \
 			--libdir=/usr/lib \
@@ -49,6 +51,7 @@ src_install() {
 			grep $pkg | 
 			sed 's/^-I//'`/* codecs/
 	done
+	sed -i -e 's/^SHCFLAGS.*//' codecs/config.mak
 	mymake="prefix=${D}/usr \
 			BINDIR=${D}/usr/bin \
 			CONFDIR=${D}/etc/mplayer \
