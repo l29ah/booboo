@@ -26,16 +26,23 @@ src_unpack() {
 }
 
 src_compile() {
+	# We have funny install during compile'
 	true
 }
 
 src_install() {
+	# Kludging around homemade configure script
 	CSI=$(pkg-config --cflags dirac schroedinger-1.0)
 	LIBS="$LIBS -ltiff"
 	CC="${CC} ${CFLAGS} $CSI"
 	./configure --prefix="${D}"
-	cp -r `pkg-config --cflags schroedinger-1.0 | sed 's/ /\n/g' | grep schroedinger | sed 's/^-I//'`/* codecs/
-	emake
-	make install
+	for pkg in dirac schroedinger-1.0
+		do cp -r `pkg-config --cflags $pkg | 
+			sed 's/ /\n/g' | 
+			grep $pkg | 
+			sed 's/^-I//'`/* codecs/
+	done
+	emake || die 'emake failed'
+	make install || die 'make install failed'
 }
 

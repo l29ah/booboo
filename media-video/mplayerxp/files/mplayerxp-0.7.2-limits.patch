@@ -9,3 +9,9 @@
  
  #include "config.h"
  #include "../mplayer.h"
+--- a/mplayerxp/libmpdemux/demux_nuv.c
++++ b/mplayerxp/libmpdemux/demux_nuv.c
+@@ -23,1 +23,2 @@
+ #include "nuppelvideo.h"
++#include "../bswap.h"
+
