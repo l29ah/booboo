@@ -17,6 +17,7 @@ DEPEND="
 	media-libs/schroedinger
 	media-video/ffmpeg
 	media-video/dirac
+	x11-base/xorg-server
 "
 RDEPEND=$DEPEND
 

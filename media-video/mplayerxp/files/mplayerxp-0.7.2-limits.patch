@@ -14,4 +14,16 @@
 @@ -23,1 +23,2 @@
  #include "nuppelvideo.h"
 +#include "../bswap.h"
+--- a/mplayerxp/osdep/lrmi.c
++++ b/mplayerxp/osdep/lrmi.c
+@@ -26,2 +26,3 @@
+ #include <fcntl.h>
++#include <xorg/xf86int10.h>
+ #include "osdep_msg.h"
+@@ -32,1 +32,5 @@
++#define IF_MASK XF86_IF_MASK
++#define IOPL_MASK XF86_IOPL_MASK
++#define TF_MASK XF86_TF_MASK
++#define VIF_MASK XF86_VIF_MASK
+ #define REAL_MEM_BASE   ((void *)0x10000)
 
