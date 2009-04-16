@@ -16,6 +16,7 @@ DEPEND="
 	media-libs/tiff
 	media-libs/schroedinger
 	media-video/ffmpeg
+	media-video/dirac
 "
 RDEPEND=$DEPEND
 
