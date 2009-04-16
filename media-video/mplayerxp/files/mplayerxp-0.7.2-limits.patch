@@ -16,8 +16,9 @@
 +#include "../bswap.h"
 --- a/mplayerxp/osdep/lrmi.c
 +++ b/mplayerxp/osdep/lrmi.c
-@@ -26,2 +26,3 @@
+@@ -26,2 +26,4 @@
  #include <fcntl.h>
++#define _INT10_PRIVATE
 +#include <xorg/xf86int10.h>
  #include "osdep_msg.h"
 @@ -32,1 +32,5 @@
