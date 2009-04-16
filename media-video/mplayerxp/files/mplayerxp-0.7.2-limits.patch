@@ -16,15 +16,10 @@
 +#include "../bswap.h"
 --- a/mplayerxp/osdep/lrmi.c
 +++ b/mplayerxp/osdep/lrmi.c
-@@ -26,2 +26,4 @@
- #include <fcntl.h>
-+#define _INT10_PRIVATE
-+#include <xorg/xf86int10.h>
- #include "osdep_msg.h"
 @@ -32,1 +32,5 @@
-+#define IF_MASK XF86_IF_MASK
-+#define IOPL_MASK XF86_IOPL_MASK
-+#define TF_MASK XF86_TF_MASK
-+#define VIF_MASK XF86_VIF_MASK
++#define IF_MASK 0x00000200
++#define IOPL_MASK 0x00003000
++#define TF_MASK 0x00000100
++#define VIF_MASK 0x00080000
  #define REAL_MEM_BASE   ((void *)0x10000)
 
