@@ -4,8 +4,8 @@
 
 EAPI="2"
 ETYPE="sources"
-KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
-HOMEPAGE="http://l29ah.ru/"
+KEYWORDS="alpha amd64 ia64 ppc ppc64 sparc x86"
+HOMEPAGE="http://wiki.github.com/l29ah/booboo"
 DESCRIPTION="Full sources with some useful patches."
 #UNIPATCH_STRICTORDER="yes"
 
@@ -13,36 +13,34 @@ inherit kernel-2
 detect_version
 detect_arch
 
-#GENPATCHESV="2"
-R4V=""
-TUXONICEV="3.0-rc8"
+GENPATCHESV="2"
+REISER4V="2.6.29"
 
-REISER4_SRC="reiser4-for-2.6.28.patch.bz2"
+REISER4_SRC="reiser4-for-${REISER4V}.patch.bz2"
 REISER4_URI="http://www.kernel.org/pub/linux/kernel/people/edward/reiser4/reiser4-for-${KV_MAJOR}.${KV_MINOR}/${REISER4_SRC}"
-TUXONICE_SRC="tuxonice-${TUXONICEV}-for-2.6.28.patch.bz2"
+TUXONICE_SRC="current-tuxonice-for-head.patch-20090313-v1.bz2"
 TUXONICE_URI="http://www.tuxonice.net/downloads/all/${TUXONICE_SRC}"
 
-IUSE="${IUSE} reiser4 tuxonice +genpatches"	
+IUSE="${IUSE} reiser4 tuxonice +genpatches"  
 # Defaults to gentoo-sources
 
 SRC_URI="${KERNEL_URI} ${ARCH_URI}
-	reiser4? ( ${REISER4_URI} )
+  reiser4? ( ${REISER4_URI} )
+  tuxonice? ( ${TUXONICE_URI} )
 "
 
 if use genpatches; then
-	ewarn "No genpatches in RC"
-	#K_WANT_GENPATCHES="base extras"
-	#K_GENPATCHES_VER="${GENPATCHESV}"
+	K_WANT_GENPATCHES="base extras"
+	K_GENPATCHES_VER="${GENPATCHESV}"
 fi
-if use reiser4; then 
-	ewarn "Using Reiser4 for .28"
+if use reiser4; then
 	UNIPATCH_LIST="${UNIPATCH_LIST}
-	${DISTDIR}/${REISER4_SRC}
-	${FILESDIR}/reiser4-2.6.28-add_to_page_cache_lru-fix.patch"
+	${DISTDIR}/${REISER4_SRC}"
 fi
-if use tuxonice; then 
-	ewarn "No TuxOnIce for .29 yet, and TuxOnIce for .28 fails to patch."
-	#UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${TUXONICE_SRC}"
+if use tuxonice; then
+	ewarn "Trying to use TuxOnIce for git-kernel"
+	ewarn "TuxOnIce support is dropped. Kick us, if you need it."
+	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${TUXONICE_SRC}"
 fi
 
 pkg_postinst() {
@@ -50,4 +48,3 @@ pkg_postinst() {
 	einfo "For more info on this patchset, and how to report problems, see:"
 	einfo "${HOMEPAGE}"
 }
-

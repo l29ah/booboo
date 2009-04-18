@@ -13,9 +13,7 @@
 =app-arch/squeeze-9999   
 
 # Non-release kernels
-=sys-kernel/l29ah-sources-2.6.29_rc5
-=sys-kernel/l29ah-sources-2.6.29_rc6
-=sys-kernel/l29ah-sources-2.6.29_rc7
+=sys-kernel/l29ah-sources-9000
 
 =net-wireless/crda-1.0.1-r1
 
