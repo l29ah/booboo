@@ -1,5 +1,5 @@
 From: Scott Lindeneau <slindeneau@gmail.com>
-Date: Fri, 10 Apr 2009 15:53:32 +0000 (+0200)
+Date: Thu, 16 Apr 2009 19:57:31 +0000 (+0200)
 Subject: ws2_32: General AcceptEx Implemenetation. - No Data_length support
 X-Git-Url: http://repo.or.cz/w/wine/hacks.git?a=commitdiff_plain;h=patches%2Fmaster%2Fwinsock_acceptex
 

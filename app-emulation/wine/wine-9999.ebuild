@@ -22,7 +22,8 @@ SRC_URI="${SRC_URI}
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="alsa cups dbus esd +gecko hal jack jpeg lcms ldap nas ncurses +opengl oss samba scanner xml +X"
+IUSE="alsa cups dbus esd +gecko hal jack jpeg lcms ldap nas ncurses +opengl oss
+samba scanner xml +X acceptex"
 RESTRICT="test" #72375
 
 RDEPEND=">=media-libs/freetype-2.0.0
