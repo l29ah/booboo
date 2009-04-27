@@ -5,14 +5,15 @@
 inherit eutils
 
 MY_P="${P/_/-}"
-S="${WORKDIR}/${P%%_*}"
+#S="${WORKDIR}/${P%%_*}"
+S="${WORKDIR}/$MY_P"
 DESCRIPTION="Quick Image Viewer"
-SRC_URI="http://www.kdown1.de/files/${MY_P}-src.tgz"
-HOMEPAGE="http://www.klografx.net/qiv/"
+SRC_URI="http://spiegl.de/qiv/download/$MY_P.tgz"
+HOMEPAGE="http://spiegl.de/qiv/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha amd64 ~ppc ~ppc64 ~sparc x86"
 IUSE="xinerama"
 
 DEPEND="media-libs/libpng
@@ -24,13 +25,18 @@ DEPEND="media-libs/libpng
 	virtual/x11 )"
 
 src_unpack() {
+	if ! built_with_use "media-libs/imlib" gtk; then
+		eerror "You have to build media-libs/imlib with USE gtk."
+		die 
+	fi
+																					
 	unpack ${A}
 	cd "${S}"
-	epatch "${FILESDIR}"/${P}-composite.patch
+#	epatch "${FILESDIR}"/qiv-2.0-composite.patch
 }
 
 src_compile() {
-	use xinerama && sed -i "s:# GTD_XINERAMA = -DGTD_XINERAMA:GTD_XINERAMA = -DGTD_XINERAMA:" Makefile
+#	use xinerama && sed -i "s:# GTD_XINERAMA = -DGTD_XINERAMA:GTD_XINERAMA = -DGTD_XINERAMA:" Makefile
 	emake || die
 }
 
