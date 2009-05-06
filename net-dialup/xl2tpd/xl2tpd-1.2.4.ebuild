@@ -18,11 +18,11 @@ RDEPEND="${DEPEND}
 	net-dialup/ppp"
 
 src_compile() {
-	emake OSFLAGS='-DLINUX -I./linux/include/ -DUSE_KERNEL'
+	emake #OSFLAGS='-DLINUX -I/usr/src/linux/include/ -DUSE_KERNEL'
 }
 
 src_install() {
-	emake PREFIX=/usr DESTDIR="${D}" OSFLAGS='-DLINUX -I./linux/include/ -DUSE_KERNEL' install || die "emake install failed"
+	emake PREFIX=/usr DESTDIR="${D}" install || die "emake install failed"
 
 	dodoc CREDITS README.xl2tpd \
 		doc/README.patents doc/rfc2661.txt doc/*.sample
