@@ -10,9 +10,6 @@
 # there are some problems with install prefix so you are to modify your $PATH
 =kde-misc/krusader-9999
 
-# And this too =))
-=app-arch/squeeze-9999   
-
 # Non-release kernels
 =sys-kernel/l29ah-sources-9000
 
