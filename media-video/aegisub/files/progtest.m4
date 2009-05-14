@@ -1,0 +1,1 @@
+/usr/share/aclocal/progtest.m4

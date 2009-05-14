@@ -1,0 +1,28 @@
+--- aegisub-9999/autogen.sh~	2008-07-20 14:54:05.000000000 +0400
++++ aegisub-9999/autogen.sh	2008-07-20 14:54:25.000000000 +0400
+@@ -307,10 +307,6 @@
+ 
+ cd $ORIGDIR
+ 
+-echo "--- $srcdir/configure ---"
+-$srcdir/configure --enable-maintainer-mode $AUTOGEN_CONFIGURE_ARGS "$@"
+-RC=$?
+-
+ echo
+ echo
+ echo "***********************************************************************"
+@@ -319,12 +315,4 @@
+ echo "* download an official distfile in order to receive support."
+ echo "*"
+ echo "***********************************************************************"
+-echo
+-
+-if test $RC -ne 0; then
+-  echo
+-  echo "Configure failed or did not finish!"
+-  exit $RC
+-fi
+-
+-echo "Now type 'make' to compile the $PROJECT."
++echo
+\ No newline at end of file
