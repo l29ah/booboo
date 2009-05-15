@@ -1,5 +1,5 @@
 From: Scott Lindeneau <slindeneau@gmail.com>
-Date: Thu, 16 Apr 2009 19:57:31 +0000 (+0200)
+Date: Sat, 9 May 2009 11:43:29 +0000 (+0200)
 Subject: ws2_32: General AcceptEx Implemenetation. - No Data_length support
 X-Git-Url: http://repo.or.cz/w/wine/hacks.git?a=commitdiff_plain;h=patches%2Fmaster%2Fwinsock_acceptex
 
@@ -25,7 +25,7 @@ index 1f2bd78..c0814fb 100644
  @ stub GetAddressByNameW
  @ stub GetNameByTypeA
 diff --git a/dlls/ws2_32/socket.c b/dlls/ws2_32/socket.c
-index cabe191..d88d98d 100644
+index 5516260..1b0e5e9 100644
 --- a/dlls/ws2_32/socket.c
 +++ b/dlls/ws2_32/socket.c
 @@ -196,6 +196,15 @@ typedef struct ws2_async
@@ -299,17 +299,17 @@ index cabe191..d88d98d 100644
  /***********************************************************************
   *              WS2_recv                (INTERNAL)
 diff --git a/dlls/ws2_32/ws2_32.spec b/dlls/ws2_32/ws2_32.spec
-index 74e71be..90301bb 100644
+index a77c215..2e20d38 100644
 --- a/dlls/ws2_32/ws2_32.spec
 +++ b/dlls/ws2_32/ws2_32.spec
-@@ -118,3 +118,5 @@
+@@ -119,3 +119,5 @@
  @ stdcall getaddrinfo(str str ptr ptr) WS_getaddrinfo
  @ stdcall getnameinfo(ptr long ptr long ptr long long) WS_getnameinfo
  @ stdcall inet_ntop(long ptr ptr long) WS_inet_ntop
 +@ stdcall AcceptEx(long long ptr long long long ptr ptr) 
 +@ stdcall GetAcceptExSockaddrs(ptr long long long ptr ptr ptr ptr)
 diff --git a/include/wine/server_protocol.h b/include/wine/server_protocol.h
-index 31ef863..d69bc24 100644
+index f819686..4f0e2d7 100644
 --- a/include/wine/server_protocol.h
 +++ b/include/wine/server_protocol.h
 @@ -47,7 +47,7 @@ struct reply_header
@@ -370,7 +370,7 @@ index 31ef863..d69bc24 100644
  #define ASYNC_TYPE_READ  0x01
  #define ASYNC_TYPE_WRITE 0x02
  #define ASYNC_TYPE_WAIT  0x03
-@@ -4602,6 +4630,7 @@ enum request
+@@ -4626,6 +4654,7 @@ enum request
      REQ_create_socket,
      REQ_accept_socket,
      REQ_set_socket_event,
@@ -378,7 +378,7 @@ index 31ef863..d69bc24 100644
      REQ_get_socket_event,
      REQ_enable_socket_event,
      REQ_set_socket_deferred,
-@@ -4692,6 +4721,7 @@ enum request
+@@ -4716,6 +4745,7 @@ enum request
      REQ_get_serial_info,
      REQ_set_serial_info,
      REQ_register_async,
@@ -386,7 +386,7 @@ index 31ef863..d69bc24 100644
      REQ_cancel_async,
      REQ_ioctl,
      REQ_get_ioctl_result,
-@@ -4845,6 +4875,7 @@ union generic_request
+@@ -4871,6 +4901,7 @@ union generic_request
      struct create_socket_request create_socket_request;
      struct accept_socket_request accept_socket_request;
      struct set_socket_event_request set_socket_event_request;
@@ -394,7 +394,7 @@ index 31ef863..d69bc24 100644
      struct get_socket_event_request get_socket_event_request;
      struct enable_socket_event_request enable_socket_event_request;
      struct set_socket_deferred_request set_socket_deferred_request;
-@@ -4935,6 +4966,7 @@ union generic_request
+@@ -4961,6 +4992,7 @@ union generic_request
      struct get_serial_info_request get_serial_info_request;
      struct set_serial_info_request set_serial_info_request;
      struct register_async_request register_async_request;
@@ -402,7 +402,7 @@ index 31ef863..d69bc24 100644
      struct cancel_async_request cancel_async_request;
      struct ioctl_request ioctl_request;
      struct get_ioctl_result_request get_ioctl_result_request;
-@@ -5086,6 +5118,7 @@ union generic_reply
+@@ -5114,6 +5146,7 @@ union generic_reply
      struct create_socket_reply create_socket_reply;
      struct accept_socket_reply accept_socket_reply;
      struct set_socket_event_reply set_socket_event_reply;
@@ -410,7 +410,7 @@ index 31ef863..d69bc24 100644
      struct get_socket_event_reply get_socket_event_reply;
      struct enable_socket_event_reply enable_socket_event_reply;
      struct set_socket_deferred_reply set_socket_deferred_reply;
-@@ -5176,6 +5209,7 @@ union generic_reply
+@@ -5204,6 +5237,7 @@ union generic_reply
      struct get_serial_info_reply get_serial_info_reply;
      struct set_serial_info_reply set_serial_info_reply;
      struct register_async_reply register_async_reply;
@@ -607,7 +607,7 @@ index 1aaa284..2bd3f25 100644
  extern void fd_copy_completion( struct fd *src, struct fd *dst );
  
 diff --git a/server/protocol.def b/server/protocol.def
-index 004f4c9..6f14a19 100644
+index 8ae653b..104a926 100644
 --- a/server/protocol.def
 +++ b/server/protocol.def
 @@ -63,7 +63,7 @@ struct reply_header
@@ -655,7 +655,7 @@ index 004f4c9..6f14a19 100644
  #define ASYNC_TYPE_WRITE 0x02
  #define ASYNC_TYPE_WAIT  0x03
 diff --git a/server/request.h b/server/request.h
-index f0ebcba..9fd7293 100644
+index f85756c..dec421b 100644
 --- a/server/request.h
 +++ b/server/request.h
 @@ -155,6 +155,7 @@ DECL_HANDLER(unlock_file);
@@ -674,7 +674,7 @@ index f0ebcba..9fd7293 100644
  DECL_HANDLER(cancel_async);
  DECL_HANDLER(ioctl);
  DECL_HANDLER(get_ioctl_result);
-@@ -397,6 +399,7 @@ static const req_handler req_handlers[REQ_NB_REQUESTS] =
+@@ -399,6 +401,7 @@ static const req_handler req_handlers[REQ_NB_REQUESTS] =
      (req_handler)req_create_socket,
      (req_handler)req_accept_socket,
      (req_handler)req_set_socket_event,
@@ -682,7 +682,7 @@ index f0ebcba..9fd7293 100644
      (req_handler)req_get_socket_event,
      (req_handler)req_enable_socket_event,
      (req_handler)req_set_socket_deferred,
-@@ -487,6 +490,7 @@ static const req_handler req_handlers[REQ_NB_REQUESTS] =
+@@ -489,6 +492,7 @@ static const req_handler req_handlers[REQ_NB_REQUESTS] =
      (req_handler)req_get_serial_info,
      (req_handler)req_set_serial_info,
      (req_handler)req_register_async,
@@ -690,7 +690,7 @@ index f0ebcba..9fd7293 100644
      (req_handler)req_cancel_async,
      (req_handler)req_ioctl,
      (req_handler)req_get_ioctl_result,
-@@ -871,8 +875,9 @@ C_ASSERT( FIELD_OFFSET(struct create_socket_request, flags) == 32 );
+@@ -875,8 +879,9 @@ C_ASSERT( FIELD_OFFSET(struct create_socket_request, flags) == 32 );
  C_ASSERT( FIELD_OFFSET(struct create_socket_reply, handle) == 8 );
  C_ASSERT( sizeof(struct create_socket_reply) == 16 );
  C_ASSERT( FIELD_OFFSET(struct accept_socket_request, lhandle) == 12 );
@@ -702,7 +702,7 @@ index f0ebcba..9fd7293 100644
  C_ASSERT( FIELD_OFFSET(struct accept_socket_reply, handle) == 8 );
  C_ASSERT( sizeof(struct accept_socket_reply) == 16 );
  C_ASSERT( FIELD_OFFSET(struct set_socket_event_request, handle) == 12 );
-@@ -881,6 +886,9 @@ C_ASSERT( FIELD_OFFSET(struct set_socket_event_request, event) == 20 );
+@@ -885,6 +890,9 @@ C_ASSERT( FIELD_OFFSET(struct set_socket_event_request, event) == 20 );
  C_ASSERT( FIELD_OFFSET(struct set_socket_event_request, window) == 24 );
  C_ASSERT( FIELD_OFFSET(struct set_socket_event_request, msg) == 28 );
  C_ASSERT( sizeof(struct set_socket_event_request) == 32 );
@@ -712,7 +712,7 @@ index f0ebcba..9fd7293 100644
  C_ASSERT( FIELD_OFFSET(struct get_socket_event_request, handle) == 12 );
  C_ASSERT( FIELD_OFFSET(struct get_socket_event_request, service) == 16 );
  C_ASSERT( FIELD_OFFSET(struct get_socket_event_request, c_event) == 20 );
-@@ -1345,6 +1353,12 @@ C_ASSERT( FIELD_OFFSET(struct register_async_request, type) == 12 );
+@@ -1349,6 +1357,12 @@ C_ASSERT( FIELD_OFFSET(struct register_async_request, type) == 12 );
  C_ASSERT( FIELD_OFFSET(struct register_async_request, async) == 16 );
  C_ASSERT( FIELD_OFFSET(struct register_async_request, count) == 56 );
  C_ASSERT( sizeof(struct register_async_request) == 64 );
@@ -1083,10 +1083,10 @@ index baaa9df..96ef50a 100644
  
  /* set socket event parameters */
 diff --git a/server/trace.c b/server/trace.c
-index 4a7bfa5..f0e0630 100644
+index 6781ef7..f080b3a 100644
 --- a/server/trace.c
 +++ b/server/trace.c
-@@ -1545,6 +1545,7 @@ static void dump_create_socket_reply( const struct create_socket_reply *req )
+@@ -1552,6 +1552,7 @@ static void dump_create_socket_reply( const struct create_socket_reply *req )
  static void dump_accept_socket_request( const struct accept_socket_request *req )
  {
      fprintf( stderr, " lhandle=%04x", req->lhandle );
@@ -1094,7 +1094,7 @@ index 4a7bfa5..f0e0630 100644
      fprintf( stderr, ", access=%08x", req->access );
      fprintf( stderr, ", attributes=%08x", req->attributes );
  }
-@@ -1563,6 +1564,12 @@ static void dump_set_socket_event_request( const struct set_socket_event_request
+@@ -1570,6 +1571,12 @@ static void dump_set_socket_event_request( const struct set_socket_event_request
      fprintf( stderr, ", msg=%08x", req->msg );
  }
  
@@ -1107,7 +1107,7 @@ index 4a7bfa5..f0e0630 100644
  static void dump_get_socket_event_request( const struct get_socket_event_request *req )
  {
      fprintf( stderr, " handle=%04x", req->handle );
-@@ -2557,6 +2564,15 @@ static void dump_register_async_request( const struct register_async_request *re
+@@ -2564,6 +2571,15 @@ static void dump_register_async_request( const struct register_async_request *re
      fprintf( stderr, ", count=%d", req->count );
  }
  
@@ -1123,7 +1123,7 @@ index 4a7bfa5..f0e0630 100644
  static void dump_cancel_async_request( const struct cancel_async_request *req )
  {
      fprintf( stderr, " handle=%04x", req->handle );
-@@ -3832,6 +3848,7 @@ static const dump_func req_dumpers[REQ_NB_REQUESTS] = {
+@@ -3856,6 +3872,7 @@ static const dump_func req_dumpers[REQ_NB_REQUESTS] = {
      (dump_func)dump_create_socket_request,
      (dump_func)dump_accept_socket_request,
      (dump_func)dump_set_socket_event_request,
@@ -1131,7 +1131,7 @@ index 4a7bfa5..f0e0630 100644
      (dump_func)dump_get_socket_event_request,
      (dump_func)dump_enable_socket_event_request,
      (dump_func)dump_set_socket_deferred_request,
-@@ -3922,6 +3939,7 @@ static const dump_func req_dumpers[REQ_NB_REQUESTS] = {
+@@ -3946,6 +3963,7 @@ static const dump_func req_dumpers[REQ_NB_REQUESTS] = {
      (dump_func)dump_get_serial_info_request,
      (dump_func)dump_set_serial_info_request,
      (dump_func)dump_register_async_request,
@@ -1139,7 +1139,7 @@ index 4a7bfa5..f0e0630 100644
      (dump_func)dump_cancel_async_request,
      (dump_func)dump_ioctl_request,
      (dump_func)dump_get_ioctl_result_request,
-@@ -4071,6 +4089,7 @@ static const dump_func reply_dumpers[REQ_NB_REQUESTS] = {
+@@ -4097,6 +4115,7 @@ static const dump_func reply_dumpers[REQ_NB_REQUESTS] = {
      (dump_func)dump_create_socket_reply,
      (dump_func)dump_accept_socket_reply,
      NULL,
@@ -1147,7 +1147,7 @@ index 4a7bfa5..f0e0630 100644
      (dump_func)dump_get_socket_event_reply,
      NULL,
      NULL,
-@@ -4162,6 +4181,7 @@ static const dump_func reply_dumpers[REQ_NB_REQUESTS] = {
+@@ -4188,6 +4207,7 @@ static const dump_func reply_dumpers[REQ_NB_REQUESTS] = {
      NULL,
      NULL,
      NULL,
@@ -1155,7 +1155,7 @@ index 4a7bfa5..f0e0630 100644
      (dump_func)dump_ioctl_reply,
      (dump_func)dump_get_ioctl_result_reply,
      (dump_func)dump_create_named_pipe_reply,
-@@ -4310,6 +4330,7 @@ static const char * const req_names[REQ_NB_REQUESTS] = {
+@@ -4338,6 +4358,7 @@ static const char * const req_names[REQ_NB_REQUESTS] = {
      "create_socket",
      "accept_socket",
      "set_socket_event",
@@ -1163,7 +1163,7 @@ index 4a7bfa5..f0e0630 100644
      "get_socket_event",
      "enable_socket_event",
      "set_socket_deferred",
-@@ -4400,6 +4421,7 @@ static const char * const req_names[REQ_NB_REQUESTS] = {
+@@ -4428,6 +4449,7 @@ static const char * const req_names[REQ_NB_REQUESTS] = {
      "get_serial_info",
      "set_serial_info",
      "register_async",
