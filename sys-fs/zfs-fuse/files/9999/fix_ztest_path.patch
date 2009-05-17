@@ -1,0 +1,9 @@
+--- a/src/cmd/ztest/runtest.sh	2007-01-09 11:07:35.000000000 +0000
++++ b/src/cmd/ztest/runtest.sh	2007-01-09 11:08:51.000000000 +0000
+@@ -3,5 +3,5 @@ ulimit -c unlimited
+ echo "Start date: `date`"
+ #ZFS_DEBUG=on /usr/bin/time -v nice -n 20 ./ztest -V -T 86400 &> log.txt
+ #/usr/bin/time -v nice -n 20 ./ztest -V -T 86400
+-nice -n 20 ./ztest -V $* && echo Test successful
++nice -n 20 /usr/sbin/run-ztest -V $* && echo Test successful
+ echo "End date: `date`"
