@@ -28,6 +28,7 @@ DEPEND="${RDEPEND}
 
 src_compile() {
 	cd hg/mcabber
+	use patch && epatch "${FILESDIR}""/dbus.patch" || die
 	use patch && epatch "${FILESDIR}""/easy.patch" || die "patch failed"
 	./autogen.sh
 	econf \

@@ -1,5 +1,4 @@
 # Live ebuilds
-=media-video/ffmpeg-9999
 =app-misc/kanatest-9999
 =games-rpg/openmw-9999
 =dev-games/mygui-9999
@@ -21,3 +20,4 @@
 
 # needs fixing
 =games-arcade/openjazz-20090329
+=net-im/ekg2-20090404
