@@ -7,21 +7,28 @@ SRC_URI=""
 LICENSE="GPL"
 SLOT="0"
 KEYWORDS="x86 amd64"
-IUSE=""
+IUSE="screen gtk"
 EGIT_REPO_URI="git://github.com/l29ah/hatexmpp.git"
 RDEPEND="
 		>=dev-libs/glib-2.18.4
 		>=sys-fs/fuse-2.7.4
-		>=net-libs/loudmouth-1.4.3"
+		>=net-libs/loudmouth-1.4.3
+		screen? ( app-misc/rlwrap )
+		screen? ( dev-perl/TimeDate )
+		screen? ( app-misc/screen ) 
+		gtk?  ( >=x11-libs/gtk+-2.12.11 )"
 DEPEND="${RDEPEND}"
 
 src_compile()
 {
 	emake || die "emake filed"
+	use gtk && cd frontends/gtkface && emake || die "gtk emake failed"
 }
 
 src_install()
 {
+	use screen	&& dobin frontends/hatescreen.sh 
+	use gtk		&& dobin frontends/gtkface/gtkface
 	dobin hatexmpp
 	dodoc README
 }
