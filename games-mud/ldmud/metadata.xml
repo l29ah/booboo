@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>games-mud</herd>
+<maintainer>
+  <email>lynX@are.you.already.psyced.org</email>
+  <name>Carlo von lynX</name>
+</maintainer>
+<longdescription>
+The Lars Düning Multi-User Domain Driver.
+Official derivate of Lars Pensjø MUD (LPMUD) and Amylaar LPMUD.
+</longdescription>
+</pkgmetadata>

@@ -1,0 +1,13 @@
+# ChangeLog for games-mud/ldmud
+# $Header: /CVS/anonCVS/psycmuve-beta-2/config/gentoo/ldmud/ChangeLog,v 1.3 2006/01/17 11:37:31 lynx Exp $
+
+*ldmud-3.3.687 (18 Nov 2005)
+
+  18 Nov 2005; Carlo von lynX <lynX@are.you.already.psyced.org> +ldmud-3.3.687.ebuild:
+  initial build for depending 'psyced' project
+
+*ldmud-3.3.712 (30 Nov 2005)
+
+  18 Nov 2005; el <el@goodadvice.pages.de> +ldmud-3.3.712.ebuild:
+  improved build: allows simple rename of .ebuild files and makes erq
+
