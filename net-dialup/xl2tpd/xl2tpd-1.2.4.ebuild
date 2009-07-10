@@ -11,14 +11,17 @@ SRC_URI="ftp://ftp.xelerance.com/${PN}/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
-IUSE=""
+IUSE="kernel-l2tp"
 
 DEPEND="net-libs/libpcap"
 RDEPEND="${DEPEND}
 	net-dialup/ppp"
 
 src_compile() {
-	emake #OSFLAGS='-DLINUX -I/usr/src/linux/include/ -DUSE_KERNEL'
+	use kernel-l2tp && (
+		ewarn 'You are using in-kernel l2tp support.'
+		emake OSFLAGS="-DLINUX -I/usr/src/linux/include/ -DUSE_KERNEL") ||
+	emake
 }
 
 src_install() {
