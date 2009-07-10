@@ -238,6 +238,10 @@ src_unpack() {
 	[[ -n ${LINGUAS} ]] && sed -e 's:Zarządano:Zażądano:' -i help/help_mp-pl.h
 }
 
+src_configure() {
+	true # This ebuild sucks...
+}
+
 src_compile() {
 
 	local myconf=""
