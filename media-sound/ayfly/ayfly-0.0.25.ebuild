@@ -10,13 +10,21 @@ SRC_URI="http://ayfly.googlecode.com/files/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64 ~arm"
-IUSE=""
+IUSE="gtk"
 
-DEPEND="media-libs/sdl-sound"
-RDEPEND="media-libs/sdl-sound"
+RDEPEND="gtk? ( x11-libs/wxGTK )"
+DEPEND="$RDEPEND
+	media-libs/sdl-sound"
+
 
 src_prepare() {
 	use arm && epatch ${FILESDIR}/disable_filters.patch
+}
+
+src_configure() {
+	local myconf
+	use gtk || myconf+=" --without-gui"
+	econf $myconf
 }
 
 src_install() {
