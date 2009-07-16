@@ -1,0 +1,10 @@
+--- a/src/libayfly/Filter3.cpp
++++ b/src/libayfly/Filter3.cpp
+@@ -37,6 +37,7 @@
+ 
+ void Filter3::Init(const FilterOpts *opts)
+ {
++return ;
+     if(Fs == opts->Fs && f0 == opts->f0 && Q == opts->Q)
+         return;
+     Fs = opts->Fs;
