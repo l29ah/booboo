@@ -10,9 +10,9 @@ SRC_URI="http://ayfly.googlecode.com/files/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64 ~arm"
-IUSE="gtk"
+IUSE="wxwidgets"
 
-RDEPEND="gtk? ( x11-libs/wxGTK )"
+RDEPEND="wxwidgets? ( x11-libs/wxGTK )"
 DEPEND="$RDEPEND
 	media-libs/libsdl"
 
@@ -23,7 +23,7 @@ src_prepare() {
 
 src_configure() {
 	local myconf
-	use gtk || myconf+=" --without-gui"
+	use wxwidgets || myconf+=" --without-gui"
 	econf $myconf
 }
 
