@@ -14,7 +14,7 @@ IUSE="gtk"
 
 RDEPEND="gtk? ( x11-libs/wxGTK )"
 DEPEND="$RDEPEND
-	media-libs/sdl-sound"
+	media-libs/libsdl"
 
 
 src_prepare() {
