@@ -1,10 +1,11 @@
---- a/src/libayfly/Filter3.cpp
-+++ b/src/libayfly/Filter3.cpp
-@@ -37,6 +37,7 @@
+--- a/src/libayfly/ay.cpp
++++ b/src/libayfly/ay.cpp
+@@ -439,7 +439,7 @@
+         float left = s0 * a_left + s1 * b_left + s2 * c_left + beeper_volume;
+         float right = s0 * a_right + s1 * b_right + s2 * c_right + beeper_volume;
  
- void Filter3::Init(const FilterOpts *opts)
- {
-+return ;
-     if(Fs == opts->Fs && f0 == opts->f0 && Q == opts->Q)
-         return;
-     Fs = opts->Fs;
+-        flt.Process2(left, right);
++        //flt.Process2(left, right);
+         if(flt_state > flt_state_limit)
+         {
+             flt_state -= flt_state_limit;
