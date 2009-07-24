@@ -1,0 +1,12 @@
+service 9pfs
+{
+	socket_type	= stream
+	wait		= no
+	user		= root
+	group		= root
+	protocol	= tcp
+	port		= 564
+	server		= /usr/sbin/u9fs
+	server_args	= -a rhosts /home
+	disable		= yes
+}
