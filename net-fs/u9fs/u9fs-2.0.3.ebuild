@@ -7,7 +7,7 @@ SRC_URI="mirror://sourceforge/v9fs/${P}.tar.gz"
 
 LICENSE="Lucent Public License"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64"
 IUSE="xinetd"
 
 DEPEND=""
