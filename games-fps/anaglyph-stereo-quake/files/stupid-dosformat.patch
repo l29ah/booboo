@@ -1,0 +1,24 @@
+--- glquake.h.orig	2003-08-03 02:34:01.725881488 -0400
++++ glquake.h	2003-08-03 02:34:18.788798979 -0400
+@@ -260,4 +260,3 @@
+ 
+ void GL_DisableMultitexture(void);
+ void GL_EnableMultitexture(void);
+-
+\ No newline at end of file
+--- gl_draw.c.orig	2003-08-03 02:34:06.243065434 -0400
++++ gl_draw.c	2003-08-03 02:34:20.535483431 -0400
+@@ -1302,4 +1302,3 @@
+ 	currenttexture = cnttextures[target-TEXTURE0_SGIS];
+ 	oldtarget = target;
+ }
+-
+\ No newline at end of file
+--- gl_rmain.c.orig	2003-08-03 02:34:11.115185259 -0400
++++ gl_rmain.c	2003-08-03 02:34:22.106199673 -0400
+@@ -1268,4 +1268,3 @@
+ 		Con_Printf ("%3i ms  %4i wpoly %4i epoly\n", (int)((time2-time1)*1000), c_brush_polys, c_alias_polys); 
+ 	}
+ }
+-
+\ No newline at end of file

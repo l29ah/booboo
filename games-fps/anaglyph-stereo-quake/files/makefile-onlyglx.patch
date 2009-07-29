@@ -1,0 +1,16 @@
+--- Makefile.orig	2003-08-03 02:28:18.169946734 -0400
++++ Makefile	2003-08-03 02:28:27.530255744 -0400
+@@ -64,11 +64,8 @@
+ # SETUP AND BUILD
+ #############################################################################
+ 
+-TARGETS=$(BUILDDIR)/bin/squake \
+-	$(BUILDDIR)/bin/glquake \
+-	$(BUILDDIR)/bin/glquake.glx \
+-	$(BUILDDIR)/bin/glquake.3dfxgl \
+-	$(BUILDDIR)/bin/quake.x11
++TARGETS=\
++	$(BUILDDIR)/bin/glquake.SDL
+ 	# $(BUILDDIR)/bin/unixded
+ 
+ build_debug:

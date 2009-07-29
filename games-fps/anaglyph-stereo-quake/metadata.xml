@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>games</herd>
+<longdescription>
+What is Anaglyph Quake?
+Anaglyph Quake is a modified version of glQuake designed to be viewed 
+with Anaglyph Glasses. The purpose of viewing with Anaglyph glasses is 
+so that the image is viewed in stereo (a separate image for each eye), 
+which is the basis for depth perception. Thus, with this version of 
+Quake, red-cyan glasses, and a suitable computer, you can play Quake in 
+real 3D.
+
+Anaglyph Glasses:
+Anaglyph Glasses are red-blue glasses (the red lens is over the left eye 
+). They rely on the idea that the red light will only pass through the 
+red lens, and blue light will only pass through the blue lens. Thus by 
+printing the two different views in these opposing colours, the viewer 
+will see a stereo view, and hence depth (amusing that the two images are 
+appropriate viewpoints of the same scene ). Because red&amp;blue are 2/3 of 
+the colours used by monitors for display , you can get red-cyan glasses, 
+cyan allowing both blue and green thorough.
+</longdescription>
+</pkgmetadata>
