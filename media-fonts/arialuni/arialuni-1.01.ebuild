@@ -1,11 +1,11 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-fonts/liberation-fonts/liberation-fonts-1.04.ebuild,v 1.1 2008/09/30 00:47:30 je_fro Exp $
 
 inherit font
 
 DESCRIPTION="Arial Unicode MS Font is an extended version of font Arial"
-
+IUSE=""
 # I think we can rely on this link
 SRC_URI="http://www.hotlinkfiles.com/files/2422358_inmst/arialuni.ttf.lzma"
 HOMEPAGE="http://support.microsoft.com/?scid=kb%3Bru%3B287247"
