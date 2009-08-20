@@ -92,7 +92,7 @@ src_unpack() {
 	epatch "${FILESDIR}"/wine-srgb-hack.patch #http://bugs.winehq.org/show_bug.cgi?id=12453
 	sed -i '/^MimeType/d' tools/wine.desktop || die #117785
 # Added by MiklerGM
-	use acceptex && epatch "${FILESDIR}"/acceptex.patch || die #http://bugs.winehq.org/show_bug.cgi?id=9787
+#	use acceptex && epatch "${FILESDIR}"/acceptex.patch || die #http://bugs.winehq.org/show_bug.cgi?id=9787
 #	use driver && epatch "${FILESDIR}"/driver.patch || die	#http://appdb.winehq.org/objectManager.php?sClass=version&iId=14322
 }
 
