@@ -12,11 +12,10 @@ ESVN_REPO_URI="https://recordmydesktop.svn.sourceforge.net/svnroot/recordmydeskt
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~ppc ~ppc64 x86"
+KEYWORDS=""
 IUSE="jack alsa"
 
-DEPEND="x11-libs/libXext
-	=x11-proto/xextproto-7.0.2
+RDEPEND="x11-libs/libXext
 	x11-libs/libXdamage
 	x11-libs/libXfixes
 	x11-libs/libICE
@@ -26,7 +25,8 @@ DEPEND="x11-libs/libXext
 	media-libs/libtheora[encode]
 	alsa? ( media-libs/alsa-lib )
 	jack? ( media-sound/jack-audio-connection-kit )"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	=x11-proto/xextproto-7.0.2"
 
 src_configure() {
 	sh autogen.sh
