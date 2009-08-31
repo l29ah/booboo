@@ -16,6 +16,7 @@ KEYWORDS="amd64 ~ppc ~ppc64 x86"
 IUSE="jack alsa"
 
 DEPEND="x11-libs/libXext
+	=x11-proto/xextproto-7.0.2
 	x11-libs/libXdamage
 	x11-libs/libXfixes
 	x11-libs/libICE
