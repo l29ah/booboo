@@ -25,10 +25,10 @@ DEPEND="media-libs/libpng
 	virtual/x11 )"
 
 src_unpack() {
-	if ! built_with_use "media-libs/imlib" gtk; then
-		eerror "You have to build media-libs/imlib with USE gtk."
-		die 
-	fi
+#	if ! built_with_use "media-libs/imlib" gtk; then
+#		eerror "You have to build media-libs/imlib with USE gtk."
+#		die 
+#	fi
 																					
 	unpack ${A}
 	cd "${S}"
