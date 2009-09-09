@@ -8,5 +8,3 @@
 # Keep it sorted.
 
 media-gfx/ristretto:xfce - Enable wallpaper changing support in xfce4.6
-x11-misc/notification-daemon-xfce:mcs - Enable support for the deprecated mcs manager
-xfce-base/xfce4-panel:mcs - Enable support for the deprecated mcs manager

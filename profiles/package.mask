@@ -4,14 +4,12 @@
 =games-rpg/openmw-9999
 =dev-games/mygui-9999
 =dev-cpp/commoncpp2-9999
-=app-cdr/xfburn-9999
-=xfce-extra/xfce4-notes-9999
+>=app-cdr/xfburn-9999
+>=xfce-extra/xfce4-notes-9999
+>=xfce-extra/xfce4-places-9999
 =net-p2p/transmission-9999
 =kde-misc/krusader-9999
 =net-libs/loudmouth-9999
-
-# Non-release kernels
-=sys-kernel/l29ah-sources-9000
 
 =net-wireless/crda-1.0.1-r1
 
