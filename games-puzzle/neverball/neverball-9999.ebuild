@@ -19,6 +19,7 @@ DEPEND="media-libs/libsdl
 	media-libs/sdl-mixer
 	media-libs/sdl-image
 	media-libs/sdl-ttf
+	dev-games/physfs
 	virtual/opengl"
 
 S=${WORKDIR}/${PN}
