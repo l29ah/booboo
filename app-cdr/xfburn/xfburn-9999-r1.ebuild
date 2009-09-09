@@ -19,7 +19,7 @@ RDEPEND=">=dev-libs/libburn-0.4.2
 	>=dev-libs/libisofs-0.6.2
 	>=x11-libs/gtk+-2.10:2
 	>=xfce-base/libxfcegui4-${XFCE_VERSION}
-	>=xfce-extra/exo-0.3
+	>=xfce-base/exo-0.3
 	xfce? ( >=xfce-base/thunar-1.0.0 )
 	dbus? ( dev-libs/dbus-glib )
 	hal? ( sys-apps/hal )
