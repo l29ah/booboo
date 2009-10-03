@@ -1,0 +1,131 @@
+Debug: [Main]: Setting up plugin paths... 
+Debug: [Main]: ...done. 
+Debug: [Main]: Mixxx 1.7.0 "" is starting... 
+Debug: [Main]: Could not read "/home/lev/.mixxx/mixxx.cfg" 
+Debug: [Main]: No version number in configuration file. Setting to 1.7.0 
+Debug: [Main]: Using LoFi EQs 
+Debug: [Main]: Using LoFi EQs 
+Debug: [Main]: SampleRate 0 
+Debug: [Main]: Latency 0 
+Debug: [Main]: (30250) findLibraryInternal: plugins should not have a 'lib' prefix: "libkfilemodule.so"
+Debug: [Main]: (30250) KPluginLoader::load: The plugin "libkfilemodule" doesn't contain a kde_plugin_verification_data structure
+Debug: [Main]: createWaveformViewer() 
+Debug: [Main]: WaveformViewerFactory :: Creating new visual waveform 
+Debug: [Main]: WaveformViewerFactory :: Making new GL context. 
+Warning: [Main]: X Error: BadLength (poly request too large or internal Xlib length error) 16
+  Extension:    128 (Uknown extension)
+  Minor opcode: 17 (Unknown request)
+  Resource id:  0x480c297
+Warning: [Main]: QGLContext::makeCurrent(): Cannot make invalid context current.
+Debug: [Main]: WaveformViewerFactory :: Creating new simple waveform 
+Debug: [Main]: WaveformRenderer::setupControlObjects - VisualResample:  400 
+Debug: [Main]: Got bgColor  QColor(ARGB 1, 0.0980392, 0.0980392, 0.0980392) 
+Debug: [Main]: Got signalColor  QColor(ARGB 1, 0, 0.803922, 0) 
+Debug: [Main]: createWaveformViewer() 
+Debug: [Main]: WaveformViewerFactory :: Creating new simple waveform 
+Debug: [Main]: WaveformRenderer::setupControlObjects - VisualResample:  400 
+Debug: [Main]: Got bgColor  QColor(ARGB 1, 0.0980392, 0.0980392, 0.0980392) 
+Debug: [Main]: Got signalColor  QColor(ARGB 1, 0, 0.803922, 0) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/." 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/.." 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/compressor.xml" 
+Debug: [Main]: LADSPA: Plugin  "Compress"  not found (required by preset  "Compressor" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/delay5s.xml" 
+Debug: [Main]: LADSPA: Plugin  "delay_5s"  not found (required by preset  "Delay5s" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/djflanger.xml" 
+Debug: [Main]: LADSPA: Plugin  "djFlanger"  not found (required by preset  "DJFlanger" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/karaoke.xml" 
+Debug: [Main]: LADSPA: Plugin  "karaoke"  not found (required by preset  "Karaoke" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/null.xml" 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/plate.xml" 
+Debug: [Main]: LADSPA: Plugin  "Plate2x2"  not found (required by preset  "PlateReverb" ) 
+Debug: [Main]: Setting up LADSPA EnableEffect "0" 
+Debug: [Main]: Key string: "EnableEffect0" 
+Debug: [Main]: Setting up LADSPA EnableEffect "1" 
+Debug: [Main]: Key string: "EnableEffect1" 
+Debug: [Main]: Setting up LADSPA EnableEffect "2" 
+Debug: [Main]: Key string: "EnableEffect2" 
+Debug: [Main]: Loading playlists and library tracks from XML... 
+Debug: [Main]: Track::readXML "/home/lev/.mixxx/mixxxtrack.xml" 
+Debug: [Main]: Track: "/home/lev/.mixxx/mixxxtrack.xml" does not exist. 
+Debug: [Main]: Promo track directory does not exist: "/usr/share/mixxx/promo" 
+Debug: [Main]: Constructed LibraryScanner!!! 
+Debug: [Main]: No playlists, returning 
+Debug: [Main]: FIXME: Need to tell the m_pPlaylistListModel to refresh in src/track.cpp on line: 1367 
+Debug: [Main]: Starting Library Scanner... 
+Debug: [Main]: Trying to add 0 songs to the library playlist 
+Debug: [Main]: Adjusting column widths: tracktable width = 100  1% of that is: 1  FIXME: this should be done when initalizing the skin. 
+Debug: [Main]: Shrinking Title/Comment for small screen...  
+Debug: [Main]: FIXME: repaintEverything switches table model and shouldn't do that when viewing the playlist model in  src/wtracktableview.cpp:  227 
+Debug: [MidiObject 1]: MidiMapping: Loading MIDI XML from "/home/lev/.mixxx/MixxxMIDIBindings.xml" 
+Debug: [MidiObject 1]: Could not open xml file: "/home/lev/.mixxx/MixxxMIDIBindings.xml" 
+Debug: [Main]: SoundManager: Setting defaults 
+Debug: [Main]: SoundManager: Setting defaults 
+Debug: [Main]: loadSettings: 0 -12.5 "" 
+Debug: [Main]: slotApply crossfader: 1 "" 
+Debug: [Main]: BPM Scheme File ConfigKey not set or file missing... setting to "/home/lev/.mixxx/mixxxbpmscheme.xml" 
+Debug: [Main]: BpmSchemes::readXML "/home/lev/.mixxx/mixxxbpmscheme.xml" 
+Debug: [Main]: BPM Scheme: "/home/lev/.mixxx/mixxxbpmscheme.xml" does not exist. 
+Debug: [Main]: getting midi device list, size  0  and:  "" 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/." 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/.." 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/compressor.xml" 
+Debug: [Main]: LADSPA: Plugin  "Compress"  not found (required by preset  "Compressor" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/delay5s.xml" 
+Debug: [Main]: LADSPA: Plugin  "delay_5s"  not found (required by preset  "Delay5s" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/djflanger.xml" 
+Debug: [Main]: LADSPA: Plugin  "djFlanger"  not found (required by preset  "DJFlanger" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/karaoke.xml" 
+Debug: [Main]: LADSPA: Plugin  "karaoke"  not found (required by preset  "Karaoke" ) 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/null.xml" 
+Debug: [Main]: LADSPA: file  "/usr/share/mixxx/skins/outlineNetbook/../../ladspa_presets/plate.xml" 
+Debug: [Main]: LADSPA: Plugin  "Plate2x2"  not found (required by preset  "PlateReverb" ) 
+Debug: [Main]: Setting up LADSPA EnableEffect "0" 
+Debug: [Main]: Key string: "EnableEffect0" 
+Debug: [Main]: Setting up LADSPA EnableEffect "1" 
+Debug: [Main]: Key string: "EnableEffect1" 
+Debug: [Main]: Setting up LADSPA EnableEffect "2" 
+Debug: [Main]: Key string: "EnableEffect2" 
+Debug: [Main]: SoundManager::setupDevices() 
+Debug: [Main]: VinylControlProxy: Unknown vinyl type  "" 
+Debug: [Main]: Defaulting to Serato... 
+Debug: [Main]: Building timecode lookup tables... 
+Debug: [Main]: Starting vinyl control xwax thread 
+Debug: [Main]: Building timecode lookup tables... 
+Debug: [Main]: Starting vinyl control xwax thread 
+Debug: [Main]: SoundDevicePortAudio::open() "0, HDA NVidia: VT1708B Analog (hw:0,0)" 
+Debug: [Main]: m_dSampleRate 44100 
+Debug: [Main]: iLatencyMSec: 64 
+Debug: [Main]: output channels: 2 | input channels: 0 
+Debug: [Main]: iLatencySamples: 5644 
+Debug: [Main]: iLatencyMSec: 64 
+Debug: [Main]: Opening stream with id 0 
+Debug: [Main]: Opened PortAudio stream successfully... starting 
+Debug: [Main]: Dynamically loaded PortAudio library! 
+Debug: [Main]: PortAudio: Started stream successfully 
+Debug: [Main]: iNumDevicesOpenedForOutput: 1 
+Debug: [Main]: iNumDevicesOpenedForInput: 0 
+Debug: [Main]: Displaying mixxx 
+Debug: [Main]: Adjusting column widths: tracktable width = 799  1% of that is: 7.99  FIXME: this should be done when initalizing the skin. 
+Debug: [Main]: Shrinking Title/Comment for small screen...  
+Debug: [Main]: Running Mixxx 
+Debug: [LibraryScanner 1]: Scan finished cleanly 
+Debug: [Main]: FIXME: repaintEverything switches table model and shouldn't do that when viewing the playlist model in  src/wtracktableview.cpp:  227 
+Debug: [Main]: Destroying MixxxApp 
+Debug: [Main]: save config,  0 
+Debug: [Main]: Write track xml,  1 
+Debug: [Main]: close soundmanager 99 
+Debug: [Main]: soundmanager->close() done 
+Debug: [Main]: delete soundmanager,  159 
+Debug: [Main]: delete master,  159 
+Debug: [Main]: in ~EngineMaster() 
+Debug: [Main]: delete channel1,  159 
+Debug: [Main]: delete channel2,  160 
+Debug: [Main]: delete buffer1,  160 
+Debug: [Main]: delete buffer2,  160 
+Debug: [Main]: delete midi,  161 
+Debug: [Main]: MidiObject: Deleting MidiMapping... 
+Debug: [Main]: MidiObject: Deleting MIDI script engine... 
+Debug: [Main]: delete view,  211 
+Debug: [Main]: delete tracks,  214 
+Debug: [Main]: delete config,  216 
