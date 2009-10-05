@@ -10,6 +10,8 @@
 =net-p2p/transmission-9999
 =kde-misc/krusader-9999
 =net-libs/loudmouth-9999
+=app-benchmarks/phoronix-test-suite-9999
+=media-video/cheese-9999
 
 =net-wireless/crda-1.0.1-r1
 

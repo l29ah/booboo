@@ -1,0 +1,5 @@
+--- ettercap-NG-0.7.3-orig/src/ec_socket.c~	2009-03-31 09:32:12.000000000 -0500
++++ ettercap-NG-0.7.3-patch/src/ec_socket.c	2009-03-31 09:32:12.000000000 -0500
+@@ -68 +68 @@
+-   fcntl (s, F_SETFL, ret);
++   fcntl (s, F_SETFL, F_SETFD, FD_CLOEXEC, ret);
