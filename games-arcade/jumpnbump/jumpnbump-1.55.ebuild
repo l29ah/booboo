@@ -7,7 +7,8 @@ inherit autotools eutils games
 
 DESCRIPTION="a funny multiplayer game about cute little fluffy bunnies"
 HOMEPAGE="http://www.jumpbump.mine.nu/"
-SRC_URI="http://ftp.hu.freebsd.org/pub/linux/distributions/frugalware/frugalware-testing/source/games-extra/jumpnbump/${P}.tar.gz"
+SRC_URI="http://ftp.hu.freebsd.org/pub/linux/distributions/frugalware/frugalware-testing/source/games-extra/jumpnbump/${P}.tar.gz
+	http://l29ah-home.wtf.la/files/${P}-64bit-c99-types-fix.patch"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,6 +26,10 @@ RDEPEND="${DEPEND}
 	tk? (
 		dev-lang/tcl
 		dev-lang/tk )"
+
+src_prepare() {
+	epatch "${DISTDIR}"/${P}-64bit-c99-types-fix.patch
+}
 
 src_configure() {
 	cd jumpnbump-1.50
