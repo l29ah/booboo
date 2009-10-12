@@ -24,6 +24,6 @@ DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
 src_install() {
-	make DESTDIR="${D}" install || die 'make install failed'
+	make PREFIX="${D}/usr" install || die 'make install failed'
 	dodoc AUTHORS README
 }
