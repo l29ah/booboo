@@ -1,0 +1,11 @@
+--- golded3/geedit.cpp.orig	2006-03-12 00:19:50.000000000 +0300
++++ golded3/geedit.cpp	2006-06-26 20:39:45.000000000 +0400
+@@ -2751,7 +2751,7 @@
+     case KK_EditDeleteSOL:        DeleteSOL();          break;
+     case KK_EditDelLeft:          DelLeft();            break;
+     case KK_EditDelLine:          DelLine();            break;
+-    case KK_EditDelLtWord:        DelLtWord();          break;
++    case KK_EditDelLtWord:        DelLeft();            break;
+     case KK_EditDelRtWord:        DelRtWord();          break;
+     case KK_EditDosShell:         DosShell();           break;
+     case KK_EditDupLine:          DupLine();            break;
