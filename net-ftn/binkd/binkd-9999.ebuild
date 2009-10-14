@@ -18,19 +18,18 @@ RDEPEND="perl? ( >=dev-lang/perl-5.8.3 )
 	 zlib? ( >=sys-libs/zlib-1.2.3 )"
 DEPEND="${RDEPEND}"
 
-src_unpack() {
-	ECVS_SERVER="cvs.happy.kiev.ua:/cvs"
-	ECVS_USER="binkd"
-	ECVS_PASS=""
-	ECVS_AUTH="pserver"
-	ECVS_MODULE="binkd"
-	ECVS_TOP_DIR="${DISTDIR}/cvs-src/${ECVS_MODULE}"
-	ECVS_CVS_OPTIONS="-P"
-	cvs_src_unpack
-}
+ECVS_SERVER="cvs.happy.kiev.ua:/cvs"
+ECVS_USER="binkd"
+ECVS_PASS=""
+ECVS_AUTH="pserver"
+ECVS_MODULE="binkd"
+ECVS_TOP_DIR="${DISTDIR}/cvs-src/${ECVS_MODULE}"
+ECVS_CVS_OPTIONS="-P"
+
+S="${WORKDIR}/${ECVS_MODULE}"
 
 src_compile() {
-	cd ${ECVS_MODULE}
+	cd ${S}
 	cp mkfls/unix/* .
 	econf \
 		$(use_with perl ) \
@@ -39,12 +38,12 @@ src_compile() {
 	        $(use_with https ) \
 	        $(use_with bwlim ) \
 	        || die "Configure failed!"
+	epatch "${FILESDIR}/makefile.patch"
 	emake || die "emake failed"
 }
 
 src_install() {
 	cd ${ECVS_MODULE}
-	sed	's/$(CONFDIR)/$(prefix)\/$(CONFDIR)/g;s/$(MANDIR)/$(prefix)\/$(MANDIR)/g;' -i Makefile
-	einstall || die "einstall failed"
+	emake DESTDIR="${D}" install || die "einstall failed"
 	dodoc \!README HISTORY || die
 }
