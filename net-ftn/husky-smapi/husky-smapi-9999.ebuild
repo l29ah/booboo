@@ -8,7 +8,6 @@ ECVS_AUTH="pserver"
 ECVS_SERVER="husky.cvs.sourceforge.net:/cvsroot/husky"
 ECVS_MODULE="${HM}"
 ECVS_CVS_COMPRESS="-z3"
-ECVS_LOCALNAME="husky"
 
 DESCRIPTION="FTN husky ${HM} library"
 SRC_URI=""
@@ -21,11 +20,6 @@ IUSE=""
 DEPEND="net-ftn/husky-huskylib"
 
 S="${WORKDIR}/${ECVS_LOCALNAME}"
-
-src_unpack() {
-    cvs_src_unpack
-    cd "${S}"
-}
 
 src_compile() {
     cd "${S}/${HM}"

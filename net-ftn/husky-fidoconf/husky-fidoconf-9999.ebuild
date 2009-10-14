@@ -8,8 +8,6 @@ ECVS_AUTH="pserver"
 ECVS_SERVER="husky.cvs.sourceforge.net:/cvsroot/husky"
 ECVS_MODULE="${HM}"
 ECVS_CVS_COMPRESS="-z3"
-ECVS_LOCALNAME="husky"
-
 
 DESCRIPTION="FTN husky ${HM} library"
 SRC_URI=""
@@ -26,16 +24,17 @@ S="${WORKDIR}/${ECVS_LOCALNAME}"
 
 src_unpack() {
     cvs_src_unpack
-    cd "${S}"
-	sed -i "s/LIB = \.a/LIB = \.so/" ${HM}/makefile.in2
+    cd "${S}/${HM}"
+	sed -i "s|\.a$|\.so|; s|LIBDIR=\$(PREFIX)/lib|LIBDIR=\$(PREFIX)/lib/|" huskymak.cfg makefile.in2
+	epatch "${FILESDIR}/fix_cvs_date.patch"
 }
 
 src_compile() {
     cd "${S}/${HM}"
-    emake RPM_BUILD_ROOT=1 || die "Sorry! Do can not compile"
+    emake -j1 RPM_BUILD_ROOT=1 || die "Sorry! Do can not compile"
 }
 
 src_install() {
     cd "${S}/${HM}"
-  	emake RPM_BUILD_ROOT=1 DESTDIR="${D}" LDCONFIG="" install || die "Sorry! Do can not install"
+  	emake RPM_BUILD_ROOT=1 DESTDIR="${D}" LDCONFIG="" DYNLIBS=1 install || die "Sorry! Do can not install"
 }

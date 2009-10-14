@@ -1,13 +1,13 @@
 # Copyright 1999-2006 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+inherit eutils gnuconfig cvs
+
 HM=${PN#husky-}
 ECVS_AUTH="pserver"
 ECVS_SERVER="husky.cvs.sourceforge.net:/cvsroot/husky"
 ECVS_MODULE="${HM}"
 ECVS_CVS_COMPRESS="-z3"
-
-inherit eutils gnuconfig cvs
 
 DESCRIPTION="FTN husky ${HM} library"
 SRC_URI=""
@@ -17,9 +17,17 @@ LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
-DEPEND=""
+DEPEND="net-ftn/husky-huskylib
+		net-ftn/husky-smapi
+		net-ftn/husky-fidoconf
+		net-ftn/husky-areafix"
 
 S="${WORKDIR}/${ECVS_LOCALNAME}"
+
+src_unpack() {
+    cvs_src_unpack
+	sed -i '/unused(my_perl);/d' ${S}/${HM}/src/perl.c
+}
 
 src_compile() {
     cd "${S}/${HM}"
