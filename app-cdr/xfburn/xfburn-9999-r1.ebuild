@@ -6,7 +6,7 @@ EAPI=1
 
 inherit xfce4
 
-XFCE_VERSION=4.4
+XFCE_VERSION=4.6
 
 xfce4_apps
 
