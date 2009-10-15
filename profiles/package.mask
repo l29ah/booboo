@@ -4,6 +4,7 @@
 =games-rpg/openmw-9999
 =dev-games/mygui-9999
 =dev-cpp/commoncpp2-9999
+=x11-terms/terminal-9999-r1
 >=app-cdr/xfburn-9999
 >=xfce-extra/xfce4-notes-9999
 >=xfce-extra/xfce4-places-9999
