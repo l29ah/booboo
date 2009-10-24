@@ -8,7 +8,7 @@ inherit xfce4
 
 XFCE_VERSION=4.6
 
-xfce4_goodies
+xfce4_apps
 
 DESCRIPTION="GTK+ based CD and DVD burning application"
 HOMEPAGE="http://www.xfce.org/projects/xfburn"
@@ -20,7 +20,7 @@ RDEPEND=">=dev-libs/libburn-0.4.2
 	>=x11-libs/gtk+-2.10:2
 	>=xfce-base/libxfcegui4-${XFCE_VERSION}
 	>=xfce-base/exo-0.3
-	xfce? ( >=xfce-base/thunar-1.0.0 )
+	xfce? ( >=xfce-base/thunar-1.0.1 )
 	dbus? ( dev-libs/dbus-glib )
 	hal? ( sys-apps/hal )
 	gstreamer? ( media-libs/gstreamer )"
