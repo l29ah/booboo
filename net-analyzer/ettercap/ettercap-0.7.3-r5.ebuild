@@ -40,14 +40,9 @@ src_unpack() {
 
 	epatch "${FILESDIR}"/${P}-daemon-textmode.patch
  	epatch "${FILESDIR}"/${P}-daemon-ui.patch
- 	#epatch "${FILESDIR}"/${P}-ec_log.patch
  	epatch "${FILESDIR}"/${P}-mitm-loop.patch
  	epatch "${FILESDIR}"/${P}-selinux-fcntl.patch
  	epatch "${FILESDIR}"/${P}-UI.patch
-
-	#patch from Timothy Redaelli <timothy@redaelli.eu> which fixes crash
-	# on 64bit CPU systems
-	epatch "${FILESDIR}"/${P}-64bit-casting.patch
 	eautoreconf
 }
 
