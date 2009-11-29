@@ -18,7 +18,7 @@ ESVN_REPO_URI="https://www.kismetwireless.net/code/svn/trunk"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus ncurses"
+IUSE="dbus ncurses suid"
 
 DEPEND="${RDEPEND}"
 RDEPEND="net-wireless/wireless-tools
@@ -37,7 +37,6 @@ src_prepare() {
 
 src_compile() {
 	# the configure script only honors '--disable-foo'
-	local myconf="--disable-gpsmap"
 
 	if ! use ncurses; then
 		myconf="${myconf} --disable-curses --disable-panel"
@@ -56,8 +55,21 @@ src_compile() {
 src_install () {
 	emake DESTDIR="${D}" install || die "emake install failed"
 
-	dodoc CHANGELOG README TODO docs/*
+	dodoc  CHANGELOG README 
+	dohtml -r docs/devel-wiki-docs
+
+
+	# INSTALL KISMET_CAPTURE IN ALL CASES
+
+	dobin   kismet_capture
+	fowners root:kismet kismet_capture
+	use suid && fperms  4750 /usr/bin/kismet_capture
 
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
+}
+
+pkg_setup () {
+	linux-info_pkg_setup
+	enewgroup kismet
 }
