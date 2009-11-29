@@ -62,7 +62,7 @@ src_install () {
 	# INSTALL KISMET_CAPTURE IN ALL CASES
 
 	dobin   kismet_capture
-	fowners root:kismet kismet_capture
+	fowners root:kismet /usr/bin/kismet_capture
 	use suid && fperms  4750 /usr/bin/kismet_capture
 
 	newinitd "${FILESDIR}"/${PN}.initd kismet
