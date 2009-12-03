@@ -1,0 +1,11 @@
+--- onscripter-en-20080823.old/configure	2008-08-23 23:21:37.000000000 +0200
++++ onscripter-en-20080823/configure	2008-08-28 22:25:43.093816200 +0200
+@@ -791,7 +791,7 @@
+ ifdef DEBUG
+ OSCFLAGS = -O0 -g -ggdb -Wpointer-arith -Werror -fomit-frame-pointer -pipe \$(OSCFLAGSEXTRA)
+ else
+-OSCFLAGS = -O2 -Wpointer-arith -Werror -fomit-frame-pointer -pipe \$(OSCFLAGSEXTRA)
++OSCFLAGS = \$(CXXFLAGS) \$(OSCFLAGSEXTRA)
+ endif
+ 
+ TARGET = onscripter-en$EXE

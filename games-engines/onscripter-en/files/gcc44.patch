@@ -1,0 +1,12 @@
+diff -Nur onscripter-en-20080823.bak/ONScripterLabel_command.cpp onscripter-en-20080823/ONScripterLabel_command.cpp
+--- onscripter-en-20080823.bak/ONScripterLabel_command.cpp	2008-07-05 20:04:58.000000000 +0200
++++ onscripter-en-20080823/ONScripterLabel_command.cpp	2009-06-02 16:14:21.696497040 +0200
+@@ -1090,7 +1090,7 @@
+     const char *buf = script_h.readStr();
+     char filename[4096];
+ 
+-    char *ext = strrchr( buf, '.' );
++    const char *ext = strrchr( buf, '.' );
+     if ( ext && (!strcmp( ext+1, "BMP" ) || !strcmp( ext+1, "bmp" ) ) ){
+         sprintf( filename, "%s%s", script_h.save_path, buf );
+         int last_delim = 0;
