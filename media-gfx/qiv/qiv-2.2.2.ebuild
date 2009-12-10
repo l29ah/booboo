@@ -14,29 +14,22 @@ HOMEPAGE="http://spiegl.de/qiv/"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~alpha amd64 ~ppc ~ppc64 ~sparc x86"
-IUSE="xinerama"
+IUSE=""
 
 DEPEND="media-libs/libpng
 	>=media-libs/tiff-3.5.5
 	media-libs/imlib2
-	|| (
-	( >=x11-libs/libX11-1.0.0
-	>=x11-proto/xineramaproto-1.1.2 )
-	virtual/x11 )"
+	>=x11-libs/libX11-1.0.0
+	media-libs/libexif
+	>=x11-libs/libXinerama-1.1
+"
 
 src_unpack() {
-#	if ! built_with_use "media-libs/imlib" gtk; then
-#		eerror "You have to build media-libs/imlib with USE gtk."
-#		die 
-#	fi
-																					
 	unpack ${A}
 	cd "${S}"
-#	epatch "${FILESDIR}"/qiv-2.0-composite.patch
 }
 
 src_compile() {
-#	use xinerama && sed -i "s:# GTD_XINERAMA = -DGTD_XINERAMA:GTD_XINERAMA = -DGTD_XINERAMA:" Makefile
 	emake || die
 }
 
