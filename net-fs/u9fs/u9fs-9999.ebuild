@@ -20,6 +20,8 @@ src_unpack() {
 	# Should make the v9fs version, but it seems like nobody cares
 	export IXP_ADDRESS='tcp!sources.cs.bell-labs.com!564'
 
+	ixpc read plan9/sys/man/4/u9fs > u9fs.8
+
 	# Better use xargs
 	files=`ixpc ls plan9/sys/src/cmd/unix/u9fs`
 	for f in $files; do
@@ -36,7 +38,7 @@ src_install() {
 	into /usr
 	doman u9fs.8
 	dosbin u9fs
-	dodoc CHANGES README TODO
+	dodoc LICENSE
 
 	if use xinetd; then
 		insinto /etc/xinetd.d
