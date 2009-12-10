@@ -2,24 +2,30 @@ inherit eutils
 
 DESCRIPTION="9P2000 Server"
 NAME="u9fs"
-HOMEPAGE="http://v9fs.sf.net"
-SRC_URI="mirror://sourceforge/v9fs/${P}.tar.gz"
+HOMEPAGE="http://plan9.bell-labs.com/sources/plan9/sys/src/cmd/unix/u9fs/"
+SRC_URI=""
 
 LICENSE="Lucent Public License"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="xinetd"
 
-DEPEND=""
-RDEPEND="${RDEPEND}
-	xinetd? ( sys-apps/xinetd )"
+DEPEND="${RDEPEND}
+	sys-libs/libixp
+"
+RDEPEND="xinetd? ( sys-apps/xinetd )"
 
 
 src_unpack() {
-	unpack ${A}
+	# Should make the v9fs version, but it seems like nobody cares
+	export IXP_ADDRESS='tcp!sources.cs.bell-labs.com!564'
 
-	# the source unpacks to just "u9fs", rename to the full name+version
-	mv "u9fs" "${P}"
+	# Better use xargs
+	files=`ixpc ls plan9/sys/src/cmd/unix/u9fs`
+	for f in $files; do
+		echo $f
+		ixpc read plan9/sys/src/cmd/unix/u9fs/$f > $f
+	done
 }
 
 src_compile() {
