@@ -9,7 +9,7 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="doc minimal nls soup sqlite"
-EGIT_REPO_URI="git://git.xfce.org/kalikiana/midori"
+EGIT_REPO_URI="git://git.xfce.org/apps/midori"
 
 RDEPEND=">=dev-libs/glib-2.16:2
 	dev-libs/libxml2
