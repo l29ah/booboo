@@ -13,7 +13,7 @@ SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 IUSE="extras"
 
 RDEPEND=">=net-libs/webkit-gtk-1.1.4

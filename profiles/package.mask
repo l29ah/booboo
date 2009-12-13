@@ -21,3 +21,6 @@
 # needs fixing
 =games-arcade/openjazz-20090329
 =net-im/ekg2-20090404
+
+# Experimental branch
+=www-client/uzbl-10000
