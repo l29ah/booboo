@@ -1,8 +1,7 @@
 # Copyright 1999-2008 Gentoo Foundation                                              
 # Distributed under the terms of the GNU General Public License v2                   
-# $Header: $                                                                        
-EAPI=2
-inherit git multilib toolchain-funcs
+EAPI="2"
+inherit eutils multilib toolchain-funcs
 EGIT_REPO_URI="git://git.videolan.org/x264.git"                                      
 DESCRIPTION="A free library for encoding H264/AVC video streams"                     
 HOMEPAGE="http://www.videolan.org/developers/x264.html"                              
@@ -17,12 +16,12 @@ RDEPEND="gtk? ( >=x11-libs/gtk+-2.6.10
 DEPEND="${RDEPEND}                                                                   
     dev-lang/yasm                                                                    
     dev-util/pkgconfig"                                                              
+
 src_unpack() {                                                                       
 	git_src_unpack                                                                   
 	cd "${S}"                                                                        
 	EPATCH_OPTS="-l"
 	epatch "${FILESDIR}/${PN}-nostrip.patch"
-	# use git 1.6 command style
 	sed -i -e "s:git-rev-list:git rev-list:g" \
 	        -e "s:git-status:git status:" \
 	        "${S}"/version.sh
