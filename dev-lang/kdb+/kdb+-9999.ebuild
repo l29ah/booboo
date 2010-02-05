@@ -14,10 +14,10 @@ LICENSE="kdb+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 RESTRICT="fetch"
-IUSE=""
+IUSE="readline"
 
 DEPEND="app-arch/unzip"
-RDEPEND=""
+RDEPEND="readline? ( app-misc/rlwrap )"
 
 pkg_nofetch() {
     eerror "Please go to:"
@@ -35,7 +35,10 @@ src_install() {
 	dodir /opt
 	mv q $D/opt/q
 	dodir /usr/bin
-	echo 'QHOME=/opt/q /opt/q/l32/q "$@"' > $D/usr/bin/q
+	qrun='QHOME=/opt/q'
+	use readline && qrun="$qrun rlwrap"
+	qrun="$qrun"' /opt/q/l32/q "$@"'
+	echo $qrun > $D/usr/bin/q
 	chmod +x $D/usr/bin/q
 }
 
