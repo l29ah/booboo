@@ -11,7 +11,7 @@ ESVN_REPO_URI="https://s.snth.net/svn/neverball/trunk"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS=""
 IUSE=""
 RESTRICT="test"
 
