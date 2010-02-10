@@ -1,0 +1,18 @@
+###############################################################################
+# mod_proxy_core.conf
+# include'd by lighttpd.conf.
+# $Header$
+###############################################################################
+
+server.modules += ("mod_proxy_core", "mod_proxy_backend_fastcgi")
+
+$HTTP["url"] =~ "\.php$" {
+	proxy-core.balancer = "round-robin"
+	proxy-core.allow-x-sendfile = "enable"
+	proxy-core.check-local = "enable"
+	proxy-core.protocol = "fastcgi"
+	proxy-core.backends = ( "unix:/var/run/lighttpd/lighttpd-fastcgi-php-" + PID + ".socket" )
+	proxy-core.max-pool-size = 16
+}
+
+# vim: set ft=conf foldmethod=marker et :
