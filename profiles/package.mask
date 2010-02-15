@@ -14,6 +14,7 @@
 =app-benchmarks/phoronix-test-suite-9999
 =media-video/cheese-9999
 =dev-util/geany-9999
+=dev-util/geany-9999-r1
 
 =net-wireless/crda-1.0.1-r1
 
