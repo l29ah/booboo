@@ -1,0 +1,221 @@
+diff -up dmenu-4.0/config.h dmenu-4.0-xft/config.h
+--- dmenu-4.0/config.h	2009-04-18 14:50:04.000000000 +0300
++++ dmenu-4.0-xft/config.h	2009-07-27 16:33:02.000000000 +0300
+@@ -7,3 +7,4 @@ static const char *normfgcolor = "#00000
+ static const char *selbgcolor  = "#0066ff";
+ static const char *selfgcolor  = "#ffffff";
+ static unsigned int spaceitem  = 30; /* px between menu items */
++static const char *fontxft     = "Monospace-10:normal"; /*if set xft is used */  
+diff -up dmenu-4.0/config.mk dmenu-4.0-xft/config.mk
+--- dmenu-4.0/config.mk	2009-04-18 14:50:04.000000000 +0300
++++ dmenu-4.0-xft/config.mk	2009-07-25 22:57:58.000000000 +0300
+@@ -15,8 +15,8 @@ XINERAMALIBS = -L${X11LIB} -lXinerama
+ XINERAMAFLAGS = -DXINERAMA
+ 
+ # includes and libs
+-INCS = -I. -I/usr/include -I${X11INC}
+-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${XINERAMALIBS}
++INCS = -I. -I/usr/include -I${X11INC} -I/usr/include -I/usr/include/freetype2
++LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${XINERAMALIBS} -lXft -lX11 -lXrender -lfreetype -lz -lfontconfig -lXrender -lX11
+ 
+ # flags
+ CPPFLAGS = -D_BSD_SOURCE -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+diff -up dmenu-4.0/dmenu.1 dmenu-4.0-xft/dmenu.1
+--- dmenu-4.0/dmenu.1	2009-04-18 14:50:04.000000000 +0300
++++ dmenu-4.0-xft/dmenu.1	2009-07-25 23:05:32.000000000 +0300
+@@ -6,6 +6,7 @@ dmenu \- dynamic menu
+ .RB [ \-i ]
+ .RB [ \-b ]
+ .RB [ \-fn " <font>"]
++.RB [ \-fa " <xftfont>"]
+ .RB [ \-nb " <color>"]
+ .RB [ \-nf " <color>"]
+ .RB [ \-p " <prompt>"]
+@@ -29,6 +30,9 @@ defines that dmenu appears at the bottom
+ .B \-fn <font>
+ defines the font.
+ .TP
++.B \-fa <font>
++defines the xft font.
++.TP
+ .B \-nb <color>
+ defines the normal background color (#RGB, #RRGGBB, and color names are supported).
+ .TP
+diff -up dmenu-4.0/dmenu.c dmenu-4.0-xft/dmenu.c
+--- dmenu-4.0/dmenu.c	2009-04-18 14:50:04.000000000 +0300
++++ dmenu-4.0-xft/dmenu.c	2009-07-27 16:22:23.000000000 +0300
+@@ -13,6 +13,7 @@
+ #ifdef XINERAMA
+ #include <X11/extensions/Xinerama.h>
+ #endif
++#include <X11/Xft/Xft.h>
+ 
+ /* macros */
+ #define CLEANMASK(mask)         (mask & ~(numlockmask | LockMask))
+@@ -36,6 +37,15 @@ typedef struct {
+ 		int descent;
+ 		int height;
+ 	} font;
++	XftDraw *xftdraw;
++	XftColor xftcolor;
++	XGlyphInfo gi;
++	struct {
++		XftFont *xft_font;
++		int ascent;
++		int descent;
++		int height;
++	} xftfont;
+ } DC; /* draw context */
+ 
+ typedef struct Item Item;
+@@ -160,9 +170,14 @@ cleanup(void) {
+ 		free(allitems);
+ 		allitems = itm;
+ 	}
++	if(fontxft) {
++		XftColorFree (dpy, DefaultVisual(dpy, screen), DefaultColormap(dpy, screen), &dc.xftcolor);
++		XftFontClose (dpy, dc.xftfont.xft_font);
++		XftDrawDestroy(dc.xftdraw);
++	}
+ 	if(dc.font.set)
+ 		XFreeFontSet(dpy, dc.font.set);
+-	else
++	else if(!fontxft)
+ 		XFreeFont(dpy, dc.font.xfont);
+ 	XFreePixmap(dpy, dc.drawable);
+ 	XFreeGC(dpy, dc.gc);
+@@ -224,7 +239,11 @@ drawtext(const char *text, unsigned long
+ 	olen = strlen(text);
+ 	h = dc.font.ascent + dc.font.descent;
+ 	y = dc.y + (dc.h / 2) - (h / 2) + dc.font.ascent;
+-	x = dc.x + (h / 2);
++	if(dc.xftfont.xft_font) {	
++		h = dc.xftfont.ascent + dc.xftfont.descent;
++		y = dc.y + (dc.h / 2) - (h / 2) + dc.xftfont.ascent;
++	}
++    x = dc.x + (h / 2);
+ 	/* shorten text if necessary */
+ 	for(len = MIN(olen, sizeof buf); len && textnw(text, len) > dc.w - h; len--);
+ 	if(!len)
+@@ -233,7 +252,11 @@ drawtext(const char *text, unsigned long
+ 	if(len < olen)
+ 		for(i = len; i && i > len - 3; buf[--i] = '.');
+ 	XSetForeground(dpy, dc.gc, col[ColFG]);
+-	if(dc.font.set)
++	if(fontxft) {
++		if (!dc.xftdraw)
++			eprint("error, creating xft drawable failed");
++		XftDrawString8(dc.xftdraw, &dc.xftcolor, dc.xftfont.xft_font, x, y, (unsigned char*)buf, len);
++	} else if(dc.font.set)
+ 		XmbDrawString(dpy, dc.drawable, dc.font.set, dc.gc, x, y, buf, len);
+ 	else
+ 		XDrawString(dpy, dc.drawable, dc.gc, x, y, buf, len);
+@@ -253,7 +276,6 @@ unsigned long
+ getcolor(const char *colstr) {
+ 	Colormap cmap = DefaultColormap(dpy, screen);
+ 	XColor color;
+-
+ 	if(!XAllocNamedColor(dpy, cmap, colstr, &color, &color))
+ 		eprint("error, cannot allocate color '%s'\n", colstr);
+ 	return color.pixel;
+@@ -309,6 +331,15 @@ initfont(const char *fontstr) {
+ }
+ 
+ void
++initxft() {
++	if(!(dc.xftfont.xft_font = XftFontOpenName (dpy, screen, fontxft)))
++		eprint("error, cannot load xft font\n" );
++	dc.xftfont.ascent = dc.xftfont.xft_font->ascent;
++	dc.xftfont.descent = dc.xftfont.xft_font->descent;
++	dc.xftfont.height = dc.xftfont.ascent + dc.xftfont.descent;
++}
++
++void
+ kpress(XKeyEvent * e) {
+ 	char buf[32];
+ 	int i, num;
+@@ -589,7 +620,12 @@ setup(Bool topbar) {
+ 	dc.norm[ColFG] = getcolor(normfgcolor);
+ 	dc.sel[ColBG] = getcolor(selbgcolor);
+ 	dc.sel[ColFG] = getcolor(selfgcolor);
+-	initfont(font);
++	if(fontxft){
++		if(!XftColorAllocName(dpy, DefaultVisual(dpy, screen), DefaultColormap(dpy, screen), (const char*)normfgcolor, &dc.xftcolor))
++			eprint("error, cannot allocate xft font color '%s'\n", normfgcolor);
++        else
++			initxft();
++	} else initfont(font);
+ 
+ 	/* menu window */
+ 	wa.override_redirect = True;
+@@ -597,6 +633,9 @@ setup(Bool topbar) {
+ 	wa.event_mask = ExposureMask | ButtonPressMask | KeyPressMask;
+ 
+ 	/* menu window geometry */
++	if(fontxft) 
++		mh = dc.xftfont.height + 2;
++	else
+ 	mh = dc.font.height + 2;
+ #if XINERAMA
+ 	if(XineramaIsActive(dpy) && (info = XineramaQueryScreens(dpy, &n))) {
+@@ -632,7 +671,7 @@ setup(Bool topbar) {
+ 	dc.drawable = XCreatePixmap(dpy, root, mw, mh, DefaultDepth(dpy, screen));
+ 	dc.gc = XCreateGC(dpy, root, 0, NULL);
+ 	XSetLineAttributes(dpy, dc.gc, 1, LineSolid, CapButt, JoinMiter);
+-	if(!dc.font.set)
++	if(!dc.font.set && !fontxft)
+ 		XSetFont(dpy, dc.gc, dc.font.xfont->fid);
+ 	if(maxname)
+ 		cmdw = textw(maxname);
+@@ -645,13 +684,20 @@ setup(Bool topbar) {
+ 	text[0] = 0;
+ 	match(text);
+ 	XMapRaised(dpy, win);
++	if(fontxft) {
++		dc.xftdraw = XftDrawCreate(dpy, dc.drawable, DefaultVisual(dpy,screen), DefaultColormap(dpy,screen));
++		if(!dc.xftdraw)
++			eprint("error, cannot create xft drawable\n");
++	}
+ }
+ 
+ int
+ textnw(const char *text, unsigned int len) {
+-	XRectangle r;
+-
+-	if(dc.font.set) {
++	if(fontxft) {
++		XftTextExtents8(dpy, dc.xftfont.xft_font, (const FcChar8*)text, len, &dc.gi);
++		return dc.gi.width;
++    } else if(dc.font.set) {
++	    XRectangle r;
+ 		XmbTextExtents(dc.font.set, text, len, NULL, &r);
+ 		return r.width;
+ 	}
+@@ -660,6 +706,8 @@ textnw(const char *text, unsigned int le
+ 
+ int
+ textw(const char *text) {
++	if(fontxft)
++		return textnw(text, strlen(text)) + dc.xftfont.height;
+ 	return textnw(text, strlen(text)) + dc.font.height;
+ }
+ 
+@@ -679,6 +727,9 @@ main(int argc, char *argv[]) {
+ 		else if(!strcmp(argv[i], "-fn")) {
+ 			if(++i < argc) font = argv[i];
+ 		}
++		else if(!strcmp(argv[i], "-fa")) {
++			if(++i < argc) fontxft = argv[i];
++		}
+ 		else if(!strcmp(argv[i], "-nb")) {
+ 			if(++i < argc) normbgcolor = argv[i];
+ 		}
+@@ -697,7 +748,7 @@ main(int argc, char *argv[]) {
+ 		else if(!strcmp(argv[i], "-v"))
+ 			eprint("dmenu-"VERSION", © 2006-2008 dmenu engineers, see LICENSE for details\n");
+ 		else
+-			eprint("usage: dmenu [-i] [-b] [-fn <font>] [-nb <color>] [-nf <color>]\n"
++			eprint("usage: dmenu [-i] [-b] [-fn <font>] [-fa <xftfont>] [-nb <color>] [-nf <color>]\n"
+ 			       "             [-p <prompt>] [-sb <color>] [-sf <color>] [-v]\n");
+ 	if(!setlocale(LC_CTYPE, "") || !XSupportsLocale())
+ 		fprintf(stderr, "warning: no locale support\n");
