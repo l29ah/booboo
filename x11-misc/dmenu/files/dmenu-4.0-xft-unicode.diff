@@ -1,5 +1,5 @@
 --- dmenu.c_	2010-02-22 19:22:43.000000000 +0300
-+++ dmenu.c	2010-02-22 19:23:19.000000000 +0300
++++ dmenu.c	2010-02-23 00:14:56.000000000 +0300
 @@ -255,9 +255,9 @@ drawtext(const char *text, unsigned long
  	if(fontxft) {
  		if (!dc.xftdraw)
@@ -12,7 +12,34 @@
  	else
  		XDrawString(dpy, dc.drawable, dc.gc, x, y, buf, len);
  }
-@@ -694,11 +694,11 @@ setup(Bool topbar) {
+@@ -339,6 +339,14 @@ initxft() {
+ 	dc.xftfont.height = dc.xftfont.ascent + dc.xftfont.descent;
+ }
+ 
++int
++firstutf8byte(unsigned char x) {
++	return ((x < 0x80) || 
++			((x & 0xE0) == 0xC0) || 
++			((x & 0xF0) == 0xE0) ||
++			((x & 0xF8) == 0xF0));
++}
++
+ void
+ kpress(XKeyEvent * e) {
+ 	char buf[32];
+@@ -432,7 +440,10 @@ kpress(XKeyEvent * e) {
+ 		break;
+ 	case XK_BackSpace:
+ 		if(len) {
+-			text[--len] = 0;
++			do {
++				len--;
++			} while ( ! firstutf8byte(text[len]));
++			text[len] = 0;
+ 			match(text);
+ 		}
+ 		break;
+@@ -694,11 +705,11 @@ setup(Bool topbar) {
  int
  textnw(const char *text, unsigned int len) {
  	if(fontxft) {
