@@ -1,0 +1,12 @@
+diff -urN xmonad-0.9.1.old/XMonad/Operations.hs xmonad-0.9.1/XMonad/Operations.hs
+--- xmonad-0.9.1.old/XMonad/Operations.hs	2010-03-07 08:02:52.000000000 +0300
++++ xmonad-0.9.1/XMonad/Operations.hs	2010-03-07 08:03:58.000000000 +0300
+@@ -327,7 +327,7 @@
+ 
+     -- If we ungrab buttons on the root window, we lose our mouse bindings.
+     whenX (not <$> isRoot w) $ setButtonGrab False w
+-    io $ do setInputFocus dpy w revertToPointerRoot 0
++    io $ do setInputFocus dpy w revertToParent 0
+             -- raiseWindow dpy w
+ 
+ ------------------------------------------------------------------------
