@@ -1,17 +1,20 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header:  $
+# $Header: $
+
+EAPI=2
 
 CABAL_FEATURES="bin lib profile haddock hscolour"
-inherit base haskell-cabal eutils
+
+inherit base haskell-cabal darcs
 
 DESCRIPTION="A tiling window manager"
 HOMEPAGE="http://xmonad.org"
-SRC_URI="http://hackage.haskell.org/packages/archive/${PN}/${PV}/${P}.tar.gz"
+EDARCS_REPOSITORY="http://code.haskell.org/xmonad"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~hppa ~sparc ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND=">=dev-lang/ghc-6.6.1
