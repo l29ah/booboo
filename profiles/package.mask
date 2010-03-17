@@ -1,21 +1,3 @@
-# Live ebuilds
-=media-sound/oss-9999
-=app-misc/kanatest-9999
-=games-rpg/openmw-9999
-=dev-games/mygui-9999
-=dev-cpp/commoncpp2-9999
-=x11-terms/terminal-9999-r1
->=app-cdr/xfburn-9999
->=xfce-extra/xfce4-notes-9999
->=xfce-extra/xfce4-places-9999
-=net-p2p/transmission-9999
-=kde-misc/krusader-9999
-=net-libs/loudmouth-9999
-=app-benchmarks/phoronix-test-suite-9999
-=media-video/cheese-9999
-=dev-util/geany-9999
-=dev-util/geany-9999-r1
-
 =net-wireless/crda-1.0.1-r1
 
 =games-misc/qlife-1.1
@@ -24,5 +6,6 @@
 =games-arcade/openjazz-20090329
 =net-im/ekg2-20090404
 
-# Experimental branch
-=www-client/uzbl-10000
+# buggy
+=media-gfx/qiv-2.2.3
+
