@@ -2,16 +2,17 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils flag-o-matic versionator games subversion
+inherit eutils flag-o-matic versionator games subversion git
 
 DESCRIPTION="Enhanced engine for iD Software's Quake 1"
 HOMEPAGE="http://icculus.org/twilight/darkplaces/"
 ESVN_REPO_URI="svn://svn.icculus.org/twilight/trunk/darkplaces"
+EGIT_REPO_URI="git://git.xonotic.org/xonotic/darkplaces.git"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="alsa dedicated nexuiz opengl oss sdl"
+IUSE="alsa dedicated nexuiz opengl oss sdl xonotic"
 
 UIDEPEND="x11-proto/xextproto
 	x11-proto/xf86dgaproto
@@ -42,7 +43,8 @@ RDEPEND="sdl? (
 		virtual/opengl
 		${UIRDEPEND} )
 	!dedicated? ( !sdl? ( !opengl? ( virtual/opengl ${UIRDEPEND} ) ) )"
-DEPEND="dev-util/pkgconfig
+DEPEND=" !games-fps/nexuiz
+	dev-util/pkgconfig
 	app-arch/unzip
 	dev-util/subversion
 	games-util/fteqcc
@@ -70,17 +72,27 @@ pkg_setup() {
 	games_pkg_setup
 
 	if default_client && ! use opengl ; then
-		einfo "Defaulting to OpenGL client"
+		die "You must select dedicated server, opengl client or both to build"
+	fi
+
+	if use nexuiz && use xonotic ; then
+		die "Choose either nexuiz or xonotic darkplaces to build\n \
+		(nexuiz may work on xonotic darkplaces)"
 	fi
 }
 
 src_unpack() {
-	subversion_src_unpack
 
 	# Make the game automatically look in the correct data directory for nexuiz
 	if use nexuiz ; then
+		subversion_src_unpack
 		sed -i "s:gamedirname1:\"nexuiz\":" fs.c \
 			|| die "sed fs.c failed"
+	fi
+
+	if use xonotic ; then
+		git_src_unpack
+		cd "$S"
 	fi
 
 	# Only additional CFLAGS optimization is the -march flag
@@ -112,7 +124,7 @@ src_compile() {
 	MAKEOPTS="${MAKEOPTS} DP_FS_BASEDIR=${GAMES_DATADIR}/quake1"
 
 	if default_client ; then
-		if use nexuiz ; then
+		if use nexuiz || use xonotic ; then
 			emake cl-nexuiz || die "emake cl-nexuiz failed"
 		fi
 
@@ -120,7 +132,7 @@ src_compile() {
 	fi
 
 	if use sdl ; then
-		if use nexuiz ; then
+		if use nexuiz || use xonotic ; then
 			emake sdl-nexuiz || die "emake sdl-nexuiz failed"
 		fi
 
@@ -128,7 +140,7 @@ src_compile() {
 	fi
 
 	if use dedicated ; then
-		if use nexuiz ; then
+		if use nexuiz || use xonotic ; then
 			emake sv-nexuiz || die "emake sv-nexuiz failed"
 		fi
 
@@ -147,21 +159,21 @@ src_install() {
 
 	if default_client ; then
 		newgamesbin ${PN}-glx ${PN} || die "dogamesbin darkplaces-glx failed"
-		if use nexuiz ; then
+		if use nexuiz || use xonotic ; then
 			dogamesbin nexuiz-glx || die "dogamesbin nexuiz-glx failed"
 		fi
 	fi
 
 	if use sdl ; then
 		dogamesbin ${PN}-sdl || die "dogamesbin sdl failed"
-		if use nexuiz ; then
+		if use nexuiz || use xonotic ; then
 			dogamesbin nexuiz-sdl || die "dogamesbin nexuiz-sdl failed"
 		fi
 	fi
 
 	if use dedicated ; then
 		newgamesbin ${PN}-dedicated ${PN}-ded || die "newgamesbin ded failed"
-		if use nexuiz ; then
+		if use nexuiz || use xonotic ; then
 			dogamesbin nexuiz-dedicated || die "dogamesbin nexuiz-dedicated failed"
 		fi
 	fi
