@@ -23,10 +23,6 @@ src_unpack() {
 	edos2unix readme.txt
 }
 
-src_compile() {
-	emake || die "emake qcc failed"
-}
-
 src_install() {
 	newbin fteqcc.bin fteqcc || die "newbin fteqcc.bin failed"
 	dodoc readme.txt
