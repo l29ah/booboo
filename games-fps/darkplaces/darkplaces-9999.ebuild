@@ -11,7 +11,7 @@ EGIT_REPO_URI="git://git.xonotic.org/xonotic/darkplaces.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS=""
 IUSE="alsa dedicated nexuiz opengl oss sdl xonotic"
 
 UIDEPEND="x11-proto/xextproto
