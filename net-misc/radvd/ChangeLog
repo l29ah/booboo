@@ -1,0 +1,217 @@
+# ChangeLog for net-misc/radvd
+# Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/net-misc/radvd/ChangeLog,v 1.56 2009/11/16 09:15:46 wschlich Exp $
+
+*radvd-1.5 (16 Nov 2009)
+
+  16 Nov 2009; Wolfram Schlich <wschlich@gentoo.org>
+  -files/radvd-1.4-parallel-make.patch, -radvd-1.2.ebuild,
+  -radvd-1.4.ebuild, +radvd-1.5.ebuild:
+  version bump, removed old versions
+
+*radvd-1.4 (20 Aug 2009)
+
+  20 Aug 2009; Robert Buchholz <rbu@gentoo.org> +radvd-1.4.ebuild,
+  +files/radvd-1.4-parallel-make.patch:
+  Version bump, bug 281637. Add another parallel-make patch to stop ylwrap
+  from running in parallel with gcc. gnu-source detection is upstream.
+
+  20 Aug 2009; Robert Buchholz <rbu@gentoo.org> -radvd-1.0-r1.ebuild,
+  radvd-1.1.ebuild:
+  Change to eautoreconf in stable as well, bug 270752.
+
+  28 Jul 2009; Diego E. Pettenò <flameeyes@gentoo.org> radvd-1.2.ebuild:
+  If you haven't set WANT_AUTOMAKE you want eautoreconf.
+
+  25 Apr 2009; Patrick Lauer <patrick@gentoo.org> radvd-1.2:
+  Restricting emake to avoid parallel make failure. Fixes #255332
+
+  18 Mar 2009; Joseph Jezak <josejx@gentoo.org> radvd-1.1.ebuild:
+  Marked ppc stable for bug #245873.
+
+  06 Mar 2009; Jeroen Roovers <jer@gentoo.org> radvd-1.1.ebuild:
+  Stable for HPPA (bug #245873).
+
+  11 Feb 2009; Raúl Porcel <armin76@gentoo.org> radvd-1.1.ebuild:
+  arm/sparc stable wrt #245873
+
+  08 Feb 2009; Markus Meier <maekke@gentoo.org> radvd-1.1.ebuild:
+  amd64/x86 stable, bug #245873
+
+*radvd-1.2 (19 Nov 2008)
+
+  19 Nov 2008; Robin H. Johnson <robbat2@gentoo.org> +radvd-1.2.ebuild:
+  Version bump.
+
+  19 Nov 2008; Robin H. Johnson <robbat2@gentoo.org> radvd-1.1.ebuild:
+  Avoid autotools maintainer mode.
+
+  19 Nov 2008; Robin H. Johnson <robbat2@gentoo.org> files/radvd.init:
+  Bug #230105, remember -w to sysctl.
+
+  18 Nov 2008; Robin H. Johnson <robbat2@gentoo.org>
+  +files/radvd-1.1-parallel-make.patch, radvd-1.1.ebuild:
+  Fix parallel make bug #198774.
+
+  17 Aug 2008; Torsten Veller <tove@gentoo.org> metadata.xml:
+  Remove latexer from metadata.xml (#206688)
+
+  28 Jul 2008; Wolfram Schlich <wschlich@gentoo.org>
+  -files/radvd-0.9-conf.d, -files/radvd-0.9-init.d, metadata.xml,
+  -radvd-0.9.ebuild, -radvd-0.9.1.ebuild, -radvd-1.0.ebuild,
+  radvd-1.1.ebuild:
+  removed old versions
+
+  28 Jul 2008; Wolfram Schlich <wschlich@gentoo.org> metadata.xml,
+  radvd-1.1.ebuild:
+  fix metadata.xml, fix paths shown in pkg_postinst()
+
+  25 Jul 2008; Friedrich Oslage <bluebird@gentoo.org> radvd-1.0-r1.ebuild:
+  Stable on sparc
+
+*radvd-1.1 (15 Jun 2008)
+
+  15 Jun 2008; Wolfram Schlich <wschlich@gentoo.org>
+  +files/radvd-1.1-gnu-source.patch, +radvd-1.1.ebuild:
+  version bump wrt bug #226509
+
+  25 Dec 2007; Christian Heim <phreak@gentoo.org> metadata.xml:
+  Removing uberlord from metadata.xml as per #199318.
+
+  02 Nov 2007; Steve Dibb <beandog@gentoo.org> radvd-1.0-r1.ebuild:
+  amd64 stable, bug 184730
+
+  13 Aug 2007; Tobias Scherbaum <dertobi123@gentoo.org> radvd-1.0-r1.ebuild:
+  ppc. stable
+
+  12 Jul 2007; Christian Faulhammer <opfer@gentoo.org> radvd-1.0-r1.ebuild:
+  stable x86, bug 184730
+
+  10 Jul 2007; Jeroen Roovers <jer@gentoo.org> radvd-1.0-r1.ebuild:
+  Stable for HPPA (bug #184730).
+
+  09 Jul 2007; Roy Marples <uberlord@gentoo.org> radvd-1.0-r1.ebuild:
+  Keyworded ~x86-fbsd
+
+*radvd-1.0-r1 (09 Feb 2007)
+
+  09 Feb 2007; Roy Marples <uberlord@gentoo.org> files/radvd.init,
+  +radvd-1.0-r1.ebuild:
+  Add reload option to init script, #166095 thanks to Martin von Gagern.
+
+  01 Nov 2006; Roy Marples <uberlord@gentoo.org> ChangeLog:
+  New version.
+
+  19 Jul 2006; Roy Marples <uberlord@gentoo.org> +files/radvd.conf,
+  +files/radvd.init, metadata.xml, radvd-0.9.1.ebuild:
+  Fix some potential quoting issues.
+  Add information to help setup radvd for grsec users.
+
+  06 Jul 2006; Henrik Brix Andersen <brix@gentoo.org> radvd-0.9.1.ebuild:
+  Updated RDEPEND, bug #138203.
+
+  17 Feb 2006; Michael Hanselmann <hansmi@gentoo.org> radvd-0.9.1.ebuild:
+  Stable on ppc.
+
+  13 Feb 2006; Henrik Brix Andersen <brix@gentoo.org> radvd-0.9.1.ebuild:
+  Stable on x86.
+
+*radvd-0.9.1 (13 Jan 2006)
+
+  13 Jan 2006; Henrik Brix Andersen <brix@gentoo.org>
+  +files/radvd-0.9.1-conf.d, +files/radvd-0.9.1-init.d, +radvd-0.9.1.ebuild:
+  Version bump.
+
+  03 Jan 2006; Henrik Brix Andersen <brix@gentoo.org>
+  -files/radvd-0.8-conf.d, -files/radvd-0.8-init.d, -files/radvd,
+  -radvd-0.8-r1.ebuild:
+  Pruned old ebuild.
+
+  24 Dec 2005; Rene Nussbaumer <killerfox@gentoo.org> radvd-0.9.ebuild:
+  Stable on hppa.
+
+  24 Dec 2005; Michael Hanselmann <hansmi@gentoo.org> radvd-0.9.ebuild:
+  Stable on ppc.
+
+  14 Dec 2005; Henrik Brix Andersen <brix@gentoo.org>
+  -radvd-0.7.2-r1.ebuild:
+  Pruned old ebuilds.
+
+  20 Nov 2005; Henrik Brix Andersen <brix@gentoo.org> radvd-0.9.ebuild:
+  Stable on x86.
+
+  11 Nov 2005; Michael Hanselmann <hansmi@gentoo.org> radvd-0.8-r1.ebuild:
+  Stable on ppc.
+
+  22 Oct 2005; Henrik Brix Andersen <brix@gentoo.org> -radvd-0.8.ebuild:
+  Pruned old versions.
+
+*radvd-0.9 (20 Oct 2005)
+
+  20 Oct 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/radvd-0.9-conf.d, +files/radvd-0.9-init.d, +radvd-0.9.ebuild:
+  Version bump.
+
+  15 Oct 2005; Henrik Brix Andersen <brix@gentoo.org> radvd-0.8-r1.ebuild:
+  Stable on x86.
+
+*radvd-0.8-r1 (31 Aug 2005)
+
+  31 Aug 2005; Henrik Brix Andersen <brix@gentoo.org>
+  +files/radvd-0.8-conf.d, +files/radvd-0.8-init.d, +metadata.xml,
+  +radvd-0.8-r1.ebuild:
+  Cleaned up ebuild, taking ownership.
+
+  23 Aug 2005; Diego Pettenò <flameeyes@gentoo.org> radvd-0.8.ebuild:
+  Use -1 instead of /bin/false on enewuser call.
+
+  07 Aug 2005; Michael Hanselmann <hansmi@gentoo.org> radvd-0.7.2-r1.ebuild:
+  Stable on ppc.
+
+*radvd-0.8 (02 Aug 2005)
+
+  02 Aug 2005; Marcelo Goes <vanquirius@gentoo.org> +radvd-0.8.ebuild:
+  Version bump for bug 86879. Thanks to Kalin KOZHUHAROV <kalin@ThinRope.net>.
+
+  14 Feb 2005; Michael Hanselmann <hansmi@gentoo.org> radvd-0.7.2-r1.ebuild:
+  Added to ~sparc and ~ppc.
+
+  02 Jan 2005; Daniel Drake <dsd@gentoo.org> radvd-0.7.2-r1.ebuild:
+  Change virtual/kernel to virtual/linux-sources
+
+  09 Aug 2004; Tom Martin <slarti@gentoo.org> radvd-0.7.2-r1.ebuild:
+  Marked ~amd64, resolves 59087
+
+  01 Jul 2004; Jon Hood <squinky86@gentoo.org> radvd-0.7.2-r1.ebuild:
+  change virtual/glibc to virtual/libc, add IUSE
+
+  26 Apr 2004; Aron Griffis <agriffis@gentoo.org> radvd-0.7.2-r1.ebuild:
+  Add die following econf for bug 48950
+
+  05 Dec 2003; Chuck Short <zul@gentoo.org> radvd-0.7.2-r1.ebuild:
+  Chown fixes.
+
+*radvd-0.7.2-r1 (21 Apr 2003)
+ 
+  13 Jul 2003; Daniel Ahlberg <aliz@gentoo.org> :
+  Added missing changelog entry.
+
+*radvd-0.7.2 (21 Apr 2003)
+
+  21 Apr 2003; Guy Martin <gmsoft@gentoo.org> radvd-0.7.2-r1.ebuild, files/radvd,
+  files/digest-radvd-0.7.2-r1 :
+  Corrected ownership of /var/run/radvd. Fix #19647
+  Marked stable for x86 and hppa.
+
+  02 Nov 2002; Hannes Mehnert <hannes@gentoo.org> radvd-0.7.1.ebuild:
+  marked stable for x86
+
+*radvd-0.7.1 (18 Jul 2002)
+
+  18 Oct 2002; Hannes Mehnert <hannes@gentoo.org> ChangeLog, radvd-0.7.1.ebuild:
+  Initial import.
+  ebuild submitted by Asbjorn Sannes <ace@sannes.org>
+
+  Added initial ChangeLog which should be updated whenever the package is
+  updated in any way.
+  
