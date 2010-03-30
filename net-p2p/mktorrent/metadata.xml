@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>net-p2p</herd>
+<use>
+	<flag name='openssl'>Use OpenSSL for md5 and sha1 support</flag>
+	<flag name='largefile'>Enable largefile support on 32 bit systems</flag>
+</use>
+</pkgmetadata>
