@@ -6,6 +6,3 @@
 =games-arcade/openjazz-20090329
 =net-im/ekg2-20090404
 
-# buggy
-=media-gfx/qiv-2.2.3
-
