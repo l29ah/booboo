@@ -20,13 +20,10 @@ RDEPEND="x11-libs/qt-gui:4
 	media-libs/sdl-mixer[vorbis]
 	media-libs/sdl-image[png]
 	media-libs/sdl-net
-	dev-lang/lua"
+	dev-lang/lua
+	>=media-fonts/dejavu-2.28"
 DEPEND="${RDEPEND}
 	>=dev-lang/fpc-2.2"
-RDEPEND="${RDEPEND}
-	>=media-fonts/dejavu-2.28"
-
-#S=${WORKDIR}/${MY_P}
 
 src_configure() {
 	mycmakeargs="-DCMAKE_INSTALL_PREFIX=${GAMES_PREFIX} -DDATA_INSTALL_DIR=${GAMES_DATADIR}"
