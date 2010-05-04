@@ -14,7 +14,7 @@ EDARCS_REPOSITORY="http://code.haskell.org/xmonad"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=dev-lang/ghc-6.6.1
