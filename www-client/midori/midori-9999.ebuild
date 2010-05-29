@@ -7,7 +7,7 @@ SRC_URI=""
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 IUSE="doc minimal nls soup sqlite"
 EGIT_REPO_URI="git://git.xfce.org/apps/midori"
 
