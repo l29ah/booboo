@@ -6,12 +6,13 @@ inherit eutils toolchain-funcs savedconfig
 
 DESCRIPTION="a generic, highly customizable, and efficient menu for the X Window System"
 HOMEPAGE="http://www.suckless.org/programs/dmenu.html"
-SRC_URI="http://code.suckless.org/dl/tools/${P}.tar.gz"
+SRC_URI="http://code.suckless.org/dl/tools/${P}.tar.gz
+	dmenu_path? ( http://tools.suckless.org/dmenu/patches/dmenu_path.c )"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd"
-IUSE="xinerama xft unicode"
+IUSE="xinerama xft unicode +dmenu_path"
 
 DEPEND="x11-libs/libX11
 	xinerama? ( x11-libs/libXinerama )"
@@ -46,6 +47,10 @@ src_compile() {
 	else
 		emake CC=$(tc-getCC) XINERAMAFLAGS="" XINERAMALIBS="" \
 			|| die "emake failed${msg}"
+	fi
+	if use dmenu_path; then
+		rm dmenu_path
+		cc $CFLAGS $DISTDIR/dmenu_path.c -o dmenu_path
 	fi
 }
 
