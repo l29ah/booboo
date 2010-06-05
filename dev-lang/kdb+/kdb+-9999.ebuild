@@ -38,7 +38,11 @@ src_install() {
 	qrun='QHOME=/opt/q'
 	use readline && qrun="$qrun rlwrap"
 	qrun="$qrun"' /opt/q/l32/q "$@"'
-	echo $qrun > $D/usr/bin/q
-	chmod +x $D/usr/bin/q
+	echo $qrun > $D/usr/bin/kdb-q
+	chmod +x $D/usr/bin/kdb-q
 }
 
+pkg_postinst() {
+	ewarn The executable script is named \'kdb-q\' due to the name conflict \
+	with Gentoo q.
+}
