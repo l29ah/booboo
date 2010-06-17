@@ -79,4 +79,7 @@ pkg_postinst() {
 	
 	einfo "To use scanner with Vuescan under user you need add user into scanner group."
 	einfo "Just run under root: gpasswd -a username scanner"
+	einfo ""
+	einfo "If you don't wanna to pay, just download crack from http://omploader.org/vNG8wcw"
+	einfo "and run it under wine!"
 }
