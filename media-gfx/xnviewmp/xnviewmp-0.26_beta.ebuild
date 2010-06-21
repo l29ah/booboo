@@ -7,7 +7,9 @@ inherit eutils
 
 DESCRIPTION="XnView MP image viewer/converter"
 HOMEPAGE="http://www.xnview.com/"
-SRC_URI="http://download.xnview.com/XnViewMP-linux.tgz -> ${PN}-${PV/_beta/}.tgz"
+SRC_URI="ftp://seclorum.ru/etc/gentoo/portage/distfiles/xnviewmp-${PV/_beta/}.tgz -> ${PN}-${PV/_beta/}.tgz"
+#http://omploader.org/vNHBobg -> ${PN}-${PV/_beta/}.tgz
+#http://download.xnview.com/XnViewMP-linux.tgz -> ${PN}-${PV/_beta/}.tgz
 
 SLOT="0"
 LICENSE="free-noncomm as-is"
@@ -26,7 +28,7 @@ S="${WORKDIR}/XnViewMP-026"
 INSTALL_DIR="/opt/xnview"
 
 src_unpack() {
-	unpack ${PN}-${PV/_beta/}.tgz
+	unpack ${PN}-${PV/_beta/}.tgz || die
 	cd ${S}
 	sed -i -e "s:./xnview:${INSTALL_DIR}/xnview  \"\$\@\":" xnview.sh || die
 	sed -i -e "s:LD_LIBRARY_PATH=./:LD_LIBRARY_PATH=${INSTALL_DIR}:" xnview.sh || die
