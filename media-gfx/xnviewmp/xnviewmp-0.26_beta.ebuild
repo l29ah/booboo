@@ -7,7 +7,6 @@ inherit eutils
 
 DESCRIPTION="XnView MP image viewer/converter"
 HOMEPAGE="http://www.xnview.com/"
-#SRC_URI="x86? ( http://download.xnview.com/XnViewMP-linux.tgz -> ${PN}-${PV/_beta/}.tgz )"
 SRC_URI="http://download.xnview.com/XnViewMP-linux.tgz -> ${PN}-${PV/_beta/}.tgz"
 
 SLOT="0"
