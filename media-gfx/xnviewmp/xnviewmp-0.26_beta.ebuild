@@ -1,10 +1,9 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
 inherit eutils
-
-EAPI=2
 
 DESCRIPTION="XnView MP image viewer/converter"
 HOMEPAGE="http://www.xnview.com/"
@@ -28,7 +27,6 @@ S="${WORKDIR}/XnViewMP-026"
 INSTALL_DIR="/opt/xnview"
 
 src_unpack() {
-#	unpack ${A}
 	unpack ${PN}-${PV/_beta/}.tgz
 	cd ${S}
 	sed -i -e "s:./xnview:${INSTALL_DIR}/xnview  \"\$\@\":" xnview.sh || die
@@ -39,14 +37,18 @@ src_install() {
 
 	dodir ${INSTALL_DIR}
 	insinto ${INSTALL_DIR}
-	doins ${S}/*
+	# Install only needed stuff
+	doins README country.txt xnview xnview.sh
+	# Install 32bit binary libraries that provided with the programs
+	doins -r lib
 
 	exeinto ${INSTALL_DIR}
 	doexe xnview
 	doexe xnview.sh
-
+	
 	exeinto /usr/bin
-	newexe xnview.sh xnview
+	# Provide a simple exec wrapper
+	doexe ${FILESDIR}/xnview
 
 	insinto /usr/share/applications/
 	doins ${FILESDIR}/xnview.desktop
