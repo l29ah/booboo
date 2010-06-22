@@ -50,7 +50,7 @@ src_install() {
 	done
 
 	insinto ${INSTALLDIR}
-	doins vuescan.bmp vuescan.dat *htm lan_*.txt
+	doins vuescan.bmp vuescan.dat ocr_en.bin *htm lan_*.txt
 	
 	if use doc; then
 		doins ${DISTDIR}/${PN}.pdf
