@@ -1,15 +1,13 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
-
+EAPI="2"
 inherit eutils
 
 DESCRIPTION="A high-quality scanning and digital camera raw image processing software."
 HOMEPAGE="http://www.hamrick.com/"
-SRC_URI="http://www.hamrick.com/files/vuesca86.tgz -> ${P}.tgz
-	http://www.hamrick.com/vuescan/${PN}.pdf"
+SRC_URI="http://www.hamrick.com/vuescan/${PN}.pdf"
 RESTRICT="primaryuri"
 
 LICENSE="vuescan"
@@ -39,7 +37,8 @@ RDEPEND=">=x11-libs/gtk+-2.0
 		 app-emulation/emul-linux-x86-gtklibs )"
 
 src_unpack() {
-	unpack ${P}.tgz
+	wget -c "http://www.hamrick.com/files/vuesca86.tgz"
+	tar -xzf vuesca86.tgz || die "Unpack failed"
 	cd ${S}
 }
 
