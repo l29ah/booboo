@@ -1,9 +1,8 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
-
+EAPI="2"
 inherit eutils
 
 DESCRIPTION="A high-quality scanning and digital camera raw image processing software."
@@ -17,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
-MY_LINGUAS="ar bg ca cs da de el en es fi fr he hi hr id it ja ko lt lv nl no pl pt ro ru sk sl sr sv tl tw uk vi zh"
+MY_LINGUAS="ar be bg ca cs da de el en es et fi fr gl he hi hr hu id it ja ko lt lv nl no pb pl pt ro ru sk sl sr sv ta th tl tr tw uk vi zh"
 
 for MY_LINGUA in ${MY_LINGUAS}; do
 	IUSE="${IUSE} linguas_${MY_LINGUA/-/_}"
@@ -46,12 +45,12 @@ src_unpack() {
 src_install() {
 	for LINGUA in ${MY_LINGUAS}; do
 		if ! use linguas_${LINGUA/-/_}; then
-			rm -f language."${LINGUA}"
+			rm -f lan_"${LINGUA}".txt
 		fi
 	done
 
 	insinto ${INSTALLDIR}
-	doins vuescan.bmp vuescan.dat *htm language.*
+	doins vuescan.bmp vuescan.dat *htm lan_*.txt
 	
 	if use doc; then
 		doins ${DISTDIR}/${PN}.pdf
