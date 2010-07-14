@@ -22,6 +22,5 @@ DEPEND=">=dev-lang/ghc-6.12.1
 	dev-haskell/ansi-terminal
 	dev-haskell/glob
 	dev-haskell/time
-	dev-haskell/regex-pcre
-	dev-haskell/filepath"
+	dev-haskell/regex-pcre"
 
