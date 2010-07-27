@@ -23,7 +23,7 @@ DEPEND="x11-libs/wxGTK:2.9
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch "$FILESDIR/$PN-0.3.1-Makefile.patch" # Not the best way to deal with	changing stuff; /r/ some sed mage
+	epatch "$FILESDIR/$P-Makefile.patch" # Not the best way to deal with	changing stuff; /r/ some sed mage
 	ln -s makefile.unix Makefile
 }
 
