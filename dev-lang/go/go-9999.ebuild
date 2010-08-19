@@ -105,7 +105,9 @@ src_install() {
 
 	if use vim-syntax ; then
 		insinto /usr/share/vim/vimfiles/plugin
-		doins "${S}"/misc/vim/go.vim || die
+		doins "${S}"/misc/vim/syntax/go.vim || die
+		insinto /usr/share/vim/vimfiles/ftdetect
+		doins "${S}"/misc/vim/ftdetect/gofiletype.vim || die
 	fi
 
 	doenvd "${ENVFILE}" || die
