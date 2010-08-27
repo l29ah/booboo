@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils
+inherit autotools-utils
 
 DESCRIPTION="Bitcoin is a peer-to-peer network based digital currency.
 Peer-to-peer (P2P) means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network."
@@ -35,11 +35,11 @@ bitcoin_src_prepare() {
 }
 
 bitcoin_src_compile() {
-	emake
+	base_src_compile
 }
 
 bitcoin_src_install() {
-	dobin bitcoin
+	dobin bitcoin || die dobin failed
 }
 
 EXPORT_FUNCTIONS src_prepare src_compile src_install
