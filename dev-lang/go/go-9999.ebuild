@@ -40,11 +40,7 @@ src_prepare() {
 	sed -i \
 		-e "/^GOBIN=/s:=.*:=/usr/bin:" \
 		-e "/MAKEFLAGS=/s:=.*:=${MAKEOPTS}:" \
-		src/Make.common src/Make.conf || die
-
-	sed -i \
-		-e "/^CFLAGS=/s:-O2:${CFLAGS}:" \
-		src/Make.conf || die
+		src/Make.common || die
 	
 	case ${ARCH} in
 	x86)
