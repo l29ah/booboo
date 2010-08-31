@@ -2,6 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-PATCH_VERSION=0.3.10
+PATCH_VERSION=9999
 
 inherit bitcoin
