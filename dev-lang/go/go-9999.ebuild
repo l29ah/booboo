@@ -9,12 +9,12 @@ DESCRIPTION="The Go Programming Language"
 HOMEPAGE="http://golang.org/"
 SRC_URI=""
 EHG_REPO_URI="https://go.googlecode.com/hg/"
-EHG_REVISION="release"
+use experimental || EHG_REVISION="release"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="emacs vim-syntax"
+IUSE="emacs vim-syntax experimental"
 
 RESTRICT="test"
 
