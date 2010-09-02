@@ -42,6 +42,11 @@ src_prepare() {
 		-e "/MAKEFLAGS=/s:=.*:=${MAKEOPTS}:" \
 		src/Make.common || die
 	
+	epatch "${FILESDIR}/portageize-makefile.patch"
+	
+	# We don't need nasty kludges that break things
+	sed -ie "s/QUOTED_//i" src/Make.*
+
 	case ${ARCH} in
 	x86)
 		GOARCH="386"
