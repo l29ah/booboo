@@ -7,26 +7,19 @@ EAPI="2"
 
 DESCRIPTION="st is a simple terminal implementation for X."
 HOMEPAGE="http://st.suckless.org/"
-SRC_URI=""
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 IUSE=""
 
-DEPEND="dev-util/mercurial"
 RDEPEND="x11-libs/libX11"
 
-#EHG_REPO_URI="http://st.suckless.org/"
 EHG_REPO_URI=http://suckless.org/cgi-bin/hgwebdir.cgi/${PN}
-EHG_PULL_CMD="hg pull --force --quiet"
 
-S=${WORKDIR}/${PN}
+S="${WORKDIR}/${PN}"
 
-src_unpack() {
-	mercurial_src_unpack
-	cd "${S}"
-
+src_prepare() {
 	sed -i \
 		-e "s/.*strip.*//" \
 		Makefile || die "sed failed"
