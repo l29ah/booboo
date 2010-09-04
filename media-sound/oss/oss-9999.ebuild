@@ -4,21 +4,20 @@
 
 inherit mercurial
 
-EHG_REPO_URI="http://mercurial.opensound.com"
+EHG_REPO_URI="http://opensound.hg.sourceforge.net:8000/hgroot/opensound/opensound"
 
 DESCRIPTION="Open Sound System - portable, mixing-capable, high quality sound system for Unix."
 HOMEPAGE="http://developer.opensound.com/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="sys-apps/gawk
 	>=x11-libs/gtk+-2
-	>=sys-kernel/linux-headers-2.6.11
-	!media-sound/oss"
-RDEPEND="${DEPEND}"
+	>=sys-kernel/linux-headers-2.6.11"
+RDEPEND=">=x11-libs/gtk+-2"
 
 S="${WORKDIR}/build"
 
@@ -27,14 +26,13 @@ src_unpack() {
 	mkdir "${WORKDIR}/build"
 
 	einfo "Replacing init script with gentoo friendly one..."
-	cp "${FILESDIR}/oss" "${WORKDIR}/mercurial.opensound.com/setup/Linux/oss/etc/S89oss"
-	cd "$WORKDIR"
+	cp "${FILESDIR}/oss" "${WORKDIR}/opensound/setup/Linux/oss/etc/S89oss"
 }
 
 src_compile() {
 	einfo "Running configure..."
 	cd "${WORKDIR}/build"
-	"${WORKDIR}/mercurial.opensound.com/configure" || die "configure failed"
+	"${WORKDIR}/opensound/configure" || die "configure failed"
 
 	einfo "Stripping compiler flags..."
 	sed -i -e 's/-D_KERNEL//' \
