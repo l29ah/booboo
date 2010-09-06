@@ -1,0 +1,37 @@
+diff --git a/Makefile.am b/Makefile.am
+index 38749ce..ae96ab5 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,7 +1,7 @@
+ include $(top_srcdir)/build/Makefile.am.lm
+ 
+-SUBDIRS = loudmouth docs examples $(TEST_DIRS)
+-DIST_SUBDIRS = loudmouth docs examples tests
++SUBDIRS = loudmouth examples $(TEST_DIRS)
++DIST_SUBDIRS = loudmouth examples tests
+ 
+ EXTRA_DIST +=			\
+ 	loudmouth-1.0.pc.in     \
+@@ -10,9 +10,6 @@ EXTRA_DIST +=			\
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = loudmouth-1.0.pc
+ 
+-DISTCHECK_CONFIGURE_FLAGS =     \
+-	--enable-gtk-doc
+-
+ ChangeLog: OLD_VERSION=`git describe`
+ ChangeLog:
+ 	git log --no-merges $(OLD_VERSION)..HEAD > $(srcdir)/ChangeLog
+diff --git a/configure.ac b/configure.ac
+index 5f74212..852b199 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -297,8 +297,6 @@ AC_SUBST(LOUDMOUTH_LIBS)
+ 
+ AC_OUTPUT([
+ Makefile
+-docs/Makefile
+-docs/reference/Makefile
+ loudmouth/Makefile
+ examples/Makefile
+ tests/Makefile
