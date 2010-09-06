@@ -21,13 +21,15 @@ RDEPEND=">=dev-libs/glib-2.4
 
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig
-	>=dev-util/gtk-doc-am-1
-	<dev-util/gtk-doc-1.12"	# Dunno why, but it fails w/ recent versions
+	doc? ( 
+		>=dev-util/gtk-doc-am-1
+		<dev-util/gtk-doc-1.12 
+	)"	# Dunno why, but it fails w/ recent versions
 
 use doc && DOCS="AUTHORS ChangeLog NEWS README"
 
 src_prepare() {
-	gtkdocize
+	use doc && gtkdocize || epatch $FILESDIR/$PN-nodocs.patch
 	eautoreconf
 }
 
