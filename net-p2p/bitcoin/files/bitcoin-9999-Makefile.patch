@@ -1,0 +1,38 @@
+--- makefile.unix	2010-08-31 17:21:24.000000000 +0400
++++ makefile.unix	2010-08-31 17:29:21.899443518 +0400
+@@ -3,29 +3,21 @@
+ # file license.txt or http://www.opensource.org/licenses/mit-license.php.
+ 
+ 
+-INCLUDEPATHS= \
+- -I"/usr/local/include/wx-2.9" \
+- -I"/usr/local/lib/wx/include/gtk2-unicode-debug-static-2.9"
+-
+-WXLIBS= \
+- -Wl,-Bstatic \
+-   -l wx_gtk2ud-2.9 \
+- -Wl,-Bdynamic \
+-   -l gtk-x11-2.0 -l SM
++INCLUDEPATHS=-I /usr/include/db4.8/
++
++WXLIBS=$(shell wx-config-2.9 --libs)
+ 
+ # for boost 1.37, add -mt to the boost libraries
+ LIBS= \
+- -Wl,-Bstatic \
+    -l boost_system \
+    -l boost_filesystem \
+    -l boost_program_options \
+    -l boost_thread \
+    -l db_cxx \
+-   -l crypto \
+- -Wl,-Bdynamic \
+-   -l gthread-2.0
++   $(shell pkg-config --libs libcrypto) \
++   $(shell pkg-config --libs gthread-2.0)
+ 
+-DEFS=-D__WXGTK__ -DNOPCH -DFOURWAYSSE2
++DEFS=$(shell wx-config-2.9 --cxxflags) -DFOURWAYSSE2
+ DEBUGFLAGS=-g -D__WXDEBUG__
+ CFLAGS=-O2 -Wno-invalid-offsetof -Wformat $(DEBUGFLAGS) $(DEFS) $(INCLUDEPATHS)
+ HEADERS=headers.h strlcpy.h serialize.h uint256.h util.h key.h bignum.h base58.h \

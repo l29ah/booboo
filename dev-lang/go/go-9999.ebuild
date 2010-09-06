@@ -9,12 +9,12 @@ DESCRIPTION="The Go Programming Language"
 HOMEPAGE="http://golang.org/"
 SRC_URI=""
 EHG_REPO_URI="https://go.googlecode.com/hg/"
-EHG_REVISION="release"
+use experimental || EHG_REVISION="release"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="emacs vim-syntax"
+IUSE="emacs vim-syntax experimental"
 
 RESTRICT="test"
 
@@ -40,12 +40,13 @@ src_prepare() {
 	sed -i \
 		-e "/^GOBIN=/s:=.*:=/usr/bin:" \
 		-e "/MAKEFLAGS=/s:=.*:=${MAKEOPTS}:" \
-		src/Make.common src/Make.conf || die
-
-	sed -i \
-		-e "/^CFLAGS=/s:-O2:${CFLAGS}:" \
-		src/Make.conf || die
+		src/Make.common || die
 	
+	epatch "${FILESDIR}/portageize-makefile.patch"
+	
+	# We don't need nasty kludges that break things
+	sed -ie "s/QUOTED_//i" src/Make.*
+
 	case ${ARCH} in
 	x86)
 		GOARCH="386"
@@ -104,8 +105,8 @@ src_install() {
 	fi
 
 	if use vim-syntax ; then
-		insinto /usr/share/vim/vimfiles/plugin
-		doins "${S}"/misc/vim/go.vim || die
+		dodir /usr/share/vim/vimfiles/
+		cp -r "${S}"/misc/vim/* "$D/usr/share/vim/vimfiles/" || die
 	fi
 
 	doenvd "${ENVFILE}" || die

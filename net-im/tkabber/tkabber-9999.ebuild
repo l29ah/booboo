@@ -16,7 +16,7 @@ trayicon +shitfree"
 SRC_URI="shitfree? ( http://rain.ifmo.ru/~alirzaev/files/tkabber-shitfree.patch
 )"
 
-DEPEND="!net-im/tkabber
+DEPEND="
 	>=dev-lang/tcl-8.3.3
 	>=dev-lang/tk-8.3.3
 	>=dev-tcltk/tcllib-1.6

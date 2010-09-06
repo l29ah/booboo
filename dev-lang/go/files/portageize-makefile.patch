@@ -1,0 +1,17 @@
+--- src/Make.pkg_	2010-09-02 20:56:45.000000000 +0400
++++ src/Make.pkg	2010-09-02 20:58:01.000000000 +0400
+@@ -57,11 +57,11 @@
+ install: $(INSTALLFILES)
+ 
+ $(pkgdir)/$(TARG).a: _obj/$(TARG).a
+-	@test -d $(QUOTED_GOROOT)/pkg && mkdir -p $(pkgdir)/$(dir)
+-	cp _obj/$(TARG).a "$@"
++	@test -d $(QUOTED_GOROOT)/pkg && mkdir -p $(DESTDIR)/$(pkgdir)/$(dir)
++	cp _obj/$(TARG).a "$(DESTDIR)/$@"
+ 
+ _go_.$O: $(GOFILES) $(PREREQ)
+-	$(GC) -o $@ $(GOFILES)
++	$(GC) -I $(DESTDIR)/$(pkgdir) -o $@ $(GOFILES)
+ 
+ _gotest_.$O: $(GOFILES) $(GOTESTFILES) $(PREREQ)
+ 	$(GC) -o $@ $(GOFILES) $(GOTESTFILES)

@@ -1,0 +1,15 @@
+diff -r bad5542901e2 p/osusers.go
+--- a/p/osusers.go	Tue Aug 24 10:28:09 2010 -0600
++++ b/p/osusers.go	Thu Sep 02 21:55:40 2010 +0400
+@@ -4,9 +4,10 @@
+ 
+ package p
+ 
+-import "once"
+ import "sync"
+ 
++var once sync.Once;
++
+ type osUser struct {
+ 	uid int
+ }
