@@ -26,7 +26,7 @@ DEPEND="
 	ssl? ( >=dev-tcltk/tls-1.4.1 )
 	sound? ( dev-tcltk/snack )
 	trayicon? ( >=dev-tcltk/tktray-1.1 )
-	tkimg? ( >=dev-tcltk/tkimg-1.2 )"
+	tkimg? ( >dev-tcltk/tkimg-1.4.20100510 )" # segfaulty crap
 RDEPEND="${DEPEND}"
 
 LICENSE="GPL-2"
