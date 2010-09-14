@@ -4,3 +4,4 @@
 
 inherit bitcoin
 
+KEYWORDS="~x86 ~amd64"
