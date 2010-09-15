@@ -11,11 +11,9 @@ Peer-to-peer (P2P) means that there is no central authority to issue new money o
 HOMEPAGE="http://www.bitcoin.org/"
 if [[ "${PV}" == "9999" ]]; then
 	ESVN_REPO_URI="https://bitcoin.svn.sourceforge.net/svnroot/bitcoin/trunk"
-	KEYWORDS=""
 	inherit subversion
 else
 	SRC_URI="mirror://sourceforge/project/$PN/Bitcoin/$P/$P-linux.tar.gz"
-	KEYWORDS="~x86 ~amd64"
 	S="$WORKDIR/$P/src"
 fi
 
