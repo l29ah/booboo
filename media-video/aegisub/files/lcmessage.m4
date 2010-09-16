@@ -1,1 +1,0 @@
-/usr/share/aclocal/lcmessage.m4

@@ -8,7 +8,6 @@ inherit eutils
 
 DESCRIPTION="K is a proprietary array processing language."
 HOMEPAGE="http://kx.com/"
-SRC_URI="$PN.zip"
 
 LICENSE="kdb+"
 SLOT="0"
@@ -19,16 +18,18 @@ IUSE="readline"
 DEPEND="app-arch/unzip"
 RDEPEND="readline? ( app-misc/rlwrap )"
 
+fn=$PN.zip
+
 pkg_nofetch() {
     eerror "Please go to:"
     eerror "  ${HOMEPAGE}"
     eerror "select your platform and download kdb+"
-    eerror "Then after downloading name it \"$SRC_URI\" and put it in:"
+    eerror "Then after downloading name it \"$fn\" and put it in:"
     eerror "  ${DISTDIR}"
 }
 
 src_unpack() {
-	unzip "${DISTDIR}/$SRC_URI"
+	unzip "${DISTDIR}/$fn"
 }
 
 src_install() {
