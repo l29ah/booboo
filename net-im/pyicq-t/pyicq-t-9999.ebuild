@@ -2,17 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-im/pyicq-t/pyicq-t-0.8.1.ebuild,v 1.1 2008/12/19 18:00:44 griffon26 Exp $
 
-NEED_PYTHON=2.3
-
 inherit eutils multilib python git
 
 MY_P="${P/pyicq-t/pyicqt}"
 
 DESCRIPTION="Python based jabber transport for ICQ"
 HOMEPAGE="http://code.google.com/p/pyicqt/"
-#SRC_URI="http://pyicqt.googlecode.com/files/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
-#ESVN_REPO_URI="http://pyicqt.googlecode.com/svn/trunk"
 EGIT_REPO_URI="git://gitorious.org/pyicqt/mainline.git"
 EGIT_BRANCH="unstable"
 
@@ -28,10 +24,6 @@ RDEPEND="${DEPEND}
 	>=dev-python/twisted-web-0.5.0
 	webinterface? ( >=dev-python/nevow-0.4.1 )
 	>=dev-python/imaging-1.1"
-
-#src_unpack() {
-#	unpack ${A} && cd "${S}" || die "unpack failed"
-#}
 
 src_install() {
 	local inspath
