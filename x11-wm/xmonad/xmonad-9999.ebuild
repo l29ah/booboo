@@ -28,6 +28,7 @@ SAMPLE_CONFIG_LOC="man"
 
 src_prepare() {
 	sed -i 's/revertToPointerRoot/revertToParent/' XMonad/Operations.hs
+	epatch "$FILESDIR/$PN-check-repeat.patch"
 }
 
 src_install() {
