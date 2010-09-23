@@ -1,0 +1,36 @@
+diff -Naur openl2tp-1.7.orig//Makefile openl2tp-1.7/Makefile
+--- openl2tp-1.7.orig//Makefile	2010-03-18 12:04:47.000000000 +0300
++++ openl2tp-1.7/Makefile	2010-07-28 01:53:08.518006868 +0400
+@@ -142,7 +142,7 @@
+ 
+ CPPFLAGS=		$(CPPFLAGS.l2tptest) $(CPPFLAGS-y)
+ CFLAGS=			-I. -Iusl -Icli -isystem $(KERNEL_BLDDIR)/include \
+-				-isystem $(KERNEL_SRCDIR)/include -MMD -Wall -Werror $(CPPFLAGS) $(CPPFLAGS.dmalloc) -DSYS_LIBDIR=$(SYS_LIBDIR)
++				-isystem $(KERNEL_SRCDIR)/include -MMD -Wall $(CPPFLAGS) $(CPPFLAGS.dmalloc) -DSYS_LIBDIR=$(SYS_LIBDIR)
+ LDFLAGS.l2tpd=		-Wl,-E -L. -Lusl -lusl -ldl $(LIBS.dmalloc) -lc
+ LDFLAGS.l2tpconfig=	-Lcli -lcli -lreadline $(LIBS.dmalloc) $(READLINE_LDFLAGS) -lc
+ 
+diff -Naur openl2tp-1.7.orig//cli/Makefile openl2tp-1.7/cli/Makefile
+--- openl2tp-1.7.orig//cli/Makefile	2008-02-03 17:55:30.000000000 +0300
++++ openl2tp-1.7/cli/Makefile	2010-07-28 01:53:28.526114781 +0400
+@@ -7,7 +7,7 @@
+ 
+ LDFLAGS.cli_test=	-L.. -L. $(READLINE_LDFLAGS) -lcli -lusl -lreadline -lcurses -lc
+ 
+-CFLAGS=			$(CFLAGS.optimize) -MMD -Wall -Werror -I.. $(READLINE_CFLAGS)
++CFLAGS=			$(CFLAGS.optimize) -MMD -Wall -I.. $(READLINE_CFLAGS)
+ 
+ .PHONY:			all test clean
+ 
+diff -Naur openl2tp-1.7.orig//usl/Makefile openl2tp-1.7/usl/Makefile
+--- openl2tp-1.7.orig//usl/Makefile	2008-02-24 14:52:50.000000000 +0300
++++ openl2tp-1.7/usl/Makefile	2010-07-28 01:53:20.782451442 +0400
+@@ -14,7 +14,7 @@
+ endif
+ 
+ CPPFLAGS+=		$(CFLAGS.optimize) -g
+-CFLAGS=			-I. -MMD -Wall -Werror $(CPPFLAGS) $(CPPFLAGS.dmalloc)
++CFLAGS=			-I. -MMD -Wall $(CPPFLAGS) $(CPPFLAGS.dmalloc)
+ 
+ .PHONY:			all test clean
+ 
