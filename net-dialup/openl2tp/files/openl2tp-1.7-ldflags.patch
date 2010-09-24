@@ -1,0 +1,61 @@
+diff -Naur openl2tp-1.7.werror//Makefile openl2tp-1.7/Makefile
+--- openl2tp-1.7.werror//Makefile	2010-07-29 23:33:31.000000000 +0400
++++ openl2tp-1.7/Makefile	2010-07-29 23:54:01.255297266 +0400
+@@ -258,10 +258,10 @@
+ 			etags $(wildcard *.c) $(wildcard *.h)
+ 
+ openl2tpd:		$(L2TPD_SRCS.o)
+-			$(CC) -o $@ $^ $(LDFLAGS.l2tpd)
++			$(CC) $(LDFLAGS) -o $@ $^ $(LDFLAGS.l2tpd)
+ 
+ l2tpconfig:		$(L2TPCONFIG_SRCS.o)
+-			$(CC) -o $@ $^ $(LDFLAGS.l2tpconfig)
++			$(CC) $(LDFLAGS) -o $@ $^ $(LDFLAGS.l2tpconfig)
+ 
+ %.o:	%.c
+ 			$(CC) -c $(CFLAGS) $< -o $@
+diff -Naur openl2tp-1.7.werror//cli/Makefile openl2tp-1.7/cli/Makefile
+--- openl2tp-1.7.werror//cli/Makefile	2010-07-29 23:33:31.000000000 +0400
++++ openl2tp-1.7/cli/Makefile	2010-07-29 23:49:49.731465337 +0400
+@@ -19,7 +19,7 @@
+ 			$(AR) rus $@ $^
+ 
+ cli_test:		$(CLI_SRCS_TEST.o) libcli.a
+-			$(CC) -o $@ $(CLI_SRCS_TEST.o) $(LDFLAGS.cli_test)
++			$(CC) $(LDFLAGS) -o $@ $(CLI_SRCS_TEST.o) $(LDFLAGS.cli_test)
+ 
+ clean:
+ 	$(RM) $(CLI_SRCS.o) $(CLI_SRCS_TEST.o) libcli.a cli_test $(wildcard *.d)
+diff -Naur openl2tp-1.7.werror//plugins/Makefile openl2tp-1.7/plugins/Makefile
+--- openl2tp-1.7.werror//plugins/Makefile	2010-03-19 17:22:53.000000000 +0300
++++ openl2tp-1.7/plugins/Makefile	2010-07-29 23:51:19.412622463 +0400
+@@ -1,7 +1,7 @@
+ CFLAGS	:= $(CFLAGS.optimize) -MMD -Wall \
+ 	-isystem $(KERNEL_BLDDIR)/include -isystem $(KERNEL_SRCDIR)/include \
+ 	-I. -I.. -I../usl -fPIC $(EXTRA_CFLAGS)
+-LDFLAGS	:= -shared
++LDFLAGS.plugins	:= -shared
+ 
+ PLUGINS.c:=	ppp_unix.c ppp_null.c ipsec.c event_sock.c
+ 
+@@ -21,7 +21,7 @@
+ 		$(RM) $(PLUGINS.so) $(wildcard *.o) $(wildcard *.d) $(SRC.generated)
+ 
+ %.so: %.c
+-		$(CC) -o $@ $(LDFLAGS) $(CFLAGS) $<
++		$(CC) $(LDFLAGS) -o $@ $(LDFLAGS.plugins) $(CFLAGS) $<
+ 
+ install:	all
+ 		$(INSTALL) -d $(DESTDIR)$(SYS_LIBDIR)/openl2tp
+diff -Naur openl2tp-1.7.werror//usl/Makefile openl2tp-1.7/usl/Makefile
+--- openl2tp-1.7.werror//usl/Makefile	2010-07-29 23:33:31.000000000 +0400
++++ openl2tp-1.7/usl/Makefile	2010-07-29 23:53:17.028110952 +0400
+@@ -26,7 +26,7 @@
+ 			$(AR) rus $@ $^
+ 
+ usl_test:		$(USL_SRCS_TEST.o) libusl.a
+-			$(CC) -o $@ $(USL_SRCS_TEST.o) $(LDFLAGS.usl_test)
++			$(CC) $(LDFLAGS) -o $@ $(USL_SRCS_TEST.o) $(LDFLAGS.usl_test)
+ 
+ clean:
+ 			-$(RM) $(USL_SRCS.o) $(USL_SRCS_TEST.o) libusl.a usl_test $(wildcard *.d)
