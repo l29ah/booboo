@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>dev-lang</herd>
+<maintainer>
+  <email>lynX@are.you.already.psyced.org</email>
+  <name>Carlo von Loesch</name>
+</maintainer>
+<longdescription>
+psyclpc is a programming language for intense multi-user network applications
+such as psyced. it's a recent fork of LDMud with some features and many
+bug fixes. we kept it compatible to LDMud, so you can run a MUD with it, too.
+
+LDMud itself is a continuation of the Amylaar LPMud Gamedriver 3.1.2.
+</longdescription>
+</pkgmetadata>
