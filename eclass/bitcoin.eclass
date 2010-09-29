@@ -30,6 +30,7 @@ RDEPEND="${DEPEND}"
 bitcoin_src_prepare() {
 	epatch "$FILESDIR/$PN-${PATCH_VERSION:-$PV}-Makefile.patch" # Not the best way to deal with	changing stuff; /r/ some sed mage
 	ln -s makefile.unix Makefile
+	sed -i -e 's/g++/$(CXX)/g' Makefile
 }
 
 bitcoin_src_compile() {
