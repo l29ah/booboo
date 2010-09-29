@@ -1,0 +1,69 @@
+Fri Jul 16 03:28:24 MSD 2010  voker57@gmail.com
+  * Removed traces of XtractLazy
+diff -rN -u old-HaXml/Build.bat new-HaXml/Build.bat
+--- old-HaXml/Build.bat	2010-09-28 06:00:12.000000000 +0400
++++ new-HaXml/Build.bat	2010-09-28 06:00:16.000000000 +0400
+@@ -78,7 +78,7 @@
+ rem -- Build tools that come with HaXml --
+ :Tools
+ cd %SRC%\tools
+-for %%F in (Canonicalise  DtdToHaskell  MkOneOf  Validate  Xtract  CanonicaliseLazy  XtractLazy) DO %GHC% --make -cpp -i.. %%F -o %%F.exe
++for %%F in (Canonicalise  DtdToHaskell  MkOneOf  Validate  Xtract  CanonicaliseLazy) DO %GHC% --make -cpp -i.. %%F -o %%F.exe
+ cd ..
+ 
+ goto Exit
+diff -rN -u old-HaXml/HaXml.cabal new-HaXml/HaXml.cabal
+--- old-HaXml/HaXml.cabal	2010-09-28 06:00:12.000000000 +0400
++++ new-HaXml/HaXml.cabal	2010-09-28 06:00:16.000000000 +0400
+@@ -89,13 +89,6 @@
+   cpp-options: -DMYVERSION='\"1.21\"'
+   Main-Is: Xtract.hs
+ 
+-Executable XtractLazy
+-  GHC-Options: -Wall
+-  Extensions:  CPP
+-  Hs-Source-Dirs: src/tools, src
+-  cpp-options: -DMYVERSION='\"1.21\"'
+-  Main-Is: XtractLazy.hs
+-
+ Executable Validate
+   GHC-Options: -Wall
+   Extensions:  CPP
+diff -rN -u old-HaXml/Makefile new-HaXml/Makefile
+--- old-HaXml/Makefile	2010-09-28 06:00:12.000000000 +0400
++++ new-HaXml/Makefile	2010-09-28 06:00:16.000000000 +0400
+@@ -41,7 +41,7 @@
+ TOOLSRCS = \
+ 	src/tools/DtdToHaskell.hs src/tools/Xtract.hs src/tools/Validate.hs \
+ 	src/tools/Canonicalise.hs src/tools/MkOneOf.hs \
+-	src/tools/CanonicaliseLazy.hs src/tools/XtractLazy.hs \
++	src/tools/CanonicaliseLazy.hs \
+ 	src/tools/XsdToHaskell.hs \
+ 
+ AUX =	configure Makefile src/Makefile src/pkg.conf docs/* examples/* \
+@@ -125,5 +125,5 @@
+ 	cd examples;    rm -f *.hi *.o
+ realclean: clean
+ 	rm -f DtdToHaskell Xtract Validate Canonicalise MkOneOf
+-	rm -f XtractLazy CanonicaliseLazy
++	rm -f CanonicaliseLazy
+ 
+diff -rN -u old-HaXml/src/Makefile new-HaXml/src/Makefile
+--- old-HaXml/src/Makefile	2010-09-28 06:00:12.000000000 +0400
++++ new-HaXml/src/Makefile	2010-09-28 06:00:16.000000000 +0400
+@@ -35,13 +35,13 @@
+ 	Text/XML/HaXml/DtdToHaskell/Instance.hs \
+ 	tools/DtdToHaskell.hs tools/Xtract.hs tools/Validate.hs \
+  	tools/Canonicalise.hs tools/MkOneOf.hs \
+- 	tools/CanonicaliseLazy.hs tools/XtractLazy.hs \
++ 	tools/CanonicaliseLazy.hs \
+  	tools/XsdToHaskell.hs \
+ 
+ TOOLSET = \
+ 	../../DtdToHaskell$(EXE) ../../Xtract$(EXE) ../../Validate$(EXE) \
+ 	../../Canonicalise$(EXE) ../../MkOneOf$(EXE) \
+-	../../CanonicaliseLazy$(EXE) ../../XtractLazy$(EXE) \
++	../../CanonicaliseLazy$(EXE) \
+ 	../../XsdToHaskell$(EXE)
+ 
+ EXE = $(shell cat ../exe)
