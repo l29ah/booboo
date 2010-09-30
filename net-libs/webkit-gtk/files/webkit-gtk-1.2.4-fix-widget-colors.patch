@@ -1,0 +1,19 @@
+--- webkit-1.2.4.old/WebCore/platform/gtk/RenderThemeGtk.cpp	2009-05-11 12:27:40.523120385 +0300
++++ webkit-1.2.4/WebCore/platform/gtk/RenderThemeGtk.cpp	2009-05-11 12:27:27.969801589 +0300
+@@ -272,6 +272,7 @@ void RenderThemeGtk::adjustButtonStyle(C
+         style->resetBorder();
+         style->setHeight(Length(Auto));
+         style->setWhiteSpace(PRE);
++        style->setColor(gtkTreeView()->style->text[GTK_STATE_NORMAL]);
+         setButtonPadding(style);
+     } else {
+         // FIXME: This should not be hard-coded.
+@@ -306,6 +307,8 @@ void RenderThemeGtk::adjustTextFieldStyl
+     style->resetPadding();
+     style->setHeight(Length(Auto));
+     style->setWhiteSpace(PRE);
++    style->setColor(gtkEntry()->style->text[GTK_STATE_NORMAL]);
++    style->setBackgroundColor(gtkEntry()->style->base[GTK_STATE_NORMAL]);
+     adjustMozillaStyle(this, style, MOZ_GTK_ENTRY);
+ }
+ 
