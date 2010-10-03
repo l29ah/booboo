@@ -29,6 +29,7 @@ DEPEND="${RDEPEND}
 use doc && DOCS="AUTHORS ChangeLog NEWS README"
 
 src_prepare() {
+	sed -i -e 's/-Werror//' acinclude.m4
 	use doc && gtkdocize || epatch $FILESDIR/$PN-nodocs.patch
 	eautoreconf
 }
