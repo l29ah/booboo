@@ -9,7 +9,7 @@ DESCRIPTION="Video bios execution tracing widget"
 HOMEPAGE="http://cgit.freedesktop.org/~stuart/vbtracetool/"
 EGIT_REPO_URI="git://anongit.freedesktop.org/~stuart/vbtracetool"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
