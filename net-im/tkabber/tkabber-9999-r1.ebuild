@@ -13,8 +13,10 @@ DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in
 HOMEPAGE="http://tkabber.jabber.ru/"
 IUSE="contrib -crypt doc examples plugins 3rd-party-plugins ssl sound tkimg
 trayicon +shitfree"
-SRC_URI="shitfree? ( http://rain.ifmo.ru/~alirzaev/files/tkabber-shitfree.patch
-)"
+sfn="tkabber-shitfree-$PR.patch"
+SRC_URI="shitfree? (
+	http://rain.ifmo.ru/~alirzaev/files/$sfn
+				   )"
 
 DEPEND="
 	>=dev-lang/tcl-8.3.3
@@ -51,7 +53,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${DISTDIR}"/tkabber-shitfree.patch
+	epatch "${DISTDIR}/$sfn"
 }
 
 src_compile() {
@@ -139,14 +141,6 @@ src_install() {
 			|| die "Can't chdir to ${OFFICIAL_TKABBER_PLUGINS_DIR}"
 		newdoc README README.plugins
 		newdoc ChangeLog ChangeLog.plugins
-
-		cd "${S}" || die "Can't chdir to ${S}"
-
-		cat <<-EOF > 99tkabber
-		TKABBER_SITE_PLUGINS="${TKABBER_SITE_PLUGINS}"
-		EOF
-
-		doenvd 99tkabber || die "Can't install env-file"
 	fi
 }
 
