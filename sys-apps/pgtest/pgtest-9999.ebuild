@@ -19,5 +19,11 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	# Lacks "watch" binary because of the naming conflict
-	dobin peek poke mppeek lmppeek strand strscan mpscan lmpscan timer bitscan strseek statwatch 3peek 3poke scan 3scan cscan pgpeek pgsub dsub peekfb peekfc pokefb peekin
+	for b in peek poke mppeek lmppeek strand strscan mpscan lmpscan timer \
+	bitscan strseek statwatch 3peek 3poke scan 3scan cscan pgpeek pgsub dsub \
+	peekfb peekfc pokefb peekin;
+	do
+		mv "$b" "pgtest-$b"
+		dobin "pgtest-$b"
+	done
 }
