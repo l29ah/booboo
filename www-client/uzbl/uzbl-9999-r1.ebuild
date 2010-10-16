@@ -7,20 +7,15 @@ EAPI="2"
 inherit base git
 
 IUSE=""
-EGIT_REPO_URI=${EGIT_REPO_URI:-"git://github.com/Dieterbe/uzbl.git"}
+EGIT_REPO_URI="git://github.com/bct/uzbl.git"
 KEYWORDS=""
-SRC_URI=""
-IUSE="experimental"
-use experimental &&
-	EGIT_BRANCH="experimental" &&
-	EGIT_COMMIT="experimental"
 
 DESCRIPTION="Web interface tools which adhere to the unix philosophy."
 HOMEPAGE="http://www.uzbl.org"
 
 LICENSE="LGPL-2.1 MPL-1.1"
 SLOT="0"
-IUSE+=" +browser helpers +tabbed vim-syntax"
+IUSE="+browser helpers +tabbed vim-syntax"
 
 COMMON_DEPEND="
 	>=dev-libs/icu-4.0.1
