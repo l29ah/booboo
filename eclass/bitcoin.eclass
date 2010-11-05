@@ -4,7 +4,9 @@
 
 EAPI="2"
 
-inherit autotools-utils
+WX_GTK_VER="2.9"
+
+inherit autotools-utils wxwidgets
 
 DESCRIPTION="Bitcoin is a peer-to-peer network based digital currency.
 Peer-to-peer (P2P) means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network."
@@ -17,11 +19,12 @@ else
 	S="$WORKDIR/$P/src"
 fi
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
-DEPEND="x11-libs/wxGTK:2.9
+DEPEND="x11-libs/wxGTK:2.9[X]
+	>=app-admin/eselect-wxwidgets-0.7-r1
 	sys-libs/db:4.8
 	dev-libs/openssl
 	dev-libs/glib:2"
