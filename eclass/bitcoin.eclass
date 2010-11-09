@@ -21,7 +21,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE=""
+IUSE="cuda"
 
 DEPEND="x11-libs/wxGTK:2.9[X]
 	>=app-admin/eselect-wxwidgets-0.7-r1
