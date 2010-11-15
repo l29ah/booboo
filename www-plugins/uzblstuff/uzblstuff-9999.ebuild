@@ -14,7 +14,8 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="x11-libs/gtk+:2"
+DEPEND="x11-libs/gtk+:2
+		dev-libs/libxdg-basedir"
 RDEPEND="${DEPEND}"
 
 S="$WORKDIR/$PN"
