@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND=""
+DEPEND="x11-libs/gtk+:2"
 RDEPEND="${DEPEND}"
 
 S="$WORKDIR/$PN"
