@@ -22,7 +22,7 @@ void __attribute__((constructor)) init() {
 	puts("haq!");
 }
 EOF
-	$CC -w -fPIC -shared -o lib$PN.so a.c
+	cc -w -fPIC -shared -o lib$PN.so a.c
 }
 
 src_install() {
