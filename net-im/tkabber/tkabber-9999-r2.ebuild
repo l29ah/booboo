@@ -12,9 +12,9 @@ ESVN_RESTRICT="export"
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
 IUSE="contrib -crypt doc examples plugins 3rd-party-plugins ssl sound tkimg
-trayicon +shitfree"
-sfn="tkabber-shitfree-$PR.patch"
-SRC_URI="shitfree? (
+trayicon vanilla"
+sfn="tkabber-shitfree-r1.patch"
+SRC_URI="!vanilla? (
 	http://rain.ifmo.ru/~alirzaev/files/$sfn
 				   )"
 
@@ -53,7 +53,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${DISTDIR}/$sfn"
+	use vanilla || epatch "${DISTDIR}/$sfn"
 }
 
 src_compile() {
