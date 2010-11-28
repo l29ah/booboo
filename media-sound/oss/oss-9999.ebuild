@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=3
+
 inherit mercurial
 
 EHG_REPO_URI="http://opensound.hg.sourceforge.net:8000/hgroot/opensound/opensound"
@@ -22,22 +24,24 @@ RDEPEND=">=x11-libs/gtk+-2"
 S="${WORKDIR}/build"
 
 src_unpack() {
-	mercurial_src_unpack
+	S="$WORKDIR/opensound" mercurial_src_unpack
 	mkdir "${WORKDIR}/build"
 
 	einfo "Replacing init script with gentoo friendly one..."
 	cp "${FILESDIR}/oss" "${WORKDIR}/opensound/setup/Linux/oss/etc/S89oss"
 }
 
-src_compile() {
+src_configure() {
 	einfo "Running configure..."
 	cd "${WORKDIR}/build"
-	"${WORKDIR}/opensound/configure" || die "configure failed"
+	"$WORKDIR/opensound/configure" || die "configure failed"
 
 	einfo "Stripping compiler flags..."
 	sed -i -e 's/-D_KERNEL//' \
-		"${WORKDIR}/build/Makefile"
+		"${WORKDIR}/build/Makefile" || die 'sed failed'
+}
 
+src_compile() {
 	emake build || die "emake build failed"
 }
 
