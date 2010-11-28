@@ -53,6 +53,7 @@ pkg_postinst() {
 	elog ""
 	elog "If you are upgrading, run"
 	elog "# /etc/init.d/oss restart "
+	elog 'and may need to remove /lib/modules/$KERNEL_VERSION/kernel/oss/'
 	elog ""
 	elog "Enjoy OSSv4 !"
 }
