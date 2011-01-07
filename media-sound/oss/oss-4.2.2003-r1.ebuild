@@ -61,14 +61,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "PLEASE NOTE:"
-	elog ""
-	elog "In order to use OSSv4 you must run"
-	elog "# /etc/init.d/oss start "
-	elog ""
-	elog "If you are upgrading from a previous build of OSSv4 you must run"
-	elog "# /etc/init.d/oss restart "
-	elog 'and may need to remove /lib/modules/$KERNEL_VERSION/kernel/oss/'
-	elog ""
-	elog "Enjoy OSSv4 !"
+	ewarn "In order to use OSSv4 you must run"
+	ewarn "# /etc/init.d/oss start "
+	ewarn "If you are upgrading from a previous build of OSSv4 you must run"
+	ewarn "# /etc/init.d/oss restart "
+	ewarn 'and may need to remove /lib/modules/$KERNEL_VERSION/kernel/oss/'
 }
