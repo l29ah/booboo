@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="gtk salsa"
+IUSE="gtk salsa midi"
 
 RESTRICT="mirror"
 
@@ -40,7 +40,8 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf="--enable-libsalsa=$(use salsa && echo YES || echo NO)"
+	local myconf="$(use salsa && echo  || echo --enable-libsalsa=NO) \
+		--config-midi=$(use midi && echo YES || echo NO)"
 	
 	cd "${WORKDIR}/build"
 
