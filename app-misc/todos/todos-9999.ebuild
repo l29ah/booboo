@@ -23,4 +23,5 @@ DEPEND=">=dev-lang/ghc-6.12.1
 	dev-haskell/glob
 	dev-haskell/time
 	dev-haskell/regex-pcre
-	dev-haskell/data-hash"
+	dev-haskell/data-hash
+	dev-haskell/dyre"
