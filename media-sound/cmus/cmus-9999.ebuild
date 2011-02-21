@@ -16,8 +16,8 @@ EGIT_REPO_URI="git://gitorious.org/cmus/cmus.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86 ~x86-fbsd"
-IUSE="aac alsa ao audioscrobbler debug examples flac mad mikmod modplug mp4 musepack oss
-pidgin pulseaudio unicode vorbis wavpack wma zsh-completion"
+IUSE="aac alsa ao audioscrobbler debug examples ffmpeg flac mad mikmod modplug mp4 musepack oss
+pidgin pulseaudio unicode vorbis wavpack zsh-completion"
 
 DEPEND="sys-libs/ncurses[unicode?]
 	aac? ( media-libs/faad2 )
@@ -32,7 +32,7 @@ DEPEND="sys-libs/ncurses[unicode?]
 	pulseaudio? ( media-sound/pulseaudio )
 	vorbis? ( >=media-libs/libvorbis-1.0 )
 	wavpack? ( media-sound/wavpack )
-	wma? ( >=media-video/ffmpeg-0.4.9_p20080326 )"
+	ffmpeg? ( media-video/ffmpeg )"
 RDEPEND="${DEPEND}
 	zsh-completion? ( app-shells/zsh )
 	pidgin? ( net-im/pidgin
@@ -49,6 +49,7 @@ my_config() {
 src_unpack() {
 	git_src_unpack || die
 	use audioscrobbler && epatch "${FILESDIR}/cmus_audioscrobblerBETA41-githead.diff"
+	use mp4 && sed -i -e 's/"m4a",//' ${S}/mp4.c
 }
 
 src_configure() {
@@ -65,7 +66,8 @@ src_configure() {
 	my_config wavpack CONFIG_WAVPACK
 	my_config mp4 CONFIG_MP4
 	my_config aac CONFIG_AAC
-	my_config wma CONFIG_FFMPEG
+	my_config ffmpeg CONFIG_FFMPEG
+	my_config ffmpeg USE_FALLBACK_IP
 	my_config pulseaudio CONFIG_PULSE
 	my_config alsa CONFIG_ALSA
 	my_config ao CONFIG_AO
