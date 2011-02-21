@@ -4,10 +4,9 @@
 
 EAPI=3
 
-ECVS_SERVER="qgo.cvs.sourceforge.net:/cvsroot/qgo"
-ECVS_MODULE="qgo2"
+inherit games subversion qt4-r2 eutils
 
-inherit games cvs qt4-r2 eutils
+ESVN_REPO_URI="https://qgo.svn.sourceforge.net/svnroot/qgo/trunk"
 
 DESCRIPTION="qGo is a full featured SGF editor and Go Client."
 HOMEPAGE="http://qgo.sourceforge.net/"
@@ -25,16 +24,15 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}"
 
-src_unpack() {
-	cvs_src_unpack
-}
+PATCHES=( "${FILESDIR}/qgo2.patch"
+	"${FILESDIR}/qt-4.7.patch" )
 
-src_prepare() {
-	epatch ${FILESDIR}/qgo2.patch
+src_unpack() {
+	subversion_src_unpack
 }
 
 src_configure() {
-	eqmake4 qgo2.pro
+	eqmake4 qgo.pro
 }
 
 src_install() {
