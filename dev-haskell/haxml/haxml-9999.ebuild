@@ -17,4 +17,4 @@ IUSE=""
 DEPEND=">=dev-lang/ghc-6.6.1
 		>=dev-haskell/cabal-1.2
 		>=dev-haskell/polyparse-1.2"
-
+RDEPEND=''
