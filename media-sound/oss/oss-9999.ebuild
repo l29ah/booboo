@@ -49,6 +49,9 @@ src_install() {
 	newinitd "${FILESDIR}"/oss oss
 	cd "${WORKDIR}/build"
 	cp -R prototype/* "${D}"
+
+	echo 'CONFIG_PROTECT="$CONFIG_PROTECT /usr/lib/oss/conf/"' > 99oss
+	doenvd 99oss || die "doenvd failed"
 }
 
 pkg_postinst() {
