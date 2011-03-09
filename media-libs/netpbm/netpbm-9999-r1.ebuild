@@ -13,7 +13,7 @@ ESVN_REPO_URI='http://netpbm.svn.sourceforge.net/svnroot/netpbm/advanced'
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="jbig jpeg jpeg2k png rle svga tiff X xml zlib"
+IUSE="jbig jpeg jpeg2k png rle svga tiff X xml zlib +doc"
 
 RDEPEND="jpeg? ( virtual/jpeg )
 	jpeg2k? ( media-libs/jasper )
@@ -122,6 +122,17 @@ src_configure() {
 src_compile() {
 	emake -j1 pm_config.h version.h manual_importinc || die #149843
 	emake || die
+	r="$PWD"
+	use doc && {
+		einfo Downloading man pages
+		mkdir netpbmdoc
+		cd netpbmdoc
+		# FIXME
+		wget --recursive --relative http://netpbm.sourceforge.net/doc/
+		cd netpbm.sourceforge.net/doc
+		emake USERGUIDE=. MAKEMAN="$r/buildtools/makeman" \
+			-f "$r/buildtools/manpage.mk" manpages
+	}
 }
 
 src_install() {
@@ -138,8 +149,14 @@ src_install() {
 	mv "${D}"/usr/man "${D}"/usr/share/ || die
 	mv "${D}"/usr/misc "${D}"/usr/share/netpbm || die
 
-	dodoc README
-	cd doc
-	GLOBIGNORE='*.html:.*' dodoc *
-	dohtml -r .
+	use doc && {
+		dodoc README
+		cd doc
+		GLOBIGNORE='*.html:.*' dodoc *
+		dohtml -r .
+
+		cd ../netpbmdoc/netpbm.sourceforge.net/doc
+		sed -i -e 's#\.gz##;s/gzip/cat/' "$r/buildtools/manpage.mk"
+		emake MANDIR="${ED}"/usr/share/man -f "$r/buildtools/manpage.mk" installman
+	}
 }
