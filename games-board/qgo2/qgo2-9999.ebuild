@@ -24,8 +24,7 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}"
 
-PATCHES=( "${FILESDIR}/qgo2.patch"
-	"${FILESDIR}/qt-4.7.patch" )
+PATCHES=( "${FILESDIR}/qgo2.patch" )
 
 src_unpack() {
 	subversion_src_unpack
