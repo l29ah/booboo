@@ -142,6 +142,8 @@ src_install() {
 		newdoc README README.plugins
 		newdoc ChangeLog ChangeLog.plugins
 	fi
+	# Remove the fucking stupid shit
+	use vanilla || rm -rf "$D/usr/share/tkabber/plugins/chat/shuffle.tcl" "$D/usr/share/tkabber/site-plugins/flip" 
 }
 
 pkg_postinst() {
