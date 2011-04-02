@@ -1,0 +1,15 @@
+--- plan9/src/cmd/mkfile	2011-03-20 08:31:28.000000000 +0000
++++ plan9.new/src/cmd/mkfile	2011-03-20 08:46:26.000000000 +0000
+@@ -1,10 +1,10 @@
+ <$PLAN9/src/mkhdr
+ 
+-TARG=`ls *.[cy] *.lx | egrep -v "\.tab\.c$|^x\." | sed 's/\.[cy]//; s/\.lx//'`
++TARG=`ls *.[cy] | egrep -v "\.tab\.c$|^x\." | sed 's/\.[cy]//; s/\.lx//'`
+ 
+ <$PLAN9/src/mkmany
+ 
+-BUGGERED='CVS|faces|factotum|lp|ip|mailfs|upas|vncv|mnihongo|mpm|index|u9fs|secstore|smugfs'
++BUGGERED='CVS|faces|factotum|lp|ip|mailfs|upas|vncv|mnihongo|mpm|index|u9fs|secstore|smugfs|grap|pic|tpic'
+ DIRS=lex `ls -l |sed -n 's/^d.* //p' |egrep -v "^($BUGGERED)$"|egrep -v '^lex$'`
+ 
+ <$PLAN9/src/mkdirs

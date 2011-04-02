@@ -1,0 +1,11 @@
+--- plan9/src/cmd/9660srv/main.c	2009-12-11 19:18:18.000000000 +0200
++++ plan9.new/src/cmd/9660srv/main.c	2009-12-11 19:18:43.000000000 +0200
+@@ -38,7 +38,7 @@
+ uchar mdata[Maxiosize];
+ char fdata[Maxfdata];
+ uchar statbuf[STATMAX];
+-int errno;
++#include <errno.h>
+ 
+ 
+ extern Xfsub	*xsublist[];
