@@ -13,7 +13,7 @@ DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in
 HOMEPAGE="http://tkabber.jabber.ru/"
 IUSE="contrib -crypt doc examples plugins 3rd-party-plugins ssl sound tkimg
 trayicon vanilla"
-sfn="tkabber-shitfree-r1.patch"
+sfn="tkabber-shitfree-r2.patch"
 SRC_URI="!vanilla? (
 	http://rain.ifmo.ru/~alirzaev/files/$sfn
 				   )"
