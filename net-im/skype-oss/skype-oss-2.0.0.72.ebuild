@@ -10,7 +10,9 @@ DESCRIPTION="A P2P-VoiceIP client, statically linked against OSS binary"
 HOMEPAGE="http://www.skype.com/"
 
 FILENAME=${PN/-oss/}_static-${PV}-oss.tar.bz2
-SRC_URI="http://download.skype.com/linux/${FILENAME}"
+# Dead
+#SRC_URI="http://download.skype.com/linux/${FILENAME}"
+SRC_URI='http://kobyla.info/soft/distfiles/skype_static-2.0.0.72-oss.tar.bz2'
 
 LICENSE="skype-eula"
 SLOT="0"
