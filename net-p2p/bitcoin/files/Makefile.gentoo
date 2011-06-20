@@ -1,0 +1,59 @@
+# Copyright (c) 2009-2010 Satoshi Nakamoto, 2010 Myckel Habets
+# Distributed under the MIT/X11 software license, see the accompanying
+# file license.txt or http://www.opensource.org/licenses/mit-license.php.
+
+INCLUDEPATHS= \
+	 -I"/usr/include" \
+	 -I"/usr/include/crypto++" \
+	 -I"@@GENTOO_DB_INCLUDEDIR@@"
+LIBPATHS= \
+	 -L"/usr/lib"
+LIBS := ${LDFLAGS} -dead_strip \
+ -ldb_cxx -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -lgthread-2.0 -lssl -lcrypto -lcrypto++ -lgmp -ldl -lz @@GENTOO_UPNP@@
+DEBUGFLAGS=-g -DwxDEBUG_LEVEL=0
+WXLIBS=$(shell /usr/bin/wx-config --libs)
+WXDEFS=$(shell /usr/bin/wx-config --cxxflags) -DNOPCH
+CXXFLAGS := ${CXXFLAGS} -Wno-invalid-offsetof -Wformat @@GENTOO_CXXFLAGS_SSE2@@  @@GENTOO_CXXFLAGS_UPNP@@ -DUSE_SSL $(INCLUDEPATHS) 
+HEADERS=headers.h strlcpy.h serialize.h uint256.h util.h key.h bignum.h base58.h \
+    script.h db.h net.h irc.h main.h rpc.h uibase.h ui.h noui.h init.h
+
+all: bitcoind
+
+OBJS= \
+	obj/util.o \
+	obj/script.o \
+	obj/db.o \
+	obj/net.o \
+	obj/irc.o \
+	obj/main.o \
+	obj/rpc.o \
+	obj/init.o
+#	cryptopp/obj/sha.o 
+#	cryptopp/obj/cpu.o
+
+bitcoind: $(OBJS:obj/%=obj/nogui/%) obj/sha256.o
+	g++ $(CXXFLAGS) -o $@ $^ $(LIBPATHS) $(LIBS)
+
+bitcoin: $(OBJS) obj/ui.o obj/uibase.o obj/sha256.o
+	g++ $(CXXFLAGS) -o $@ $^ $(WXLIBS) $(LIBS)
+
+#cryptopp/obj/%.o: cryptopp/%.cpp
+#	g++ -c $(CXXFLAGS) -O3 -o $@ $<
+
+obj/%.o: %.cpp $(HEADERS)
+	g++ -c $(CXXFLAGS) $(WXDEFS) -DGUI -o $@ $<
+
+obj/sha256.o: sha256.cpp
+	g++ -c $(CXXFLAGS) @@GENTOO_SHA256_SSE2@@ -o $@ $<
+
+obj/nogui/%.o: %.cpp $(HEADERS)
+	g++ -c $(CXXFLAGS) -o $@ $<
+
+
+#clean:
+#	-rm -f bitcoin bitcoind
+#	-rm -f obj/*
+#	-rm -f obj/nogui/*
+#	-rm -f cryptopp/obj/*.o
+#	-rm -f headers.h.gch
+# end
