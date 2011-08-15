@@ -9,7 +9,7 @@ inherit eutils subversion cmake-utils
 
 DESCRIPTION="a PDF Viewer which behaviors like Vim"
 HOMEPAGE="http://code.google.com/p/apvlv/"
-SRC_URI=""
+SRC_URI="http://dump.bitcheese.net/files/yroveme/apvlv-bump-page-render-api.patch"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,7 +17,8 @@ KEYWORDS=""
 IUSE="debug djvu umd"
 
 RDEPEND=">=x11-libs/gtk+-2.6:2
-	>=app-text/poppler-0.12.3-r3[cairo]
+	>=app-text/poppler-0.12.3-r3[cairo,gdk]
+	<app-text/poppler-0.17[cairo,gdk]
 	djvu? ( app-text/djvu )
 	umd? ( unwritten/libumd )"
 DEPEND="${RDEPEND}
@@ -25,6 +26,11 @@ DEPEND="${RDEPEND}
 
 src_unpack() {
 	subversion_src_unpack
+}
+
+src_prepare() {
+	subversion_src_prepare
+	epatch "$DISTDIR/apvlv-bump-page-render-api.patch"
 }
 
 src_configure() {
