@@ -37,6 +37,8 @@ src_prepare() {
 	cp "${FILESDIR}/oss" "${S}/setup/Linux/oss/etc/S89oss"
 
 	sed -i -e 's/-Werror//' phpmake/Makefile.php setup/Linux/oss/build/install.sh setup/srcconf_linux.inc
+
+	epatch "${FILESDIR}/usb.patch"
 }
 
 src_configure() {
