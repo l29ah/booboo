@@ -18,7 +18,7 @@ DEPEND="
 	dev-lang/tk
 	>=dev-tcltk/tcllib-1.11
 	>=media-libs/libpng-1.4
-	media-libs/jpeg
+	virtual/jpeg
 	media-libs/tiff"
 RDEPEND="${DEPEND}"
 
