@@ -1,0 +1,72 @@
+--- configure.sh	2011-07-23 11:32:58.000000000 +0400
++++ configure.sh	2011-07-23 11:36:06.226984026 +0400
+@@ -23,7 +23,5 @@
+ echo ""
+ echo "Press enter to continue..."
+ 
+-read a
+-
+ # ------------------------------------------------------------------------------
+ # Parse command line arguments and specify default values
+@@ -83,12 +81,17 @@
+ MDDIR=$RESULT
+ echo "Successfully found MonoDevelop root directory." $MDDIR
+ 
+-PATHS=( /usr/lib/fsharp /usr/local/lib/fsharp /opt/mono/lib/mono/2.0 )
++PATHS=( /usr/lib/mono/4.0 /usr/lib/fsharp )
+ searchpaths "F#" FSharp.Core.dll PATHS[@]
+ FSDIR=$RESULT
+ echo "Successfully found F# root directory." $FSDIR
++
++PATHS=( /usr/lib/mono/mono-addins )
++searchpaths "Mono.Addins" Mono.Addins.dll PATHS[@]
++MADIR=$RESULT
++echo "Successfully found Mono.Addins root directory." $MADIR
+ 
+-PATHS=( /usr/lib/mono/2.0 /Library/Frameworks/Mono.framework/Versions/2.8/lib/mono/2.0 /opt/mono/lib/mono/2.0 )
++PATHS=( /usr/lib/mono/4.0 )
+ searchpaths "Mono" mscorlib.dll PATHS[@]
+ MONODIR=$RESULT
+ echo "Successfully found Mono root directory." $MONODIR
+@@ -135,3 +137,5 @@
+ sed "s,INSERT_CSHARP_COMPILER,$GMCS,g" Makefile.1 > Makefile.2
++sed "s,INSERT_MA_ROOT,$MADIR,g" Makefile.2 > Makefile.1
++rm Makefile.2
++mv Makefile.1 Makefile
+-rm Makefile.1
+-mv Makefile.2 Makefile
++
+--- Makefile.orig	2011-07-29 19:16:55.000000000 +0400
++++ Makefile.orig	2011-07-29 19:18:10.000000000 +0400
+@@ -7,3 +7,4 @@
+ MDROOT  = INSERT_MD_ROOT
++MAROOT  = INSERT_MA_ROOT
+ MONOBIN = INSERT_MONO_BIN
+ FSBIN = INSERT_FSHARP_BIN
+@@ -59,5 +60,5 @@
+ REFERENCES = \
+ 	-r:$(MONOBIN)/mscorlib.dll \
+-	-r:System.dll -r:System.Xml.dll \
++	-r:System.dll -r:System.Xml.dll -r:Mono.Posix.dll -r:$(MAROOT)/Mono.Addins.dll -r:Mono.Cairo.dll /codepage:65001 \
+ 	-r:$(MDBIN)/MonoDevelop.Core.dll \
+ 	-r:$(MDBIN)/MonoDevelop.Ide.dll \
+--- src/Services/FSharpCompiler.fs	2011-07-29 19:16:55.000000000 +0400
++++ src/Services/FSharpCompiler.fs	2011-07-29 19:18:10.000000000 +0400
+@@ -74,7 +74,7 @@
+ 
+   /// Wrapper type for the 'FSharp.Compiler.dll' assembly - expose types we use
+   type FSharpCompiler private () =      
+-    static let asm = Assembly.Load("FSharp.Compiler, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a19089b1c74d0809")
++    static let asm = Assembly.Load("FSharp.Compiler, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")
+     static member InteractiveChecker = asm.GetType("Microsoft.FSharp.Compiler.SourceCodeServices.InteractiveChecker")
+     static member IsResultObsolete = asm.GetType("Microsoft.FSharp.Compiler.SourceCodeServices.IsResultObsolete")
+     static member CheckOptions = asm.GetType("Microsoft.FSharp.Compiler.SourceCodeServices.CheckOptions")
+@@ -84,7 +84,7 @@
+     
+   /// Wrapper type for the 'FSharp.Compiler.Server.Shared.dll' assembly - expose types we use
+   type FSharpCompilerServerShared private () =      
+-    static let asm = Assembly.Load("FSharp.Compiler.Server.Shared, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a19089b1c74d0809")
++    static let asm = Assembly.Load("FSharp.Compiler.Server.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")
+     static member InteractiveServer = asm.GetType("Microsoft.FSharp.Compiler.Server.Shared.FSharpInteractiveServer")
+ 
+ // --------------------------------------------------------------------------------------
