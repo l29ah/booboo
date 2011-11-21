@@ -18,7 +18,7 @@ SRC_URI="http://${PN}.googlecode.com/files/${P}-source.zip -> ${P}.zip"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="
