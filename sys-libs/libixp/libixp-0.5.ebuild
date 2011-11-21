@@ -6,7 +6,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="Standalone client/server 9P library"
 HOMEPAGE="http://libs.suckless.org/"
-SRC_URI="http://code.suckless.org/dl/libs/${P}.tar.gz"
+SRC_URI="http://dl.suckless.org/libs/$P.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -23,7 +23,6 @@ src_unpack() {
 	sed -i \
 		-e "/^PREFIX/s|=.*|= ${D}/usr|" \
 		-e "/^ETC/s|=.*|= ${D}/etc|" \
-		-e "/^CFLAGS/s|=|+=|" \
 		-e "/^LDFLAGS/s|=|+=|" \
 		config.mk || die "sed failed"
 }
