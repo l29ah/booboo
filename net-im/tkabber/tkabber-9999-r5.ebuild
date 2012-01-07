@@ -13,10 +13,6 @@ DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in
 HOMEPAGE="http://tkabber.jabber.ru/"
 IUSE="contrib -crypt doc examples plugins 3rd-party-plugins ssl sound tkimg
 trayicon vanilla"
-sfn="tkabber-shitfree-r2.patch"
-SRC_URI="!vanilla? (
-	http://rain.ifmo.ru/~alirzaev/files/$sfn
-				   )"
 
 DEPEND="
 	>=dev-lang/tcl-8.3.3
@@ -53,7 +49,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	use vanilla || epatch "${DISTDIR}/$sfn"
+	use vanilla || epatch "${FILESDIR}/shitfree.patch"
 }
 
 src_compile() {
