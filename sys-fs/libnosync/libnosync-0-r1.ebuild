@@ -2,7 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
+
+inherit multilib-native
 
 DESCRIPTION="Places stubs instead of *sync() calls"
 HOMEPAGE="I don't need that!"
@@ -16,19 +18,21 @@ IUSE=""
 DEPEND="sys-devel/gcc"
 RDEPEND="${DEPEND}"
 
-src_compile() {
+multilib-native_src_compile_internal() {
 	cat > libnosync.c << EOF
 void sync(){}
 int fsync(int a){return 0;}
 int fdatasync(int a){return 0;}
 EOF
-	${CC:-cc} $CFLAGS -fPIC -s -Wall -shared -o libnosync.so libnosync.c
-	echo /usr/lib/libnosync.so > ld.so.preload
+	mkdir $CHOST
+	cd $CHOST
+	${CC:-cc} $CFLAGS -fPIC -s -Wall -shared -o libnosync.so ../libnosync.c
+	#echo libnosync.so > ld.so.preload
 }
 
-src_install() {
-	insinto /etc
-	doins ld.so.preload
+multilib-native_src_install_internal() {
+	#insinto /etc
+	#doins ld.so.preload
+	cd $CHOST
 	dolib.so libnosync.so
 }
-
