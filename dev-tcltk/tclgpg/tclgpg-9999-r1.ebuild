@@ -4,44 +4,42 @@
 
 EAPI=2
 
-inherit eutils autotools subversion
+ESVN_REPO_URI="http://tclgpg.googlecode.com/svn/trunk/"
+
+inherit autotools subversion
 
 DESCRIPTION="Tcl interface to GNU Privacy Guard with interface similar to TclGPGME."
 HOMEPAGE="http://code.google.com/p/tclgpg/"
 SRC_URI=""
-ESVN_REPO_URI="http://tclgpg.googlecode.com/svn/trunk/"
 
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
+IUSE="doc helper threads vanilla"
 
-IUSE="helper threads doc"
 
-DEPEND="app-crypt/gnupg
-	dev-lang/tcl
+RDEPEND="app-crypt/gnupg
+	dev-lang/tcl[threads]
 	!helper? ( dev-tcltk/tclx )"
 
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	dev-tcltk/tcllib"
 
 src_prepare() {
-	eautoconf || die "eautoconf failed"
+	use vanilla || epatch "$FILESDIR/$PN-fix-keyexpired.patch"
+	eautoreconf
 }
 
 src_configure() {
 	econf \
 		$(use_enable helper c-helper) \
-		$(use_enable threads) \
-		|| die "econf failed"
-}
-
-src_compile() {
-	emake || die "emake failed"
+		$(use_enable threads)
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "emake install failed"
+	emake DESTDIR="${D}" install || die
+	dodoc ChangeLog || die
 	if use doc ; then
 		dohtml doc/gpg.html || die
 	fi
-	dodoc ChangeLog || die
 }
