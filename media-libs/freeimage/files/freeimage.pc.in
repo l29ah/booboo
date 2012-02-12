@@ -1,0 +1,10 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=${exec_prefix}/@LIBDIR@
+
+Name: @PACKAGENAME@
+Description: @DESCRIPTION@
+Version: @VERSION@
+Requires: @REQUIRES@
+Libs: @LIBS@
+Libs.private: @EXTLIBS@
