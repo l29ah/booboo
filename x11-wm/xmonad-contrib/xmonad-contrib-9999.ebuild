@@ -22,7 +22,7 @@ IUSE="xft vanilla"
 
 RDEPEND=">=dev-lang/ghc-6.6.1
 		dev-haskell/mtl
-		>=dev-haskell/x11-1.5
+		>=dev-haskell/x11-1.6
 		dev-haskell/utf8-string
 		xft? ( >=dev-haskell/x11-xft-0.2 )
 		~x11-wm/xmonad-${PV}"
