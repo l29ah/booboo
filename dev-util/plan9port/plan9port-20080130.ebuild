@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="x11-base/xorg-server"
+DEPEND="X ( x11-base/xorg-server )"
 RDEPEND=""
 
 S="${WORKDIR}/plan9"

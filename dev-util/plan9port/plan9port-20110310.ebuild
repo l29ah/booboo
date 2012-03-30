@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="x11-apps/xauth"
+DEPEND="X ( x11-apps/xauth ) "
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/plan9"

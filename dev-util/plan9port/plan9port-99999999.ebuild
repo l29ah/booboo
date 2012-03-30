@@ -12,13 +12,13 @@ EHG_REPO_URI="http://code.swtch.com/${PN}"
 
 LICENSE="Lucent-1.02"
 SLOT="0"
-IUSE=""
+IUSE="X"
 
-DEPEND="x11-libs/libX11
-		x11-libs/libXau
-		x11-libs/libXdmcp
-		x11-libs/libXext
-		x11-libs/libxcb
+DEPEND="X? ( x11-libs/libX11
+		     x11-libs/libXau
+		     x11-libs/libXdmcp
+		     x11-libs/libXext
+		     x11-libs/libxcb )
 		sys-libs/glibc"
 RDEPEND="${DEPEND}"
 
