@@ -13,9 +13,9 @@ SRC_URI="http://swtch.com/plan9port/${P}.tgz"
 LICENSE="9base"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="X"
 
-DEPEND="X ( x11-apps/xauth ) "
+DEPEND="X? ( x11-apps/xauth ) "
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/plan9"

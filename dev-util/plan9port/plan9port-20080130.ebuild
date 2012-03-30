@@ -12,9 +12,9 @@ SRC_URI="mirror://gentoo/${PN}-repack-${PV}.tar.bz2
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="X"
 
-DEPEND="X ( x11-base/xorg-server )"
+DEPEND="X? ( x11-base/xorg-server )"
 RDEPEND=""
 
 S="${WORKDIR}/plan9"
