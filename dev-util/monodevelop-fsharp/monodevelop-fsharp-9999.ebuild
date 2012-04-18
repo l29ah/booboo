@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=4
 
-EGIT_REPO_URI="git://github.com/fsharp/fsharpbinding.git"
+EGIT_REPO_URI="git://github.com/o01eg/fsharpbinding.git"
 
 inherit git-2 eutils mono multilib versionator
 
@@ -19,23 +19,23 @@ IUSE=""
 
 DEPEND="=dev-dotnet/fsharp-9999
 dev-lang/mono
-dev-util/monodevelop
+=dev-util/monodevelop-2.8.2
 dev-dotnet/mono-addins"
 RDEPEND="${DEPEND}"
 
-src_prepare()
-{
-	epatch "${FILESDIR}/fsharpbinding-net4.0.patch"
-}
+#src_prepare()
+#{
+#	epatch "${FILESDIR}/fsharpbinding-net4.0.patch"
+#}
 
 src_configure()
 {
 	./configure.sh
 }
 
-#src_compile() {
-#	emake
-#}
+src_compile() {
+	emake
+}
 
 src_install()
 {
