@@ -99,8 +99,8 @@ src_install() {
 		doins -r contrib || die "Can't install additional contrib components to ${D}/usr/share/doc/${PF}"
 	fi
 
-	doicon "${FILESDIR}/${PN/-svn}.png"
-	make_desktop_entry ${PN/-svn} Tkabber ${PN/-svn}.png
+	doicon "${FILESDIR}/${PN}.png"
+	make_desktop_entry ${PN} Tkabber ${PN}.png
 
 	if use plugins || use 3rd-party-plugins; then
 		TKABBER_PLUGINS="${TKABBER_PLUGINS:-}"
