@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils
-
 EAPI=2
+
+inherit eutils
 
 DESCRIPTION="STLFilt simplifies and/or reformats long-winded C++ error and
 warning messages, with a focus on STL-related diagnostics"
