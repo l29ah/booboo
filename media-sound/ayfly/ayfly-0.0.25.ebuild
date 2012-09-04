@@ -1,8 +1,10 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-inherit eutils
 EAPI="2"
+
+inherit eutils
+
 DESCRIPTION="Ayfly is a AY-891x emulator and player."
 HOMEPAGE="http://code.google.com/p/ayfly/"
 SRC_URI="http://ayfly.googlecode.com/files/${P}.tar.bz2"
