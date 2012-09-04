@@ -2,15 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit java-pkg-2 java-ant-2
-
 EAPI="2"
+
+inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="epub2pdf is a command-line tool that quickly generates PDF files
 from EPUB ebooks. It allows the user to specify page size, fonts, margins, and
 default paragraph alignment."
 HOMEPAGE="http://epub2pdf.com/"
-SRC_URI="http://epub2pdf.com/files/epub2pdf-0.3-src-all.zip"
+SRC_URI="http://epub2pdf.com/files/epub2pdf-$PV-src-all.zip"
 
 LICENSE=""
 SLOT="0"
@@ -21,7 +21,7 @@ DEPEND=">=virtual/jdk-1.6
 	app-arch/unzip"
 RDEPEND=">=virtual/jre-1.6
 	dev-java/batik:1.7
-	>=dev-java/itext-2.1.5
+	>=dev-java/itext-2.1.5:0
 	>=dev-java/sac-1.3
 	>=dev-java/saxon-6.5.5:6.5
 	>=dev-java/xml-commons-resolver-1.2
