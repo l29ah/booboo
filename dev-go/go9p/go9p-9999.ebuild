@@ -2,8 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit mercurial
 EAPI=3
+
+inherit mercurial
 
 DESCRIPTION=""
 HOMEPAGE="http://go9p.googlecode.com/"
