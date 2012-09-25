@@ -65,7 +65,8 @@ FLAGS=-DSTEPS16" > config.default \
 src_install() {
 	newgamesbin build/default/simutrans-experimental ${PN} || die "dogamesbin failed"
 	insinto "${GAMES_DATADIR}"/${PN}
-	doins -r $pak/* || die "doins failed"
+	doins -r $pak || die "doins failed"
+	doins -r simutrans/* || die "doins failed"
 	dodoc documentation/* todo.txt
 	doicon simutrans.ico
 	make_desktop_entry simutrans Simutrans /usr/share/pixmaps/simutrans.ico
