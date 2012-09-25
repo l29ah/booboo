@@ -1,0 +1,69 @@
+--- dataobj/loadsave.cc.old	2012-09-25 18:01:48.000000000 +0400
++++ dataobj/loadsave.cc	2012-09-25 18:13:36.000000000 +0400
+@@ -96,7 +96,7 @@
+ 		if(fd->gzfp==NULL) {
+ 			return false;
+ 		}
+-		gzgets(fd->gzfp, buf, 80);
++		gzgets((gzFile)fd->gzfp, buf, 80);
+ 	}
+ 	saving = false;
+ 
+@@ -282,11 +282,11 @@
+ 	}
+ 	if(  is_zipped()  &&  fd->gzfp) {
+ 		int err_no;
+-		const char *err_str = gzerror( fd->gzfp, &err_no );
++		const char *err_str = gzerror( (gzFile)fd->gzfp, &err_no );
+ 		if(err_no!=Z_OK  &&  err_no!=Z_STREAM_END) {
+ 			success =  err_no==Z_ERRNO ? strerror(errno) : err_str;
+ 		}
+-		gzclose(fd->gzfp);
++		gzclose((gzFile)fd->gzfp);
+ 		fd->gzfp = NULL;
+ 	}
+ 	if(  is_bzip2()  &&  fd->fp ) {
+@@ -330,7 +330,7 @@
+ 		return fd->bse!=BZ_OK;
+ 	}
+ 	else {
+-		return gzeof(fd->gzfp) != 0;
++		return gzeof((gzFile)fd->gzfp) != 0;
+ 	}
+ }
+ 
+@@ -338,7 +338,7 @@
+ void loadsave_t::lsputc(int c)
+ {
+ 	if(is_zipped()) {
+-		gzputc(fd->gzfp, c);
++		gzputc((gzFile)fd->gzfp, c);
+ 	}
+ 	else if(is_bzip2()) {
+ 		uint8 ch = c;
+@@ -359,14 +359,14 @@
+ 		return fd->bse==BZ_OK ? c[0] : -1;
+ 	}
+ 	else {
+-		return gzgetc(fd->gzfp);
++		return gzgetc((gzFile)fd->gzfp);
+ 	}
+ }
+ 
+ size_t loadsave_t::write(const void *buf, size_t len)
+ {
+ 	if(is_zipped()) {
+-		return gzwrite(fd->gzfp, const_cast<void *>(buf), len);
++		return gzwrite((gzFile)fd->gzfp, const_cast<void *>(buf), len);
+ 	}
+ 	else if(is_bzip2()) {
+ 		BZ2_bzWrite( &fd->bse, fd->bzfp, const_cast<void *>(buf), len);
+@@ -387,7 +387,7 @@
+ 		return fd->bse==BZ_OK ? len : 0;
+ 	}
+ 	else {
+-		return gzread(fd->gzfp, buf, len);
++		return gzread((gzFile)fd->gzfp, buf, len);
+ 	}
+ }
+ 
