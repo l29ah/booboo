@@ -31,21 +31,21 @@ diff -r 1af7e985cef6 kernel/drv/oss_usb/ossusb_audio.c
  }
  
  #if 0
-@@ -962,13 +964,11 @@
+@@ -962,13 +964,9 @@
    adev_p adev = audio_engines[dev];
    dmap_p dmap = adev->dmap_out;
  
--  MUTEX_ENTER_IRQDISABLE (devc->mutex, flags);
- 
-   if (portc->stopping)
++  if (portc->stopping)
++    return 0;
++
+   MUTEX_ENTER_IRQDISABLE (devc->mutex, flags);
+-
+-  if (portc->stopping)
 -    {
 -      MUTEX_EXIT_IRQRESTORE (devc->mutex, flags);
 -      return 0;
 -    }
-+    return 0;
-+
-+  MUTEX_ENTER_IRQDISABLE (devc->mutex, flags);
- 
+-
    pn = portc->curr_datapipe;
    portc->curr_datapipe = (portc->curr_datapipe + 1) % NR_DATAPIPES;
 @@ -994,8 +994,7 @@
