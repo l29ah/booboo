@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs savedconfig
 
 DESCRIPTION="a generic, highly customizable, and efficient menu for the X Window System"
 HOMEPAGE="http://www.suckless.org/programs/dmenu.html"
-SRC_URI="http://code.suckless.org/dl/tools/${P}.tar.gz
+SRC_URI="http://pkgs.fedoraproject.org/repo/pkgs/dmenu/dmenu-4.0.tar.gz/66e761a653930cc8a21614ba9fedf903/dmenu-4.0.tar.gz
 	dmenu_path? ( http://tools.suckless.org/dmenu/patches/legacy/dmenu_path.c )"
 
 LICENSE="MIT"
