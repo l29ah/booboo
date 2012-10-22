@@ -22,11 +22,12 @@ RDEPEND="
 src_install() {
 	install -Dm755 ${PN} "${D}/usr/bin/${PN}"
 	install -Dm644 asd.conf "${D}/etc/asd.conf"
-	install -Dm755 rc.asd "${D}/etc/init.d/asd"
 	install -Dm755 asd.cron.hourly "${D}/etc/cron.hourly/asd-update"
 	install -Dm644 "asd.service" "${D}/usr/lib/systemd/system/asd.service"
 	
 	gzip -9 asd.manpage
 	install -g 0 -o 0 -Dm 0644 asd.manpage.gz "${D}/usr/share/man/man1/${PN}.1.gz"
 	install -g 0 -o 0 -Dm 0644 asd.manpage.gz "${D}/usr/share/man/man1/asd.1.gz"
+
+	install -Dm755 ${FILESDIR}/initd "${D}/etc/init.d/asd"
 }
