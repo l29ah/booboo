@@ -15,7 +15,11 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="x11-libs/qt-core:4"
+DEPEND="
+	x11-libs/qt-core:4
+	dev-libs/boost
+	sys-apps/dbus
+	"
 RDEPEND="${DEPEND}"
 
 DOCS=( TODO README.markdown )
