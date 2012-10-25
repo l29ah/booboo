@@ -4,7 +4,7 @@
 
 EAPI=2
 
-inherit git eutils
+inherit git-2 eutils
 
 DESCRIPTION="An implementation of the Infinote protocol written in GObject-based C."
 HOMEPAGE="http://gobby.0x539.de/"
