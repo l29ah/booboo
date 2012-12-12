@@ -9,7 +9,7 @@ DICT_PREFIX="kanjidic2-"
 inherit stardict
 
 HOMEPAGE="http://stardict.sourceforge.net/Dictionaries_ja.php"
-SRC_URI="mirror://sourceforge/stardict/${P}.tar.bz2"
+SRC_URI="http://dump.bitcheese.net/files/oxicece/stardict-kanjidic2-2.4.2.tar.bz2"
 
 LICENSE="GDLS"
 KEYWORDS="~amd64 ~ppc ~sparc ~x86"
