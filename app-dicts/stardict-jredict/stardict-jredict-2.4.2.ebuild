@@ -1,6 +1,6 @@
 DESCRIPTION="Collection of dicts for stardict."
 HOMEPAGE="http://stardict.sourceforge.net/Dictionaries_ja.php"
-SRC_URI="http://switch.dl.sourceforge.net/sourceforge/stardict/$P.tar.bz2"
+SRC_URI="http://dump.bitcheese.net/files/ofubimi/stardict-jredict-2.4.2.tar.bz2"
 
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
