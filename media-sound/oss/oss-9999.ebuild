@@ -14,7 +14,7 @@ HOMEPAGE="http://developer.opensound.com/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="salsa midi vmix_fixedpoint"
 
 DEPEND="sys-apps/gawk
 	>=x11-libs/gtk+-2
@@ -32,9 +32,12 @@ src_unpack() {
 }
 
 src_configure() {
-	einfo "Running configure..."
+	local myconf="$(use salsa && echo  || echo --enable-libsalsa=NO) \
+		--config-midi=$(use midi && echo YES || echo NO) \
+		--config-vmix=$(use vmix_fixedpoint && echo FIXEDPOINT || echo FLOAT)"
+	
 	cd "${WORKDIR}/build"
-	"$WORKDIR/opensound/configure" || die "configure failed"
+	"$WORKDIR/opensound/configure" $myconf || die "configure failed"
 
 	einfo "Stripping compiler flags..."
 	sed -i -e 's/-D_KERNEL//' \

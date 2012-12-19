@@ -8,13 +8,13 @@
 
 # Ebuild was taken from #216656
 
+EAPI=2
+inherit eutils git
+
 EGIT_REPO_URI="http://www.phorogit.com/repo/phoronix-test-suite.git"
 #default:
 EGIT_BRANCH="master"
 #EGIT_BRANCH="trondheim-12"
-
-EAPI=2
-inherit eutils git
 
 DESCRIPTION="Comprehensive testing and benchmarking platform"
 HOMEPAGE="http://phoronix-test-suite.com"

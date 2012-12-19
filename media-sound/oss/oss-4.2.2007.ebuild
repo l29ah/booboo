@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="gtk salsa midi"
+IUSE="gtk salsa midi vmix_fixedpoint"
 
 RESTRICT="mirror"
 
@@ -43,7 +43,8 @@ src_prepare() {
 
 src_configure() {
 	local myconf="$(use salsa && echo  || echo --enable-libsalsa=NO) \
-		--config-midi=$(use midi && echo YES || echo NO)"
+		--config-midi=$(use midi && echo YES || echo NO) \
+		--config-vmix=$(use vmix_fixedpoint && echo FIXEDPOINT || echo FLOAT)"
 
 	cd "${WORKDIR}/build"
 

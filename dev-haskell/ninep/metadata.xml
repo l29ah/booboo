@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		Pure Haskell implementation of the 9P2000 protocol from the
+		Plan 9 and Inferno operating systems.  Many implementations of
+		9P2000 exist including the Linux kernel v9fs module, wmii
+		(X window manager).  More information on 9P and implementations
+		may be found at http:\/\/9p.cat-v.org
+	</longdescription>
+</pkgmetadata>
