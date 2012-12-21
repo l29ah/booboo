@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/jkramer/shell-fm.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS=""
 IUSE="ao"
 
 RDEPEND="media-libs/libmad
