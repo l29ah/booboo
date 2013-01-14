@@ -16,7 +16,7 @@ SRC_URI="https://github.com/downloads/jamespetts/$PN-pak128.britain/$pak.zip"
 
 LICENSE="Artistic"
 SLOT="0"
-KEYWORDS="-* amd64 x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND="media-libs/libsdl[audio,video]
