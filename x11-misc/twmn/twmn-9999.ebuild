@@ -23,3 +23,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 DOCS=( TODO README.markdown )
+
+src_prepare() {
+	sed -i -e 's#/usr/local/#/usr/#g' */*.pro
+}
