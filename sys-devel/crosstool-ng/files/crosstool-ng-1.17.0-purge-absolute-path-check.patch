@@ -1,0 +1,16 @@
+--- Makefile.orig	2013-01-24 15:54:30.829002134 +0400
++++ Makefile	2013-01-24 15:54:51.275822075 +0400
+@@ -90,13 +90,6 @@
+ 	@echo "$< did changed: you must re-run './configure'"
+ 	@false
+ 
+-# If installing with DESTDIR, check it's an absolute path
+-ifneq ($(strip $(DESTDIR)),)
+-  ifneq ($(DESTDIR),$(abspath /$(DESTDIR)))
+-    $(error DESTDIR is not an absolute PATH: '$(DESTDIR)')
+-  endif
+-endif
+-
+ ###############################################################################
+ # Global make rules
+ 
