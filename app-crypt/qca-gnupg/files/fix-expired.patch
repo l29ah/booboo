@@ -1,0 +1,29 @@
+--- qca-gnupg-2.0.0-beta3/gpgop.cpp	2008-04-08 07:01:19.000000000 +0400
++++ qca-gnupg-2.0.0-beta3/gpgop.cpp	2012-02-23 14:43:24.646386182 +0400
+@@ -879,26 +879,6 @@
+ 			if(curError == GpgOp::ErrorUnknown)
+ 				curError = GpgOp::ErrorFormat;
+ 		}
+-		else if(s == "KEYEXPIRED")
+-		{
+-			if(curError == GpgOp::ErrorUnknown)
+-			{
+-				if(input.op == GpgOp::SignAndEncrypt)
+-				{
+-					if(!signPartDone)
+-						curError = GpgOp::ErrorSignerExpired;
+-					else
+-						curError = GpgOp::ErrorEncryptExpired;
+-				}
+-				else
+-				{
+-					if(signing)
+-						curError = GpgOp::ErrorSignerExpired;
+-					else
+-						curError = GpgOp::ErrorEncryptExpired;
+-				}
+-			}
+-		}
+ 		else if(s == "INV_RECP")
+ 		{
+ 			int r = nextArg(rest).toInt();
