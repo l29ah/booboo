@@ -6,8 +6,8 @@ EAPI=4
 inherit flag-o-matic eutils games git
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
-EGIT_BRANCH=devel
-EGIT_COMMIT=devel
+EGIT_BRANCH=master
+EGIT_COMMIT=master
 
 DESCRIPTION="A free Transport Tycoon clone"
 HOMEPAGE="http://www.simutrans.com/"
