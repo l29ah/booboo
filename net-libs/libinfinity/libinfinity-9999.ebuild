@@ -25,7 +25,7 @@ RDEPEND="dev-libs/glib:2
 	libdaemon? ( dev-libs/libdaemon )"
 DEPEND="${RDEPEND}
 	>=dev-util/pkgconfig-0.23
-	doc? ( dev-util/gtk-doc )"
+	dev-util/gtk-doc"
 
 pkg_setup() {
 	if use server ; then
