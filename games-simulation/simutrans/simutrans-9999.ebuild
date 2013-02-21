@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/games-simulation/simutrans/simutrans-0.102.2.2.ebuild,v 1.5 2012/03/23 20:14:06 tupone Exp $
 
 EAPI=4
-inherit flag-o-matic eutils games git
+inherit flag-o-matic eutils games git-2
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
 EGIT_BRANCH=master
@@ -12,7 +12,8 @@ EGIT_COMMIT=master
 DESCRIPTION="A free Transport Tycoon clone"
 HOMEPAGE="http://www.simutrans.com/"
 pak=Pak128.Britain-Ex-0.8.4
-SRC_URI="https://github.com/downloads/jamespetts/$PN-pak128.britain/$pak.zip"
+SRC_URI="https://github.com/downloads/jamespetts/$PN-pak128.britain/$pak.zip
+http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip"
 
 LICENSE="Artistic"
 SLOT="0"
@@ -29,9 +30,11 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}
 
 src_unpack() {
-	git_src_unpack
-	cd "$S"
-	unpack $A
+	git-2_src_unpack
+	mkdir -p "${S}/simutrans/text"
+	cd "${S}/simutrans/text"
+	unpack language_pack-Base+texts.zip
+	cd "${S}"
 }
 
 src_prepare() {
