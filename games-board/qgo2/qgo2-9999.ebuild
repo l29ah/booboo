@@ -17,9 +17,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="media-libs/alsa-lib
-	x11-libs/qt-core:4
-	x11-libs/qt-gui:4
-	x11-libs/qt-test:4"
+	dev-qt/qtcore:4
+	dev-qt/qtgui:4
+	dev-qt/qttest:4"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}"

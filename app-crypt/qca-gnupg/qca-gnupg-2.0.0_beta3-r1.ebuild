@@ -18,7 +18,7 @@ KEYWORDS="alpha amd64 ~arm hppa ia64 ppc ppc64 sparc x86 ~x86-fbsd"
 IUSE="debug"
 
 DEPEND=">=app-crypt/qca-${QCA_VER}[debug?]
-	x11-libs/qt-core"
+	dev-qt/qtcore:4"
 RDEPEND="${DEPEND}
 	app-crypt/gnupg"
 
