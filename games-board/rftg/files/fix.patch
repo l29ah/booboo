@@ -1,0 +1,22 @@
+--- gui.c
++++ gui.c
+@@ -1111,7 +1111,7 @@
+ 		if (i == ACT_DEVELOP2 || i == ACT_SETTLE2) continue;
+ 
+ 		/* Construct image filename */
+-		sprintf(fn, RFTGDIR "/image/icon%02d.png", i);
++		sprintf(fn, RFTGDIR "/image/icon%03d.png", i);
+ 
+ 		/* Load image */
+ 		icon_cache[i] = gdk_pixbuf_new_from_file(fn, NULL);
+--- Makefile.am
++++ Makefile.am
+@@ -1,6 +1,5 @@
+-bin_PROGRAMS = rftg
++bin_PROGRAMS = rftg learner dumpnet
+-noinst_PROGRAMS = learner dumpnet
+ if BUILD_SERVER
+-noinst_PROGRAMS += server ai_client
++bin_PROGRAMS += server ai_client
+ endif
+ dist_bin_SCRIPTS = do_train
