@@ -6,8 +6,8 @@ EAPI=4
 inherit flag-o-matic eutils games git-2
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
-EGIT_BRANCH=master
-EGIT_COMMIT=master
+EGIT_BRANCH=112.x-private-car-merge
+EGIT_COMMIT=112.x-private-car-merge
 
 DESCRIPTION="A free Transport Tycoon clone"
 HOMEPAGE="http://www.simutrans.com/"
@@ -61,12 +61,11 @@ FLAGS=-DSTEPS16" > config.default \
 		|| die "sed failed"
 
 	rm -f simutrans/simutrans
-	epatch "${FILESDIR}"/${PN}-0.102.2.2-gcc46.patch \
-		"${FILESDIR}"/${P}-zlib.patch
+	epatch "${FILESDIR}"/${PN}-0.102.2.2-gcc46.patch
 }
 
 src_install() {
-	newgamesbin build/default/simutrans-experimental ${PN} || die "dogamesbin failed"
+	newgamesbin build/default/sim ${PN} || die "dogamesbin failed"
 	insinto "${GAMES_DATADIR}"/${PN}
 	doins -r $pak || die "doins failed"
 	doins -r simutrans/* || die "doins failed"
