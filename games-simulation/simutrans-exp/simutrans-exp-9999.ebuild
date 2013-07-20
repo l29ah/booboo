@@ -9,11 +9,9 @@ EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
 EGIT_BRANCH=11.x
 EGIT_COMMIT=11.x
 
-DESCRIPTION="A free Transport Tycoon clone"
+DESCRIPTION="A free Transport Tycoon clone Experimental version."
 HOMEPAGE="http://www.simutrans.com/"
-pak=Pak128.Britain-Ex-0.9.0
-SRC_URI="http://www.bridgewater-brunel.me.uk/downloads/${pak}.zip
-http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip"
+SRC_URI="http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip"
 
 LICENSE="Artistic"
 SLOT="0"
@@ -26,6 +24,7 @@ RDEPEND="media-libs/libsdl[audio,video]
 	media-libs/sdl-mixer"
 DEPEND="${RDEPEND}
 	app-arch/unzip"
+PDEPEND="games-simulation/simutrans-exp-britain-ex"
 
 S=${WORKDIR}
 
@@ -62,22 +61,20 @@ FLAGS=-DSTEPS16" > config.default \
 
 	rm -f simutrans/simutrans
 	epatch "${FILESDIR}"/${PN}-0.102.2.2-gcc46.patch
-	#epatch "${FILESDIR}"/${PN}-11.x-makeobj.patch
 }
 
 src_compile() {
-	#emake makeobj
 	emake
+	cd makeobj ; emake
 }
 
 src_install() {
 	newgamesbin build/default/simutrans-experimental ${PN} || die "dogamesbin failed"
 
-	#exeinto /usr/lib/games/${PN}
-	#doexe makeobj/makeobj || die "doexe failed"
+	exeinto /usr/lib/games/${PN}
+	doexe build/default/makeobj/makeobj || die "doexe failed"
 
 	insinto "${GAMES_DATADIR}"/${PN}
-	doins -r $pak || die "doins failed"
 	doins -r simutrans/* || die "doins failed"
 	dodoc documentation/* todo.txt
 	doicon simutrans.ico
