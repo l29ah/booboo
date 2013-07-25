@@ -6,14 +6,12 @@ EAPI=4
 inherit flag-o-matic eutils games git-2
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
-EGIT_BRANCH=112.x-private-car-merge
-EGIT_COMMIT=112.x-private-car-merge
+EGIT_BRANCH=11.x
+EGIT_COMMIT=11.x
 
-DESCRIPTION="A free Transport Tycoon clone"
+DESCRIPTION="A free Transport Tycoon clone Experimental version."
 HOMEPAGE="http://www.simutrans.com/"
-pak=Pak128.Britain-Ex-0.8.4
-SRC_URI="https://github.com/downloads/jamespetts/$PN-pak128.britain/$pak.zip
-http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip"
+SRC_URI="http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip"
 
 LICENSE="Artistic"
 SLOT="0"
@@ -26,6 +24,7 @@ RDEPEND="media-libs/libsdl[audio,video]
 	media-libs/sdl-mixer"
 DEPEND="${RDEPEND}
 	app-arch/unzip"
+PDEPEND="games-simulation/simutrans-exp-britain-ex"
 
 S=${WORKDIR}
 
@@ -64,10 +63,18 @@ FLAGS=-DSTEPS16" > config.default \
 	epatch "${FILESDIR}"/${PN}-0.102.2.2-gcc46.patch
 }
 
+src_compile() {
+	emake
+	cd makeobj ; emake
+}
+
 src_install() {
-	newgamesbin build/default/sim ${PN} || die "dogamesbin failed"
+	newgamesbin build/default/simutrans-experimental ${PN} || die "dogamesbin failed"
+
+	exeinto /usr/lib/games/${PN}
+	doexe build/default/makeobj/makeobj || die "doexe failed"
+
 	insinto "${GAMES_DATADIR}"/${PN}
-	doins -r $pak || die "doins failed"
 	doins -r simutrans/* || die "doins failed"
 	dodoc documentation/* todo.txt
 	doicon simutrans.ico
