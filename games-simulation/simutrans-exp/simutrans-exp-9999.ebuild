@@ -11,7 +11,8 @@ EGIT_COMMIT=11.x
 
 DESCRIPTION="A free Transport Tycoon clone Experimental version."
 HOMEPAGE="http://www.simutrans.com/"
-SRC_URI="http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip"
+SRC_URI=""
+texts_uri=http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip
 
 LICENSE="Artistic"
 SLOT="0"
@@ -23,7 +24,8 @@ RDEPEND="media-libs/libsdl[audio,video]
 	media-libs/libpng
 	media-libs/sdl-mixer"
 DEPEND="${RDEPEND}
-	app-arch/unzip"
+	app-arch/unzip
+	net-misc/wget"
 PDEPEND="games-simulation/simutrans-exp-britain-ex"
 
 S=${WORKDIR}
@@ -32,7 +34,12 @@ src_unpack() {
 	git-2_src_unpack
 	mkdir -p "${S}/simutrans/text"
 	cd "${S}/simutrans/text"
-	unpack language_pack-Base+texts.zip
+
+	if [[ ! ${EVCS_OFFLINE} ]]; then
+		wget ${texts_uri} -O ${DISTDIR}/simutrans-exp-language_pack-Base+texts.zip
+	fi
+
+	unpack simutrans-exp-language_pack-Base+texts.zip
 	cd "${S}"
 }
 
