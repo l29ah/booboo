@@ -2,34 +2,37 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=4
 
 inherit eutils
 
+
 DESCRIPTION="K is a proprietary array processing language."
 HOMEPAGE="http://kx.com/"
+SRC_URI="$PN.zip"
 
 LICENSE="kdb+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-RESTRICT="fetch"
 IUSE="readline"
 
 DEPEND="app-arch/unzip"
 RDEPEND="readline? ( app-misc/rlwrap )"
 
-fn=$PN.zip
+RESTRICT="fetch"
+S="$WORKDIR"
+
 
 pkg_nofetch() {
     eerror "Please go to:"
     eerror "  ${HOMEPAGE}"
     eerror "select your platform and download kdb+"
-    eerror "Then after downloading name it \"$fn\" and put it in:"
+    eerror "Then after downloading name it \"$SRC_URI\" and put it in:"
     eerror "  ${DISTDIR}"
 }
 
 src_unpack() {
-	unzip "${DISTDIR}/$fn"
+	unzip "${DISTDIR}/$SRC_URI"
 }
 
 src_install() {
