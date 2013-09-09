@@ -21,8 +21,8 @@ DEPEND="dev-libs/expat
 	dev-libs/fribidi
 	app-arch/bzip2
 	dev-db/sqlite
-	x11-libs/qt-gui:4
-	x11-libs/qt-core:4
+	dev-qt/qtgui:4
+	dev-qt/qtcore:4
 	"
 RDEPEND="${DEPEND}"
 

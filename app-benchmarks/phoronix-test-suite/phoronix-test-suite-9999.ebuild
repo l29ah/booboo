@@ -57,7 +57,7 @@ RDEPEND="dev-lang/php[cli,gd,pcntl]
 		>=x11-libs/gtk+-2
 		x11-libs/libXvMC
 		x11-libs/libXv
-		x11-libs/qt-core:4 )"
+		dev-qt/qtcore:4 )"
 
 src_unpack() {
 	git_src_unpack

@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="gtk qt fltk"
 
-DEPEND="qt? ( x11-libs/qt-core:4 )
+DEPEND="qt? ( dev-qt/qtcore:4 )
 	gtk? ( x11-libs/gtk+:2 )
 	fltk? ( x11-libs/fltk:1 )"
 RDEPEND="${DEPEND}"
