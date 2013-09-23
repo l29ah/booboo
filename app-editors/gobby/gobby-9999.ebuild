@@ -2,16 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=4
 
-inherit git eutils gnome2-utils
+inherit git-2 eutils gnome2-utils
 
 DESCRIPTION="GTK-based collaborative editor"
 HOMEPAGE="http://gobby.0x539.de/"
 SRC_URI=""
 EGIT_REPO_URI="git://git.0x539.de/git/gobby.git"
-EGIT_BRANCH="gobby-infinote"
-EGIT_COMMIT="gobby-infinote"
 
 LICENSE="GPL-2"
 SLOT="0.5"
