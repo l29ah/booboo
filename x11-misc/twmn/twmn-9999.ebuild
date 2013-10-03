@@ -17,6 +17,7 @@ IUSE=""
 
 DEPEND="
 	dev-qt/qtcore:4
+	dev-qt/qtgui:4
 	dev-libs/boost
 	sys-apps/dbus
 	"
