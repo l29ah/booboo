@@ -9,7 +9,7 @@ inherit font
 DESCRIPTION="Arial Unicode MS Font is an extended version of font Arial"
 IUSE=""
 # I think we can rely on this link
-SRC_URI="http://omploader.org/vMzAycQ -> arialuni.ttf.lzma"
+SRC_URI="http://dump.bitcheese.net/files/ysemuga/arialuni.ttf.lzma"
 HOMEPAGE="http://support.microsoft.com/?scid=kb%3Bru%3B287247"
 KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 SLOT="0"
