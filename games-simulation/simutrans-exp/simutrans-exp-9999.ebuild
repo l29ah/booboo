@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/games-simulation/simutrans/simutrans-0.102.2.2.ebuild,v 1.5 2012/03/23 20:14:06 tupone Exp $
 
-EAPI=4
+EAPI=5
 inherit flag-o-matic eutils games git-2
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
@@ -12,7 +12,6 @@ EGIT_COMMIT=11.x
 DESCRIPTION="A free Transport Tycoon clone Experimental version."
 HOMEPAGE="http://www.simutrans.com/"
 SRC_URI=""
-texts_uri=http://simutrans-germany.com/translator/data/tab/language_pack-Base+texts.zip
 
 LICENSE="Artistic"
 SLOT="0"
@@ -26,21 +25,13 @@ RDEPEND="media-libs/libsdl[audio,video]
 DEPEND="${RDEPEND}
 	app-arch/unzip
 	net-misc/wget"
-PDEPEND="games-simulation/simutrans-exp-britain-ex"
+PDEPEND="games-simulation/simutrans-exp-britain-ex
+	games-simulation/simutrans-exp-lang"
 
 S=${WORKDIR}
 
 src_unpack() {
 	git-2_src_unpack
-	mkdir -p "${S}/simutrans/text"
-	cd "${S}/simutrans/text"
-
-	if [[ ! ${EVCS_OFFLINE} ]]; then
-		wget ${texts_uri} -O ${DISTDIR}/simutrans-exp-language_pack-Base+texts.zip
-	fi
-
-	unpack simutrans-exp-language_pack-Base+texts.zip
-	cd "${S}"
 }
 
 src_prepare() {
