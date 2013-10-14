@@ -2,22 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/games-strategy/freeciv/freeciv-2.3.2.ebuild,v 1.4 2012/05/21 10:10:10 phajdan.jr Exp $
 
-EAPI=4
+EAPI=5
 inherit eutils gnome2-utils games-ggz games
 
 DESCRIPTION="multiplayer strategy game (Civilization Clone)"
 HOMEPAGE="http://www.freeciv.org/"
-SRC_URI="mirror://sourceforge/freeciv/${P/_/-}.tar.bz2"
+SRC_URI="mirror://sourceforge/freeciv/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="2.4"
 KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
-IUSE="auth dedicated ggz gtk gtk3 ipv6 nls readline sdl +sound"
+IUSE="dedicated ggz gtk gtk3 ipv6 nls readline sdl +sound"
 
 RDEPEND="readline? ( sys-libs/readline )
 	sys-libs/zlib
 	app-arch/bzip2
-	auth? ( virtual/mysql )
 	!dedicated? (
 		nls? ( virtual/libintl )
 		gtk? ( x11-libs/gtk+:2 )
@@ -42,11 +41,7 @@ DEPEND="${RDEPEND}
 		x11-proto/xextproto
 	)"
 
-S=${WORKDIR}/${P/_/-}
-
 src_prepare() {
-	sh ./autogen.sh
-
 	# install the .desktop in /usr/share/applications
 	# install the icons in /usr/share/pixmaps
 	sed -i \
@@ -83,12 +78,11 @@ src_configure() {
 	fi
 
 	egamesconf \
-		--program-suffix=-2.4
+		--program-suffix=-2.4 \
 		--disable-dependency-tracking \
 		--localedir=/usr/share/locale \
 		--with-ggzconfig=/usr/bin \
 		--enable-noregistry="${GGZ_MODDIR}" \
-		$(use_enable auth) \
 		$(use_enable ipv6) \
 		$(use_enable nls) \
 		$(use_with readline) \
@@ -100,17 +94,28 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed"
 
-	if ! use dedicated ; then
+	if use dedicated ; then
+		rm -rf "${D}/usr/share/pixmaps"
+		rm -f "${D}"/usr/share/man/man6/freeciv-{client,gtk2,gtk3,sdl,xaw}*
+	else
 		# Create and install the html manual. It can't be done for dedicated
-		# servers, because the 'civmanual' tool is then not built. Also
-		# delete civmanual from the GAMES_BINDIR, because it's then useless.
+		# servers, because the 'freeciv-manual' tool is then not built. Also
+		# delete freeciv-manual from the GAMES_BINDIR, because it's useless.
 		# Note: to have it localized, it should be ran from _postinst, or
 		# something like that, but then it's a PITA to avoid orphan files...
-		./manual/freeciv-manual || die "freeciv-manual failed"
-		dohtml manual*.html || die "dohtml failed"
-		rm -f "${D}/${GAMES_BINDIR}"/civmanual
-		use sdl && make_desktop_entry freeciv-sdl-2.4 "Freeciv 2.4 (SDL)"
-		freeciv-client-2.4
+		./manual/freeciv-manual || die
+		dohtml manual*.html
+		if use sdl ; then
+			make_desktop_entry freeciv-sdl "Freeciv (SDL)" freeciv-client
+		else
+			rm -f "${D}"/usr/share/man/man6/freeciv-sdl*
+		fi
+		rm -f "${D}"/usr/share/man/man6/freeciv-xaw*
+	fi
+	find "${D}" -name "freeciv-manual*" -delete
+
+	if use ggz ; then
+		mv "${D}"/usr/share/ggz/modules/Freeciv.module.dsc "${D}"/usr/share/ggz/modules/Freeciv.module-2.4.dsc
 	fi
 
 	dodoc ChangeLog NEWS doc/{BUGS,CodingStyle,HACKING,HOWTOPLAY,README*,TODO}
