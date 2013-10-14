@@ -10,7 +10,7 @@ HOMEPAGE="http://www.freeciv.org/"
 SRC_URI="mirror://sourceforge/freeciv/${P}.tar.bz2"
 
 LICENSE="GPL-2"
-SLOT="2.4"
+SLOT="0"
 KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 IUSE="dedicated ggz gtk gtk3 ipv6 nls readline sdl +sound"
 
@@ -54,9 +54,6 @@ src_prepare() {
 		data/Makefile.in \
 		data/icons/Makefile.in \
 		|| die "sed failed"
-	
-	# install data to freeciv-2.4 folder
-	sed -i -e 's:AC_INIT(\[freeciv\(.*\):AC_INIT(\[freeciv-2.4\1:' configure.ac || die "sed failed"
 
 	# remove civclient manpage if dedicated server
 	if use dedicated ; then
@@ -78,7 +75,6 @@ src_configure() {
 	fi
 
 	egamesconf \
-		--program-suffix=-2.4 \
 		--disable-dependency-tracking \
 		--localedir=/usr/share/locale \
 		--with-ggzconfig=/usr/bin \
@@ -113,10 +109,6 @@ src_install() {
 		rm -f "${D}"/usr/share/man/man6/freeciv-xaw*
 	fi
 	find "${D}" -name "freeciv-manual*" -delete
-
-	if use ggz ; then
-		mv "${D}"/usr/share/ggz/modules/Freeciv.module.dsc "${D}"/usr/share/ggz/modules/Freeciv.module-2.4.dsc
-	fi
 
 	dodoc ChangeLog NEWS doc/{BUGS,CodingStyle,HACKING,HOWTOPLAY,README*,TODO}
 	rm -rf "${D}$(games_get_libdir)"
