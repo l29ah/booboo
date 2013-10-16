@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/media-sound/cmus/cmus-2.3.3.ebuild,v 1.1 2010/07/18 17:13:46 fauli Exp $
 
 EAPI=2
-inherit base git multilib
+inherit base git-2 multilib
 
 MY_P=${PN}-v${PV}
 

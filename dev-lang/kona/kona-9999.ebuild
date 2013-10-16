@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit git
+inherit git-2
 
 DESCRIPTION="Kona is an open-source implementation of the K programming language."
 HOMEPAGE="https://github.com/kevinlawler/kona"

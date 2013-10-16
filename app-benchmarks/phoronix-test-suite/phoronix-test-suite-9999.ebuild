@@ -9,7 +9,7 @@
 # Ebuild was taken from #216656
 
 EAPI=2
-inherit eutils git
+inherit eutils git-2
 
 EGIT_REPO_URI="http://www.phorogit.com/repo/phoronix-test-suite.git"
 #default:

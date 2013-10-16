@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit base git savedconfig
+inherit base git-2 savedconfig
 
 DESCRIPTION="Vimprobable is a WWW browser that behaves like the Vimperator plugin available for Mozilla Firefox based on the WebKit engine using GTK bindings."
 HOMEPAGE="http://www.yllr.net/vimprobable/"

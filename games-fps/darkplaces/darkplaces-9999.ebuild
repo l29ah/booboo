@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils flag-o-matic versionator games subversion git
+inherit eutils flag-o-matic versionator games subversion git-2
 
 DESCRIPTION="Enhanced engine for iD Software's Quake 1"
 HOMEPAGE="http://icculus.org/twilight/darkplaces/"

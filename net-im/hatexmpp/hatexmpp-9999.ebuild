@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-inherit git
+inherit git-2
 
 DESCRIPTION="hatexmpp is a xmpp-client featuring ii-like interface"
 HOMEPAGE="http://github.com/l29ah/hatexmpp"

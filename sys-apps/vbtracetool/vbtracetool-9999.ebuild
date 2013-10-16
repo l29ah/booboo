@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-inherit base git
+inherit base git-2
 
 DESCRIPTION="Video bios execution tracing widget"
 HOMEPAGE="http://cgit.freedesktop.org/~stuart/vbtracetool/"

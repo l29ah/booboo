@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit git autotools
+inherit git-2 autotools
 
 DESCRIPTION="GtkMMorse is a morse code learning tool released under GPL, which provides two type of training methods:
 

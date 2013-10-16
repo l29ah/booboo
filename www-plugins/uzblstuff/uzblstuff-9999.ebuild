@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-inherit base git
+inherit base git-2
 
 DESCRIPTION="uzbl event manager and tab manager and cookie manager"
 HOMEPAGE="http://github.com/jakeprobst/uzblstuff"

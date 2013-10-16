@@ -1,6 +1,6 @@
 EAPI=2
 
-inherit git autotools
+inherit git-2 autotools
 
 DESCRIPTION="Lightweight C Jabber library"
 HOMEPAGE="http://www.loudmouth-project.org/"

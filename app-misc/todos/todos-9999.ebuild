@@ -3,7 +3,7 @@
 # $Header:  $
 
 CABAL_FEATURES="bin"
-inherit base haskell-cabal git
+inherit base haskell-cabal git-2
 
 DESCRIPTION="Easy-to-use TODOs manager."
 HOMEPAGE="http://gitorious.org/todos"
