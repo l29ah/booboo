@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-sound/cmus/cmus-2.3.3.ebuild,v 1.1 2010/07/18 17:13:46 fauli Exp $
 
-EAPI=2
+EAPI=5
 inherit base git-2 multilib
 
 MY_P=${PN}-v${PV}
@@ -46,8 +46,7 @@ my_config() {
 	myconf="${myconf} ${2}=${value}"
 }
 
-src_unpack() {
-	git_src_unpack || die
+src_prepare() {
 	use audioscrobbler && epatch "${FILESDIR}/cmus_audioscrobblerBETA41-githead.diff"
 	use mp4 && sed -i -e 's/"m4a",//' ${S}/mp4.c
 }
