@@ -78,7 +78,7 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install || die
-	dodoc AUTHORS README TODO
+	dodoc AUTHORS README
 
 	use examples || rm -rf "${D}"/usr/share/doc/${PF}/examples
 
