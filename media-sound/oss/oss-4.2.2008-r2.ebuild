@@ -3,7 +3,7 @@
 # $Header: $
 EAPI=2
 
-inherit eutils versionator
+inherit eutils versionator linux-mod
 
 MY_PV=$(get_version_component_range 1-2)
 MY_BUILD=$(get_version_component_range 3)
@@ -76,9 +76,16 @@ src_install() {
 }
 
 pkg_postinst() {
+	UPDATE_MODULEDB=true
+	linux-mod_pkg_postinst
+
 	ewarn "In order to use OSSv4 you must run"
 	ewarn "# /etc/init.d/oss start "
 	ewarn "If you are upgrading from a previous build of OSSv4 you must run"
 	ewarn "# /etc/init.d/oss restart "
 	ewarn 'and may need to remove /lib/modules/$KERNEL_VERSION/kernel/oss/'
+}
+
+pkg_postrm() {
+	linux-mod_pkg_postrm
 }

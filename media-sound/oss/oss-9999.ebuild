@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit mercurial
+inherit mercurial linux-mod
 
 EHG_REPO_URI="http://opensound.hg.sourceforge.net:8000/hgroot/opensound/opensound"
 
@@ -58,12 +58,16 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "To use OSSv4 for the first time you must run"
-	elog "# /etc/init.d/oss start "
-	elog ""
-	elog "If you are upgrading, run"
-	elog "# /etc/init.d/oss restart "
-	elog 'and may need to remove /lib/modules/$KERNEL_VERSION/kernel/oss/'
-	elog ""
-	elog "Enjoy OSSv4 !"
+	UPDATE_MODULEDB=true
+	linux-mod_pkg_postinst
+
+	ewarn "In order to use OSSv4 you must run"
+	ewarn "# /etc/init.d/oss start "
+	ewarn "If you are upgrading from a previous build of OSSv4 you must run"
+	ewarn "# /etc/init.d/oss restart "
+	ewarn 'and may need to remove /lib/modules/$KERNEL_VERSION/kernel/oss/'
+}
+
+pkg_postrm() {
+	linux-mod_pkg_postrm
 }
