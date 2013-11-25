@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-gfx/qiv/qiv-2.2.3.ebuild,v 1.1 2010/03/12 09:17:59 ssuominen Exp $
 
-EAPI=2
+EAPI=5
 inherit toolchain-funcs mercurial
 
 DESCRIPTION="Quick Image Viewer"
