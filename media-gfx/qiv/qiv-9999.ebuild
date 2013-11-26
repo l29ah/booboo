@@ -16,7 +16,6 @@ IUSE="xinerama"
 
 RDEPEND="x11-libs/gtk+:2
 	media-libs/imlib2
-	!media-gfx/pqiv
 	media-libs/libexif
 	xinerama? ( x11-libs/libXinerama )"
 DEPEND="${RDEPEND}
