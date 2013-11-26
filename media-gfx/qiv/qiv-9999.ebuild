@@ -43,5 +43,5 @@ src_compile() {
 src_install() {
 	dobin qiv || die
 	doman qiv.1
-	dodoc Changelog qiv-command.example README README.TODO
+	dodoc Changelog README README.TODO
 }
