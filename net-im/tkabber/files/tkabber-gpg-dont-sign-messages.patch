@@ -1,0 +1,14 @@
+--- a/tkabber/gpgme.tcl	2013-12-27 17:12:55.657244241 +0400
++++ b/tkabber/gpgme.tcl	2013-12-27 17:12:57.493900957 +0400
+@@ -469,6 +469,11 @@
+         return
+     }
+ 
++    if {[llength $args] != 0} {
++        # message signing is insecure
++        return
++    }
++
+     once_only $xlib
+ 
+     if {[catch {$ctx($xlib) sign -input $data \

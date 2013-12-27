@@ -49,7 +49,10 @@ src_unpack() {
 }
 
 src_prepare() {
-	use vanilla || epatch "${FILESDIR}/shitfree.patch"
+	use vanilla || {
+		epatch "${FILESDIR}/shitfree.patch"
+		epatch "${FILESDIR}/tkabber-gpg-dont-sign-messages.patch"
+	}
 }
 
 src_compile() {
@@ -143,14 +146,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	echo
-	einfo "There's no UI option to disable emoticons yet, however"
-	einfo "you can put the following into your ~/.tkabber/config.tcl"
-	einfo
-	einfo "hook::add finload_hook {"
-	einfo " array unset emoteicons::emoteicons"
-	einfo "}"
-	echo
 	einfo "By default tkabber uses an internal XML parser. You may want"
 	einfo "to use an external one for (dubious) performance reasons,"
 	einfo "in which case you may like to emerge dev-tcltk/tdom (and put"
