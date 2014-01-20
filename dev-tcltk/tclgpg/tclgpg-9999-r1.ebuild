@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=5
 
 ESVN_REPO_URI="http://tclgpg.googlecode.com/svn/trunk/"
 
@@ -14,8 +14,8 @@ SRC_URI=""
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
-IUSE="doc helper threads vanilla"
+KEYWORDS=""
+IUSE="doc helper threads"
 
 
 RDEPEND="app-crypt/gnupg
@@ -26,7 +26,6 @@ DEPEND="${RDEPEND}
 	dev-tcltk/tcllib"
 
 src_prepare() {
-	use vanilla || epatch "$FILESDIR/$PN-fix-keyexpired.patch"
 	eautoreconf
 }
 
