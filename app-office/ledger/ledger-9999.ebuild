@@ -19,11 +19,7 @@ PYTHON_DEPEND="python? 2"
 DEPEND=">=dev-libs/boost-1.35[python?]
 	dev-libs/gmp
 	dev-libs/mpfr
-	doc? (
-		sys-apps/texinfo
-		dev-texlive/texlive-texinfo
-		virtual/latex-base
-	)
+	doc? ( sys-apps/texinfo )
 	libedit? ( dev-libs/libedit )"
 RDEPEND="${DEPEND}
 	gnuplot? ( sci-visualization/gnuplot )
@@ -33,6 +29,7 @@ RDEPEND="${DEPEND}
 DOCS=(doc/LICENSE test/input/drewr.dat)
 
 src_prepare() {
+	epatch "$FILESDIR/ledger-no-latex.patch"
 	cmake-utils_src_prepare
 
 	# disable autodetection for libedit
@@ -69,7 +66,6 @@ src_install() {
 	fi
 
 	if use doc; then
-		dodoc "${BUILD_DIR}"/doc/ledger3.pdf
 		dohtml "${BUILD_DIR}"/doc/ledger3.html
 	fi
 
