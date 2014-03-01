@@ -7,6 +7,8 @@ EAPI=4
 inherit eutils games git-2
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-pak128.britain.git'
+EGIT_BRANCH=half-heights
+EGIT_COMMIT=half-heights
 
 DESCRIPTION="Britain pakset for Simutrans Experimental"
 HOMEPAGE="http://www.simutrans.com/"

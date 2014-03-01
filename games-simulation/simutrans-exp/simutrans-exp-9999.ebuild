@@ -6,8 +6,8 @@ EAPI=5
 inherit flag-o-matic eutils games git-2
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
-EGIT_BRANCH=11.x
-EGIT_COMMIT=11.x
+EGIT_BRANCH=way-improvements
+EGIT_COMMIT=way-improvements
 
 DESCRIPTION="A free Transport Tycoon clone Experimental version."
 HOMEPAGE="http://www.simutrans.com/"
@@ -16,15 +16,13 @@ SRC_URI=""
 LICENSE="Artistic"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="debug"
 
 RDEPEND="media-libs/libsdl[audio,video]
 	sys-libs/zlib
 	media-libs/libpng
 	media-libs/sdl-mixer"
-DEPEND="${RDEPEND}
-	app-arch/unzip
-	net-misc/wget"
+DEPEND="${RDEPEND}"
 PDEPEND="games-simulation/simutrans-exp-britain-ex
 	games-simulation/simutrans-exp-lang"
 
@@ -39,12 +37,20 @@ src_prepare() {
 	echo "BACKEND=mixer_sdl
 COLOUR_DEPTH=16
 OSTYPE=linux
-FLAGS=-DSTEPS16" > config.default \
+FLAGS=-DSTEPS16
+MULTI_THREAD=1" > config.default \
 	|| die "echo failed"
 
 	if use amd64; then
 		echo "FLAGS+=-DUSE_C" >> config.default
 	fi
+
+	if use debug; then
+		echo "DEBUG=3" >> config.default
+	else
+		echo "OPTIMISE=1" >> config.default
+	fi
+
 	# make it look in the install location for the data
 	sed -i \
 		-e "s:argv\[0\]:\"${GAMES_DATADIR}/${PN}/\":" \
@@ -59,6 +65,7 @@ FLAGS=-DSTEPS16" > config.default \
 
 	rm -f simutrans/simutrans
 	epatch "${FILESDIR}"/${PN}-0.102.2.2-gcc46.patch
+	epatch "${FILESDIR}"/9999-way-improvements.patch
 }
 
 src_compile() {
