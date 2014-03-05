@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=5
 
-inherit mercurial linux-mod
+inherit git-2 linux-mod
 
-EHG_REPO_URI="http://opensound.hg.sourceforge.net:8000/hgroot/opensound/opensound"
+EGIT_REPO_URI="http://git.code.sf.net/p/opensound/git"
 
 DESCRIPTION="Open Sound System - portable, mixing-capable, high quality sound system for Unix."
 HOMEPAGE="http://developer.opensound.com/"
@@ -24,9 +24,11 @@ RDEPEND=">=x11-libs/gtk+-2"
 S="${WORKDIR}/build"
 
 src_unpack() {
-	S="$WORKDIR/opensound" mercurial_src_unpack
+	S="$WORKDIR/opensound" git-2_src_unpack
 	mkdir "${WORKDIR}/build"
+}
 
+src_prepare() {
 	einfo "Replacing init script with gentoo friendly one..."
 	cp "${FILESDIR}/oss" "${WORKDIR}/opensound/setup/Linux/oss/etc/S89oss"
 }
