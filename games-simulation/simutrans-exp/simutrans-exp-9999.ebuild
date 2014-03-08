@@ -65,7 +65,6 @@ MULTI_THREAD=1" > config.default \
 
 	rm -f simutrans/simutrans
 	epatch "${FILESDIR}"/${PN}-0.102.2.2-gcc46.patch
-	epatch "${FILESDIR}"/9999-way-improvements.patch
 }
 
 src_compile() {
