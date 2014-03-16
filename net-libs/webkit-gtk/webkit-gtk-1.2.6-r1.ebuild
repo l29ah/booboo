@@ -9,7 +9,7 @@ inherit autotools flag-o-matic eutils virtualx
 MY_P="webkit-${PV}"
 DESCRIPTION="Open source web browser engine"
 HOMEPAGE="http://www.webkitgtk.org/"
-SRC_URI="http://www.webkitgtk.org/${MY_P}.tar.gz"
+SRC_URI="http://www.webkitgtk.org/releases/${MY_P}.tar.gz"
 
 LICENSE="LGPL-2 LGPL-2.1 BSD"
 SLOT="2"
