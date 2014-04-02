@@ -20,5 +20,5 @@ IUSE=""
 DEPEND="
 	dev-python/python-daemon
 	dev-python/notify2
-	dev-libs/openssl"
+	dev-python/pycrypto"
 RDEPEND="${DEPEND}"
