@@ -29,8 +29,11 @@ src_unpack() {
 }
 
 src_prepare() {
+	cd "$WORKDIR/opensound"
+	epatch "$FILESDIR/oss-4.2.2008-linux-3.12.patch"
+
 	einfo "Replacing init script with gentoo friendly one..."
-	cp "${FILESDIR}/oss" "${WORKDIR}/opensound/setup/Linux/oss/etc/S89oss"
+	cp "${FILESDIR}/oss" setup/Linux/oss/etc/S89oss
 }
 
 src_configure() {
