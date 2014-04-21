@@ -7,6 +7,7 @@ EAPI=5
 inherit git-2 linux-mod
 
 EGIT_REPO_URI="http://git.code.sf.net/p/opensound/git"
+EGIT_PROJECT="$PN"
 
 DESCRIPTION="Open Sound System - portable, mixing-capable, high quality sound system for Unix."
 HOMEPAGE="http://developer.opensound.com/"
