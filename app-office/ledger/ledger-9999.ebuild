@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}
 DOCS=(doc/LICENSE test/input/drewr.dat)
 
 src_prepare() {
-	epatch "$FILESDIR/ledger-no-latex.patch"
 	cmake-utils_src_prepare
 
 	# disable autodetection for libedit
