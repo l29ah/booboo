@@ -32,6 +32,7 @@ pkg_setup() {
 
 src_prepare() {
 	sed -i -e 's:login:system-auth:' ${PN}.pam || die
+	epatch_user
 }
 
 src_install() {
