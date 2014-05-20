@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="debug"
 
-RDEPEND="media-libs/libsdl[audio,video]
+RDEPEND="media-libs/libsdl[sound,video]
 	sys-libs/zlib
 	media-libs/libpng
 	media-libs/sdl-mixer"

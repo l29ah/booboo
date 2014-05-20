@@ -28,7 +28,7 @@ RDEPEND="readline? ( sys-libs/readline )
 		)
 		!gtk3? ( !gtk? ( !sdl? ( x11-libs/gtk+:2 ) ) )
 		sound? (
-			media-libs/libsdl[audio]
+			media-libs/libsdl[sound]
 			media-libs/sdl-mixer
 		)
 		ggz? ( games-board/ggz-gtk-client )
