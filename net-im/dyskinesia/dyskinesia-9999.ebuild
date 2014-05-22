@@ -20,5 +20,6 @@ RDEPEND="
 	dev-qt/qtgui:4
 	dev-qt/qtwebkit:4
 	dev-qt/qtxmlpatterns:4
-	net-libs/libotr"
+	dev-qt/designer:4
+	<net-libs/libotr-4.0.0"
 DEPEND="${RDEPEND}"
