@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qt4-r2 git-2
+inherit qt4-r2 git-r3
 
 DESCRIPTION="A PSYC client written in QT"
 HOMEPAGE="http://about.psyc.eu/Dyskinesia"
@@ -23,3 +23,12 @@ RDEPEND="
 	dev-qt/designer:4
 	<net-libs/libotr-4.0.0"
 DEPEND="${RDEPEND}"
+
+src_configure() {
+	qt4-r2_src_configure
+	sed -i -e 's#^\(LIBS.*\)$#\1 -lX11#' Makefile
+}
+
+src_install() {
+	dobin $PN
+}
