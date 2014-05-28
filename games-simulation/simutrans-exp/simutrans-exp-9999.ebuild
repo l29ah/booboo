@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/games-simulation/simutrans/simutrans-0.102.2.2.ebuild,v 1.5 2012/03/23 20:14:06 tupone Exp $
 
 EAPI=5
-inherit flag-o-matic eutils games git-2
+inherit flag-o-matic eutils games git-r3
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
 EGIT_BRANCH=way-improvements
@@ -26,10 +26,8 @@ DEPEND="${RDEPEND}"
 PDEPEND="games-simulation/simutrans-exp-britain-ex
 	games-simulation/simutrans-exp-lang"
 
-S=${WORKDIR}
-
 src_unpack() {
-	git-2_src_unpack
+	git-r3_src_unpack
 }
 
 src_prepare() {
