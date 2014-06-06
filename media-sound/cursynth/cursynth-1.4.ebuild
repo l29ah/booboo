@@ -19,3 +19,10 @@ DEPEND="
 	jack? ( media-sound/jack-audio-connection-kit )
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.8 )"
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	econf \
+		$(use_with jack) \
+		$(use_with alsa) \
+		$(use_with oss)
+}
