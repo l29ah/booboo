@@ -7,7 +7,7 @@ inherit stardict
 
 DESCRIPTION="Stardict Longman Dictionary of Contemporary English"
 HOMEPAGE="http://stardict.sourceforge.net/Dictionaries_dictd-www.dict.org.php"
-SRC_URI="http://dump.bitcheese.net/files/elaryhe/stardict-longman-2.4.2.tar.bz2"
+SRC_URI="http://dl.sork.so/stardict-longman-2.4.2.tar.bz2"
 LICENSE="GDLS"
 KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE=""
