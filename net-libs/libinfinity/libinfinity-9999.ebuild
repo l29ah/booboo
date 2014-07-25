@@ -56,7 +56,7 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install || die
-	dodoc AUTHORS NEWS README TODO || die
+	dodoc AUTHORS NEWS README.md TODO || die
 
 	if use server ; then
 		newinitd "${FILESDIR}/infinoted.initd" infinoted
