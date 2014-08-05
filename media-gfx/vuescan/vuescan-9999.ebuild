@@ -7,7 +7,6 @@ inherit eutils
 
 DESCRIPTION="A high-quality scanning and digital camera raw image processing software."
 HOMEPAGE="http://www.hamrick.com/"
-SRC_URI="http://www.hamrick.com/vuescan/${PN}.pdf"
 RESTRICT="primaryuri"
 
 LICENSE="vuescan"
@@ -37,23 +36,16 @@ RDEPEND=">=x11-libs/gtk+-2.0
 		 app-emulation/emul-linux-x86-gtklibs )"
 
 src_unpack() {
-	wget -c "http://www.hamrick.com/files/vuesca86.tgz"
+	# FIXME use the common DISTDIR pathway
+	wget -c "https://www.hamrick.com/files/vuesca86.tgz"
 	tar -xzf vuesca86.tgz || die "Unpack failed"
 	cd ${S}
+	use doc && wget -c "https://www.hamrick.com/vuescan/${PN}.pdf"
 }
 
 src_install() {
-	for LINGUA in ${MY_LINGUAS}; do
-		if ! use linguas_${LINGUA/-/_}; then
-			rm -f lan_"${LINGUA}".txt
-		fi
-	done
-
-	insinto ${INSTALLDIR}
-	doins vuescan.bmp vuescan.dat ocr_en.bin *htm lan_*.txt
-	
 	if use doc; then
-		doins ${DISTDIR}/${PN}.pdf
+		dodoc ${PN}.pdf
 	fi
 
 	exeinto ${INSTALLDIR}
@@ -62,10 +54,6 @@ src_install() {
 	exeinto /usr/bin
 	# Provide a simple exec wrapper
 	doexe ${FILESDIR}/vuescan
-	
-	doicon ${FILESDIR}/VueScan.png
-
-	make_desktop_entry "${INSTALLDIR}/${PN}" vuescan VueScan.png Graphics
 }
 
 pkg_postinst() {
@@ -79,10 +67,8 @@ pkg_postinst() {
 		ewarn "You need to install it yourself since it is not provided with Gentoo."
 		ewarn "Good luck."
 	fi
-	
+
 	einfo "To use scanner with Vuescan under user you need add user into scanner group."
 	einfo "Just run under root: gpasswd -a username scanner"
-	einfo ""
-	einfo "If you don't wanna pay, just download crack from http://omploader.org/vNG8wcw"
-	einfo "and run it under wine!"
+
 }

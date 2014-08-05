@@ -7,14 +7,12 @@ inherit eutils
 
 DESCRIPTION="A high-quality scanning and digital camera raw image processing software."
 HOMEPAGE="http://www.hamrick.com/"
-SRC_URI="http://www.hamrick.com/files/vuesca86.tgz -> ${P}.tgz
-	http://www.hamrick.com/vuescan/${PN}.pdf"
+SRC_URI="http://www.hamrick.com/files/vuesca86.tgz -> ${P}.tgz"
 RESTRICT="primaryuri"
 
 LICENSE="vuescan"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc"
 
 MY_LINGUAS="ar be bg ca cs da de el en es et fi fr gl he hi hr hu id it ja ko lt lv nl no pb pl pt ro ru sk sl sr sv ta th tl tr tw uk vi zh"
 
@@ -51,10 +49,6 @@ src_install() {
 
 	insinto ${INSTALLDIR}
 	doins vuescan.bmp vuescan.dat ocr_en.bin *htm lan_*.txt
-	
-	if use doc; then
-		doins ${DISTDIR}/${PN}.pdf
-	fi
 
 	exeinto ${INSTALLDIR}
 	doexe vuescan
@@ -82,7 +76,4 @@ pkg_postinst() {
 	
 	einfo "To use scanner with Vuescan under user you need add user into scanner group."
 	einfo "Just run under root: gpasswd -a username scanner"
-	einfo ""
-	einfo "If you don't wanna pay, just download crack from http://omploader.org/vNG8wcw"
-	einfo "and run it under wine!"
 }
