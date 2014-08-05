@@ -11,14 +11,8 @@ RESTRICT="primaryuri"
 
 LICENSE="vuescan"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="doc"
-
-MY_LINGUAS="ar be bg ca cs da de el en es et fi fr gl he hi hr hu id it ja ko lt lv nl no pb pl pt ro ru sk sl sr sv ta th tl tr tw uk vi zh"
-
-for MY_LINGUA in ${MY_LINGUAS}; do
-	IUSE="${IUSE} linguas_${MY_LINGUA/-/_}"
-done
 
 S="${WORKDIR}/VueScan"
 
