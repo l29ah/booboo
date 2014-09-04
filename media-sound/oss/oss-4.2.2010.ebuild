@@ -32,7 +32,6 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
-	epatch "$FILESDIR/oss-4.2.2008-linux-3.12.patch"
 	mkdir "${WORKDIR}/build"
 
 	einfo "Replacing init script with gentoo friendly one ..."
