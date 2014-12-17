@@ -17,10 +17,15 @@ HOMEPAGE="http://www.golang.org"
 LICENSE="BSD"
 SLOT="0"
 
-IUSE_TARGETS="linux_arm linux_amd64 linux_x64 linux_x86"
-use_targets="$(printf ' go_targets_%s' ${IUSE_TARGETS})"
-IUSE="${use_targets}"
-REQUIRED_USE="|| ( ${use_targets} )"
+targets="
+	linux_arm
+	linux_amd64
+	linux_x64
+	linux_x86
+"
+IUSE_GO_TARGETS="$(printf ' go_targets_%s' ${targets})"
+IUSE="${IUSE_GO_TARGETS}"
+REQUIRED_USE="|| ( ${IUSE_GO_TARGETS} )"
 
 DEPEND=""
 RDEPEND=""
@@ -53,8 +58,9 @@ src_compile()
 	cd src
 	# TODO: don't be so stupid and build everything manually
 	# so the host stuff is not rebuilt from scratch for each target
-	for t in ${IUSE_TARGETS}; do
-		if use "go_targets_${t}"; then
+	for t in ${IUSE_GO_TARGETS}; do
+		if use "${t}"; then
+			t="${t#go_targets_}"
 			export GOOS="${t%_*}"
 			arch="${t#*_}"
 			case ${arch} in
@@ -63,10 +69,7 @@ src_compile()
 					;;
 				arm)
 					export GOARCH=arm
-					if [[ $CTARGET = armv5* ]]
-					then
-						export GOARM=5
-					fi
+					export GOARM=5
 					;;
 				x64)
 					export GOARCH=amd64p32
@@ -89,7 +92,6 @@ src_test()
 
 src_install()
 {
-	rm -rf src/debug
 	dobin $(find bin -type f -maxdepth 1)
 	dodoc AUTHORS CONTRIBUTORS PATENTS README misc/editors
 
