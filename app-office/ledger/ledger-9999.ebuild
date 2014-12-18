@@ -42,9 +42,9 @@ src_configure() {
 		$(cmake-utils_use_build debug DEBUG)
 		$(cmake-utils_use_build doc DOCS)
 		$(cmake-utils_use_build doc WEB_DOCS)
-		$(cmake-utils_use_build static-libs LIBRARY)
 		$(cmake-utils_use_has libedit EDIT)
 		$(cmake-utils_use_use python PYTHON)
+		$(cmake-utils_use_build python LIBRARY)
 	)
 	cmake-utils_src_configure
 }
