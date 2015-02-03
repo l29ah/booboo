@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/gnome-base/gconf/Attic/gconf-2.18.0.1.ebuild,v 1.12 2008/05/18 12:37:45 eva dead $
 
+EAPI=5
+
 inherit gnome2
 
 MY_PN=GConf
