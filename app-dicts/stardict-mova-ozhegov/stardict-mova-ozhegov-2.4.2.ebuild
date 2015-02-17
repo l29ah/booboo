@@ -4,9 +4,6 @@
 
 EAPI=4
 
-DICT_PREFIX="dictd_www.mova.org_"
-DICT_SUFFIX=ozhegov
-
 inherit stardict
 
 SRC_URI="http://abloz.com/huzheng/stardict-dic/mova.org/${DICT_P}.tar.bz2"

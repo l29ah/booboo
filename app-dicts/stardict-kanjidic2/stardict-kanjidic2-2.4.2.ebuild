@@ -4,7 +4,6 @@
 
 FROM_LANG="Japanese"
 TO_LANG="English"
-DICT_PREFIX="kanjidic2-"
 
 inherit stardict
 

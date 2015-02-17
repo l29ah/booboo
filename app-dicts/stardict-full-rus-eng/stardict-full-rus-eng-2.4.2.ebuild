@@ -4,9 +4,6 @@
 
 EAPI=4
 
-DICT_PREFIX=full-
-DICT_SUFFIX=rus-eng
-
 inherit stardict
 
 DESCRIPTION="Full Russian-English"
