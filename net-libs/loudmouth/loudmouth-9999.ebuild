@@ -1,10 +1,9 @@
 EAPI=2
 
-inherit git-2 autotools
+inherit base git-r3
 
 DESCRIPTION="Lightweight C Jabber library"
-HOMEPAGE="http://www.loudmouth-project.org/"
-SRC_URI=""
+HOMEPAGE="https://github.com/mcabber/loudmouth"
 # The official repo is dead; trying the mcabber-forked one
 #EGIT_REPO_URI="git://github.com/engineyard/loudmouth.git"
 EGIT_REPO_URI="git://github.com/mcabber/loudmouth.git"
@@ -30,8 +29,12 @@ use doc && DOCS="AUTHORS ChangeLog NEWS README"
 
 src_prepare() {
 	sed -i -e 's/-Werror//' acinclude.m4
-	use doc && gtkdocize || epatch $FILESDIR/$PN-nodocs.patch
-	eautoreconf
+	use doc && {
+		./autogen.sh
+	} || {
+		epatch "$FILESDIR/${PN}-nodocs.patch"
+		./autogen.sh -n
+	}
 }
 
 src_configure() {
@@ -41,7 +44,7 @@ src_configure() {
 				c="--with-ssl=openssl $c"
 	} || use gnutls || c="--with-ssl=no $c"
 
-	econf $c
+	econf --disable-dependency-tracking $c
 }
 
 src_install() {
