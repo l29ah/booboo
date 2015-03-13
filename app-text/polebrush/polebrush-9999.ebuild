@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit findlib eutils git-2
+inherit git-2
 
 DESCRIPTION="Polebrush — human-oriented markup language"
 HOMEPAGE="http://komar.bitcheese.net/en/code/polebrush"
@@ -19,6 +19,5 @@ DEPEND=">=dev-lang/ocaml-3.11
 RDEPEND=""
 
 src_install() {
-	findlib_src_preinst
 	dobin "${PN}"
 }
