@@ -21,3 +21,8 @@ IUSE=""
 DEPEND="dev-python/setuptools"
 RDEPEND="${DEPEND}
 dev-python/six"
+
+src_prepare() {
+	# https://code.google.com/p/pyfilesystem/issues/detail?id=186
+	sed -i -e 's#    def setcontents(self, path, file, chunk_size=64\*1024):#    def setcontents(self, path, file, chunk_size=64*1024, errors=None, encoding=None, encodings=None):#' fs/contrib/tahoelafs/__init__.py
+}
