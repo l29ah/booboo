@@ -25,4 +25,7 @@ dev-python/six"
 src_prepare() {
 	# https://code.google.com/p/pyfilesystem/issues/detail?id=186
 	sed -i -e 's#    def setcontents(self, path, file, chunk_size=64\*1024):#    def setcontents(self, path, file, chunk_size=64*1024, errors=None, encoding=None, encodings=None):#' fs/contrib/tahoelafs/__init__.py
+
+	# https://code.google.com/p/pyfilesystem/issues/detail?id=194
+	sed -i -e 's#            setattr(st, key, val)#            try:\n                setattr(st, key, val)\n            except:\n                pass#' fs/expose/fuse/fuse3.py
 }
