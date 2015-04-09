@@ -1,7 +1,0 @@
-# $Header: /CVS/anonCVS/psycmuve-beta-2/config/gentoo/psyced/ChangeLog,v 1.2 2006/01/17 11:37:31 lynx Exp $
-
-*psyced-0.99 (18 Nov 2005)
-
-  18 Nov 2005; Carlo von lynX <lynX@are.you.already.psyced.org> +psyced-0.99.ebuild:
-  initial build
-
