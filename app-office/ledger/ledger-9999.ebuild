@@ -27,7 +27,7 @@ RDEPEND="${DEPEND}
 	vim-syntax? ( app-vim/ledger-syntax )"
 
 # include test/input/drewr.dat as it is referenced by the manual
-DOCS=(doc/LICENSE test/input/drewr.dat)
+DOCS=(test/input/drewr.dat)
 
 src_prepare() {
 	cmake-utils_src_prepare
