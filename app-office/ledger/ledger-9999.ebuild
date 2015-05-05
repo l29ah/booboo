@@ -10,10 +10,11 @@ DESCRIPTION="A double-entry accounting system with a command-line reporting inte
 HOMEPAGE="http://ledger-cli.org/"
 EGIT_REPO_URI="git://github.com/ledger/ledger.git"
 EGIT_HAS_SUBMODULES=1
+IUSE="debug doc gnuplot libedit python static-libs vim-syntax experimental"
+use experimental && EGIT_BRANCH=next
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="debug doc gnuplot libedit python static-libs vim-syntax"
 PYTHON_DEPEND="python? 2"
 
 DEPEND=">=dev-libs/boost-1.35[python?]
