@@ -5,5 +5,4 @@
 =net-im/ekg2-20090404
 
 # The project moved to fossil and booboo lags behind; contributions are welcome
-dev-tcltk/tclgpg
 net-im/tkabber

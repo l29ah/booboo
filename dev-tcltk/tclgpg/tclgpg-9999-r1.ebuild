@@ -4,9 +4,9 @@
 
 EAPI=5
 
-ESVN_REPO_URI="http://tclgpg.googlecode.com/svn/trunk/"
+EFOSSIL_REPO_URI='https://chiselapp.com/user/sgolovan/repository/tclgpg'
 
-inherit autotools subversion
+inherit autotools fossil
 
 DESCRIPTION="Tcl interface to GNU Privacy Guard with interface similar to TclGPGME."
 HOMEPAGE="http://code.google.com/p/tclgpg/"
