@@ -1,13 +1,9 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-EAPI=2
+EAPI=5
 
-inherit subversion eutils
-
-ESVN_REPO_URI="http://svn.xmpp.ru/repos/tkabber/trunk/tkabber"
-ESVN_PROJECT="tkabber"
-ESVN_RESTRICT="export"
+inherit fossil eutils
 
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
@@ -32,20 +28,10 @@ KEYWORDS=""
 SLOT="0"
 
 src_unpack() {
-	subversion_fetch
-
-	if use plugins; then
-		ESVN_REPO_URI="http://svn.xmpp.ru/repos/tkabber/trunk/tkabber-plugins" \
-		ESVN_PROJECT="tkabber/plugins/official/" \
-		subversion_fetch
-	fi
-
-	if use 3rd-party-plugins; then
-		ESVN_REPO_URI="http://svn.xmpp.ru/repos/tkabber-3rd-party/trunk/plugins" \
-		ESVN_PROJECT="tkabber/plugins/3rd-party" \
-		subversion_fetch
-	fi
-	ESVN_PROJECT="tkabber" subversion_export
+	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber' tkabber
+	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tclxmpp' tkabber/tclxmpp
+	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber-plugins' plugins/official
+	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber-contrib' plugins/3rd-party
 }
 
 src_prepare() {
@@ -80,10 +66,6 @@ src_install() {
 	cp *.tcl "${D}/usr/share/tkabber" \
 		|| die "Can't copy tcl files to ${D}/usr/share/tkabber"
 
-	dosed "s:svn\[get_snapshot \[fullpath ChangeLog\]\]:svn-$(get_commit_date):" \
-	/usr/share/tkabber/tkabber.tcl \
-		|| die "Failed to fixate date of commit in tkabber.tcl"
-
 	emake DESTDIR="${D}" PREFIX="/usr" install-bin || die "emake install failed."
 
 	dodoc AUTHORS ChangeLog INSTALL README \
@@ -107,8 +89,8 @@ src_install() {
 
 	if use plugins || use 3rd-party-plugins; then
 		TKABBER_PLUGINS="${TKABBER_PLUGINS:-}"
-		local OFFICIAL_TKABBER_PLUGINS_DIR="${S}/plugins/official/tkabber-plugins"
-		local THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party/plugins"
+		local OFFICIAL_TKABBER_PLUGINS_DIR="${S}/plugins/official"
+		local THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
 		local TKABBER_SITE_PLUGINS="/usr/share/tkabber/site-plugins"
 		local INCOMPATIBLE_PLUGINS="pluginmanager"
 		local TKIMG_DEPENDENT_PLUGINS="alarm"
@@ -331,9 +313,4 @@ fix_existing_third_party_tkabber_plugins() {
 		ewarn "${CONFLICTING_PLUGINS}"
 		echo
 	fi
-}
-
-get_commit_date() {
-	grep -m 1 -o -P "\d{4}-\d\d-\d\d" "${S}/tkabber/ChangeLog" \
-	| sed s/'-'//g
 }

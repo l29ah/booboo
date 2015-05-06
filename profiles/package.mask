@@ -3,6 +3,3 @@
 # needs fixing
 =games-arcade/openjazz-20090329
 =net-im/ekg2-20090404
-
-# The project moved to fossil and booboo lags behind; contributions are welcome
-net-im/tkabber
