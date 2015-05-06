@@ -1,5 +1,0 @@
-=net-wireless/crda-1.0.1-r1
-
-# needs fixing
-=games-arcade/openjazz-20090329
-=net-im/ekg2-20090404
