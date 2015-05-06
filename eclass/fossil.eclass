@@ -34,7 +34,11 @@ fossil_fetch() {
 	pushd "${EFOSSIL_STORE_DIR}" >/dev/null || die "${EFOSSIL}: can't chdir to ${EFOSSIL_STORE_DIR}"
 	mkdir -m 775 -p "${EFOSSIL_PROJECT}" || die "${EFOSSIL}: can't mkdir ${EFOSSIL_PROJECT}."
 	cloned_repo="${EFOSSIL_STORE_DIR}/${EFOSSIL_PROJECT}/${repo_uri##*/}"
-	fossil clone "$repo_uri" "$cloned_repo"
+	if [[ -e "$cloned_repo" ]]; then
+		fossil pull -R "$cloned_repo" "$repo_uri"
+	else
+		fossil clone "$repo_uri" "$cloned_repo"
+	fi
 
 	if ! has "export" ${EFOSSIL_RESTRICT}; then
 		local S="${S}/${S_dest}"
