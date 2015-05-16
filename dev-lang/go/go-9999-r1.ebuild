@@ -6,9 +6,9 @@ EAPI=5
 
 export CTARGET=${CTARGET:-${CHOST}}
 
-inherit eutils mercurial
+inherit eutils git-2
 
-EHG_REPO_URI="https://go.googlecode.com/hg"
+EGIT_REPO_URI="https://go.googlesource.com/go"
 KEYWORDS="-* ~amd64 ~arm ~x86"
 
 DESCRIPTION="A concurrent garbage collected and typesafe programming language"
@@ -17,17 +17,13 @@ HOMEPAGE="http://www.golang.org"
 LICENSE="BSD"
 SLOT="0"
 
-targets="
-	linux_arm
-	linux_amd64
-	linux_x64
-	linux_x86
-"
+targets="linux_arm linux_amd64 linux_x64 linux_x86"
+
 IUSE_GO_TARGETS="$(printf ' go_targets_%s' ${targets})"
 IUSE="${IUSE_GO_TARGETS}"
 REQUIRED_USE="|| ( ${IUSE_GO_TARGETS} )"
 
-DEPEND=""
+DEPEND=">=dev-lang/go-bootstrap-1.4.1"
 RDEPEND=""
 
 # The tools in /usr/lib/go should not cause the multilib-strict check to fail.
@@ -52,9 +48,12 @@ src_prepare()
 
 src_compile()
 {
+	export GOROOT_BOOTSTRAP="${EPREFIX}"/usr/lib/go1.4
 	export GOROOT_FINAL="${EPREFIX}"/usr/lib/go
 	export GOROOT="$(pwd)"
 	export GOBIN="${GOROOT}/bin"
+	tc-export CC
+
 	cd src
 	# TODO: don't be so stupid and build everything manually
 	# so the host stuff is not rebuilt from scratch for each target
@@ -93,7 +92,7 @@ src_test()
 src_install()
 {
 	dobin $(find bin -type f -maxdepth 1)
-	dodoc AUTHORS CONTRIBUTORS PATENTS README misc/editors
+	dodoc AUTHORS CONTRIBUTORS PATENTS README.md
 
 	dodir /usr/lib/go
 	insinto /usr/lib/go
@@ -102,7 +101,7 @@ src_install()
 	# Once this is fixed, we can consider using the doc use flag to control
 	# installing the doc and src directories.
 	# [1] http://code.google.com/p/go/issues/detail?id=2775
-	doins -r doc include lib pkg src
+	doins -r doc lib pkg src
 	fperms -R +x /usr/lib/go/pkg/tool
 }
 
