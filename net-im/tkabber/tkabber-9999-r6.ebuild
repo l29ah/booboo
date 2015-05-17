@@ -35,10 +35,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	use vanilla || {
-		epatch "${FILESDIR}/shitfree.patch"
-		epatch "${FILESDIR}/tkabber-gpg-dont-sign-messages.patch"
-	}
+	epatch_user
 }
 
 src_compile() {
