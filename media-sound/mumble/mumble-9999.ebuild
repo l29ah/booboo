@@ -69,7 +69,8 @@ src_configure() {
 			no-bundled-speex \
 			no-embed-qt-translations \
 			no-server \
-			no-update" \
+			no-update \
+			qt4-legacy-compat" \
 		DEFINES+="PLUGIN_PATH=/usr/$(get_libdir)/mumble"
 }
 
