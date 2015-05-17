@@ -11,32 +11,6 @@
  }
  
  proc chat::reconnect_groupchats {xlib} {
---- tkabber.old/tkabber/ifacetk/iface.tcl	2010-03-22 19:01:57.000000000 +0300
-+++ tkabber/tkabber/ifacetk/iface.tcl	2011-04-05 04:10:27.000000000 +0400
-@@ -360,7 +360,7 @@
- 		    [list command [::msgcat::mc "Add group by regexp on JIDs..."] {} {} {} \
- 			 -command [namespace current]::roster::add_group_by_jid_regexp_dialog] \
- 		  ]] \
--		  [list cascad [::msgcat::mc "Chats"] {} chats $ifacetk::options(show_tearoffs) \
-+		  [list cascad [::msgcat::mc "MUCs"] {} chats $ifacetk::options(show_tearoffs) \
- 		   [list \
- 		    [list checkbutton [::msgcat::mc "Generate enter/exit messages"] {} {} {} \
- 			 -variable muc::options(gen_enter_exit_msgs)] \
---- tkabber.old/tkabber/plugins/roster/conferences.tcl	2010-03-22 19:01:56.000000000 +0300
-+++ tkabber/tkabber/plugins/roster/conferences.tcl	2011-04-05 04:18:11.000000000 +0400
-@@ -41,9 +41,9 @@
- 		       conference rooms on login."] \
- 	-type boolean -group Chat
- 
--    custom::defvar options(roster_group) [::msgcat::mc "Conferences"] \
-+    custom::defvar options(roster_group) [::msgcat::mc "MUCs"] \
- 	[::msgcat::mc "Default group for conferences in roster."] \
--	-type string -group Hidden
-+	-type string -group Chat
- }
- 
- ###############################################################################
-
 --- tkabber.old/tkabber/login.tcl	2012-01-07 18:35:50.000000000 +0400
 +++ tkabber/tkabber/login.tcl	2012-01-07 18:36:29.000000000 +0400
 @@ -345,11 +345,6 @@
