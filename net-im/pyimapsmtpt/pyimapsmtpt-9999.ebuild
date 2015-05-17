@@ -12,7 +12,7 @@ DESCRIPTION="An xmpp transport (or bot, possibly to-be-done) that allows using I
 HOMEPAGE="https://github.com/HoverHell/pyimapsmtpt"
 EGIT_REPO_URI="https://github.com/HoverHell/pyimapsmtpt"
 
-LICENSE="MIT"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
