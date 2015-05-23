@@ -14,10 +14,10 @@ SRC_URI=""
 LICENSE="MIT CC-BY-3.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
+IUSE="test static-libs"
 
 DEPEND=">sys-devel/bison-3.0
-	dev-libs/oniguruma
+	dev-libs/oniguruma[static-libs?]
 	sys-devel/flex
 	test? ( dev-util/valgrind )"
 
@@ -30,5 +30,5 @@ src_prepare() {
 
 src_configure() {
 	# don't try to rebuild docs
-	econf --disable-docs
+	econf --disable-docs $(use_enable static-libs static)
 }
