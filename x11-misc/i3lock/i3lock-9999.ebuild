@@ -24,7 +24,7 @@ RDEPEND="virtual/pam
 	x11-libs/cairo[xcb]"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
-DOCS=( CHANGELOG README )
+DOCS=( CHANGELOG README.md )
 
 pkg_setup() {
 	tc-export CC
