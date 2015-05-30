@@ -1,0 +1,29 @@
+--- common/mafw-dbus.c.orig	2015-05-29 13:02:01.756999264 +0300
++++ common/mafw-dbus.c	2015-05-29 13:02:12.513872344 +0300
+@@ -75,26 +75,6 @@
+ 	g_assert_not_reached();
+ }
+ 
+-/* Stolen from D-Bus internals. */
+-typedef union
+-{
+-	dbus_int16_t  i16;
+-	dbus_uint16_t u16;
+-	dbus_int32_t  i32;
+-	dbus_uint32_t u32;
+-#ifdef DBUS_HAVE_INT64
+-	dbus_int64_t  i64;
+-	dbus_uint64_t u64;
+-#else
+-	struct {
+-		char eightbytes[8];
+-	};
+-#endif
+-	double dbl;
+-	unsigned char byt;
+-	char *str;
+-} DBusBasicValue;
+-
+ /*
+  * Appends an array (@values) of length @nelem consisting of @eltype
+  * typed elements to @iter.  Handles arrays of basic types and and
