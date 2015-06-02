@@ -35,7 +35,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch_user
+	use vanilla || epatch_user
 }
 
 src_compile() {
