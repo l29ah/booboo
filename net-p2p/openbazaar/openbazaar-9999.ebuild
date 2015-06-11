@@ -35,6 +35,14 @@ DEPEND="
 	>=dev-python/pyee-0.1.0"
 RDEPEND="${DEPEND}"
 
+pkg_setup() {
+	enewuser openbazaar
+}
+
+src_prepare() {
+	sed -i -e "s#logs#/var/log/openbazaar/#;s#'db'#/var/lib/openbazaar/" ./node/openbazaar_daemon.py
+}
+
 src_compile() {
 	true
 }
@@ -45,4 +53,6 @@ src_install() {
 	dobin openbazaar
 	insinto /usr/share/openbazaar/
 	doins -r node html rudp
+	mkdir $D/var/log/openbazaar $D/var/lib/openbazaar
+	chown openbazaar $D/var/log/openbazaar $D/var/lib/openbazaar
 }
