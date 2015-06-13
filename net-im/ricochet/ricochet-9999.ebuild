@@ -24,7 +24,8 @@ DEPEND="
 	dev-qt/qtdeclarative:5
 	dev-qt/qtquickcontrols:5
 	"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	net-misc/tor"
 
 src_configure() {
 	use debug && d='CONFIG+=debug' || d='CONFIG+=release'
