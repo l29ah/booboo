@@ -8,18 +8,21 @@ inherit cmake-utils
 
 DESCRIPTION="XMPP gateway to IRC."
 HOMEPAGE="http://biboumi.louiz.org/"
-SRC_URI="http://git.louiz.org/biboumi/snapshot/biboumi-1.1.tar.xz"
+SRC_URI="http://git.louiz.org/biboumi/snapshot/${P}.tar.xz"
 
 LICENSE="ZLIB"
 SLOT="0"
-KEYWORDS="~amd64"
-IUSE=""
+KEYWORDS="~x86 ~amd64"
+IUSE="+doc +tls"
 
-DEPEND="
+RDEPEND="
 	dev-libs/expat
 	virtual/libiconv
 	sys-apps/util-linux
 	net-dns/libidn
 	net-dns/c-ares
-	dev-libs/botan"
-RDEPEND="${DEPEND}"
+	tls? ( >=dev-libs/botan-1.11 )"
+DEPEND="${RDEPEND}
+	doc? ( app-text/ronn )"
+
+DOCS=( README CHANGELOG conf/biboumi.cfg )
