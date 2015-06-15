@@ -40,7 +40,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -i -e "s#logs#/var/log/openbazaar/#;s#'db'#/var/lib/openbazaar/" ./node/openbazaar_daemon.py
+	sed -i -e "s#'logs'#'/var/log/openbazaar/'#;s#'db'#'/var/lib/openbazaar/'#" ./node/openbazaar_daemon.py || die
 }
 
 src_compile() {
@@ -53,6 +53,6 @@ src_install() {
 	dobin openbazaar
 	insinto /usr/share/openbazaar/
 	doins -r node html rudp
-	mkdir $D/var/log/openbazaar $D/var/lib/openbazaar
-	chown openbazaar $D/var/log/openbazaar $D/var/lib/openbazaar
+	dodir /var/log/openbazaar /var/lib/openbazaar
+	fowners openbazaar /var/log/openbazaar /var/lib/openbazaar
 }
