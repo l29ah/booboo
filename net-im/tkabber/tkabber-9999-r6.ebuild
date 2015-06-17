@@ -7,10 +7,10 @@ inherit fossil eutils
 
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
-IUSE="contrib -crypt doc examples plugins 3rd-party-plugins ssl sound tkimg
+IUSE="contrib -crypt +doc examples plugins 3rd-party-plugins ssl sound tkimg
 trayicon vanilla"
 
-DEPEND="
+RDEPEND="
 	>=dev-lang/tcl-8.3.3
 	>=dev-lang/tk-8.3.3
 	>=dev-tcltk/tcllib-1.6
@@ -21,7 +21,8 @@ DEPEND="
 	sound? ( dev-tcltk/snack )
 	trayicon? ( >=dev-tcltk/tktray-1.1 )
 	tkimg? ( >dev-tcltk/tkimg-1.4.20100510 )" # segfaulty crap
-RDEPEND="${DEPEND}"
+DEPEND="${DEPEND}
+	doc? ( app-text/xml2rfc )"
 
 LICENSE="GPL-2"
 KEYWORDS=""
@@ -39,9 +40,7 @@ src_prepare() {
 }
 
 src_compile() {
-	echo
-	einfo "Nothing to compile."
-	echo
+	true
 }
 
 src_install() {
@@ -60,19 +59,13 @@ src_install() {
 		fi
 	done
 
+	sed -i -e 's#\[fullpath ChangeLog\]#"/usr/share/doc/'"$PF"'/ChangeLog"#' tkabber.tcl
 	cp *.tcl "${D}/usr/share/tkabber" \
 		|| die "Can't copy tcl files to ${D}/usr/share/tkabber"
 
 	emake DESTDIR="${D}" PREFIX="/usr" install-bin || die "emake install failed."
+	use doc && emake DESTDIR="${D}" PREFIX="/usr" DOCDIR="/usr/share/doc/$PF" install-doc || die "emake install-doc failed."
 
-	dodoc AUTHORS ChangeLog INSTALL README \
-		|| die "Can't install tkabber documentation"
-
-	if use doc ; then
-		insinto "/usr/share/doc/${PF}"
-		doins -r doc \
-		|| die "Can't install extra tkabber documentation to ${D}/usr/share/doc/${PF}"
-	fi
 	if use examples ; then
 		emake DESTDIR="${D}" PREFIX="/usr" install-examples || die "Can't install examples."
 	fi
@@ -82,7 +75,7 @@ src_install() {
 	fi
 
 	doicon "${FILESDIR}/${PN}.png"
-	make_desktop_entry ${PN} Tkabber ${PN}.png
+	make_desktop_entry ${PN} Tkabber
 
 	if use plugins || use 3rd-party-plugins; then
 		TKABBER_PLUGINS="${TKABBER_PLUGINS:-}"
@@ -142,15 +135,6 @@ pkg_postinst() {
 		echo
 	fi
 	plugins_inform
-}
-
-subversion_export() {
-		cd "${ESVN_STORE_DIR}/${ESVN_PROJECT}" \
-		|| die "Can't chdir to ${ESVN_STORE_DIR}/${ESVN_PROJECT}"
-
-		mkdir -p "${S}"
-		rsync -rlpgo --exclude=".svn/" . "${S}" \
-		|| die "Can't export to ${S}."
 }
 
 # Getting list of directories in current or specified by argument directory.
