@@ -22,3 +22,8 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	>=dev-python/lxml-2.2.7
 	>=dev-python/requests-2.5.0"
+
+src_install() {
+	distutils-r1_src_install
+	keepdir /var/cache/xml2rfc
+}
