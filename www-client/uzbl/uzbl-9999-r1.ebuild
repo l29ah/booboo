@@ -40,7 +40,10 @@ COMMON_DEPEND='
 		>=x11-libs/gtk+-2.14:2
 	)
 	gtk3? (
-		net-libs/webkit-gtk:3
+		|| (
+			net-libs/webkit-gtk:4
+			net-libs/webkit-gtk:3
+		)
 		x11-libs/gtk+:3
 	)
 '
@@ -126,7 +129,7 @@ src_prepare() {
 
 src_compile() {
 	[[ ${PV} == 9999 ]] && gtk_var='ENABLE_GTK3' || gtk_var='USE_GTK3'
-	emake PREFIX="${PREFIX}" ${gtk_var}=$(use gtk3 && echo yes || echo no)
+	emake PREFIX="${PREFIX}" ${gtk_var}=$(use gtk3 && echo yes || echo no) ENABLE_WEBKIT2=$(use gtk3 && echo yes || echo no)
 }
 
 src_install() {
@@ -135,7 +138,7 @@ src_install() {
 	use browser && use tabbed && targets="${targets} install-uzbl-tabbed"
 
 	# -j1 : upstream bug #351
-	emake -j1 DESTDIR="${D}" PREFIX="${PREFIX}"	\
+	emake -j1 DESTDIR="${D}" PREFIX="${PREFIX}" ${gtk_var}=$(use gtk3 && echo yes || echo no) ENABLE_WEBKIT2=$(use gtk3 && echo yes || echo no) \
 		DOCDIR="${ED}/usr/share/doc/${PF}" ${targets}
 
 	if use vim-syntax; then
