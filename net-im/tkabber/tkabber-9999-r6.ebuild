@@ -64,7 +64,9 @@ src_install() {
 		|| die "Can't copy tcl files to ${D}/usr/share/tkabber"
 
 	emake DESTDIR="${D}" PREFIX="/usr" install-bin || die "emake install failed."
-	use doc && emake DESTDIR="${D}" PREFIX="/usr" DOCDIR="/usr/share/doc/$PF" install-doc || die "emake install-doc failed."
+	if use doc; then
+		emake DESTDIR="${D}" PREFIX="/usr" DOCDIR="/usr/share/doc/$PF" install-doc || die "emake install-doc failed."
+	fi
 
 	if use examples ; then
 		emake DESTDIR="${D}" PREFIX="/usr" install-examples || die "Can't install examples."
