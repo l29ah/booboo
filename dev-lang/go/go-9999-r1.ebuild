@@ -9,7 +9,7 @@ export CTARGET=${CTARGET:-${CHOST}}
 inherit eutils git-2
 
 EGIT_REPO_URI="https://go.googlesource.com/go"
-KEYWORDS="-* ~amd64 ~arm ~x86"
+KEYWORDS=""
 
 DESCRIPTION="A concurrent garbage collected and typesafe programming language"
 HOMEPAGE="http://www.golang.org"
