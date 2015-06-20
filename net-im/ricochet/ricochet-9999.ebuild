@@ -15,16 +15,17 @@ SLOT="0"
 KEYWORDS=""
 IUSE="debug"
 
-DEPEND="
+cDEPEND="
 	dev-libs/openssl
 	dev-libs/protobuf
-	dev-util/pkgconfig
 	dev-qt/qtcore:5
 	dev-qt/qtmultimedia:5
 	dev-qt/qtdeclarative:5
 	dev-qt/qtquickcontrols:5
 	"
-RDEPEND="${DEPEND}
+DEPEND="${cDEPEND}
+	virtual/pkgconfig"
+RDEPEND="${cDEPEND}
 	net-misc/tor"
 
 src_configure() {

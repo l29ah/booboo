@@ -17,7 +17,7 @@ IUSE=""
 RDEPEND=">=x11-libs/gtk+-2.6
 	dev-libs/libxml2"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_install() {
 	./autogen.sh

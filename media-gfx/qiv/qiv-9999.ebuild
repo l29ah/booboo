@@ -19,7 +19,7 @@ RDEPEND="x11-libs/gtk+:2
 	media-libs/libexif
 	xinerama? ( x11-libs/libXinerama )"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 S="${WORKDIR}/$PN"
 

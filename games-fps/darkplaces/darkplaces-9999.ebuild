@@ -44,7 +44,7 @@ RDEPEND="sdl? (
 		${UIRDEPEND} )
 	!dedicated? ( !sdl? ( !opengl? ( virtual/opengl ${UIRDEPEND} ) ) )"
 DEPEND=" !games-fps/nexuiz
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	app-arch/unzip
 	dev-util/subversion
 	games-util/fteqcc

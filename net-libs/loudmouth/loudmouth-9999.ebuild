@@ -19,7 +19,7 @@ RDEPEND=">=dev-libs/glib-2.4
 	openssl? ( dev-libs/openssl )"
 
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	doc? ( 
 		>=dev-util/gtk-doc-am-1
 		<dev-util/gtk-doc-1.12 

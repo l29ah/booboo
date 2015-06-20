@@ -23,7 +23,7 @@ RDEPEND="dev-cpp/glibmm:2
 	dev-cpp/libxmlpp:2.6
 	x11-libs/gtksourceview:2.0"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	doc? (
 		app-text/gnome-doc-utils
 		app-text/scrollkeeper

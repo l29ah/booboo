@@ -22,7 +22,7 @@ RDEPEND=">=x11-libs/gtk+-2.6:2
 	djvu? ( app-text/djvu )
 	umd? ( unwritten/libumd )"
 DEPEND="${RDEPEND}
-	>=dev-util/pkgconfig-0.9.0"
+	virtual/pkgconfig"
 
 src_unpack() {
 	subversion_src_unpack

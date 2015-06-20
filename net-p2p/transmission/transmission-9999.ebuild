@@ -27,7 +27,7 @@ libnotify? ( >=x11-libs/libnotify-0.4.4 ) )"
 DEPEND="${RDEPEND}
 sys-devel/gettext
 dev-util/intltool
-dev-util/pkgconfig"
+virtual/pkgconfig"
 
 pkg_setup() {
 	enewgroup transmission
