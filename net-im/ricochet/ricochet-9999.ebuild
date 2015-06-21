@@ -22,6 +22,7 @@ cDEPEND="
 	dev-qt/qtmultimedia:5
 	dev-qt/qtdeclarative:5
 	dev-qt/qtquickcontrols:5
+	dev-qt/linguist-tools:5
 	"
 DEPEND="${cDEPEND}
 	virtual/pkgconfig"
