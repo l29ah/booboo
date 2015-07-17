@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE=""
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="apparmor"
 
 DEPEND="$DEPEND dev-go/go-colorable"
 
@@ -23,4 +23,6 @@ QA_FLAGS_IGNORED="usr/bin/wego"
 
 src_install() {
 	dobin wego
+
+	use apparmor && insinto /etc/apparmor.d && doins $FILESDIR/usr.bin.wego
 }
