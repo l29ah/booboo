@@ -1,0 +1,30 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Tiziano Müller
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+	use net
+}
+
+start() {
+	ebegin "Starting edge"
+	start-stop-daemon \
+		--start \
+		--quiet \
+		--exec /usr/sbin/edge \
+		--env N2N_KEY="${KEY}" \
+		-- -a "${ADDRESS}" \
+			-c "${COMMUNITY}" \
+			-l "${SUPERNODE}" \
+			-u ${USER} -g ${GROUP} ${OPTIONS}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping edge"
+	start-stop-daemon \
+		--stop \
+		--exec /usr/sbin/edge
+	eend $?
+}

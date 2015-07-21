@@ -1,0 +1,27 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Tiziano Müller
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+	use net
+}
+
+start() {
+	ebegin "Starting supernode"
+	start-stop-daemon \
+		--start \
+		--quiet \
+		--exec /usr/sbin/supernode \
+		--user ${USER}:${GROUP} \
+		-- -l "${PORT}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping supernode"
+	start-stop-daemon \
+		--stop \
+		--exec /usr/sbin/supernode
+	eend $?
+}

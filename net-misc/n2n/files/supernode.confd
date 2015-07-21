@@ -1,0 +1,6 @@
+# the uid/gid owning the process
+USER="n2n"
+GROUP="n2n"
+
+# the port on which to listen
+PORT="7654"
