@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-misc/opengfx/opengfx-0.5.1.ebuild,v 1.4 2014/10/12 08:52:05 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/games-misc/opengfx/opengfx-0.5.2.ebuild,v 1.1 2015/07/29 01:46:07 mr_bones_ Exp $
 
 EAPI=5
 inherit eutils games
@@ -27,16 +27,12 @@ RDEPEND=""
 S=${WORKDIR}/${MY_P}-source
 
 src_prepare() {
-	# ensure that we will not use gimp to regenerate the pngs
-	# causes sandbox violations and not worth the effort anyway
-	sed -i -e '/^GFX_SCRIPT_LIST_FILES/s/^/#/' Makefile.config || die
-	# work with later versions of unix2dos from app-text/dos2unix
-	sed -i -e '/^UNIX2DOS_FLAGS/s/null/null >&2/' Makefile || die
+	epatch "${FILESDIR}/${P}-Makefile.patch"
 }
 
 src_compile() {
-	#emake help  # print out the env to make bug reports better
-	_V= emake bundle_tar
+	GIMP= emake help  # print out the env to make bug reports better
+	GIMP= _V= emake bundle_tar
 }
 
 src_install() {
