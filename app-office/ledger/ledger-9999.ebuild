@@ -2,14 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
-inherit cmake-utils git-2 python
+inherit cmake-utils git-r3 python
 
 DESCRIPTION="A double-entry accounting system with a command-line reporting interface"
 HOMEPAGE="http://ledger-cli.org/"
-EGIT_REPO_URI="git://github.com/ledger/ledger.git"
-EGIT_HAS_SUBMODULES=1
+EGIT_REPO_URI="https://github.com/ledger/ledger"
 IUSE="debug doc gnuplot libedit python static-libs vim-syntax experimental"
 use experimental && EGIT_BRANCH=next
 
@@ -17,7 +16,7 @@ LICENSE="BSD"
 SLOT="0"
 PYTHON_DEPEND="python? 2"
 
-DEPEND=">=dev-libs/boost-1.35[python?]
+DEPEND=">=dev-libs/boost-1.35:=[python?]
 	dev-libs/gmp
 	dev-libs/mpfr
 	doc? ( sys-apps/texinfo )
