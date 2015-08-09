@@ -9,9 +9,9 @@ EAPI=5
 CABAL_FEATURES="bin lib profile haddock hoogle hscolour"
 inherit haskell-cabal git-r3
 
-DESCRIPTION="(L29Ah's fork of the) Math-inspired programmatic 2&3D CAD: CSG, bevels, and shells; gcode export"
-HOMEPAGE="https://github.com/l29ah/ImplicitCAD"
-EGIT_REPO_URI="https://github.com/l29ah/ImplicitCAD"
+DESCRIPTION="Math-inspired programmatic 2&3D CAD: CSG, bevels, and shells; gcode export"
+HOMEPAGE="https://github.com/colah/ImplicitCAD"
+EGIT_REPO_URI="https://github.com/colah/ImplicitCAD"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
