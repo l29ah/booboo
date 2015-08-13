@@ -40,7 +40,7 @@ RDEPEND="${RDEPEND}
 	sqlite? ( dev-db/sqlite:3 )
 	purple? ( >=net-im/pidgin-2.6.0 )
 	skype? ( dev-libs/dbus-glib x11-base/xorg-server[xvfb] net-im/skype )
-	irc? ( net-im/communi[qt4] )
+	irc? ( <net-im/communi-3[qt4] )
 	"
 
 DEPEND="${RDEPEND}
