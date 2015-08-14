@@ -14,15 +14,21 @@ EGIT_BRANCH="2.2"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="icu test examples qt4 qt5"
+IUSE="icu test examples +qt4 qt5"
 
 REQUIRED_USE="
 	^^ ( qt4 qt5 )
 "
 
 RDEPEND="
-	dev-qt/qtcore
-	dev-qt/qtdeclarative
+	qt4? (
+		dev-qt/qtcore:4
+		dev-qt/qtdeclarative:4
+	)
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtdeclarative:5
+	)
 	!icu? ( dev-libs/uchardet )
 	icu? ( dev-libs/icu )
 "
