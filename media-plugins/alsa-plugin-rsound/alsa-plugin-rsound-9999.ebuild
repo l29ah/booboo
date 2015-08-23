@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/Themaister/alsa-plugins-rsound.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 SRC_URI=""
 
 IUSE=""
