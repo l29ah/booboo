@@ -4,18 +4,20 @@
 
 EAPI='5'
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_4 )
 
 inherit python-single-r1
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-2
-	EGIT_REPO_URI=${EGIT_REPO_URI:-'git://github.com/Dieterbe/uzbl.git'}
+	#EGIT_REPO_URI=${EGIT_REPO_URI:-'git://github.com/Dieterbe/uzbl.git'}
+	EGIT_REPO_URI=${EGIT_REPO_URI:-'https://github.com/keis/uzbl/'}
 	KEYWORDS=''
 	SRC_URI=''
 	IUSE='experimental'
 	use experimental &&
-		EGIT_BRANCH='next'
+		EGIT_BRANCH='web-extensions-dir'
+		#EGIT_BRANCH='next'
 else
 	inherit vcs-snapshot
 	KEYWORDS='~amd64 ~x86 ~amd64-linux ~x86-linux'
@@ -56,6 +58,7 @@ DEPEND="
 RDEPEND="
 	${COMMON_DEPEND}
 	x11-misc/xdg-utils
+	dev-python/six[${PYTHON_USEDEP}]
 	browser? (
 		x11-misc/xclip
 	)
@@ -107,10 +110,6 @@ src_prepare() {
 	# make gtk3 configurable
 	sed -r 's:^(ENABLE_GTK3) = (.*):\1?=\2:' -i Makefile ||
 		die 'Makefile sed for gtk3 failed'
-
-	# specify python version
-	python_fix_shebang bin/uzbl-tabbed ||
-		die 'Fix shebang failed'
 
 	# fix sandbox
 	if [ ${PV} == 9999 ] && ! use experimental
