@@ -11,17 +11,22 @@ SRC_URI="mirror://sourceforge/amide/${P}.tgz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="doc +dicom ffmpeg"
+IUSE="doc +dicom ffmpeg libgsl libfame"
 
 RDEPEND="
 	>=x11-libs/gtk+-2.16:2
 	dicom? ( sci-libs/dcmtk )
-	ffmpeg? ( virtual/ffmpeg )"
+	ffmpeg? ( virtual/ffmpeg )
+	libgsl? ( sci-libs/gsl )
+	libfame? ( media-libs/libfame )"
 DEPEND="${RDEPEND}
-	doc? ( app-text/gnome-doc-utils )"
+	doc? (
+		app-text/gnome-doc-utils
+		app-text/scrollkeeper
+	)"
 
 src_configure() {
-	econf $(use_enable doc) $(use_enable dicom libdcmdata) $(use_enable ffmpeg)
+	econf $(use_enable doc) $(use_enable dicom libdcmdata) $(use_enable ffmpeg) $(use_enable libfame) $(use_enable libgsl)
 }
 
 src_compile() {
