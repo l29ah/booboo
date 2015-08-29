@@ -25,7 +25,7 @@ RDEPEND=""
 src_compile()
 {
 	mkdir destdir
-	emake MAKEOBJ=/usr/lib/games/simutrans-exp/makeobj DESTDIR=destdir
+	emake MAKEOBJ=/usr/lib/games/simutrans-exp/makeobj-experimental DESTDIR=destdir
 }
 
 src_install()

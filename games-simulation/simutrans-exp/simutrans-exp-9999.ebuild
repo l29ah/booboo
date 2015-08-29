@@ -74,7 +74,7 @@ src_install() {
 	newgamesbin build/default/simutrans-experimental ${PN} || die "dogamesbin failed"
 
 	exeinto /usr/lib/games/${PN}
-	doexe build/default/makeobj/makeobj || die "doexe failed"
+	doexe build/default/makeobj-experimental/makeobj-experimental || die "doexe failed"
 
 	insinto "${GAMES_DATADIR}"/${PN}
 	doins -r simutrans/* || die "doins failed"
