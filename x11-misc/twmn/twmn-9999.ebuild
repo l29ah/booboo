@@ -20,6 +20,7 @@ DEPEND="
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtdbus:5
+		dev-qt/qtx11extras:5
 	)
 	!qt5? (
 		dev-qt/qtcore:4
@@ -31,7 +32,7 @@ DEPEND="
 	"
 RDEPEND="${DEPEND}"
 
-DOCS=( TODO README.markdown )
+DOCS=( TODO README.md )
 
 src_unpack() {
 	use qt5 || EGIT_COMMIT=e8f5096932db1fa1d7fcd7b2e421033cdfd52dac
@@ -40,4 +41,12 @@ src_unpack() {
 
 src_prepare() {
 	sed -i -e 's#/usr/local/#/usr/#g' */*.pro
+}
+
+src_configure() {
+	if use qt5; then
+		eqmake5
+	else
+		qt4-r2_src_configure
+	fi
 }
