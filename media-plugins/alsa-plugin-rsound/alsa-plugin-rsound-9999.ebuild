@@ -19,7 +19,7 @@ IUSE=""
 
 RDEPEND="
 	media-libs/alsa-lib
-	media-sound/rsound
+	media-sound/rsound:=
 "
 DEPEND="${RDEPEND}"
 
