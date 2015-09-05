@@ -10,11 +10,10 @@ DESCRIPTION="wego is a weather client for the terminal."
 EGO_PACKAGE_PATH="github.com/schachmat/wego"
 HOMEPAGE="https://${EGO_PACKAGE_PATH}/"
 EGIT_REPO_URI=$HOMEPAGE
-SRC_URI=""
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 IUSE="apparmor"
 
 DEPEND="$DEPEND dev-go/go-colorable"
@@ -23,6 +22,7 @@ QA_FLAGS_IGNORED="usr/bin/wego"
 
 src_install() {
 	dobin wego
+	dodoc README.md
 
 	use apparmor && insinto /etc/apparmor.d && doins $FILESDIR/usr.bin.wego
 }
