@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
-inherit autotools base git-2
+EAPI=5
+inherit autotools base git-r3
 
 DESCRIPTION="RSound plugin for ALSA"
 HOMEPAGE="http://themaister.net/rsound.html"
