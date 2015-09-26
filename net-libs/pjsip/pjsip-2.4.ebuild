@@ -29,7 +29,8 @@ DEPEND="alsa? ( media-libs/alsa-lib )
 	gsm? ( media-sound/gsm )
 	ilbc? ( dev-libs/ilbc-rfc3951 )
 	speex? ( media-libs/speex )
-	ssl? ( dev-libs/openssl )"
+	ring? ( ssl? ( net-libs/gnutls ) )
+	!ring? ( ssl? ( dev-libs/openssl ) )"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/pjproject-${PV}"
@@ -58,15 +59,28 @@ src_prepare() {
 	# TODO: remove deps to shipped codecs and libs, use system ones
 	# rm -r third_party
 	# libresample: https://ccrma.stanford.edu/~jos/resample/Free_Resampling_Software.html
+
+	use ring && {
+		epatch $WORKDIR/ring/contrib/src/pjproject/*.patch $FILESDIR/pjsip-ring-intptr_t.patch
+		sed -i -e 's#/usr/local#/usr#' aconfigure
+	}
 }
 
 src_configure() {
 	# Disable through portage available codecs
-	econf --disable-gsm-codec \
+	ssl=''
+	if use ring; then
+		use ssl && ssl=--enable-ssl=gnutls
+		conf=./aconfigure
+	else
+		use ssl && ssl=$(use_enable ssl)
+		conf=econf
+	fi
+	$conf --disable-gsm-codec \
 		--disable-speex-codec \
 		--disable-ilbc-codec \
 		--disable-speex-aec \
-		$(use_enable ssl) \
+		$ssl \
 		$(use_enable epoll) \
 		$(use_enable alsa sound) \
 		$(use_enable oss) \
@@ -78,8 +92,6 @@ src_configure() {
 		#$(use_enable small-filter) \
 		#$(use_enable large-filter) \
 		#$(use_enable speex-aec) \
-
-	use ring && epatch $WORKDIR/ring/contrib/src/pjproject/*.patch $FILESDIR/pjsip-ring-intptr_t.patch
 }
 
 src_compile() {
