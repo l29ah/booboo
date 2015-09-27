@@ -25,6 +25,7 @@ IUSE="gstreamer test"
 COMMON_DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 DEPEND="${COMMON_DEPEND}
 	app-text/asciidoc
+	dev-util/source-highlight
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )"
 RDEPEND="${COMMON_DEPEND}
 	>=dev-python/jinja-2.7.3[${PYTHON_USEDEP}]
@@ -38,9 +39,7 @@ RDEPEND="${COMMON_DEPEND}
 RESTRICT="test"
 
 python_compile_all() {
-	if [[ ${PV} == "9999" ]]; then
-		"${PYTHON}" scripts/asciidoc2html.py || die "Failed generating docs"
-	fi
+	"${PYTHON}" scripts/asciidoc2html.py || die "Failed generating docs"
 
 	a2x -f manpage doc/${PN}.1.asciidoc || die "Failed generating man page"
 }
