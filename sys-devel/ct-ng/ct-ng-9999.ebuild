@@ -35,7 +35,7 @@ src_configure () {
 src_install() {
 	emake DESTDIR="${D%/}" install
 	newbashcomp ${PN}.comp ${PN}
-	dodoc README TODO
+	dodoc README.md TODO
 	use doc && mv "${D}"/usr/share/doc/crosstool-ng/"${PN}.${PVR}"/* \
 		"${D}"/usr/share/doc/"${PF}"
 	rm -rf "${D}"/usr/share/doc/crosstool-ng
