@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/media-video/motion/motion-3.2.12.ebuild,v 1.1 2011/05/19 18:50:35 ssuominen Exp $
 
 EAPI=4
-inherit eutils user git-r3
+inherit eutils user git-r3 autotools
 
 DESCRIPTION="A fork of the software motion detector"
 HOMEPAGE="https://github.com/Mr-Dave/motion"
@@ -24,6 +24,10 @@ DEPEND="${RDEPEND}
 
 pkg_setup() {
 	enewuser motion -1 -1 -1 video
+}
+
+src_prepare() {
+	eautoreconf
 }
 
 src_configure() {
