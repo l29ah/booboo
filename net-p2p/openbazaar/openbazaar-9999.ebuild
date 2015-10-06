@@ -6,7 +6,7 @@ EAPI=5
 
 inherit git-r3
 
-DESCRIPTION="penBazaar is a decentralized marketplace proof of concept. It is based off of the POC code by the darkmarket team and is now licensed under the MIT license."
+DESCRIPTION="OpenBazaar is a decentralized marketplace proof of concept. It is based off of the POC code by the darkmarket team and is now licensed under the MIT license."
 HOMEPAGE="https://github.com/OpenBazaar/OpenBazaar"
 EGIT_REPO_URI="https://github.com/OpenBazaar/OpenBazaar.git"
 
