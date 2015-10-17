@@ -1,0 +1,25 @@
+#!/bin/bash
+db=/var/db/co2mon/graph.rrd
+[ -e "$db" ] || rrdtool create "$db" --step 5 \
+	DS:CO2:GAUGE:60:0:3000 \
+	DS:TEMP:GAUGE:60:0:40 \
+	RRA:AVERAGE:0:1:17280 \
+	RRA:AVERAGE:0.5:12:43200
+
+last_co2=U
+last_temp=U
+
+update_rrd() {
+    rrdtool update "$db" --template CO2:TEMP -- N:$last_co2:$last_temp
+}
+
+co2mond | while read -r name value; do
+    echo "$name $value"
+    if [ "$name" == "CntR" ]; then
+        last_co2=$value
+        update_rrd
+    elif [ "$name" == "Tamb" ]; then
+        last_temp=$value
+        update_rrd
+    fi
+done

@@ -1,0 +1,21 @@
+#!/sbin/runscript
+PIDFILE=/var/run/co2mond.pid
+start() {
+	ebegin "Starting co2mond"
+	start-stop-daemon \
+		--start \
+		--quiet \
+		--background \
+		--interpreted \
+		--exec /usr/bin/co2mond-rrd \
+		--pidfile "$PIDFILE" \
+		--make-pidfile
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping co2mond"
+	kill -- -`cat "$PIDFILE"`
+	rm "$PIDFILE"
+	eend $?
+}
