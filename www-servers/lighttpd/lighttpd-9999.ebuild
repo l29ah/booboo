@@ -2,15 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/www-servers/lighttpd/lighttpd-1.4.20.ebuild,v 1.8 2009/02/03 12:46:51 betelgeuse Exp $
 
+EAPI=5
+
 WANT_AUTOCONF=latest
 WANT_AUTOMAKE=latest
-inherit eutils autotools depend.php subversion
+inherit user eutils autotools depend.php git-r3
 
 DESCRIPTION="Lightweight high-performance web server"
 HOMEPAGE="http://www.lighttpd.net/"
-ESVN_REPO_URI="svn://svn.lighttpd.net/lighttpd/trunk/"
-ESVN_PROJECT="lighttpd"
-SVN_BOOTSTRAP="NOCONFIGURE=1 ./autogen.sh"
+EGIT_REPO_URI="git://git.lighttpd.net/lighttpd/lighttpd2.git"
 
 LICENSE="BSD"
 SLOT="0"
@@ -99,11 +99,7 @@ pkg_setup() {
 	enewuser lighttpd -1 -1 /var/www/localhost/htdocs lighttpd
 }
 
-src_unpack() {
-	subversion_src_unpack
-
-	EPATCH_SUFFIX="diff" EPATCH_OPTS="-l" epatch "${FILESDIR}"/"${PVR}" || die "Patching failed!"
-
+src_prepare() {
 	# dev-python/docutils installs rst2html.py not rst2html
 	sed -i -e 's|\(rst2html\)|\1.py|g' doc/Makefile.am || \
 		die "sed doc/Makefile.am failed"
@@ -170,13 +166,9 @@ src_install() {
 	update_config
 
 	# docs
-	dodoc AUTHORS README NEWS ChangeLog doc/*.sh
-	newdoc doc/lighttpd.conf lighttpd.conf.distrib
+	dodoc -r contrib
 
 	use doc && dohtml -r doc/*
-
-	docinto txt
-	dodoc doc/*.txt
 
 	# logrotate
 	insinto /etc/logrotate.d
