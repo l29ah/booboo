@@ -66,6 +66,7 @@ src_install() {
 
 	if use doc; then
 		dohtml "${BUILD_DIR}"/doc/ledger3.html
+		dodoc -r contrib
 	fi
 
 	rm -rf "${ED}"/usr/share/doc/${PN}
