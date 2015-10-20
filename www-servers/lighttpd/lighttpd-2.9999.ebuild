@@ -22,6 +22,7 @@ IUSE="bzip2 doc fastcgi gdbm ipv6 ldap lua minimal memcache mysql postgres pcre 
 RDEPEND="
 	!www-servers/cherokee
 	>=sys-libs/zlib-1.1
+	dev-libs/libev
 	bzip2?    ( app-arch/bzip2 )
 	gdbm?     ( sys-libs/gdbm )
 	ldap?     ( >=net-nds/openldap-2.1.26 )
