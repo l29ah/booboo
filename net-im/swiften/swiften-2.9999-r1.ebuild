@@ -70,6 +70,7 @@ src_compile() {
 		docbook_xsl="${EPREFIX}/usr/share/sgml/docbook/xsl-stylesheets"
 		docbook_xml="${EPREFIX}/usr/share/sgml/docbook/xml-dtd-4.5"
 		swiften_dll=1
+		distcc=1
 		Swiften
 	)
 

@@ -26,3 +26,14 @@ DEPEND="${RDEPEND}
 	doc? ( app-text/ronn )"
 
 DOCS=( README CHANGELOG conf/biboumi.cfg )
+
+pkg_setup() {
+	enewuser $PN
+}
+
+src_install() {
+	dodir /var/log/biboumi
+	fowners biboumi /var/log/biboumi
+
+	cmake-utils_src_install
+}

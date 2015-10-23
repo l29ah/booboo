@@ -10,14 +10,14 @@ inherit python-single-r1
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-2
-	#EGIT_REPO_URI=${EGIT_REPO_URI:-'git://github.com/Dieterbe/uzbl.git'}
-	EGIT_REPO_URI=${EGIT_REPO_URI:-'https://github.com/keis/uzbl/'}
+	EGIT_REPO_URI=${EGIT_REPO_URI:-'https://github.com/Dieterbe/uzbl.git'}
+	#EGIT_REPO_URI=${EGIT_REPO_URI:-'https://github.com/keis/uzbl/'}
 	KEYWORDS=''
 	SRC_URI=''
 	IUSE='experimental'
 	use experimental &&
-		EGIT_BRANCH='web-extensions-dir'
-		#EGIT_BRANCH='next'
+		#EGIT_BRANCH='web-extensions-dir'
+		EGIT_BRANCH='next'
 else
 	inherit vcs-snapshot
 	KEYWORDS='~amd64 ~x86 ~amd64-linux ~x86-linux'
