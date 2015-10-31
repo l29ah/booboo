@@ -16,7 +16,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND="
-	dev-libs/msgpack[cxx]"
+	>=dev-libs/msgpack-1.2.0[cxx]"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
