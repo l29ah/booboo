@@ -15,7 +15,9 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+rrdtool"
 
-DEPEND="rrdtool? ( net-analyzer/rrdtool )"
+DEPEND="
+	rrdtool? ( net-analyzer/rrdtool )
+	dev-libs/hidapi"
 RDEPEND="${DEPEND}"
 
 src_install() {
