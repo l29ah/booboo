@@ -17,7 +17,7 @@ IUSE="+png"
 
 DEPEND=""
 RDEPEND="<dev-lang/python-3
-	png? ( virtual/python-imaging )"	# FIXME proper python deps
+	png? ( dev-python/pillow )"
 
 src_install() {
 	python_convert_shebangs -r -x -- 2 .
