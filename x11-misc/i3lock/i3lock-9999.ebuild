@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2 toolchain-funcs
+inherit git-2 toolchain-funcs eutils
 
 DESCRIPTION="Simple screen locker"
 HOMEPAGE="http://i3wm.org/i3lock/"
