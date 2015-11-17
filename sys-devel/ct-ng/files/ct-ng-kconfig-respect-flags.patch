@@ -1,14 +1,13 @@
-diff -Naur crosstool-ng-1.15.3.orig//kconfig/Makefile crosstool-ng-1.15.3/kconfig/Makefile
---- crosstool-ng-1.15.3.orig//kconfig/Makefile	2012-07-17 16:39:55.000000000 -0400
-+++ crosstool-ng-1.15.3/kconfig/Makefile	2012-08-07 12:06:59.000000000 -0400
+--- kconfig/Makefile.old	2015-11-17 16:40:47.525496530 +0300
++++ kconfig/Makefile	2015-11-17 16:40:55.198946167 +0300
 @@ -6,8 +6,8 @@
  	@true   # Just be silent, you fscking son of a fscking beach...
  
  # Build flags
 -CFLAGS = -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\""
--LDFLAGS =
+-LDFLAGS = $(INTL_LIBS)
 +CFLAGS += -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\""
-+#LDFLAGS =
++LDFLAGS += $(INTL_LIBS)
  
  # Compiler flags to use gettext
  ifeq ($(gettext),)
