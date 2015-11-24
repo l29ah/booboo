@@ -20,7 +20,6 @@ RDEPEND="$DEPEND
 	app-eselect/eselect-package-manager"
 
 src_compile() {
-	cp /home/l29ah/projects/gentoo-clang/gentoo-clang-scripts/* .
 	true
 }
 
