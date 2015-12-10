@@ -15,7 +15,7 @@ EGIT_REPO_URI="https://github.com/OpenBazaar/python-libbitcoinclient"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="+bitcoin"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
