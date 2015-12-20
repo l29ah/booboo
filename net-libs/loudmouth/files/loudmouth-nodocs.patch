@@ -23,7 +23,7 @@ index 38749ce..ae96ab5 100644
  ChangeLog:
  	git log --no-merges $(OLD_VERSION)..HEAD > $(srcdir)/ChangeLog
 diff --git a/configure.ac b/configure.ac
-index 0f914aa..b03d8ee 100644
+index 4f1fcff..e82ff1a 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -44,7 +44,6 @@ AC_HEADER_STDC
@@ -35,7 +35,7 @@ index 0f914aa..b03d8ee 100644
  
  LT_CURRENT=1
 @@ -110,9 +109,6 @@ if test "x$have_idn" = "xyes"; then
- 	AC_DEFINE(HAVE_IDN, 1, [Define if IDN support is included])
+         AC_DEFINE(HAVE_IDN, 1, [Define if IDN support is included])
  fi
  
 -dnl Gtk doc
@@ -54,15 +54,15 @@ index 0f914aa..b03d8ee 100644
  examples/Makefile
  tests/Makefile
 @@ -320,7 +314,6 @@ echo "
- 	Linux TCP keepalives:     ${use_keepalives}
- 	Enable Debug:             ${enable_debug}
- 	Enable GSSAPI:            ${enable_gssapi}
--	Enable Documentation:     ${enable_gtk_doc}
- 	Enable Tests:             ${enable_test}
+         Linux TCP keepalives:     ${use_keepalives}
+         Enable Debug:             ${enable_debug}
+         Enable GSSAPI:            ${enable_gssapi}
+-        Enable Documentation:     ${enable_gtk_doc}
+         Enable Tests:             ${enable_test}
  
- 	Now type 'make' to build Loudmouth
+         Now type 'make' to build Loudmouth
 diff --git a/docs/reference/Makefile.am b/docs/reference/Makefile.am
-index f9dea8f..95e1371 100644
+index 5d9c3aa..16bda12 100644
 --- a/docs/reference/Makefile.am
 +++ b/docs/reference/Makefile.am
 @@ -80,9 +80,6 @@ GTKDOC_LIBS=						\
@@ -74,4 +74,4 @@ index f9dea8f..95e1371 100644
 -
  # Other files to distribute
  # e.g. EXTRA_DIST += version.xml.in
- EXTRA_DIST += 
+ EXTRA_DIST +=
