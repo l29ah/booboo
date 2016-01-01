@@ -1,0 +1,34 @@
+
+diff --git a/Makefile b/Makefile
+index 1c56cfe..46aa8f9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,28 +3,24 @@ include config.mk
+ all:
+ 	$(MAKE) -C icebox
+ 	$(MAKE) -C icepack
+-	$(MAKE) -C iceprog
+ 	$(MAKE) -C icemulti
+ 	# $(MAKE) -C icetime
+ 
+ clean:
+ 	$(MAKE) -C icebox clean
+ 	$(MAKE) -C icepack clean
+-	$(MAKE) -C iceprog clean
+ 	$(MAKE) -C icemulti clean
+ 	# $(MAKE) -C icetime clean
+ 
+ install:
+ 	$(MAKE) -C icebox install
+ 	$(MAKE) -C icepack install
+-	$(MAKE) -C iceprog install
+ 	$(MAKE) -C icemulti install
+ 	# $(MAKE) -C icetime install
+ 
+ uninstall:
+ 	$(MAKE) -C icebox uninstall
+ 	$(MAKE) -C icepack uninstall
+-	$(MAKE) -C iceprog uninstall
+ 	$(MAKE) -C icemulti uninstall
+ 	# $(MAKE) -C icetime uninstall
+ 

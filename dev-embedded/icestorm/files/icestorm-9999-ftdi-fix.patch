@@ -1,0 +1,13 @@
+diff --git a/iceprog/Makefile b/iceprog/Makefile
+index 4ffb9a5..13d0acb 100644
+--- a/iceprog/Makefile
++++ b/iceprog/Makefile
+@@ -1,6 +1,6 @@
+ include ../config.mk
+-LDLIBS = -lftdi -lm
+-CFLAGS = -MD -O0 -ggdb -Wall -std=c99
++LDLIBS = `pkg-config --libs libftdi1` -lm
++CFLAGS = -MD -O0 -ggdb -Wall -std=c99 `pkg-config --cflags libftdi1`
+ MXEGCC = /usr/local/src/mxe/usr/bin/i686-pc-mingw32-gcc
+ 
+ all: iceprog
