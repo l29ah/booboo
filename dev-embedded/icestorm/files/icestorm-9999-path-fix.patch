@@ -1,0 +1,47 @@
+diff --git a/config.mk b/config.mk
+index b6c0f6a..c52f172 100644
+--- a/config.mk
++++ b/config.mk
+@@ -1,4 +1,4 @@
+ CXX = clang
+ CC = $(CXX)
+ DESTDIR =
+-PREFIX = /usr/local
++PREFIX = /usr
+diff --git a/icebox/icebox_vlog.py b/icebox/icebox_vlog.py
+index a956e8f..6616220 100755
+--- a/icebox/icebox_vlog.py
++++ b/icebox/icebox_vlog.py
+@@ -367,7 +367,7 @@ def seg_to_net(seg, default=None):
+ 
+ if lookup_symbols:
+     text_func.append("// Debug Symbols")
+-    with open("/usr/local/share/icebox/chipdb-%s.txt" % ic.device, "r") as f:
++    with open("/usr/share/icebox/chipdb-%s.txt" % ic.device, "r") as f:
+         current_net = -1
+         exported_names = dict()
+         for line in f:
+diff --git a/icepack/Makefile b/icepack/Makefile
+index 256c339..8eaac06 100644
+--- a/icepack/Makefile
++++ b/icepack/Makefile
+@@ -1,6 +1,6 @@
+ include ../config.mk
+ LDLIBS = -lm -lstdc++
+-CXXFLAGS = -MD -O0 -ggdb -Wall -std=c++11 -I/usr/local/include
++CXXFLAGS = -MD -O0 -ggdb -Wall -std=c++11
+ MXEGCC = /usr/local/src/mxe/usr/bin/i686-pc-mingw32-gcc
+ 
+ all: icepack iceunpack
+diff --git a/iceprog/Makefile b/iceprog/Makefile
+index 4ffb9a5..0798001 100644
+--- a/iceprog/Makefile
++++ b/iceprog/Makefile
+@@ -1,6 +1,6 @@
+ include ../config.mk
+-LDLIBS = -L/usr/local/lib -lftdi -lm
+-CFLAGS = -MD -O0 -ggdb -Wall -std=c99 -I/usr/local/include
++LDLIBS = -lftdi -lm
++CFLAGS = -MD -O0 -ggdb -Wall -std=c99
+ MXEGCC = /usr/local/src/mxe/usr/bin/i686-pc-mingw32-gcc
+ 
