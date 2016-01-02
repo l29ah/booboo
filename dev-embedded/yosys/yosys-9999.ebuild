@@ -16,19 +16,19 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="
-		sys-libs/readline
-		virtual/libffi
-		dev-vcs/git
-		dev-vcs/mercurial"
+	sys-libs/readline
+	virtual/libffi
+	dev-vcs/git
+	dev-lang/tcl
+	dev-vcs/mercurial"
 
 DEPEND="
-	    sys-devel/bison
-		sys-devel/flex
-        >=dev-lang/python-3
-		sys-apps/gawk
-		media-gfx/graphviz
-		virtual/pkgconfig
-        ${RDEPEND}"
+	sys-devel/bison
+	sys-devel/flex
+	>=dev-lang/python-3
+	sys-apps/gawk
+	virtual/pkgconfig
+	${RDEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-path-fix.patch
