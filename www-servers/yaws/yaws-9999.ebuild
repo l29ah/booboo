@@ -6,7 +6,7 @@ EAPI="2"
 
 inherit git-2 eutils autotools
 
-EGIT_REPO_URI="http://github.com/klacke/yaws.git"
+EGIT_REPO_URI="https://github.com/klacke/yaws.git"
 DESCRIPTION="Yaws is a high performance HTTP 1.1 web server."
 HOMEPAGE="http://yaws.hyber.org/"
 LICENSE="BSD"

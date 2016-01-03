@@ -7,7 +7,7 @@ inherit base git-2
 
 DESCRIPTION="uzbl event manager and tab manager and cookie manager"
 HOMEPAGE="http://github.com/jakeprobst/uzblstuff"
-EGIT_REPO_URI="http://github.com/jakeprobst/uzblstuff.git"
+EGIT_REPO_URI="https://github.com/jakeprobst/uzblstuff.git"
 
 LICENSE=""
 SLOT="0"

@@ -12,7 +12,7 @@ inherit cmake-utils versionator ${VCS_ECLASS}
 DESCRIPTION="Spectrum is a XMPP transport/gateway"
 HOMEPAGE="http://spectrum.im"
 if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="git://github.com/hanzz/libtransport.git"
+	EGIT_REPO_URI="https://github.com/hanzz/libtransport.git"
 else
 	MY_PN="spectrum"
 	MY_PV=$(replace_version_separator '_' '-')

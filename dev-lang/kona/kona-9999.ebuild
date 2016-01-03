@@ -8,7 +8,7 @@ inherit git-2
 
 DESCRIPTION="Kona is an open-source implementation of the K programming language."
 HOMEPAGE="https://github.com/kevinlawler/kona"
-EGIT_REPO_URI='git://github.com/kevinlawler/kona.git'
+EGIT_REPO_URI='https://github.com/kevinlawler/kona.git'
 
 LICENSE="as-is"
 SLOT="0"

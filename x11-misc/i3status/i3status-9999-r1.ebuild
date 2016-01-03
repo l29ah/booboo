@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-EGIT_REPO_URI="git://github.com/lexszero/i3status"
+EGIT_REPO_URI="https://github.com/lexszero/i3status"
 
 inherit base multilib git-2
 

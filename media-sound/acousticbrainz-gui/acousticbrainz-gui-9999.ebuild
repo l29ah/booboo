@@ -9,7 +9,7 @@ inherit cmake-utils git-r3
 DESCRIPTION="This client lets you submit your own audio features to the AcousticBrainz project."
 HOMEPAGE="https://github.com/MTG/acousticbrainz-gui/"
 SRC_URI=""
-EGIT_REPO_URI="git://github.com/MTG/acousticbrainz-gui.git"
+EGIT_REPO_URI="https://github.com/MTG/acousticbrainz-gui.git"
 EGIT_COMMIT="c70a6dcd0f8574e94692ed5cf745d3612436b107" # before they switch to Qt5
 
 LICENSE="GPLv2"

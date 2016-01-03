@@ -4,7 +4,7 @@
 
 EAPI=4
 
-EGIT_REPO_URI="git://github.com/o01eg/fsharpbinding.git"
+EGIT_REPO_URI="https://github.com/o01eg/fsharpbinding.git"
 
 inherit git-2 eutils mono multilib versionator
 

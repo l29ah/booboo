@@ -8,7 +8,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="A lightweight and flexible command-line JSON processor"
 HOMEPAGE="http://stedolan.github.com/jq/"
-EGIT_REPO_URI="git://github.com/stedolan/jq.git"
+EGIT_REPO_URI="https://github.com/stedolan/jq.git"
 SRC_URI=""
 
 LICENSE="MIT CC-BY-3.0"

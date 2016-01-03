@@ -11,7 +11,7 @@ inherit git-r3 distutils-r1
 DESCRIPTION="Open multi-site list manager for media tracking sites."
 HOMEPAGE="https://github.com/z411/trackma"
 
-EGIT_REPO_URI="git://github.com/z411/trackma.git"
+EGIT_REPO_URI="https://github.com/z411/trackma.git"
 
 SRC_URI=""
 

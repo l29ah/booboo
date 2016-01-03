@@ -8,7 +8,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="cmacro: Lisp macros for C"
 HOMEPAGE="https://github.com/eudoxia0/cmacro"
-EGIT_REPO_URI="git://github.com/eudoxia0/cmacro.git"
+EGIT_REPO_URI="https://github.com/eudoxia0/cmacro.git"
 SRC_URI=""
 
 LICENSE="MIT"

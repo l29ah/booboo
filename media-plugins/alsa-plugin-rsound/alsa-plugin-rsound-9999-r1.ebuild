@@ -8,7 +8,7 @@ inherit autotools base git-r3
 DESCRIPTION="RSound plugin for ALSA"
 HOMEPAGE="http://themaister.net/rsound.html"
 SRC_URI=""
-EGIT_REPO_URI="git://github.com/Themaister/alsa-plugins-rsound.git"
+EGIT_REPO_URI="https://github.com/Themaister/alsa-plugins-rsound.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

@@ -8,7 +8,7 @@ inherit git-2 toolchain-funcs eutils
 
 DESCRIPTION="Simple screen locker"
 HOMEPAGE="http://i3wm.org/i3lock/"
-EGIT_REPO_URI="git://github.com/lexszero/i3lock"
+EGIT_REPO_URI="https://github.com/lexszero/i3lock"
 
 LICENSE="BSD"
 SLOT="0"

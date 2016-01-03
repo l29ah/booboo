@@ -8,7 +8,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="TuxOnIce module for dracut."
 HOMEPAGE="https://github.com/milo000/dracut-tuxonice"
-EGIT_REPO_URI="git://github.com/milo000/dracut-tuxonice.git"
+EGIT_REPO_URI="https://github.com/milo000/dracut-tuxonice.git"
 SRC_URI=""
 
 LICENSE="MIT CC-BY-3.0"

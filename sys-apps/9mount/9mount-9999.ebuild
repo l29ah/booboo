@@ -13,7 +13,7 @@ RDEPEND="${DEPEND}"
 
 DESCRIPTION="A set of SUID mounting tools for use with v9fs."
 HOMEPAGE="http://github.com/minad/9mount"
-EGIT_REPO_URI="git://github.com/minad/9mount.git"
+EGIT_REPO_URI="https://github.com/minad/9mount.git"
 
 LICENSE="ISC"
 SLOT="0"

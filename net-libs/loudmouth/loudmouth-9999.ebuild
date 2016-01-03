@@ -5,8 +5,8 @@ inherit base git-r3
 DESCRIPTION="Lightweight C Jabber library"
 HOMEPAGE="https://github.com/mcabber/loudmouth"
 # The official repo is dead; trying the mcabber-forked one
-#EGIT_REPO_URI="git://github.com/engineyard/loudmouth.git"
-EGIT_REPO_URI="git://github.com/mcabber/loudmouth.git"
+#EGIT_REPO_URI="https://github.com/engineyard/loudmouth.git"
+EGIT_REPO_URI="https://github.com/mcabber/loudmouth.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
