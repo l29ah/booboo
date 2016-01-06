@@ -14,6 +14,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="sys-devel/gcc sys-devel/make"
+DEPEND="sys-devel/make"
 RDEPEND=""
 
+# clang errors on this one
+CFLAGS="$CFLAGS -Wno-error=return-type"
