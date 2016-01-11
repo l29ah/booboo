@@ -1,0 +1,61 @@
+diff -Nurd owfs-3.1p0.orig/module/owshell/src/c/Makefile.am owfs-3.1p0/module/owshell/src/c/Makefile.am
+--- owfs-3.1p0.orig/module/owshell/src/c/Makefile.am	2015-01-11 02:31:32.000000000 +0100
++++ owfs-3.1p0/module/owshell/src/c/Makefile.am	2015-06-09 10:50:30.190892962 +0200
+@@ -41,7 +41,10 @@
+ 	-Wcast-align \
+ 	-Wstrict-prototypes \
+ 	-Wredundant-decls \
+-	${EXTRACFLAGS}
++	${EXTRACFLAGS} \
++	${PTHREAD_CFLAGS} \
++	${LIBUSB_CFLAGS} \
++	${PIC_FLAGS}
+ 
+ LDADD = ${LD_EXTRALIBS} ${OSLIBS}
+ 
+diff -Nurd owfs-3.1p0.orig/module/owtcl/Makefile.am owfs-3.1p0/module/owtcl/Makefile.am
+--- owfs-3.1p0.orig/module/owtcl/Makefile.am	2015-01-11 02:31:32.000000000 +0100
++++ owfs-3.1p0/module/owtcl/Makefile.am	2015-06-09 10:51:00.778221509 +0200
+@@ -40,6 +40,7 @@
+ 	-Wstrict-prototypes \
+ 	-Wredundant-decls \
+ 	${EXTRACFLAGS} \
++	${LIBUSB_CFLAGS} \
+ 	${PTHREAD_CFLAGS} \
+ 	$(TCL_DEFS) \
+ 	$(TCL_SHLIB_CFLAGS) \
+diff -Nurd owfs-3.1p0.orig/module/swig/perl5/OW/Makefile.linux.in owfs-3.1p0/module/swig/perl5/OW/Makefile.linux.in
+--- owfs-3.1p0.orig/module/swig/perl5/OW/Makefile.linux.in	2015-01-11 02:31:32.000000000 +0100
++++ owfs-3.1p0/module/swig/perl5/OW/Makefile.linux.in	2015-06-09 10:50:30.190892962 +0200
+@@ -9,7 +9,7 @@
+     'VERSION'	=>	q[@VERSION@],
+ # Avoid compilation problem for Fedora Core 1 and Slackware 10.2
+     'DEFINE'    =>	q[@PTHREAD_CFLAGS@ -D_FILE_OFFSET_BITS=64 -DSKIP_SEARCH_H @DEFS@],
+-    'INC'       =>	q[-I../../../../src/include -I../../../owlib/src/include @CPPFLAGS@],
++    'INC'       =>	q[-I../../../../src/include -I../../../owlib/src/include @CPPFLAGS@ @LIBUSB_CFLAGS@],
+ # Default value for LDDLFLAGS is $Config{lddlflags}="-shared -L/usr/local/lib"
+ # but we want rpath to be @libdir@ or @exec_prefix@/lib
+     'LDDLFLAGS' =>      q[-shared -L../../../owlib/src/c/.libs -Wl,-rpath=@prefix@/lib],
+diff -Nurd owfs-3.1p0.orig/module/swig/perl5/OW/Makefile.osx.in owfs-3.1p0/module/swig/perl5/OW/Makefile.osx.in
+--- owfs-3.1p0.orig/module/swig/perl5/OW/Makefile.osx.in	2015-01-11 02:31:32.000000000 +0100
++++ owfs-3.1p0/module/swig/perl5/OW/Makefile.osx.in	2015-06-09 10:50:30.190892962 +0200
+@@ -9,7 +9,7 @@
+     'VERSION'	=>	q[@VERSION@],
+ # Avoid compilation problem for Fedora Core 1 and Slackware 10.2
+     'DEFINE'    =>	q[@PTHREAD_CFLAGS@ -D_FILE_OFFSET_BITS=64 -DSKIP_SEARCH_H @DEFS@],
+-    'INC'       =>	q[-I../../../../src/include -I../../../owlib/src/include @CPPFLAGS@],
++    'INC'       =>	q[-I../../../../src/include -I../../../owlib/src/include @CPPFLAGS@ @LIBUSB_CFLAGS@],
+ # Default value for LDDLFLAGS is $Config{lddlflags}="-shared -L/usr/local/lib"
+ # but we want rpath to be @libdir@ or @exec_prefix@/lib
+     'LDDLFLAGS' =>      q[-bundle -flat_namespace -undefined suppress -Wl,-L../../../owlib/src/c/.libs],
+diff -Nurd owfs-3.1p0.orig/module/swig/php/Makefile.am owfs-3.1p0/module/swig/php/Makefile.am
+--- owfs-3.1p0.orig/module/swig/php/Makefile.am	2015-01-11 02:31:32.000000000 +0100
++++ owfs-3.1p0/module/swig/php/Makefile.am	2015-06-09 10:50:30.190892962 +0200
+@@ -22,6 +22,7 @@
+ 	-I$(top_srcdir)/src/include \
+ 	-I$(top_srcdir)/module/owlib/src/include \
+ 	${EXTRACFLAGS} \
++	${LIBUSB_CFLAGS} \
+ 	${PTHREAD_CFLAGS} \
+ 	@PHPINC@
+ 
