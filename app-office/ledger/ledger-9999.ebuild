@@ -10,7 +10,6 @@ DESCRIPTION="A double-entry accounting system with a command-line reporting inte
 HOMEPAGE="http://ledger-cli.org/"
 EGIT_REPO_URI="https://github.com/ledger/ledger"
 IUSE="debug doc gnuplot libedit python static-libs vim-syntax experimental"
-use experimental && EGIT_BRANCH=next
 
 LICENSE="BSD"
 SLOT="0"
@@ -27,6 +26,11 @@ RDEPEND="${DEPEND}
 
 # include test/input/drewr.dat as it is referenced by the manual
 DOCS=(test/input/drewr.dat)
+
+src_unpack() {
+	use experimental && EGIT_BRANCH=next
+	git-r3_src_unpack
+}
 
 src_prepare() {
 	cmake-utils_src_prepare
