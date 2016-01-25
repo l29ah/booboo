@@ -21,8 +21,8 @@ IUSE=""
 RDEPEND=">=dev-haskell/constraints-0.3:=[profile?] <dev-haskell/constraints-0.5:=[profile?]
 	>=dev-haskell/equational-reasoning-0.2:=[profile?] <dev-haskell/equational-reasoning-0.3:=[profile?]
 	>=dev-haskell/monomorphic-0.0.3:=[profile?]
-	|| ( ( >=dev-haskell/singletons-0.8:=[profile?] <dev-haskell/singletons-1.2:=[profile?] ) ( >=dev-haskell/singletons-2.0:=[profile?] <dev-haskell/singletons-2.1:=[profile?] ) )
-	>=dev-lang/ghc-7.6.1:=
+	( >=dev-haskell/singletons-2.0:=[profile?] <dev-haskell/singletons-2.1:=[profile?] )
+	>=dev-lang/ghc-7.10:=
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.16.0

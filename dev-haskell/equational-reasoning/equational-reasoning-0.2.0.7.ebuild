@@ -18,10 +18,10 @@ SLOT="0/${PV}"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="|| ( ( >=dev-haskell/singletons-0.8:=[profile?] <dev-haskell/singletons-1.2:=[profile?] ) ( >=dev-haskell/singletons-2.0:=[profile?] <dev-haskell/singletons-2.1:=[profile?] ) )
+RDEPEND="( >=dev-haskell/singletons-2.0:=[profile?] <dev-haskell/singletons-2.1:=[profile?] )
 	>=dev-haskell/tagged-0.6:=[profile?]
 	>=dev-haskell/void-0.6:=[profile?] <dev-haskell/void-0.8:=[profile?]
-	>=dev-lang/ghc-7.6.1:=
+	>=dev-lang/ghc-7.10:=
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.16.0
