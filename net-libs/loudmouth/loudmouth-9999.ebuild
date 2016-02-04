@@ -32,7 +32,6 @@ src_prepare() {
 	use doc && {
 		./autogen.sh
 	} || {
-		epatch "$FILESDIR/${PN}-nodocs.patch"
 		./autogen.sh -n
 	}
 }
