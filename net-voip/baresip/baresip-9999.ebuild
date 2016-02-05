@@ -17,7 +17,7 @@ IUSE=""
 
 DEPEND="
 	net-voip/re
-	media-libs/rem"
+	>=media-libs/rem-0.4.7"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
