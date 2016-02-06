@@ -104,8 +104,7 @@ src_prepare() {
 		-e 's:linux/videodev.h ::' \
 		configure.ac || die
 
-	epatch "${FILESDIR}/${PN}-2.9.0-v4l-automagic.patch" \
-		"${FILESDIR}/${PN}-2.9.0-tests.patch" \
+	epatch "${FILESDIR}/${PN}-2.9.0-tests.patch" \
 		"${FILESDIR}/${PN}-2.11.0-xxdi.patch"
 
 	eautoreconf
