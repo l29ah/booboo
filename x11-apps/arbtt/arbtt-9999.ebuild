@@ -30,7 +30,7 @@ RDEPEND=">=dev-haskell/binary-0.5:=
 	>dev-haskell/x11-1.4.4:=
 	>=dev-lang/ghc-7.6.1:=
 	x11-libs/libXScrnSaver
-	>=dev-haskell/aeson-0.6:= <dev-haskell/aeson-0.11:=
+	>=dev-haskell/aeson-0.6:= <dev-haskell/aeson-0.12:=
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.16.0
