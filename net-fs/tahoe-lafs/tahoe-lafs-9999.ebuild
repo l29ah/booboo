@@ -22,7 +22,7 @@ KEYWORDS=""
 IUSE="doc"
 
 RDEPEND="
-	>=dev-python/foolscap-0.8.0[${PYTHON_USEDEP}]
+	>=dev-python/foolscap-0.10.1[${PYTHON_USEDEP}]
 	dev-python/nevow[${PYTHON_USEDEP}]
 	dev-python/mock[${PYTHON_USEDEP}]
 	dev-python/pyasn1[${PYTHON_USEDEP}]
