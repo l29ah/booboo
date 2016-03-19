@@ -4,12 +4,11 @@
 
 EAPI="3"
 
-ESVN_REPO_URI="http://apvlv.googlecode.com/svn/trunk"
-inherit eutils subversion cmake-utils
+inherit git-r3 eutils cmake-utils
 
+EGIT_REPO_URI="https://github.com/naihe2010/apvlv"
 DESCRIPTION="a PDF Viewer which behaviors like Vim"
-HOMEPAGE="http://code.google.com/p/apvlv/"
-SRC_URI="http://dump.bitcheese.net/files/yroveme/apvlv-bump-page-render-api.patch"
+HOMEPAGE="https://naihe2010.github.io/apvlv/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,21 +16,11 @@ KEYWORDS=""
 IUSE="debug djvu umd"
 
 RDEPEND=">=x11-libs/gtk+-2.6:2
-	>=app-text/poppler-0.12.3-r3[cairo,gdk]
-	<app-text/poppler-0.17[cairo,gdk]
+	>=app-text/poppler-0.12.3-r3[cairo]
 	djvu? ( app-text/djvu )
 	umd? ( unwritten/libumd )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
-
-src_unpack() {
-	subversion_src_unpack
-}
-
-src_prepare() {
-	subversion_src_prepare
-	epatch "$DISTDIR/apvlv-bump-page-render-api.patch"
-}
 
 src_configure() {
 	mycmakeargs="$(cmake-utils_use djvu APVLV_WITH_DJVU)
