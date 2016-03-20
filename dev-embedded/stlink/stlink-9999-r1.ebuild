@@ -7,8 +7,8 @@ EAPI=5
 inherit git-r3 autotools flag-o-matic linux-info
 
 DESCRIPTION="On board debugger driver for stm32-discovery boards"
-HOMEPAGE="https://github.com/burjui/stlink"
-EGIT_REPO_URI="https://github.com/karlp/stlink.git"
+HOMEPAGE="https://github.com/texane/stlink"
+EGIT_REPO_URI="https://github.com/texane/stlink"
 
 LICENSE="BSD"
 SLOT="0"
