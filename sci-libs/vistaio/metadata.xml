@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer>
+    <email>gw.fossdev@gmail.com</email>
+  </maintainer>
+  <longdescription lang="en">
+    vistaio is a library to handle the in and output of a variety of
+    data like images, volume data, and triangular meshes. 
+</longdescription>
+</pkgmetadata>

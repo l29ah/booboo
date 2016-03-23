@@ -1,0 +1,10 @@
+*vistaio-1.2.18 (03 Nov 2015)
+
+  03 Nov 2015;  <gw.fossdev@gmail.com> vistaio-1.2.18.ebuild:
+  Initial upload of new upstream
+
+*vistaio-1.2.16 (30 Oct 2015)
+
+  30 Oct 2015;  <gw.fossdev@gmail.com> vistaio-1.2.16.ebuild:
+  correct ebuild to satisfy repoman
+

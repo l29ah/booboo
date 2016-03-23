@@ -1,0 +1,11 @@
+  24 Mar 2016;  <gerddie@gentoo.org> xmedcon-0.14.1.ebuild:
+  sci-misc/xmedcon:          * correct icon install source location
+
+  24 Mar 2016;  <gerddie@gentoo.org> xmedcon-0.14.1.ebuild:
+  sci-misc/xmedcon:          * Add blocker for xmedcon in other categories
+
+*xmedcon-0.14.1 (24 Mar 2016)
+
+  24 Mar 2016;  <gerddie@gentoo.org> +metadata.xml, +xmedcon-0.14.1.ebuild:
+  sci-misc/xmedcon:     * Bump version to new upstream     * Move to sci-misc
+  because it is not just a lib
