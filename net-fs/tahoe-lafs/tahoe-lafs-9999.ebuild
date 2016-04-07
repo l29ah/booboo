@@ -44,7 +44,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 
 src_prepare() {
 	sed -i -e '/egg = os.path.realpath/d;/sys.path.insert(0, egg)/d;s#import setuptools;.*#import setuptools#' setup.py
-	rm -r setuptools* setup.cfg || die
+	rm -r setup.cfg || die
 	distutils-r1_src_prepare
 }
 
