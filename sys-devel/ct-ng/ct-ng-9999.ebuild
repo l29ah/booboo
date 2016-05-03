@@ -8,7 +8,7 @@ inherit autotools bash-completion-r1 eutils git-r3
 
 DESCRIPTION="crosstool-ng is a tool to build cross-compiling toolchains"
 HOMEPAGE="http://crosstool-ng.org"
-EGIT_REPO_URI="git://crosstool-ng.org/crosstool-ng"
+EGIT_REPO_URI="https://github.com/crosstool-ng/crosstool-ng"
 
 LICENSE="GPL-2"
 SLOT="0"
