@@ -41,10 +41,7 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed"
-	insinto /etc/udev/rules.d
-	doins 49-stlinkv*.rules
-	insinto /etc/modprobe.d
-	doins stlink_v1.modprobe.conf
+	cp -r etc $D
 	einfo "You may want to run \`udevadm control --reload-rules'."
 	dodoc README
 }
