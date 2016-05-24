@@ -21,9 +21,6 @@ DEPEND="tk? ( >=dev-lang/tk-8.1 )"
 DOCS="CODING.STD CREDITS NEWS README TODO"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-0.94.2-flags.patch
-	epatch "${FILESDIR}"/${PN}-0.94.2+autoconf-2.63.patch
-
 	# only install wordview.desktop when tk is enabled (bug #522766)
 	if ! use tk ; then
 		sed -i 's/ desktop//' Makefile.in || die
