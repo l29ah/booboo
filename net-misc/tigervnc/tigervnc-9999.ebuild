@@ -88,13 +88,12 @@ src_prepare() {
 	eapply "${WORKDIR}"/patches/010_libvnc-os.patch
 	eapply "${WORKDIR}"/patches/030_manpages.patch
 	eapply "${WORKDIR}"/patches/055_xstartup.patch
-	eapply "${FILESDIR}"/${PN}-1.6.0-xorg118-1.patch
 
 	default
 
 	if use server ; then
 		cd unix/xserver || die
-		eapply ../xserver117.patch
+		eapply ../xserver118.patch
 		eautoreconf
 	fi
 }
