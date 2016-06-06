@@ -58,10 +58,10 @@ src_configure() {
 		--disable-ufoslicer
 		$(use_enable !debug release)
 		$(use_enable editor uforadiant)
-		$(use_enable editor ufo2map)
 		$(use_enable server ufoded)
 		$(use_enable client ufo)
 		$(use_enable sse)
+		--enable-ufo2map
 		--enable-game
 		--disable-paranoid
 		$(use_enable profile profiling)
@@ -80,6 +80,7 @@ src_compile() {
 	emake || die
 	echo "Running emake lang!"
 	emake lang || die
+	emake maps || die
 
 	if use editor; then
 		emake uforadiant || die
