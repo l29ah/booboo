@@ -516,7 +516,7 @@ set-kdedir() {
 		if [[ -z "$KDEBASE" ]]; then
 			# find the latest kdelibs installed
 			for x in /usr/kde/{git,svn,3.5} "${PREFIX}" \
-				"${KDE3LIBSDIR}" "${KDELIBSDIR}" "${KDE3DIR}" "${KDEDIR}" /usr/kde/*; do
+				"${KDE3LIBSDIR}" "${KDELIBSDIR}" "${KDE3DIR}" "${KDEDIR}"; do
 				if [[ -f "${x}/include/kwin.h" ]]; then
 					debug-print found "${KDEDIR}"
 					export KDEDIR="$x"
