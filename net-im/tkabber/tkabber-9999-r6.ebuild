@@ -41,7 +41,17 @@ src_prepare() {
 }
 
 src_compile() {
-	true
+	local THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
+	if use 3rd-party-plugins && has vimage ${TKABBER_PLUGINS}; then
+		cd "${THIRD_PARTY_TKABBER_PLUGINS_DIR}/vimage/lib/tkImageTools" \
+			|| die "Cannot cd to tkImageTools"
+		# Replace hardcoded tcl version
+		if has_version ">=dev-lang/tcl-8.6"; then
+			sed -i -e 's/MINOR_VERSION = 5/MINOR_VERSION = 6/' Makefile \
+				|| die "Cannot patch tkImageTools Makefile"
+		fi
+		emake
+	fi
 }
 
 src_install() {
