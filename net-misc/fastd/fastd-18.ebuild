@@ -17,19 +17,19 @@ IUSE="ssl +sodium nacl lto +caps +cipher-aes128 cipher-aes128-openssl +cipher-ae
 REQUIRED_USE="cipher-aes128-openssl? ( ssl )"
 
 DEPEND=">=dev-libs/libuecc-7
-       dev-libs/json-c
-	   caps? ( sys-libs/libcap )
-	   sodium? ( dev-libs/libsodium )
-	   nacl? ( dev-libs/libnacl )
-	   ssl? ( dev-libs/openssl )"
+		dev-libs/json-c
+		caps? ( sys-libs/libcap )
+		sodium? ( dev-libs/libsodium )
+		nacl? ( dev-libs/libnacl )
+		ssl? ( dev-libs/openssl )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
     local mycmakeargs=(
-	    $(cmake-utils_use_enable sodium LIBSODIUM)
-	    $(cmake-utils_use_enable ssl OPENSSL)
-	    $(cmake-utils_use_enable lto LTO)
-	    $(cmake-utils_use_with caps CAPABILITIES)
+		$(cmake-utils_use_enable sodium LIBSODIUM)
+		$(cmake-utils_use_enable ssl OPENSSL)
+		$(cmake-utils_use_enable lto LTO)
+		$(cmake-utils_use_with caps CAPABILITIES)
 		$(cmake-utils_use_with cipher-aes128 CIPHER_AES128)
 		$(cmake-utils_use_with cipher-aes128-openssl CIPHER_AES128_OPENSSL)
 		$(cmake-utils_use_with cipher-aes128-nacl CIPHER_AES128_NACL)
@@ -61,11 +61,11 @@ src_configure() {
 }
 
 src_install() {
-    cmake-utils_src_install
+	cmake-utils_src_install
 
 	doman doc/${PN}.1
 
-    keepdir /etc/fastd
+	keepdir /etc/fastd
 	newinitd "${FILESDIR}/${PN}.init" fastd
 }
 
