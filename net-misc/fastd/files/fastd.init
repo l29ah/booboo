@@ -1,4 +1,4 @@
-#!/sbin/runscript
+#!/sbin/openrc-run
 # Copyright 1999-2007 Gentoo Foundation
 # Modified to match fastd by Gordon Quad <gordon@niflheim.info>
 # Distributed under the terms of the GNU General Public License v2
@@ -6,9 +6,9 @@
 VPNDIR=${VPNDIR:-/etc/fastd}
 VPN=${SVCNAME#*.}
 if [ -n "${VPN}" ] && [ ${SVCNAME} != "fastd" ]; then
-	VPNPID="/var/run/fastd.${VPN}.pid"
+	VPNPID="/var/run/fastd/fastd.${VPN}.pid"
 else
-	VPNPID="/var/run/fastd.pid"
+	VPNPID="/var/run/fastd/fastd.pid"
 fi
 VPNCONF="${VPNDIR}/${VPN}.conf"
 
@@ -62,6 +62,9 @@ start() {
 	ebegin "Starting ${SVCNAME}"
 
 	checkconfig || return 1
+
+	mkdir -p -m775 /var/run/fastd
+	chown root:fastd /var/run/fastd
 
 	start-stop-daemon --start --exec /usr/bin/fastd --chdir ${VPNDIR} --pidfile "${VPNPID}" \
 		-- --config "${VPNCONF}" --pid-file "${VPNPID}" --daemon
