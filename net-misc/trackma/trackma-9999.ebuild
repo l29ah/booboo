@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -23,11 +23,11 @@ IUSE="+urwid gtk qt4"
 DEPEND="urwid? ( dev-python/urwid[${PYTHON_USEDEP}] )
 	gtk? (
 		dev-python/pygtk[${PYTHON_USEDEP}]
-		virtual/python-imaging[${PYTHON_USEDEP}]
+		dev-python/pillow[${PYTHON_USEDEP}]
 	)
 	qt4? (
 		dev-python/PyQt4[${PYTHON_USEDEP}]
-		virtual/python-imaging[${PYTHON_USEDEP}]
+	  dev-python/pillow[${PYTHON_USEDEP}]
 	)
 	${PYTHON_DEPS}"
 RDEPEND="sys-process/lsof
