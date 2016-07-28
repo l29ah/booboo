@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_COMPAT=( python{3_4,3_5} )
 
 inherit git-r3 distutils-r1
 
@@ -22,7 +22,7 @@ IUSE="+urwid gtk qt4"
 
 DEPEND="urwid? ( dev-python/urwid[${PYTHON_USEDEP}] )
 	gtk? (
-		dev-python/pygtk[${PYTHON_USEDEP}]
+		dev-python/pygobject[${PYTHON_USEDEP}]
 		dev-python/pillow[${PYTHON_USEDEP}]
 	)
 	qt4? (
