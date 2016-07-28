@@ -27,7 +27,7 @@ DEPEND="urwid? ( dev-python/urwid[${PYTHON_USEDEP}] )
 	)
 	qt4? (
 		dev-python/PyQt4[${PYTHON_USEDEP}]
-	  dev-python/pillow[${PYTHON_USEDEP}]
+         	dev-python/pillow[${PYTHON_USEDEP}]
 	)
 	${PYTHON_DEPS}"
 RDEPEND="sys-process/lsof
