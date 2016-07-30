@@ -95,6 +95,7 @@ python_prepare_all() {
 	fi
 
 	sed -i -e 's#"-Werror",##g' setup.py || die
+	sed -i -e 's#xorg_conf = .*#xorg_conf = "/etc/xpra/xorg.conf"#' setup.py || die
 
 	distutils-r1_python_prepare_all
 }
