@@ -188,7 +188,7 @@ plugins_verify() {
 		shift
 	done
 
-# 	Verifying plugins existence.
+	# Verifying plugins existence.
 	if [[ -n "$TKABBER_PLUGINS" ]]; then
 		PLUGINS=( ${TKABBER_PLUGINS} )
 		TKABBER_PLUGINS=""
@@ -206,11 +206,6 @@ plugins_verify() {
 			ewarn
 			ewarn "${ABSENT_PLUGINS}"
 			ewarn
-			ewarn "You may want to cancel the installation by pressing ^c now and verify"
-			ewarn "your settings. Waiting 5 seconds before continuing..."
-			ewarn
-			ebeep 5
-			epause 5
 		fi
 	fi
 
