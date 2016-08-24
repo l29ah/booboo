@@ -135,17 +135,17 @@ pkg_postinst() {
 	einfo "to use an external one for (dubious) performance reasons,"
 	einfo "in which case you may like to emerge dev-tcltk/tdom (and put"
 	einfo "\"package require tdom\" in your ~/.tkabber/config.tcl)."
-	echo
+	einfo
 	einfo "You may also optionally emerge dev-tcltk/tclx to theoretically"
 	einfo "speed some other of tkabber's pure-Tcl operations up,"
 	einfo "as you'd get them written in C. Real performance gains are"
 	einfo "subject to further tests."
-	echo
+	einfo
 	if ! use tkimg; then
 		ewarn "dev-tcltk/tkimg adds support for PNG and JPG images, such as avatars,"
 		ewarn "photos, non-default emoticons, etc. Some plugins, for example the"
 		ewarn "\"alarm\" plugin may not function correctly without dev-tcltk/tkimg"
-		echo
+		ewarn
 	fi
 	plugins_inform
 }
@@ -200,7 +200,7 @@ plugins_verify() {
 			fi
 		done
 		if [[ -n "${ABSENT_PLUGINS}" ]]; then
-			echo
+			ewarn
 			ewarn "Following plugins specified in the TKABBER_PLUGINS environment variable"
 			ewarn "are not present in the svn repositories:"
 			ewarn
@@ -208,7 +208,7 @@ plugins_verify() {
 			ewarn
 			ewarn "You may want to cancel the installation by pressing ^c now and verify"
 			ewarn "your settings. Waiting 5 seconds before continuing..."
-			echo
+			ewarn
 			ebeep 5
 			epause 5
 		fi
@@ -222,13 +222,13 @@ plugins_verify() {
 			fi
 		done
 		if [[ -n "${DEPENDENT_PLUGINS}" ]]; then
-			echo
+			eerror
 			eerror "The \"tkimg\" USE-flag is not enabled, but the following plugins depend on dev-tcltk/tkimg:"
 			eerror
 			eerror "${DEPENDENT_PLUGINS}"
 			eerror
 			eerror "Please activate the \"tkimg\" USE-flag before installing these plugins"
-			echo
+			eerror
 			die "\"tkimg\" USE-flag required, but not enabled."
 		fi
 	fi
@@ -238,7 +238,7 @@ plugins_inform() {
 	if use plugins or use 3rd-party-plugins; then
 		ewarn "You may need to refresh your profile (eg. login again)"
 		ewarn "for the plugins to work."
-		echo
+		ewarn
 		if [[ -z "${TKABBER_PLUGINS}" ]]; then
 			einfo "You selected to install plugins via the plugins and/or 3rd-party-plugins"
 			einfo "USE variables. Please note, that if you wish to install only particular"
@@ -248,7 +248,7 @@ plugins_inform() {
 			einfo "Currently the following plugins are available:"
 			einfo
 			einfo "${AVAILABLE_PLUGINS}"
-			echo
+			einfo
 		fi
 	fi
 }
@@ -278,7 +278,7 @@ plugins_install() {
 	for i in "${PLUGINS[@]}"; do
 		if has "${i}" ${EXISTING_PLUGINS}; then
 			cp -R "${PLUGINS_DIR}/${i}" "${D}/${TKABBER_SITE_PLUGINS}" \
-			|| echo "Can't copy ${PLUGINS_DIR}/${i} to ${D}/${TKABBER_SITE_PLUGINS}"
+			|| eerror "Can't copy ${PLUGINS_DIR}/${i} to ${D}/${TKABBER_SITE_PLUGINS}"
 		fi
 	done
 }
@@ -301,10 +301,10 @@ fix_existing_third_party_tkabber_plugins() {
 	done
 
 	if [[ -n "${CONFLICTING_PLUGINS}" ]]; then
-		echo
+		ewarn
 		ewarn "Repositories have the following plugins duplicated,"
 		ewarn "official versions of this plugins will be prefered:"
 		ewarn "${CONFLICTING_PLUGINS}"
-		echo
+		ewarn
 	fi
 }
