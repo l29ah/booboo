@@ -96,7 +96,7 @@ src_install() {
 		local THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
 		local TKABBER_SITE_PLUGINS="/usr/share/tkabber/site-plugins"
 		local INCOMPATIBLE_PLUGINS="pluginmanager"
-		local TKIMG_DEPENDENT_PLUGINS="alarm"
+		local TKIMG_DEPENDENT_PLUGINS="alarm vimage"
 
 		if use plugins; then
 			local EXISTING_OFFICIAL_TKABBER_PLUGINS="$(dirlist "${OFFICIAL_TKABBER_PLUGINS_DIR}")"
