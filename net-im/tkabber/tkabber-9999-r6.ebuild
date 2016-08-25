@@ -55,7 +55,7 @@ src_compile() {
 }
 
 src_install() {
-	dodir /usr/share/tkabber
+	insinto "/usr/share/${PN}"
 	cd "${S}/tkabber/" || die "Can't chdir to ${S}/tkabber/"
 
 	local x
@@ -64,27 +64,29 @@ src_install() {
 	for x in *; do
 		if [[ -d "${x}" ]] ; then
 			if ! has "${x}" ${DOCSDIRS} ; then
-				cp -R "${x}" "${D}/usr/share/tkabber" \
-			|| die "Can't copy ${x} to ${D}/usr/share/tkabber"
+				doins -r "${x}"
 			fi
 		fi
 	done
 
-	sed -i -e 's#\[fullpath ChangeLog\]#"/usr/share/doc/'"$PF"'/ChangeLog"#' tkabber.tcl
-	cp *.tcl "${D}/usr/share/tkabber" \
-		|| die "Can't copy tcl files to ${D}/usr/share/tkabber"
+	sed -i -e 's#\[fullpath ChangeLog\]#"/usr/share/doc/'"$PF"'/ChangeLog"#' tkabber.tcl \
+		|| die "Failed to fix Changelog fullpath in tkabber.tcl"
 
-	emake DESTDIR="${D}" PREFIX="/usr" install-bin || die "emake install failed."
-	if use doc; then
-		emake DESTDIR="${D}" PREFIX="/usr" DOCDIR="/usr/share/doc/$PF" install-doc || die "emake install-doc failed."
+	doins *.tcl
+
+	emake DESTDIR="${D}" PREFIX="/usr" install-bin
+
+	if use doc ; then
+		emake DESTDIR="${D}" PREFIX="/usr" DOCDIR="/usr/share/doc/${PF}" install-doc
 	fi
 
 	if use examples ; then
-		emake DESTDIR="${D}" PREFIX="/usr" install-examples || die "Can't install examples."
+		emake DESTDIR="${D}" PREFIX="/usr" install-examples
 	fi
+
 	if use contrib ; then
 		insinto "/usr/share/doc/${PF}"
-		doins -r contrib || die "Can't install additional contrib components to ${D}/usr/share/doc/${PF}"
+		doins -r contrib
 	fi
 
 	doicon "${FILESDIR}/${PN}.png"
@@ -249,6 +251,7 @@ plugins_inform() {
 }
 
 plugins_install() {
+	insinto "${TKABBER_SITE_PLUGINS}"
 	local PLUGINS
 	local EXISTING_PLUGINS
 	local PLUGINS_DIR
@@ -272,8 +275,7 @@ plugins_install() {
 	[[ -d "${D}/${TKABBER_SITE_PLUGINS}" ]] || mkdir "${D}/${TKABBER_SITE_PLUGINS}"
 	for i in "${PLUGINS[@]}"; do
 		if has "${i}" ${EXISTING_PLUGINS}; then
-			cp -R "${PLUGINS_DIR}/${i}" "${D}/${TKABBER_SITE_PLUGINS}" \
-			|| eerror "Can't copy ${PLUGINS_DIR}/${i} to ${D}/${TKABBER_SITE_PLUGINS}"
+			doins -r "${PLUGINS_DIR}/${i}"
 		fi
 	done
 }
