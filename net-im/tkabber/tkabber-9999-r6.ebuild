@@ -81,7 +81,7 @@ src_install() {
 	fi
 
 	if use examples ; then
-		emake DESTDIR="${D}" PREFIX="/usr" install-examples
+		emake DESTDIR="${D}" PREFIX="/usr" DOCDIR="/usr/share/doc/${PF}" install-examples
 	fi
 
 	if use contrib ; then
