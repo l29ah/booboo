@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email></email>
+	</maintainer>
+<longdescription lang="en">GUI client for XMPP (Jabber) instant messaging protocol. It's writen in Tcl/Tk, and works on many platforms.</longdescription>
+<use>
+	<flag name='contrib'>Enables installation additional contrib components ('contrib' dir), don't confuse with tkabber-contrib repo name for third party plugins</flag>
+	<flag name='examples'>Enables installation examples of configs, tools, xrdb, etc ('examples' dir)</flag>
+	<flag name='gpg'>Enables GnuPG support with dev-tcltk/tclgpg</flag>
+	<flag name='plugins'>Enables installation the extra plugins</flag>
+	<flag name='3rd-party-plugins'>Enables installation the extra third party plugins</flag>
+	<flag name='sound'>Enables sound event support with dev-tcltk/snack</flag>
+	<flag name='ssl'>Enables SSL/TLS support with dev-tcltk/tls</flag>
+	<flag name='tkimg'>Enables image support with dev-tcltk/tkimg</flag>
+	<flag name='trayicon'>Enables support for tray icon with dev-tcltk/tktray</flag>
+</use>
+</pkgmetadata>
