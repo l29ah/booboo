@@ -7,7 +7,7 @@ inherit fossil eutils
 
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
-IUSE="contrib -crypt +doc examples plugins 3rd-party-plugins ssl sound tkimg
+IUSE="contrib -gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg
 trayicon +udp vanilla"
 
 RDEPEND="
@@ -16,7 +16,7 @@ RDEPEND="
 	>=dev-tcltk/tcllib-1.6
 	>=dev-tcltk/bwidget-1.3
 	>=dev-tcltk/tkXwin-1.0
-	crypt? ( dev-tcltk/tclgpg )
+	gpg? ( dev-tcltk/tclgpg )
 	ssl? ( >=dev-tcltk/tls-1.4.1 )
 	sound? ( dev-tcltk/snack )
 	trayicon? ( >=dev-tcltk/tktray-1.1 )
