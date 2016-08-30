@@ -8,7 +8,7 @@ inherit fossil eutils
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
 IUSE="contrib -gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg
-trayicon +udp vanilla"
+trayicon +udp vanilla fix-site-plugins-path"
 
 RDEPEND="
 	>=dev-lang/tcl-8.3.3
@@ -29,6 +29,12 @@ LICENSE="GPL-2"
 KEYWORDS=""
 SLOT="0"
 
+OFFICIAL_TKABBER_PLUGINS_DIR="${S}/plugins/official"
+THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
+TKABBER_SITE_PLUGINS="/usr/share/tkabber/site-plugins"
+INCOMPATIBLE_PLUGINS="pluginmanager"
+TKIMG_DEPENDENT_PLUGINS="alarm vimage"
+
 src_unpack() {
 	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber' tkabber
 	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tclxmpp' tkabber/tclxmpp
@@ -41,11 +47,22 @@ src_unpack() {
 }
 
 src_prepare() {
-	use vanilla || epatch_user
+	if use vanilla; then
+		return
+	fi
+
+	# Fix default official and third party plugins directory
+	if use fix-site-plugins-path; then
+		cd "${S}/tkabber" || die "Can't chdir to ${S}/tkabber"
+		epatch "${FILESDIR}/tkabber.tcl.site.plugins.patch"
+		sed -i -e 's#TKABBER_SITE_PLUGINS_PATH_PLACEHOLDER#'"${TKABBER_SITE_PLUGINS}"'#' \
+			tkabber.tcl || die "Failed to fix default site plugins path in tkabber.tcl"
+	fi
+
+	epatch_user
 }
 
 src_compile() {
-	local THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
 	if use 3rd-party-plugins && has vimage ${TKABBER_PLUGINS}; then
 		cd "${THIRD_PARTY_TKABBER_PLUGINS_DIR}/vimage/lib/tkImageTools" \
 			|| die "Cannot cd to tkImageTools"
@@ -98,11 +115,6 @@ src_install() {
 
 	if use plugins || use 3rd-party-plugins; then
 		TKABBER_PLUGINS="${TKABBER_PLUGINS:-}"
-		local OFFICIAL_TKABBER_PLUGINS_DIR="${S}/plugins/official"
-		local THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
-		local TKABBER_SITE_PLUGINS="/usr/share/tkabber/site-plugins"
-		local INCOMPATIBLE_PLUGINS="pluginmanager"
-		local TKIMG_DEPENDENT_PLUGINS="alarm vimage"
 
 		if use plugins; then
 			local EXISTING_OFFICIAL_TKABBER_PLUGINS="$(dirlist "${OFFICIAL_TKABBER_PLUGINS_DIR}")"
@@ -236,21 +248,20 @@ plugins_verify() {
 }
 
 plugins_inform() {
-	if use plugins or use 3rd-party-plugins; then
-		ewarn "You may need to refresh your profile (eg. login again)"
-		ewarn "for the plugins to work."
-		ewarn
-		if [[ -z "${TKABBER_PLUGINS}" ]]; then
-			einfo "You selected to install plugins via the plugins and/or 3rd-party-plugins"
-			einfo "USE variables. Please note, that if you wish to install only particular"
-			einfo "plugins from all available ones, you need to specify them in the"
-			einfo "TKABBER_PLUGINS variable in make.conf."
-			einfo
-			einfo "Currently the following plugins are available:"
-			einfo
-			einfo "${AVAILABLE_PLUGINS}"
-			einfo
-		fi
+	if ! use plugins && ! use 3rd-party-plugins; then
+		return
+	fi
+
+	if [[ -z "${TKABBER_PLUGINS}" ]]; then
+		einfo "You selected to install plugins via the plugins and/or 3rd-party-plugins"
+		einfo "USE variables. Please note, that if you wish to install only particular"
+		einfo "plugins from all available ones, you need to specify them in the"
+		einfo "TKABBER_PLUGINS variable in make.conf."
+		einfo
+		einfo "Currently the following plugins are available:"
+		einfo
+		einfo "${AVAILABLE_PLUGINS}"
+		einfo
 	fi
 }
 

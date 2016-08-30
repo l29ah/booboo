@@ -1,0 +1,16 @@
+--- tkabber.tcl
++++ tkabber.tcl
+@@ -271,10 +271,12 @@
+ plugins::load [file join plugins pep]
+ plugins::load [file join plugins $tcl_platform(platform)]
+ 
+ if {[info exists env(TKABBER_SITE_PLUGINS)]} {
+     plugins::load_dir $env(TKABBER_SITE_PLUGINS)
++} else {
++    plugins::load_dir {TKABBER_SITE_PLUGINS_PATH_PLACEHOLDER}
+ }
+ 
+ plugins::load_dir [file join $configdir plugins]
+ 
+ hook::run postload_hook
+

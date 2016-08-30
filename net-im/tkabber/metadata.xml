@@ -15,5 +15,8 @@
 	<flag name='ssl'>Enables SSL/TLS support with dev-tcltk/tls</flag>
 	<flag name='tkimg'>Enables image support with dev-tcltk/tkimg</flag>
 	<flag name='trayicon'>Enables support for tray icon with dev-tcltk/tktray</flag>
+	<flag name='udp'>Enables support for DNS resolving over UDP.<flag>
+	<flag name='vanilla'>Skips any kind of source patching (and epatch_user too).<flag>
+	<flag name='fix-site-plugins-path'>Patches sources with path to installed external plugins. Likely will be useful when 'plugins' or '3rd-party-plugins' USE flags are enabled.<flag>
 </use>
 </pkgmetadata>
