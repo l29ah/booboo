@@ -32,8 +32,12 @@ SLOT="0"
 src_unpack() {
 	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber' tkabber
 	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tclxmpp' tkabber/tclxmpp
-	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber-plugins' plugins/official
-	fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber-contrib' plugins/3rd-party
+	if use plugins; then
+		fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber-plugins' plugins/official
+	fi
+	if use 3rd-party-plugins; then
+		fossil_fetch 'https://chiselapp.com/user/sgolovan/repository/tkabber-contrib' plugins/3rd-party
+	fi
 }
 
 src_prepare() {
