@@ -22,8 +22,10 @@ DEPEND="$RDEPEND
 	virtual/pkgconfig"
 
 pkg_pretend() {
-	if ! linux_chkconfig_module USB_STORAGE; then
-		ewarn "You will need to rebuild usb-storage as a module for v1 stlink to work."
+	if linux_config_exists; then
+		if ! linux_chkconfig_module USB_STORAGE; then
+			ewarn "You will need to rebuild usb-storage as a module for v1 stlink to work."
+		fi
 	fi
 }
 
