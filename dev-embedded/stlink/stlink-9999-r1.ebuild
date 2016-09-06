@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-r3 autotools flag-o-matic linux-info
+inherit git-r3 cmake-utils flag-o-matic linux-info
 
 DESCRIPTION="On board debugger driver for stm32-discovery boards"
 HOMEPAGE="https://github.com/texane/stlink"
@@ -29,21 +29,9 @@ pkg_pretend() {
 	fi
 }
 
-src_prepare() {
-	eautoreconf
-}
-
-src_configure() {
-	econf
-}
-
-src_compile() {
-	emake || die "Make failed!"
-}
-
 src_install() {
-	emake DESTDIR="${D}" install || die "emake install failed"
+	enable_cmake-utils_src_install
 	cp -r etc $D
 	einfo "You may want to run \`udevadm control --reload-rules'."
-	dodoc README
+	dodoc README.md
 }
