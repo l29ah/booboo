@@ -39,6 +39,7 @@ ESVN_REPO_URI="http://navit.svn.sourceforge.net/svnroot/navit/trunk/navit"
 
 src_configure() {
 	mycmakeargs=(
+		-DSAMPLE_MAP=OFF
 		$(cmake-utils_use_use svg SVG)
 		$(cmake-utils_use_use gles OPENGLES)
 		$(cmake-utils_use_use gles2 OPENGLES2)
