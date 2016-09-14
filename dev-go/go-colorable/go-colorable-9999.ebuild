@@ -18,3 +18,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="$DEPEND"
+
+src_prepare() {
+	rm -rf _example _example2
+}
