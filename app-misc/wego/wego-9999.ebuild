@@ -16,7 +16,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE="apparmor"
 
-DEPEND="$DEPEND dev-go/go-colorable"
+DEPEND="$DEPEND
+	dev-go/go-colorable
+	dev-go/go-runewidth
+	dev-go/ingo"
 
 QA_FLAGS_IGNORED="usr/bin/wego"
 
