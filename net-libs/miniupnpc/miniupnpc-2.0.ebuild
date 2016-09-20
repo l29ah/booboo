@@ -11,7 +11,7 @@ HOMEPAGE="http://miniupnp.free.fr/"
 SRC_URI="http://miniupnp.free.fr/files/${P}.tar.gz"
 
 LICENSE="BSD"
-SLOT="0/14"
+SLOT="0/15"
 KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="ipv6 kernel_linux static-libs"
 
@@ -22,10 +22,7 @@ src_prepare() {
 	epatch_user
 
 	# These bins are not installed, upnpc-static requires building static lib
-	# Reduce APIVERSION used to build SONAME since last API change was
-	# backwards compatible to surprise of all the universe.
-	sed -i -e '/EXECUTABLES =/s/ upnpc-static listdevices//' \
-		-e '/APIVERSION/s:15:14:' Makefile || die
+	sed -i -e '/EXECUTABLES =/s/ upnpc-static listdevices//' Makefile || die
 
 	if ! use static-libs; then
 		sed -i \
