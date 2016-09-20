@@ -4,17 +4,23 @@
 
 EAPI=5
 
-inherit git-r3 cmake-utils
+inherit cmake-utils
 
 DESCRIPTION="Utilities library used by Belledonne Communications softwares like belle-sip, mediastreamer2 and linphone."
 HOMEPAGE="http://www.linphone.org/"
-EGIT_REPO_URI="git://git.linphone.org/bctoolbox.git"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="git://git.linphone.org/bctoolbox.git"
+else
+	SRC_URI="https://www.linphone.org/releases/sources/bctoolbox/$P.tar.gz"
+	KEYWORDS="~x86 ~amd64"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE=""
 
-DEPEND="
+RDEPEND="
 	|| ( net-libs/polarssl net-libs/mbedtls )"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	dev-util/bcunit"
