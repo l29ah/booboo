@@ -1,4 +1,4 @@
-EAPI=2
+EAPI=5
 
 inherit base git-r3
 
@@ -25,8 +25,6 @@ DEPEND="${RDEPEND}
 		<dev-util/gtk-doc-1.12 
 	)"	# Dunno why, but it fails w/ recent versions
 
-use doc && DOCS="AUTHORS ChangeLog NEWS README"
-
 src_prepare() {
 	sed -i -e 's/-Werror//' acinclude.m4
 	use doc && {
@@ -47,6 +45,7 @@ src_configure() {
 }
 
 src_install() {
-	einstall
+	use doc && DOCS="AUTHORS ChangeLog NEWS README"
+	default
 }
 
