@@ -30,7 +30,7 @@ src_compile()
 
 src_install()
 {
-	insinto /usr/share/${PN}
+	insinto /usr/share/simutrans-exp
 	cd destdir
 	doins -r pak128.Britain-Ex || die "doins failed"
 }
