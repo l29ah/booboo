@@ -1,0 +1,12 @@
+--- simutrans-exp-9999/Makefile 2011-01-01 00:00:00.000000000 +0000
++++ simutrans-exp-9999/Makefile 2011-01-01 00:00:00.000000000 +0000
+@@ -64,5 +64,9 @@
+   LDFLAGS += -stdlib=libstdc++
+ endif
+ 
++ifeq ($(OSTYPE),linux)
++  CFLAGS +=  -std=c++11
++endif
++
+ ifeq ($(OSTYPE),mingw)
+   SOURCES += clipboard_w32.cc
