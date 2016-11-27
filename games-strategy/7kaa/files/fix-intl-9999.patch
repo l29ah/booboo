@@ -1,0 +1,8 @@
+--- configure.ac 2016-01-01 00:00:00.000
++++ configure.ac 2016-01-01 00:00:00.000
+@@ -58,4 +58,5 @@
+ AC_PROG_LN_S
+ PKG_PROG_PKG_CONFIG
++IT_PROG_INTLTOOL
+ 
+ # Checks for header files.
