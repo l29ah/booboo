@@ -23,8 +23,8 @@ RDEPEND="media-libs/libsdl[sound,video]
 	media-libs/libpng
 	media-libs/sdl-mixer"
 DEPEND="${RDEPEND}"
-PDEPEND="games-simulation/simutrans-exp-britain-ex"
-PATCHES="${FILESDIR}/${PF}-c++11.patch"
+PDEPEND="|| ( games-simulation/simutrans-exp-britain-ex
+	games-simulation/simutrans-exp-sweden-ex ) "
 
 DOCS="documentation/*
 todo.txt"
@@ -34,14 +34,12 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply ${PATCHES}
-	
 	strip-flags # bug #293927
 	echo "BACKEND=mixer_sdl
 COLOUR_DEPTH=16
 OSTYPE=linux
-FLAGS=-DSTEPS16
-MULTI_THREAD=1" > config.default \
+MULTI_THREAD=1
+FLAGS += -fno-delete-null-pointer-checks -fno-strict-aliasing -std=c++11" > config.default \
 	|| die "echo failed"
 
 	if use amd64; then
@@ -56,7 +54,7 @@ MULTI_THREAD=1" > config.default \
 
 	# make it look in the install location for the data
 	sed -i \
-		-e "s:argv\[0\]:\"/usr/share/${PN}/\":" \
+		-e "s:argv\[0\]:\"/usr/share/${PF}/\":" \
 		simmain.cc \
 		|| die "sed failed"
 
@@ -72,17 +70,19 @@ MULTI_THREAD=1" > config.default \
 }
 
 src_compile() {
-	emake
-	cd makeobj ; emake
+	emake || die
+	cd ${S}/makeobj && emake || die
+	cd ${S}/nettools && emake || die
 }
 
 src_install() {
-	dobin build/default/simutrans-experimental || die "dobin failed"
+	dobin build/default/{simutrans-experimental,nettool/nettool} || die "dobin failed"
 
-	exeinto /usr/lib/${PN}
+
+	exeinto /usr/libexec/${PF}
 	doexe build/default/makeobj-experimental/makeobj-experimental || die "doexe failed"
 
-	insinto /usr/share/${PN}
+	insinto /usr/share/${PF}
 	doins -r simutrans/* || die "doins failed"
 	#dodoc documentation/* todo.txt
 	doicon simutrans.ico

@@ -1,16 +1,16 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=6
 
 inherit eutils git-r3
 
-EGIT_REPO_URI='https://github.com/jamespetts/simutrans-pak128.britain.git'
-EGIT_BRANCH=half-heights
-EGIT_COMMIT=half-heights
+EGIT_REPO_URI='https://github.com/VictorErik/Pak128.Sweden-Ex.git'
+EGIT_BRANCH=half-height
+EGIT_COMMIT=half-height
 
-DESCRIPTION="Britain pakset for Simutrans Experimental"
+DESCRIPTION="Sweden pakset for Simutrans Experimental"
 HOMEPAGE="http://www.simutrans.com/"
 SRC_URI=""
 
@@ -32,6 +32,6 @@ src_install()
 {
 	insinto /usr/share/simutrans-exp-9999
 	cd destdir
-	doins -r pak128.Britain-Ex || die "doins failed"
+	doins -r pak128.Sweden-Ex || die "doins failed"
 }
 
