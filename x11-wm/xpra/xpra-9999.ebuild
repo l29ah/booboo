@@ -14,7 +14,7 @@ ESVN_REPO_URI="https://www.xpra.org/svn/Xpra/trunk/src"
 LICENSE="GPL-2 BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="+client +clipboard csc cups dec_av2 libav lz4 lzo opengl pulseaudio server sound vpx webp x264 x265"
+IUSE="+client +clipboard csc cups dec_av2 libav lz4 lzo opengl pulseaudio server sound vpx x264 x265"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	clipboard? ( || ( server client ) )
@@ -46,7 +46,7 @@ COMMON_DEPEND=""${PYTHON_DEPS}"
 		media-libs/gst-plugins-base:1.0
 		dev-python/gst-python:1.0 )
 	vpx? ( media-libs/libvpx virtual/ffmpeg )
-	webp? ( media-libs/libwebp )
+	media-libs/libwebp
 	x264? ( media-libs/x264
 		!libav? ( >=media-video/ffmpeg-1.0.4:0= )
 		libav? ( media-video/libav:0= )
@@ -116,7 +116,6 @@ python_configure_all() {
 		$(use_with server)
 		$(use_with sound)
 		$(use_with vpx)
-		$(use_with webp)
 		$(use_with x264 enc_x264)
 		$(use_with x265 enc_x265)
 		--with-Xdummy
