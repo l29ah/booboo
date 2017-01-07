@@ -19,9 +19,3 @@ IUSE=""
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
-
-src_install() {
-	# FIXME https://github.com/pyca/pynacl
-	rm -rf ../${P}-*/temp.*
-	distutils-r1_src_install
-}
