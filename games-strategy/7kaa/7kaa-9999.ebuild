@@ -18,7 +18,8 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND="media-libs/openal
-media-libs/libsdl2[video,sound]"
+media-libs/libsdl2[video,sound]
+net-libs/enet:1.3"
 RDEPEND="${DEPEND}"
 
 src_unpack() {
