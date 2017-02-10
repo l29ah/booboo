@@ -15,7 +15,9 @@ SLOT="0/9"
 KEYWORDS=""
 IUSE="debug doc examples minimal ntp-timestamp ssl"
 
-RDEPEND="ssl? ( dev-libs/openssl:0= )"
+RDEPEND="
+	ssl? ( dev-libs/openssl:0= )
+	net-libs/bctoolbox"
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	virtual/pkgconfig"
