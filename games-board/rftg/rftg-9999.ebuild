@@ -15,9 +15,12 @@ EGIT_REPO_URI="https://github.com/bnordli/rftg.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="server"
 
-DEPEND="x11-libs/gtk+:2"
+DEPEND="x11-libs/gtk+:2
+	server? (
+		virtual/libmysqlclient
+	)"
 RDEPEND="${DEPEND}"
 
 
@@ -31,6 +34,11 @@ src_prepare()
 	eautoreconf
 }
 
+src_configure()
+{
+	econf $(use_enable server) || die
+}
+
 src_compile()
 {
 	emake || die
@@ -39,5 +47,8 @@ src_compile()
 src_install()
 {
 	emake DESTDIR="${D}" install || die
+	if use server ; then
+		dodoc ../sql/server-schema.sql
+	fi
 }
 
