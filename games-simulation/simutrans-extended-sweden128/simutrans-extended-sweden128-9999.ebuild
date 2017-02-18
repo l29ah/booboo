@@ -10,7 +10,7 @@ EGIT_REPO_URI='https://github.com/VictorErik/Pak128.Sweden-Ex.git'
 EGIT_BRANCH=half-height
 EGIT_COMMIT=half-height
 
-DESCRIPTION="Sweden pakset for Simutrans Experimental"
+DESCRIPTION="Sweden pakset for Simutrans Extended"
 HOMEPAGE="http://www.simutrans.com/"
 SRC_URI=""
 
@@ -19,18 +19,18 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="games-simulation/simutrans-exp"
+DEPEND="=games-simulation/simutrans-extended-9999"
 RDEPEND=""
 
 src_compile()
 {
 	mkdir destdir
-	emake MAKEOBJ=/usr/libexec/simutrans-exp-9999/makeobj-experimental DESTDIR=destdir
+	emake MAKEOBJ=/usr/libexec/simutrans-extended-9999/makeobj-extended DESTDIR=destdir
 }
 
 src_install()
 {
-	insinto /usr/share/simutrans-exp-9999
+	insinto /usr/share/simutrans-extended-9999
 	cd destdir
 	doins -r pak128.Sweden-Ex || die "doins failed"
 }

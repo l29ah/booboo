@@ -5,11 +5,9 @@
 EAPI=6
 inherit flag-o-matic eutils git-r3
 
-EGIT_REPO_URI='https://github.com/jamespetts/simutrans-experimental.git'
-EGIT_BRANCH=devel-new-2
-EGIT_COMMIT=devel-new-2
+EGIT_REPO_URI='https://github.com/jamespetts/simutrans-extended.git'
 
-DESCRIPTION="A free Transport Tycoon clone Experimental version."
+DESCRIPTION="A free Transport Tycoon clone Extended version."
 HOMEPAGE="http://www.simutrans.com/"
 SRC_URI=""
 
@@ -23,8 +21,8 @@ RDEPEND="media-libs/libsdl[sound,video]
 	media-libs/libpng
 	media-libs/sdl-mixer"
 DEPEND="${RDEPEND}"
-PDEPEND="|| ( games-simulation/simutrans-exp-britain-ex
-	games-simulation/simutrans-exp-sweden-ex ) "
+PDEPEND="|| ( games-simulation/simutrans-extended-britain128
+	games-simulation/simutrans-extended-sweden128 ) "
 
 DOCS="documentation/*
 todo.txt"
@@ -64,7 +62,7 @@ FLAGS += -fno-delete-null-pointer-checks -fno-strict-aliasing -std=c++11" > conf
 		Makefile \
 		|| die "sed failed"
 
-	rm -f simutrans/{simutrans,nettool,simexstrip,simutrans-experimental,simutrans-experimental-10.15,simutrans-experimental-32}
+	rm -f simutrans/{simutrans,nettool,simexstrip,simutrans-experimental,simutrans-experimental-10.15,simutrans-experimental-32,simutrans-extended,nettool/nettool}
 
 	eapply_user
 }
@@ -76,11 +74,11 @@ src_compile() {
 }
 
 src_install() {
-	dobin build/default/{simutrans-experimental,nettool/nettool} || die "dobin failed"
+	dobin build/default/{simutrans-extended,nettool/nettool} || die "dobin failed"
 
 
 	exeinto /usr/libexec/${PF}
-	doexe build/default/makeobj-experimental/makeobj-experimental || die "doexe failed"
+	doexe build/default/makeobj-extended/makeobj-extended || die "doexe failed"
 
 	insinto /usr/share/${PF}
 	doins -r simutrans/* || die "doins failed"

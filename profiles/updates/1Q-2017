@@ -1,0 +1,3 @@
+move games-simulation/simutrans-exp games-simulation/simutrans-extended
+move games-simulation/simutrans-exp-britain-ex games-simulation/simutrans-extended-britain128
+move games-simulation/simutrans-exp-sweden-ex games-simulation/simutrans-extended-sweden128
