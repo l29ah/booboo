@@ -4,7 +4,9 @@
 
 EAPI=5
 
-inherit python
+PYTHON_COMPAT=( python2_7 )
+
+inherit python-single-r1 python-utils-r1
 
 DESCRIPTION="Web of trust statistics and pathfinder"
 HOMEPAGE="https://www.lysator.liu.se/~jc/wotsap/"
@@ -16,12 +18,11 @@ KEYWORDS="~x86 ~amd64"
 IUSE="+png"
 
 DEPEND=""
-RDEPEND="<dev-lang/python-3
-	png? ( dev-python/pillow )"
+RDEPEND="png? ( dev-python/pillow[$PYTHON_USEDEP] )"
 
 src_install() {
-	python_convert_shebangs -r -x -- 2 .
-	sed -i -e 's#global Image.*#global PIL#;s# \(Image\)# PIL.\1#g' wotsap
+	python_fix_shebang .
+	sed -i -e 's#global Image.*#global PIL#;s# \(Image\)# PIL.\1#g;s#fromstring#frombytes#g' wotsap
 	dobin pks2wot wotsap
 	dodoc README ChangeLog wotfileformat-0.1.txt wotfileformat.txt
 }
