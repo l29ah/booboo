@@ -6,7 +6,7 @@ EAPI=5
 
 WANT_AUTOCONF=latest
 WANT_AUTOMAKE=latest
-inherit user eutils autotools depend.php git-r3
+inherit eutils autotools depend.php git-r3
 
 DESCRIPTION="Lightweight high-performance web server"
 HOMEPAGE="http://www.lighttpd.net/"
