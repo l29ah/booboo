@@ -4,7 +4,9 @@
 
 EAPI=5
 
-inherit cmake-utils git-r3 python
+PYTHON_COMPAT=( python2_7 )
+
+inherit cmake-utils git-r3 python-r1
 
 DESCRIPTION="A double-entry accounting system with a command-line reporting interface"
 HOMEPAGE="http://ledger-cli.org/"
@@ -13,7 +15,6 @@ IUSE="debug doc gnuplot libedit python static-libs vim-syntax experimental"
 
 LICENSE="BSD"
 SLOT="0"
-PYTHON_DEPEND="python? 2"
 
 DEPEND=">=dev-libs/boost-1.35:=[python?]
 	dev-libs/gmp
