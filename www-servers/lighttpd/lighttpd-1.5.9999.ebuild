@@ -4,7 +4,7 @@
 
 WANT_AUTOCONF=latest
 WANT_AUTOMAKE=latest
-inherit user eutils autotools depend.php subversion
+inherit user eutils autotools subversion
 
 DESCRIPTION="Lightweight high-performance web server"
 HOMEPAGE="http://www.lighttpd.net/"
@@ -92,8 +92,6 @@ pkg_setup() {
 		ewarn "and mod_ssi."
 		ebeep 5
 	fi
-
-	use php && require_php_with_use cgi
 
 	enewgroup lighttpd
 	enewuser lighttpd -1 -1 /var/www/localhost/htdocs lighttpd
