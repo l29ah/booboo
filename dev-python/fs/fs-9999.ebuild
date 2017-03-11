@@ -2,16 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
-PYTHON_DEPEND="2:2.5"
-SUPPORT_PYTHON_ABIS=1
-RESTRICT_PYTHON_ABIS="2.4 3.*"
+EAPI=5
+PYTHON_COMPAT=( python2_7 )
 
-inherit distutils subversion
+inherit distutils-r1 git-r3
 
-DESCRIPTION="Filesystem abstraction"
-HOMEPAGE="http://code.google.com/p/pyfilesystem/"
-ESVN_REPO_URI="http://pyfilesystem.googlecode.com/svn/trunk/"
+DESCRIPTION="Python's Filesystem abstraction layer"
+HOMEPAGE="https://github.com/PyFilesystem/pyfilesystem2"
+EGIT_REPO_URI="https://github.com/PyFilesystem/pyfilesystem2"
 
 LICENSE="BSD"
 SLOT="0"
