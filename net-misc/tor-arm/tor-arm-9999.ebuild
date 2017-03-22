@@ -17,7 +17,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="dev-lang/python
-		net-misc/tor"
+		net-vpn/tor"
 RDEPEND="${DEPEND}"
 
 src_prepare() {

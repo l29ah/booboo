@@ -27,7 +27,7 @@ cDEPEND="
 DEPEND="${cDEPEND}
 	virtual/pkgconfig"
 RDEPEND="${cDEPEND}
-	net-misc/tor"
+	net-vpn/tor"
 
 src_configure() {
 	use debug && d='CONFIG+=debug' || d='CONFIG+=release'
