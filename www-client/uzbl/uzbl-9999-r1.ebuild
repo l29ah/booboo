@@ -50,6 +50,8 @@ RDEPEND="
 	${COMMON_DEPEND}
 	x11-misc/xdg-utils
 	dev-python/six[${PYTHON_USEDEP}]
+	dev-python/wheel[${PYTHON_USEDEP}]
+	dev-python/pip[${PYTHON_USEDEP}]
 	browser? (
 		x11-misc/xclip
 	)
@@ -111,6 +113,10 @@ src_prepare() {
 		sed -i 's/prefix=$(PREFIX)/prefix=$(DESTDIR)\/$(PREFIX)/' Makefile ||
 			die 'Makefile sed for sandbox failed'
 	fi
+}
+
+src_compile() {
+	true
 }
 
 src_install() {
