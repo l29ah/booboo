@@ -1,12 +1,13 @@
 --- kconfig/Makefile.old	2015-11-17 16:40:47.525496530 +0300
 +++ kconfig/Makefile	2015-11-17 16:40:55.198946167 +0300
-@@ -6,8 +6,8 @@
+@@ -6,9 +6,9 @@
  	@true   # Just be silent, you fscking son of a fscking beach...
  
  # Build flags
--CFLAGS = -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\""
+-CFLAGS = -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\"" \
++CFLAGS += -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\"" \
+ 	 -DGPERF_LEN_TYPE="$(gperf_len_type)"
 -LDFLAGS = $(INTL_LIBS)
-+CFLAGS += -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\""
 +LDFLAGS += $(INTL_LIBS)
  
  # Compiler flags to use gettext

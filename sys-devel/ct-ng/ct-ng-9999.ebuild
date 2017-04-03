@@ -29,7 +29,7 @@ src_prepare() {
 }
 
 src_configure () {
-	econf --with-install="/usr/bin/install"
+	econf INSTALL="/usr/bin/install"
 }
 
 src_install() {
