@@ -32,12 +32,14 @@ RDEPEND="dev-haskell/blaze-builder:=[profile?]
 	dev-haskell/vector-space:=[profile?]
 	>=dev-lang/ghc-7.4.1:=
 
-	dev-haskell/numinstances:=
-	dev-haskell/criterion:=
-	dev-haskell/silently:=
-	dev-haskell/snap-core:=
-	dev-haskell/snap-server:=
-	dev-haskell/transformers:=
+	dev-haskell/numinstances:=[profile?]
+	dev-haskell/criterion:=[profile?]
+	dev-haskell/silently:=[profile?]
+	dev-haskell/snap-core:=[profile?]
+	dev-haskell/snap-server:=[profile?]
+	dev-haskell/transformers:=[profile?]
+	dev-haskell/monads-tf:=[profile?]
+	dev-haskell/download:=[profile?]
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.6
