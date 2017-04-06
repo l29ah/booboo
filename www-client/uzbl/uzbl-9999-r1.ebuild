@@ -34,10 +34,8 @@ COMMON_DEPEND='
 	dev-libs/glib:2
 	>=dev-libs/icu-4.0.1
 	>=net-libs/libsoup-2.24:2.4
-	|| (
-		net-libs/webkit-gtk:4
-		net-libs/webkit-gtk:3
-	)
+	experimental? ( net-libs/webkit-gtk:4 )
+	!experimental? ( net-libs/webkit-gtk:3 )
 	x11-libs/gtk+:3
 '
 
