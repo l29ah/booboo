@@ -49,7 +49,7 @@ RDEPEND="
 	x11-misc/xdg-utils
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/wheel[${PYTHON_USEDEP}]
-	dev-python/pip[${PYTHON_USEDEP}]
+	>=dev-python/pip-9.0.1-r1[${PYTHON_USEDEP}]
 	browser? (
 		x11-misc/xclip
 	)
