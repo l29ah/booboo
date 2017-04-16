@@ -104,13 +104,6 @@ src_prepare() {
 	# remove -ggdb
 	sed -i 's/-ggdb //g' Makefile ||
 		die '-ggdb removal sed failed'
-
-	# fix sandbox
-	if [ ${PV} == 9999 ] && ! use experimental
-	then
-		sed -i 's/prefix=$(PREFIX)/prefix=$(DESTDIR)\/$(PREFIX)/' Makefile ||
-			die 'Makefile sed for sandbox failed'
-	fi
 }
 
 src_compile() {
