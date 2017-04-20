@@ -34,8 +34,6 @@ src_prepare() {
 
 	sh ./autogen.sh
 	intltoolize --copy --force
-	eautoreconf
-	eautomake
 }
 
 src_compile() {
