@@ -31,7 +31,8 @@ RDEPEND="${cDEPEND}
 
 src_configure() {
 	use debug && d='CONFIG+=debug' || d='CONFIG+=release'
-	eqmake5 DEFINES+=RICOCHET_NO_PORTABLE $d
+	tc-is-clang && clangopt='-spec linux-clang'
+	eqmake5 $clangopt DEFINES+=RICOCHET_NO_PORTABLE $d
 }
 
 src_install() {
