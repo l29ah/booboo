@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 inherit cmake-utils git-r3
 DESCRIPTION="Taisei (lit. Occident) is a fan-made, Open Source clone of the
