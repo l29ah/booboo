@@ -19,7 +19,7 @@ HOMEPAGE="http://biboumi.louiz.org/"
 
 LICENSE="ZLIB"
 SLOT="0"
-IUSE="+doc +tls systemd"
+IUSE="doc +tls systemd"
 
 RDEPEND="
 	dev-libs/expat
@@ -29,7 +29,7 @@ RDEPEND="
 	net-dns/c-ares
 	tls? ( >=dev-libs/botan-1.11 )"
 DEPEND="${RDEPEND}
-	doc? ( app-text/ronn )"
+	doc? ( app-text/pandoc )"
 
 DOCS=( README.rst CHANGELOG.rst )
 
