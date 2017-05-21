@@ -13,7 +13,7 @@ SRC_URI="http://git.louiz.org/biboumi/snapshot/${P}.tar.xz"
 LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="+doc +tls"
+IUSE="+doc +tls systemd"
 
 RDEPEND="
 	dev-libs/expat
@@ -25,7 +25,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	doc? ( app-text/ronn )"
 
-DOCS=( README.rst CHANGELOG.rst conf/biboumi.cfg )
+DOCS=( README.rst CHANGELOG.rst )
 
 pkg_setup() {
 	enewuser $PN
@@ -34,6 +34,9 @@ pkg_setup() {
 src_install() {
 	dodir /var/log/biboumi
 	fowners biboumi /var/log/biboumi
+	doinitd "$FILESDIR/biboumi"
 
 	cmake-utils_src_install
+
+	use systemd || rm -rf "$D/usr/lib/systemd"
 }

@@ -1,0 +1,6 @@
+#!/sbin/openrc-run
+description="XMPP gateway to IRC"
+pidfile="/var/run/biboumi.pid"
+command="/usr/bin/biboumi"
+command_args="/etc/biboumi/biboumi.cfg"
+start_stop_daemon_args="-v --background --make-pidfile -u biboumi"
