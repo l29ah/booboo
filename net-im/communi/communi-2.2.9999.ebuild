@@ -29,7 +29,7 @@ RDEPEND="
 		dev-qt/qtcore:5
 		dev-qt/qtdeclarative:5
 	)
-	!icu? ( dev-libs/uchardet )
+	!icu? ( app-i18n/uchardet )
 	icu? ( dev-libs/icu )
 "
 DEPEND="
