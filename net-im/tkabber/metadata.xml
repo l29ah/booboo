@@ -8,6 +8,7 @@
 	<flag name='gpg'>Enables GnuPG support with dev-tcltk/tclgpg</flag>
 	<flag name='plugins'>Enables installation the extra plugins</flag>
 	<flag name='3rd-party-plugins'>Enables installation the extra third party plugins</flag>
+	<flag name='remote-controlling'>Enables potentially insecure XEP-0146 support</flag>
 	<flag name='sound'>Enables sound event support with dev-tcltk/snack</flag>
 	<flag name='ssl'>Enables SSL/TLS support with dev-tcltk/tls</flag>
 	<flag name='tkimg'>Enables image support with dev-tcltk/tkimg</flag>
