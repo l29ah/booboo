@@ -8,7 +8,7 @@ inherit fossil eutils
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
 IUSE="contrib -gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg
-trayicon +udp vanilla fix-site-plugins-path"
+trayicon +udp vanilla fix-site-plugins-path remote-controlling"
 
 RDEPEND="
 	>=dev-lang/tcl-8.3.3
@@ -145,7 +145,10 @@ src_install() {
 		newdoc ChangeLog ChangeLog.plugins
 	fi
 	# Remove the fucking stupid shit
-	use vanilla || rm -rf "$D/usr/share/tkabber/plugins/chat/shuffle.tcl" "$D/usr/share/tkabber/site-plugins/flip" 
+	use vanilla || rm -rf "$D/usr/share/tkabber/plugins/chat/shuffle.tcl" "$D/usr/share/tkabber/site-plugins/flip" || die
+
+	# Remove the server trust (XEP-0146 support)
+	use remote-controlling || rm -rf "$D/usr/share/tkabber/plugins/general/remote.tcl" || die
 }
 
 pkg_postinst() {
