@@ -3,16 +3,16 @@
 # $Header: $
 
 EAPI=5
-inherit subversion cmake-utils
+inherit git-r3 cmake-utils
 
 DESCRIPTION="An open-source car navigation system with a routing engine"
 HOMEPAGE="http://www.navit-project.org"
-SRC_URI=""
+EGIT_REPO_URI="https://github.com/navit-gps/navit"
 
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus garmin gles gles2 gps gtk nls python sdl speechd svg"
+IUSE="dbus garmin gles gles2 gps gtk nls python qt sdl speechd svg"
 
 # gps: http://trac.navit-project.org/ticket/1284
 RDEPEND="dev-libs/glib:2
@@ -21,6 +21,7 @@ RDEPEND="dev-libs/glib:2
 	gles2? ( virtual/opengl )
 	gtk? ( x11-libs/gtk+:2
 		x11-misc/xkbd )
+	qt? ( dev-qt/qtsensors:5 )
 	sdl? ( media-libs/libsdl
 		media-libs/sdl-image
 		dev-games/cegui
@@ -35,8 +36,6 @@ DEPEND="${RDEPEND}
 	dev-vcs/cvs
 	svg? ( || ( gnome-base/librsvg media-gfx/imagemagick[png,svg] ) )"
 
-ESVN_REPO_URI="http://navit.svn.sourceforge.net/svnroot/navit/trunk/navit"
-
 src_configure() {
 	mycmakeargs=(
 		-DSAMPLE_MAP=OFF
@@ -44,6 +43,7 @@ src_configure() {
 		$(cmake-utils_use_use gles OPENGLES)
 		$(cmake-utils_use_use gles2 OPENGLES2)
 		$(cmake-utils_use_use nls NATIVE_LANGUAGE_SUPPORT)
+		$(cmake-utils_use_disable qt QT)
 	)
 
 	cmake-utils_src_configure
