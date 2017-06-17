@@ -12,7 +12,7 @@ DESCRIPTION="Seven Kingdoms: Ancient Adversaries"
 HOMEPAGE="https://www.7kfans.com/"
 SRC_URI="https://www.7kfans.com/downloads/7kaa-music.tar.bz2"
 
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
@@ -29,11 +29,9 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply -p0 ${FILESDIR}/fix-intl-9999.patch
 	eapply_user
 
 	bash ./autogen.sh || die Autogen
-	intltoolize --copy --force || die intltoolize
 }
 
 src_configure() {
