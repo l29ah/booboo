@@ -32,17 +32,20 @@ src_prepare() {
 	eapply -p0 ${FILESDIR}/fix-intl-9999.patch
 	eapply_user
 
-	sh ./autogen.sh
-	intltoolize --copy --force
+	bash ./autogen.sh || die Autogen
+	intltoolize --copy --force || die intltoolize
+}
+
+src_configure() {
+	econf || die
 }
 
 src_compile() {
-	econf
 	emake || die
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	emake DESTDIR="${D}" install || die
 
 	insinto /usr/share/7kaa/music
 	doins 7kaa-music/music/*
