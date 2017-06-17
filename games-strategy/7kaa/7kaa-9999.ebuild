@@ -4,7 +4,7 @@
 
 EAPI=6
 
-EGIT_REPO_URI='git://github.com/the3dfxdude/7kaa.git'
+EGIT_REPO_URI='https://github.com/the3dfxdude/7kaa.git'
 
 inherit git-r3 autotools
 
