@@ -1,6 +1,6 @@
---- kconfig/Makefile.old	2015-11-17 16:40:47.525496530 +0300
-+++ kconfig/Makefile	2015-11-17 16:40:55.198946167 +0300
-@@ -6,9 +6,9 @@
+--- kconfig/Makefile.in	2017-06-18 03:46:32.615084397 +0300
++++ kconfig/Makefile.in	2017-06-18 11:18:16.836961735 +0300
+@@ -11,9 +11,9 @@
  	@true   # Just be silent, you fscking son of a fscking beach...
  
  # Build flags
@@ -10,5 +10,5 @@
 -LDFLAGS = $(INTL_LIBS)
 +LDFLAGS += $(INTL_LIBS)
  
- # Compiler flags to use gettext
- ifeq ($(gettext),)
+ ifneq (@DPKG_BUILDFLAGS@,)
+ CFLAGS += $(shell @DPKG_BUILDFLAGS@ --get CPPFLAGS) \
