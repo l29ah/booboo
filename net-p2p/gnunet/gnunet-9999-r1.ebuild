@@ -26,18 +26,19 @@ RESTRICT="test"
 LICENSE="GPL-3"
 
 SLOT="0"
-IUSE="experimental http mysql nls postgres +sqlite X"
+IUSE="experimental +hostlist http mysql nls +sqlite X"
 REQUIRED_USE="
-	!mysql? ( !postgres? ( sqlite ) )
-	!mysql? ( !sqlite? ( postgres ) )
-	!postgres? ( !mysql? ( sqlite ) )
-	!postgres? ( !sqlite? ( mysql ) )
-	!sqlite? ( !postgres? ( mysql ) )
-	!sqlite? ( !mysql? ( postgres ) )
+	!mysql? ( sqlite )
+	!sqlite? ( mysql  )
 "
 
 DEPEND="
-	>=net-misc/curl-7.21.0
+	hostlist? (
+		|| (
+			net-misc/gnurl
+			>=net-misc/curl-7.21.0[curl_ssl_gnutls]
+		)
+	)
 	>=media-libs/libextractor-0.6.1
 	dev-libs/libgcrypt
 	>=dev-libs/libunistring-0.9.2
@@ -46,7 +47,6 @@ DEPEND="
 	http? ( >=net-libs/libmicrohttpd-0.9.18 )
 	mysql? ( >=virtual/mysql-5.1 )
 	nls? ( sys-devel/gettext )
-	postgres? ( >=dev-db/postgresql-server-8.3 )
 	sqlite? ( >=dev-db/sqlite-3.0 )
 	X? (
 		x11-libs/libXt
@@ -63,7 +63,6 @@ pkg_setup() {
 
 src_prepare() {
 	if [[ ${PV} == "9999" ]] ; then
-		subversion_src_prepare
 		autotools-utils_src_prepare
 	fi
 }
