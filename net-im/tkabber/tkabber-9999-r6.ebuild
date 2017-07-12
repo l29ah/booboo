@@ -20,7 +20,7 @@ RDEPEND="
 	ssl? ( >=dev-tcltk/tls-1.4.1 )
 	sound? ( dev-tcltk/snack )
 	trayicon? ( >=dev-tcltk/tktray-1.1 )
-	tkimg? ( >dev-tcltk/tkimg-1.4.20100510 )
+	tkimg? ( >=dev-tcltk/tkimg-1.4.6 )
 	udp? ( dev-tcltk/tcludp )"
 DEPEND="${DEPEND}
 	doc? ( app-text/xml2rfc )"
