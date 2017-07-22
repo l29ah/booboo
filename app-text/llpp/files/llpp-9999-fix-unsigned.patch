@@ -1,0 +1,13 @@
+diff --git a/link.c b/link.c
+index 4d23869..c46020d 100644
+--- a/link.c
++++ b/link.c
+@@ -4467,7 +4467,7 @@ CAMLprim void ml_init (value csock_v, value params_v)
+     }
+     else {
+         int len;
+-        const unsigned char *data;
++        const char *data;
+ 
+         data = pdf_lookup_substitute_font (state.ctx, 0, 0, 0, 0, &len);
+         state.face = load_builtin_font (data, len);
