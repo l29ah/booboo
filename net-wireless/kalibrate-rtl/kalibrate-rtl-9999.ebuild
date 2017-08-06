@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND=""
+DEPEND="net-wireless/rtl-sdr"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
