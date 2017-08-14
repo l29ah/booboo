@@ -23,9 +23,7 @@ RDEPEND="net-misc/curl
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-kconfig-respect-flags.patch
 
-	#Upstream provides ${S}/bootstrap which runs autoconf -Wall --force
-	#We'll use eautoconf to be portage friendly
-	eautoconf -Wall --force
+	./bootstrap
 }
 
 src_configure () {
