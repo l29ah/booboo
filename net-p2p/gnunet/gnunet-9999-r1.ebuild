@@ -26,7 +26,7 @@ RESTRICT="test"
 LICENSE="GPL-3"
 
 SLOT="0"
-IUSE="experimental +hostlist http mysql nls +sqlite X"
+IUSE="experimental +hostlist http mysql nls postgres +sqlite X"
 REQUIRED_USE="
 	!mysql? ( sqlite )
 	!sqlite? ( mysql  )
