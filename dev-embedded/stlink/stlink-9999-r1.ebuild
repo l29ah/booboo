@@ -30,7 +30,7 @@ pkg_pretend() {
 }
 
 src_install() {
-	enable_cmake-utils_src_install
+	cmake-utils_src_install
 	cp -r etc $D
 	einfo "You may want to run \`udevadm control --reload-rules'."
 	dodoc README.md
