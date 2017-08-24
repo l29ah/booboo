@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit base autotools git-r3
+inherit base autotools git-r3 fcaps
 
 DESCRIPTION="C library and ncurses based program to generate ICMP echo requests and ping multiple hosts at once"
 HOMEPAGE="http://noping.cc/"
@@ -37,7 +37,10 @@ src_configure() {
 src_install() {
 	default
 	find "${D}" -name '*.la'  -delete || die
+}
 
-	fperms u+s,og-r /usr/bin/oping
-	fperms u+s,og-r /usr/bin/noping
+pkg_postinst() {
+	fcaps cap_net_raw \
+		usr/bin/oping \
+		usr/bin/noping
 }
