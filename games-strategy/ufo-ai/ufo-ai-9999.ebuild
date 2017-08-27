@@ -7,7 +7,7 @@ inherit eutils flag-o-matic games git-r3
 
 DESCRIPTION="UFO: Alien Invasion - X-COM inspired strategy game"
 HOMEPAGE="http://ufoai.sourceforge.net/"
-EGIT_REPO_URI="http://git.code.sf.net/p/ufoai/code"
+EGIT_REPO_URI="https://git.code.sf.net/p/ufoai/code"
 
 LICENSE="GPL-2"
 SLOT="0"
