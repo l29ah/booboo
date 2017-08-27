@@ -17,5 +17,5 @@ IUSE=""
 RDEPEND="
 	sci-libs/oce
 	sci-libs/libarea
-	>=x11-libs/wxGTK-2.8"
+	|| ( x11-libs/wxGTK:3.0 x11-libs/wxGTK:2.8 )"
 DEPEND="$RDEPEND"
