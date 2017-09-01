@@ -27,10 +27,12 @@ RDEPEND="
 	dev-lang/tcl
 	dev-lang/tk
 	dev-tcltk/tclx
+	dev-tcltk/tkimg
 	dev-tcltk/tclreadline
 	dev-tcltk/blt
 	dev-tcltk/bwidget
 	${PYTHON_DEPS}
+	dev-lang/python:2.7[tk]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/configobj[${PYTHON_USEDEP}]
@@ -50,6 +52,8 @@ RDEPEND="
 	)
 	gtk? (
 		x11-libs/gtk+:2
+		dev-python/pygtk[${PYTHON_USEDEP}]
+		dev-python/pygobject[${PYTHON_USEDEP}]
 		dev-python/pygtkglext[${PYTHON_USEDEP}]
 		dev-python/pygtksourceview[${PYTHON_USEDEP}]
 		x11-libs/vte[python,${PYTHON_USEDEP}]
@@ -71,6 +75,8 @@ RDEPEND="
 	sys-process/psmisc
 	net-firewall/iptables
 	media-gfx/graphviz
+	x11-libs/libXinerama
+	media-libs/glu
 "
 
 DEPEND="${RDEPEND}"
