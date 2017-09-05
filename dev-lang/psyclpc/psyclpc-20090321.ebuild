@@ -48,10 +48,6 @@ DEPEND="${RDEPEND}
 #MYS="/var/tmp/portage/${P}/work/${P}/src"
 MYS="${S}/src"
 
-use debug && {
-		RESTRICT="${RESTRICT} nostrip"
-}
-
 src_compile() {
 		cd "${MYS}"
 #		use berkdb >&/dev/null && myopts="${myopts} --enable-db"
