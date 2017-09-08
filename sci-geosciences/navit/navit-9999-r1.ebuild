@@ -52,5 +52,5 @@ src_configure() {
 src_install () {
 	cmake-utils_src_install
 
-	dodoc AUTHORS ChangeLog README || die "dodoc failed"
+	dodoc AUTHORS ChangeLog README.md || die "dodoc failed"
 }
