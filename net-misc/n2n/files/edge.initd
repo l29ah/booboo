@@ -1,7 +1,8 @@
-#!/sbin/runscript
+#!/sbin/openrc-run
 # Copyright 1999-2010 Tiziano Müller
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+
+pidfile=/run/edge.pid
 
 depend() {
 	use net
@@ -12,12 +13,13 @@ start() {
 	start-stop-daemon \
 		--start \
 		--quiet \
+		--background --make-pidfile --pidfile "$pidfile" \
 		--exec /usr/sbin/edge \
 		--env N2N_KEY="${KEY}" \
 		-- -a "${ADDRESS}" \
 			-c "${COMMUNITY}" \
 			-l "${SUPERNODE}" \
-			-u ${USER} -g ${GROUP} ${OPTIONS}
+			-u ${USER} -g ${GROUP} -f ${OPTIONS}
 	eend $?
 }
 
@@ -25,6 +27,6 @@ stop() {
 	ebegin "Stopping edge"
 	start-stop-daemon \
 		--stop \
-		--exec /usr/sbin/edge
+		--pidfile "$pidfile"
 	eend $?
 }
