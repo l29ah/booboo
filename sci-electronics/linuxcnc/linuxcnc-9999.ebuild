@@ -11,7 +11,7 @@ inherit git-r3 eutils autotools-utils python-single-r1
 
 DESCRIPTION="LinuxCNC controls CNC machines."
 HOMEPAGE="http://linuxcnc.org/"
-EGIT_REPO_URI="https://github.com/jepler/linuxcnc-mirror"
+EGIT_REPO_URI="https://github.com/LinuxCNC/linuxcnc"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -36,7 +36,7 @@ RDEPEND="
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/configobj[${PYTHON_USEDEP}]
-	virtual/python-imaging[tk,${PYTHON_USEDEP}]
+	dev-python/pillow[tk,${PYTHON_USEDEP}]
 	dev-libs/boost[python,${PYTHON_USEDEP}]
 	modbus? (
 		dev-libs/libmodbus
@@ -56,7 +56,6 @@ RDEPEND="
 		dev-python/pygobject[${PYTHON_USEDEP}]
 		dev-python/pygtkglext[${PYTHON_USEDEP}]
 		dev-python/pygtksourceview[${PYTHON_USEDEP}]
-		x11-libs/vte[python,${PYTHON_USEDEP}]
 	)
 	gnome? (
 		dev-python/gnome-python-base
@@ -81,12 +80,12 @@ RDEPEND="
 
 DEPEND="${RDEPEND}"
 
-S=$S/src
+S="$S/src"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
 src_prepare() {
-	epatch "${FILESDIR}/fixups.patch"
+	default
 	eautoreconf
 }
 
@@ -97,6 +96,8 @@ src_configure() {
 		$(use_with modbus libmodbus)
 		$(use_with usb libusb-1.0)
 		$(usex uspace '--with-realtime=uspace' '')
+		--enable-non-distributable=yes
+		--with-boost-python=boost_python-2.7
 	)
 	autotools-utils_src_configure
 }
