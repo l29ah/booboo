@@ -7,8 +7,6 @@ EAPI=6
 inherit eutils git-r3
 
 EGIT_REPO_URI='https://github.com/VictorErik/Pak128.Sweden-Ex.git'
-EGIT_BRANCH=half-height
-EGIT_COMMIT=half-height
 
 DESCRIPTION="Sweden pakset for Simutrans Extended"
 HOMEPAGE="http://www.simutrans.com/"
