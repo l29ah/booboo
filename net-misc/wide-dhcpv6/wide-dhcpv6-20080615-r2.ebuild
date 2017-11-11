@@ -13,15 +13,23 @@ SRC_URI="http://downloads.sourceforge.net/project/wide-dhcpv6/wide-dhcpv6/wide-d
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="vanilla"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	econf || die
 	epatch "${FILESDIR}/fix-libc-depend.patch"
 	epatch "${FILESDIR}/fix-dprintf-conflict.patch"
 	epatch "${FILESDIR}/address-suffix-1.patch"
+	use vanilla || {
+		epatch "$FILESDIR/0006-Add-new-feature-dhcp6c-profiles.patch"
+	}
+	default
+}
+
+src_compile() {
+	emake -j1
 }
 
 mkd() {
