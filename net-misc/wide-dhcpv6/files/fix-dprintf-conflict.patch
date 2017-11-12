@@ -72,9 +72,9 @@
  	    in6addr2str(&sa->addr.addr, 0));
  
  	ia = sa->ctl->iacna_ia;
---- cftoken.c	Thu Jan 01 09:01:40 1970
-+++ cftoken.c	Thu Jan 01 09:01:40 1970
-@@ -2475,10 +2475,10 @@
+--- cftoken.l	2017-11-12 14:31:27.111743574 +0300
++++ cftoken.l	2017-11-12 14:31:55.465077299 +0300
+@@ -340,10 +340,10 @@
  	int l;
  {
  	if (w) {
@@ -87,7 +87,7 @@
  		    "<%d>[%s] (%d)", yy_start, t, l);
  	}
  }
-@@ -2494,7 +2494,7 @@
+@@ -359,7 +359,7 @@
  	if (bp < ep)
  		bp += vsnprintf(bp, ep - bp, s, ap);
  
@@ -96,7 +96,7 @@
  }
  
  void
-@@ -2532,7 +2532,7 @@
+@@ -397,7 +397,7 @@
  	FILE *fp;
  
  	if (incstackp >= MAX_INCLUDE_DEPTH) {
@@ -105,7 +105,7 @@
  		return (-1);
  	}
  	incstack[incstackp].path = configfilename;
-@@ -2541,7 +2541,7 @@
+@@ -406,7 +406,7 @@
  
  	fp = fopen(path, "r");
  	if (fp == NULL) {
@@ -114,7 +114,7 @@
  			path, strerror(errno));
  		if (errno == ENOENT)
  			return (0);
-@@ -2563,7 +2563,7 @@
+@@ -428,7 +428,7 @@
  {
  	configfilename = conf;
  	if ((yyin = fopen(configfilename, "r")) == NULL) {

@@ -19,6 +19,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_configure() {
+	rm cfparse.c cftoken.c	# generated file
 	epatch "${FILESDIR}/fix-libc-depend.patch"
 	epatch "${FILESDIR}/fix-dprintf-conflict.patch"
 	epatch "${FILESDIR}/address-suffix-1.patch"
