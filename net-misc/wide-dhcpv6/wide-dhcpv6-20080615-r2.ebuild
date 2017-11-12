@@ -25,7 +25,10 @@ src_configure() {
 	epatch "${FILESDIR}/address-suffix-1.patch"
 	epatch "$FILESDIR/0002-Don-t-strip-binaries.patch"
 	use vanilla || {
+		epatch "$FILESDIR/0005-Update-ifid-on-interface-restart.patch"
 		epatch "$FILESDIR/0006-Add-new-feature-dhcp6c-profiles.patch"
+		epatch "$FILESDIR/0007-Adding-ifid-option-to-the-dhcp6c.conf-prefix-interfa.patch"
+		epatch "$FILESDIR/0015-a-bit-info-to-logger-when-get-OPTION_RECONF_ACCEPT.patch"
 		epatch "$FILESDIR/wide-dhcpv6-disable-extra-cflags.patch"
 	}
 	default
