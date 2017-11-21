@@ -16,3 +16,12 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
+
+PATCHES=( "$FILESDIR/libarea-providing-library-path-cmake.patch" )
+
+src_configure() {
+	local mycmakeargs=(
+		-DLIB_INSTALL_DIR="$(get_libdir)"
+	)
+	cmake-utils_src_configure
+}
