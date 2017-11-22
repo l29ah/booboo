@@ -19,3 +19,10 @@ RDEPEND="
 	sci-libs/libarea
 	|| ( x11-libs/wxGTK:3.0 x11-libs/wxGTK:2.8 )"
 DEPEND="$RDEPEND"
+
+src_configure() {
+	local mycmakeargs=(
+		-DLIB_INSTALL_DIR="$(get_libdir)"
+	)
+	cmake-utils_src_configure
+}
