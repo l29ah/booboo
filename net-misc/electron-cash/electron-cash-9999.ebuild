@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{3_4,3_5,3_6} )
 PYTHON_REQ_USE="ncurses?"
 
 inherit distutils-r1 gnome2-utils
@@ -23,7 +23,7 @@ HOMEPAGE="https://electroncash.org/"
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="audio_modem cli cosign digitalbitbox email greenaddress_it ncurses qrcode +qt4 sync trustedcoin_com vkb"
+IUSE="audio_modem cli cosign digitalbitbox email ncurses qrcode +qt4 sync vkb"
 
 if [[ ${PV} != *9999* ]]; then
 	LINGUAS="ar_SA bg_BG cs_CZ da_DK de_DE el_GR eo_UY es_ES fr_FR hu_HU hy_AM id_ID it_IT ja_JP ko_KR ky_KG lv_LV nb_NO nl_NL no_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI ta_IN th_TH tr_TR vi_VN zh_CN"
@@ -39,10 +39,8 @@ REQUIRED_USE="
 	cosign? ( qt4 )
 	digitalbitbox? ( qt4 )
 	email? ( qt4 )
-	greenaddress_it? ( qt4 )
 	qrcode? ( qt4 )
 	sync? ( qt4 )
-	trustedcoin_com? ( qt4 )
 	vkb? ( qt4 )
 "
 
@@ -57,7 +55,10 @@ RDEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tlslite[${PYTHON_USEDEP}]
-	dev-libs/protobuf[python,${PYTHON_USEDEP}]
+	|| (
+		dev-python/protobuf-python[${PYTHON_USEDEP}]
+		dev-libs/protobuf[python,${PYTHON_USEDEP}]
+	)
 	virtual/python-dnspython[${PYTHON_USEDEP}]
 	qrcode? ( media-gfx/zbar[python,v4l,${PYTHON_USEDEP}] )
 	qt4? (
@@ -111,10 +112,10 @@ src_prepare() {
 	for gui in  \
 		$(usex qt4      qt   '')  \
 	; do
-		setup_py_gui="${setup_py_gui}'electrum_gui.${gui}',"
+		setup_py_gui="${setup_py_gui}'electroncash_gui.${gui}',"
 	done
 
-	sed -i "s/'electrum_gui\\.qt',/${setup_py_gui}/" setup.py || die
+	sed -i "s/'electroncash_gui\\.qt',/${setup_py_gui}/" setup.py || die
 
 	local bestgui
 	if use qt4; then
@@ -134,13 +135,11 @@ src_prepare() {
 		$(usex cosign          '' cosigner_pool        ) \
 		$(usex digitalbitbox   '' digitalbitbox        ) \
 		$(usex email           '' email_requests       ) \
-		$(usex greenaddress_it '' greenaddress_instant ) \
 		hw_wallet \
 		ledger \
 		keepkey \
 		$(usex sync            '' labels               ) \
 		trezor  \
-		$(usex trustedcoin_com '' trustedcoin          ) \
 		$(usex vkb             '' virtualkeyboard      ) \
 	; do
 		rm -r plugins/"${plugin}"* || die
@@ -153,7 +152,7 @@ src_prepare() {
 }
 
 src_install() {
-	doicon -s 128 icons/electron.png
+	doicon -s 128 icons/electron-cash.png
 	distutils-r1_src_install
 }
 
