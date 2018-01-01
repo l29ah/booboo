@@ -4,13 +4,20 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_4 )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
-inherit eutils python-single-r1 git-r3 autotools
+inherit eutils python-single-r1 autotools
 
 DESCRIPTION="Open source library for SPI/I2C control via FTDI chips"
 HOMEPAGE="https://github.com/l29ah/libmpsse"
-EGIT_REPO_URI="https://github.com/l29ah/libmpsse"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/l29ah/libmpsse"
+else
+	SRC_URI="https://github.com/l29ah/libmpsse/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
+fi
 
 LICENSE="BSD-2"
 SLOT="0"
