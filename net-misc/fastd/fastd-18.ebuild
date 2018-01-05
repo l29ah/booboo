@@ -12,7 +12,7 @@ SRC_URI="https://projects.universe-factory.net/attachments/download/86/${P}.tar.
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm"
-IUSE="ssl +sodium nacl lto +caps +cipher-aes128 cipher-aes128-openssl +cipher-aes128-nacl +cipher-null-memcpy +cipher-null +cipher-salsa20 +cipher-salsa2012 +cipher-salsa2012-nacl +cipher-salsa2012-xmm +cipher-salsa20-nacl +cipher-salca20-xmm +dynamic-peers +mac-ghash +mac-ghash-builtin +mac-ghash-pclmultqdq +mac-uhash +mac-uhash-builtin +method-cipher-test +method-composed-gmac +method-composed-umac +method-generic-gmac +method-generic-poly1305 +method-generic-umac +method-null +method-xsalsa20-poly1305 +status-socket"
+IUSE="ssl +sodium nacl lto +caps cipher-aes128-ctr +cipher-null-memcpy +cipher-null +cipher-salsa20 +cipher-salsa2012 +cipher-salsa2012-nacl +cipher-salsa2012-xmm +cipher-salsa20-nacl +cipher-salca20-xmm +dynamic-peers +mac-ghash +mac-ghash-builtin +mac-ghash-pclmultqdq +mac-uhash +mac-uhash-builtin +method-cipher-test +method-composed-gmac +method-composed-umac +method-generic-gmac +method-generic-poly1305 +method-generic-umac +method-null +method-xsalsa20-poly1305 +status-socket"
 
 REQUIRED_USE="cipher-aes128-openssl? ( ssl )"
 
@@ -20,7 +20,7 @@ DEPEND=">=dev-libs/libuecc-7
 		dev-libs/json-c
 		caps? ( sys-libs/libcap )
 		sodium? ( dev-libs/libsodium )
-		nacl? ( dev-libs/libnacl )
+		nacl? ( net-libs/nacl )
 		ssl? ( dev-libs/openssl )"
 RDEPEND="${DEPEND}"
 
@@ -30,9 +30,7 @@ src_configure() {
 		$(cmake-utils_use_enable ssl OPENSSL)
 		$(cmake-utils_use_enable lto LTO)
 		$(cmake-utils_use_with caps CAPABILITIES)
-		$(cmake-utils_use_with cipher-aes128 CIPHER_AES128)
-		$(cmake-utils_use_with cipher-aes128-openssl CIPHER_AES128_OPENSSL)
-		$(cmake-utils_use_with cipher-aes128-nacl CIPHER_AES128_NACL)
+		$(cmake-utils_use_with cipher-aes128-ctr CIPHER_AES128_CTR)
 		$(cmake-utils_use_with cipher-null-memcpy CIPHER_NULL_MEMCPY)
 		$(cmake-utils_use_with cipher-null CIPHER_NULL)
 		$(cmake-utils_use_with cipher-salsa20 CIPHER_SALSA20)
