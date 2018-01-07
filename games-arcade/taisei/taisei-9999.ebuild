@@ -15,11 +15,18 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="media-libs/libsdl
-	media-libs/sdl-ttf
-	media-libs/libpng
+DEPEND="
+	>=media-libs/libsdl2-2.0.5
+	media-libs/sdl2-mixer
+	media-libs/sdl2-ttf
+	>=dev-libs/libzip-1.0
+	>=media-libs/libpng-1.5.0
 	virtual/opengl
-	media-libs/openal
-	media-libs/freealut
+	sys-libs/zlib
 "
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	# do not strip as pm will do it for us
+	sed -i -e '/strip=true/d' meson.build
+}
