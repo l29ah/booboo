@@ -30,6 +30,7 @@ src_prepare() {
 	use cxx || epatch "${FILESDIR}"/${PN}-0.1.12-nocpp.patch
 	epatch "${FILESDIR}"/${PN}-0.1.12-no-infinite-bulk.patch
 	epatch "${FILESDIR}"/${PN}-0.1-ansi.patch # 273752
+	epatch "$FILESDIR/08_bus_location.diff" # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=611958
 	eautoreconf
 }
 
