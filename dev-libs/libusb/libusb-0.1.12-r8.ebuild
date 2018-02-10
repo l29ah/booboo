@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-libs/libusb/Attic/libusb-0.1.12-r7.ebuild,v 1.13 2013/08/01 12:27:35 ssuominen dead $
 
-EAPI="3"
+EAPI=6
 
-inherit eutils libtool autotools toolchain-funcs
+inherit eutils libtool autotools toolchain-funcs multilib-minimal
 
 DESCRIPTION="Userspace access to USB devices"
 HOMEPAGE="http://libusb.sourceforge.net/"
@@ -32,21 +32,26 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.1-ansi.patch # 273752
 	epatch "$FILESDIR/08_bus_location.diff" # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=611958
 	eautoreconf
+
+	multilib_copy_sources
 }
 
-src_configure() {
+multilib_src_configure() {
 	econf \
 		$(use_enable static-libs static) \
 		$(use_enable debug debug all) \
 		$(use_enable doc build-docs)
 }
 
-src_install() {
+multilib_src_install() {
 	emake -j1 DESTDIR="${D}" install || die "make install failed"
+	gen_usr_ldscript -a usb
+}
+
+multilib_src_install_all() {
 	dodoc AUTHORS NEWS README
 	use doc && dohtml doc/html/*.html
 
-	gen_usr_ldscript -a usb
 	use cxx || rm -f "${ED}"/usr/include/usbpp.h
 
 	rm -f "${ED}"/usr/lib*/libusb*.la
