@@ -1,13 +1,12 @@
 --- kconfig/Makefile.in	2017-06-18 03:46:32.615084397 +0300
 +++ kconfig/Makefile.in	2017-06-18 11:18:16.836961735 +0300
-@@ -11,9 +11,9 @@
+@@ -11,8 +11,8 @@
  	@true   # Just be silent, you fscking son of a fscking beach...
  
  # Build flags
--CFLAGS = -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\"" \
-+CFLAGS += -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\"" \
- 	 -DGPERF_LEN_TYPE="$(gperf_len_type)"
+-CFLAGS = -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\""
 -LDFLAGS = $(INTL_LIBS)
++CFLAGS += -DCONFIG_=\"CT_\" -DPACKAGE="\"crosstool-NG $(VERSION)\""
 +LDFLAGS += $(INTL_LIBS)
  
  ifneq (@DPKG_BUILDFLAGS@,)
