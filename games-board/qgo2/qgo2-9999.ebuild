@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=6
 
-inherit games subversion qt4-r2 eutils
+inherit subversion eutils qmake-utils xdg-utils
 
-ESVN_REPO_URI="https://qgo.svn.sourceforge.net/svnroot/qgo/trunk"
+ESVN_REPO_URI="https://svn.code.sf.net/p/qgo/code/trunk"
 
 DESCRIPTION="qGo is a full featured SGF editor and Go Client."
 HOMEPAGE="http://qgo.sourceforge.net/"
@@ -31,15 +31,23 @@ src_unpack() {
 }
 
 src_configure() {
-	eqmake4 qgo.pro
+	eqmake5 qgo.pro
 }
 
 src_install() {
-	qt4-r2_src_install
+	INSTALL_ROOT="${D}" emake install || di
 
-	dodoc AUTHORS
+	dodoc AUTHORS || die
 
 	insinto "${GAMES_DATADIR}"/qgo/languages
 	doins src/translations/*.qm || die
+}
+
+pkg_postinst() {
+	xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
 }
 
