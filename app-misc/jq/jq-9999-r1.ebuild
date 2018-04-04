@@ -17,7 +17,7 @@ KEYWORDS=""
 IUSE="test +dynamic static-libs"
 
 DEPEND=">sys-devel/bison-3.0
-	dev-libs/oniguruma[static-libs?]
+	dev-libs/oniguruma:=[static-libs?]
 	sys-devel/flex
 	test? ( dev-util/valgrind )"
 
