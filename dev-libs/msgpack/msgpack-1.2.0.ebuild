@@ -29,6 +29,10 @@ DEPEND="
 
 DOCS=( README.md )
 
+src_prepare() {
+	sed -i -e 's,-Werror,,g' CMakeLists.txt || die
+}
+
 src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use cxx MSGPACK_ENABLE_CXX)
