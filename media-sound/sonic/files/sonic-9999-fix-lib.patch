@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 89378e2..f4e7144 100644
+--- a/Makefile
++++ b/Makefile
+@@ -47,7 +47,7 @@ spectrogram.o: spectrogram.c sonic.h
+ 	$(CC) $(CFLAGS) -c spectrogram.c
+ 
+ libsonic.so.$(LIB_TAG): $(OBJ)
+-	$(CC) $(CFLAGS) -shared -Wl,-$(SONAME),libsonic.so.0 $(OBJ) -o libsonic.so.$(LIB_TAG)
++	$(CC) $(CFLAGS) -shared -Wl,-$(SONAME),libsonic.so.0 $(OBJ) -o libsonic.so.$(LIB_TAG) -lm $(FFTLIB)
+ 	ln -sf libsonic.so.$(LIB_TAG) libsonic.so
+ 	ln -sf libsonic.so.$(LIB_TAG) libsonic.so.0
+ 
