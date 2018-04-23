@@ -27,7 +27,7 @@ RDEPEND="
 	sys-apps/util-linux
 	net-dns/libidn
 	net-dns/c-ares
-	tls? ( >=dev-libs/botan-1.11 )
+	tls? ( >=dev-libs/botan-1.11:= )
 	litesql? ( dev-cpp/litesql )"
 DEPEND="${RDEPEND}
 	doc? ( app-text/pandoc )"

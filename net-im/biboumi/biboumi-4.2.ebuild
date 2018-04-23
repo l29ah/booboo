@@ -21,7 +21,7 @@ RDEPEND="
 	sys-apps/util-linux
 	net-dns/libidn
 	net-dns/c-ares
-	tls? ( >=dev-libs/botan-1.11 )"
+	tls? ( >=dev-libs/botan-1.11:= )"
 DEPEND="${RDEPEND}
 	doc? ( app-text/ronn )"
 
