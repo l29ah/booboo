@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/crosstool-ng/crosstool-ng"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc"
+IUSE="doc bash-completion"
 
 RDEPEND="net-misc/curl
 	dev-util/gperf
@@ -21,18 +21,15 @@ RDEPEND="net-misc/curl
 	dev-vcs/subversion"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-kconfig-respect-flags.patch
-
 	./bootstrap
 }
 
 src_configure () {
-	econf INSTALL="/usr/bin/install"
+	econf INSTALL="/usr/bin/install" $(use_with bash-completion)
 }
 
 src_install() {
 	emake DESTDIR="${D%/}" install
-	newbashcomp ${PN}.comp ${PN}
 	dodoc README.md TODO
 	use doc && mv "${D}"/usr/share/doc/crosstool-ng/"${PN}.${PVR}"/* \
 		"${D}"/usr/share/doc/"${PF}"
