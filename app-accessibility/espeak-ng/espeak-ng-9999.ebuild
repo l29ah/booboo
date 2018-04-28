@@ -5,7 +5,7 @@ EAPI=6
 
 inherit autotools git-r3 user
 
-DESCRIPTION="eSpeak NG - reborn of eSpeak TTS (Text-to-Speach engine"
+DESCRIPTION="eSpeak NG - reborn of eSpeak TTS (Text-to-Speach engine)"
 HOMEPAGE="https://github.com/espeak-ng/espeak-ng"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/espeak-ng/espeak-ng.git"
