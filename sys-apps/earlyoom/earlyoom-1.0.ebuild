@@ -19,6 +19,7 @@ RDEPEND="${DEPEND}"
 
 src_compile() {
 	emake earlyoom
+	use systemd && emake earlyoom.service
 }
 
 src_install() {
