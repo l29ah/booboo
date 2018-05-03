@@ -39,7 +39,7 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install
-	dodoc ../README
+	dodoc ../README.md
 	dodoc ../docs/README*
 	if use doc ; then
 		dodoc ../docs/AN_135_MPSSE_Basics.pdf
