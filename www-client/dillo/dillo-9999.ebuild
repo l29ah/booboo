@@ -20,7 +20,7 @@ RDEPEND="
 	sys-libs/zlib
 	jpeg? ( virtual/jpeg:0 )
 	png? ( >=media-libs/libpng-1.2:0 )
-	ssl? ( dev-libs/openssl:0 )
+	ssl? ( dev-libs/openssl:0= )
 "
 DEPEND="
 	${RDEPEND}
