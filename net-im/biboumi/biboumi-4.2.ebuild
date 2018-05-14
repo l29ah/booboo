@@ -19,7 +19,7 @@ RDEPEND="
 	dev-libs/expat
 	virtual/libiconv
 	sys-apps/util-linux
-	net-dns/libidn
+	net-dns/libidn:=
 	net-dns/c-ares
 	tls? ( >=dev-libs/botan-1.11:= )"
 DEPEND="${RDEPEND}
