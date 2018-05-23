@@ -39,7 +39,7 @@ RDEPEND="dev-haskell/blaze-builder:=[profile?]
 	dev-haskell/snap-server:=[profile?]
 	dev-haskell/transformers:=[profile?]
 	dev-haskell/monads-tf:=[profile?]
-	dev-haskell/download:=[profile?]
+	dev-haskell/hspec:=[profile?]
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.6
