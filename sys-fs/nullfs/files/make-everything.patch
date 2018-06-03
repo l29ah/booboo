@@ -1,0 +1,16 @@
+--- Makefile
++++ Makefile
+@@ -1,7 +1,8 @@
+-LDFLAGS=-lfuse -lstdc++
+-
+-nul1fs:
+-	cc $(LDFLAGS) -o nul1fs nul1fs.c
++LDLIBS="-lfuse"
++T=nul1fs nullfs nulnfs
+ 
++all: $(T)
++nullfs: nullfs.c++
++	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $< $(LDLIBS) -o $@
+ clean:
+-	rm -f nul1fs
++	rm -f $(T) *.o
