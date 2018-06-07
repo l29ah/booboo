@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<use>
+ <flag name="glib">Support reading config files via glib helpers</flag>
+ <flag name="test-programs">Install test programs for DRM driver development</flag>
+ <flag name="unwind">Provide automatic stack traces on test failures</flag>
+ <flag name="valgrind">Support valgrind annotations</flag>
+ <flag name="xrandr">Enable support for the X RandR extension</flag>
+</use>
+</pkgmetadata>
