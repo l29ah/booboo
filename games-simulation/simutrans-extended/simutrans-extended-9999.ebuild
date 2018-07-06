@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/games-simulation/simutrans/simutrans-0.102.2.2.ebuild,v 1.5 2012/03/23 20:14:06 tupone Exp $
 
-EAPI=6
+EAPI=7
 inherit flag-o-matic eutils git-r3
 
 EGIT_REPO_URI='https://github.com/jamespetts/simutrans-extended.git'
@@ -16,10 +16,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE="debug"
 
-RDEPEND="media-libs/libsdl[sound,video]
+RDEPEND="media-libs/libsdl2[sound,video]
 	sys-libs/zlib
 	media-libs/libpng
-	media-libs/sdl-mixer"
+	media-libs/sdl2-mixer"
 DEPEND="${RDEPEND}"
 PDEPEND="|| ( games-simulation/simutrans-extended-britain128
 	games-simulation/simutrans-extended-sweden128 ) "
@@ -33,7 +33,7 @@ src_unpack() {
 
 src_prepare() {
 	strip-flags # bug #293927
-	echo "BACKEND=mixer_sdl
+	echo "BACKEND=sdl2
 COLOUR_DEPTH=16
 OSTYPE=linux
 MULTI_THREAD=1
