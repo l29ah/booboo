@@ -17,9 +17,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="media-libs/alsa-lib
-	dev-qt/qtcore:4
-	dev-qt/qtgui:4
-	dev-qt/qttest:4"
+	dev-qt/qtcore:5
+	dev-qt/qtgui:5
+	dev-qt/qttest:5"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}"
@@ -39,7 +39,7 @@ src_install() {
 
 	dodoc AUTHORS || die
 
-	insinto "${GAMES_DATADIR}"/qgo/languages
+	insinto /usr/share/qgo/languages
 	doins src/translations/*.qm || die
 }
 
