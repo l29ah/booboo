@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=7
 
 EGIT_REPO_URI='https://github.com/the3dfxdude/7kaa.git'
 
@@ -31,7 +31,8 @@ src_unpack() {
 src_prepare() {
 	eapply_user
 
-	bash ./autogen.sh || die Autogen
+	eautoreconf -vif || die autoreconf
+
 }
 
 src_configure() {
