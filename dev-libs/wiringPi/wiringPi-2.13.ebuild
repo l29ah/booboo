@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
-EAPI="3"
+EAPI="4"
 
 inherit eutils
 
