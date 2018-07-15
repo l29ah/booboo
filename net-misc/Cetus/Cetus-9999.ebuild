@@ -22,10 +22,10 @@ RDEPEND="${DEPEND}
 	net-misc/QtQuickVcp
 "
 
-
 src_prepare() {
 	S="${WORKDIR}/${P}/build"
 	mkdir "$S"
+	default
 }
 
 src_configure() {
