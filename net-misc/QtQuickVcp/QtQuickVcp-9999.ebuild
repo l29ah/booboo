@@ -23,7 +23,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	eqmake5
+	eqmake5 'QMAKE_CFLAGS_ISYSTEM=-I'
 }
 
 src_install() {
