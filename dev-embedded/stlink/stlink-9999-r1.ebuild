@@ -29,6 +29,16 @@ pkg_pretend() {
 	fi
 }
 
+src_configure() {
+	local mycmakeargs=(
+		-DSTLINK_UDEV_RULES_DIR="$(get_udevdir)"/rules.d
+		-DSTLINK_MODPROBED_DIR="${EPREFIX}/etc/modprobe.d"
+		-DLIB_INSTALL_DIR:PATH="$(get_libdir)"
+	)
+
+	cmake-utils_src_configure
+}
+
 src_install() {
 	cmake-utils_src_install
 	cp -r etc $D
