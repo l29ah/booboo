@@ -19,12 +19,19 @@ IUSE="doc"
 
 RDEPEND="dev-qt/qtcore:4[qt3support]
 	dev-qt/qtgui:4[qt3support]
+	dev-qt/qtsvg:4
 	dev-qt/qt3support:4
 	x11-libs/libX11"
 DEPEND="${RDEPEND}
 	doc? ( sci-mathematics/octave )"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
+
+# picks proper moc
+export QT_SELECT=qt4
+
+# picks clang++ otherwise for some strange reason
+export CXX=g++
 
 src_configure() {
 	# the package doesn't use pkg-config on Linux, only on Darwin
