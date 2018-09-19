@@ -30,6 +30,8 @@ DEPEND="dev-lang/swig
 S="${WORKDIR}/$P/src"
 
 src_prepare() {
+	default
+
 	eautoreconf
 }
 
