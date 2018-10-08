@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit git-r3
+inherit git-r3 multilib
 
 DESCRIPTION="RSound is a networked audio system. It allows applications to
 transfer their audio data to a different computer."
@@ -30,6 +30,12 @@ pkg_setup() {
 	DOCS+=" AUTHORS ChangeLog DOCUMENTATION README"
 }
 
+src_prepare() {
+	default
+
+	sed -i -e 's#$(PREFIX)/lib#$(PREFIX)/'"$(get_libdir)"'#g' src/Makefile
+}
+
 src_configure() {
 	./configure \
 		--prefix="${D}"/usr \
@@ -43,6 +49,7 @@ src_configure() {
 }
 
 src_install() {
+	dodir "/usr/$(get_libdir)/pkgconfig"
 	emake install
 	dodoc AUTHORS ChangeLog DOCUMENTATION README
 }
