@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit cmake-utils git-r3
+inherit cmake-utils git-r3 multilib
 
 DESCRIPTION="Switch your X keyboard layouts from the command line"
 HOMEPAGE="https://github.com/ierton/xkb-switch"
@@ -17,3 +17,9 @@ IUSE=""
 
 DEPEND="x11-libs/libxkbfile"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	# multilib-strict
+	sed -i -e "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt
+	default
+}
