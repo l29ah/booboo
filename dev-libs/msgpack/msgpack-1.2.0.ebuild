@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit cmake-multilib
 
 if [[ ${PV} == 9999 ]]; then
@@ -14,7 +14,7 @@ else
 fi
 
 DESCRIPTION="MessagePack is a binary-based efficient data interchange format"
-HOMEPAGE="http://msgpack.org/ https://github.com/msgpack/msgpack-c/"
+HOMEPAGE="https://msgpack.org/ https://github.com/msgpack/msgpack-c/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -31,13 +31,14 @@ DOCS=( README.md )
 
 src_prepare() {
 	find . -name "CMakeLists.txt" -exec sed -i -e 's,-Werror,,g' {} \; || die
+	default
 }
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use cxx MSGPACK_ENABLE_CXX)
-		$(cmake-utils_use static-libs MSGPACK_STATIC)
-		$(cmake-utils_use test MSGPACK_BUILD_TESTS)
+		-DMSGPACK_ENABLE_CXX=$(usex cxx)
+		-DMSGPACK_STATIC=$(usex static-libs)
+		-DMSGPACK_BUILD_TESTS=$(usex test)
 	)
 	cmake-multilib_src_configure
 }
