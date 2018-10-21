@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit cmake-multilib
 
 DESCRIPTION="libuecc is a very small generic-purpose Elliptic Curve Cryptography library compatible with Ed25519"
