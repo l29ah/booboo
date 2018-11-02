@@ -1,0 +1,23 @@
+diff --git a/configure.ac b/configure.ac
+index 30da1cb..de6c7a5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -104,18 +104,7 @@ AC_PATH_XTRA
+ 
+ AC_DEFUN([GTKTEST],
+ [
+-	AC_REQUIRE([AC_PROG_AWK])
+-	AC_MSG_CHECKING([gtk version])
+-	if gtkversion=`pkg-config gtk+-3.0 --silence-errors --modversion`; then
+-		AC_MSG_RESULT([$gtkversion])
+-		GTKCONFIG='pkg-config gtk+-3.0'
+-	elif gtkversion=`pkg-config gtk+-2.0 --silence-errors --modversion`; then
+-		AC_MSG_RESULT([$gtkversion])
+ 		GTKCONFIG='pkg-config gtk+-2.0'
+-	else
+-		AC_MSG_RESULT([not found])
+-		AC_MSG_ERROR([gtk+-2 or 3 is required.])
+-	fi
+ ])
+ 
+ if test "x$WITH_DEPENDENCIES_CHECK" = "xyes"; then
