@@ -20,6 +20,7 @@ RDEPEND="virtual/pam
 	>=x11-libs/libxkbcommon-0.3.1
 	x11-libs/libxkbfile
 	x11-libs/xcb-util
+	x11-libs/xcb-util-xrm
 	x11-libs/libX11
 	x11-libs/cairo[xcb]"
 DEPEND="${RDEPEND}
