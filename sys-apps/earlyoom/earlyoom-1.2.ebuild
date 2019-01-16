@@ -12,18 +12,24 @@ SRC_URI="https://github.com/rfjakob/earlyoom/archive/v$PV.tar.gz -> $P.tar.gz"
 LICENSE="MIT-with-advertising"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+openrc systemd"
+IUSE="+openrc systemd docs"
 
-DEPEND=""
-RDEPEND="${DEPEND}"
+DEPEND="docs? ( app-text/pandoc )"
+RDEPEND=""
 
 src_compile() {
 	emake earlyoom
-	use systemd && emake earlyoom.service
+	use docs && emake earlyoom.1
+	use systemd && emake PREFIX=/usr earlyoom.service
 }
 
 src_install() {
 	dobin earlyoom
+	use docs && doman earlyoom.1
+
+	insinto /etc/default
+	newins earlyoom.default earlyoom
+
 	use openrc && doinitd "$FILESDIR/$PN"
 	use systemd && systemd_dounit earlyoom.service
 }
