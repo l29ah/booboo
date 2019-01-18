@@ -21,10 +21,13 @@ SLOT="0"
 IUSE=""
 
 DEPEND="dev-python/python-olm
-	dev-python/h11
-	dev-python/hyper-h2
-	dev-python/attrs
-	dev-python/future
+	>=dev-python/h11-0.7.0
+	>=dev-python/hyper-h2-3.0.1
+	>=dev-python/atomicwrites-1.2.1
+	>=dev-python/peewee-3.8.1
+	>=dev-python/attrs-18.2.0
+	>=dev-python/future-0.16.0-r1
+	>=dev-python/jsonschema-2.6.0
 	dev-python/logbook
 	dev-python/typing"
 RDEPEND="${DEPEND}"
