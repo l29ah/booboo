@@ -21,6 +21,10 @@ DEPEND="sys-libs/zlib
 	dev-libs/jansson
 	lua? ( dev-lang/lua )"
 
+src_prepare() {
+	sed -i -e 's,-Werror,,g' Makefile.in || die
+}
+
 src_configure() {
 	econf $(use_enable lua liblua ) --with-progname=telegram-cli
 }
