@@ -1,0 +1,28 @@
+From b65a51faec4988354bbcf087e0d71f6713b9a5b5 Mon Sep 17 00:00:00 2001
+From: Robin Kauffman <robink@creosotehill.org>
+Date: Tue, 12 Feb 2019 19:55:34 -0800
+Subject: [PATCH] Drop remaining DV stuff from POTFILES.in
+
+Looks like upstream forgot to fully flush it out.
+---
+ po/POTFILES.in | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/po/POTFILES.in b/po/POTFILES.in
+index fb1e0e25e..2f243d9eb 100644
+--- a/po/POTFILES.in
++++ b/po/POTFILES.in
+@@ -128,10 +128,6 @@ src/dns/gnunet-helper-dns.c
+ src/dns/gnunet-service-dns.c
+ src/dns/gnunet-zonewalk.c
+ src/dns/plugin_block_dns.c
+-src/dv/dv_api.c
+-src/dv/gnunet-dv.c
+-src/dv/gnunet-service-dv.c
+-src/dv/plugin_transport_dv.c
+ src/exit/gnunet-daemon-exit.c
+ src/exit/gnunet-helper-exit.c
+ src/exit/gnunet-helper-exit-windows.c
+-- 
+2.20.1
+

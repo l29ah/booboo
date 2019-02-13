@@ -56,6 +56,8 @@ DEPEND="
 	)
 "
 
+PATCHES=( "${FILESDIR}/${P}-Drop-remaining-DV-stuff-from-POTFILES.in.patch" )
+
 pkg_setup() {
 	enewgroup gnunetdns
 	enewuser  gnunet
