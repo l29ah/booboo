@@ -141,7 +141,7 @@ multilib_src_configure() {
 
 	# work around out-of-source build issues for multilib systems
 	# https://bugs.gentoo.org/672184
-	mkdir gtk pygtk qt test zbarcam || die
+	mkdir -p gtk pygtk qt test zbarcam || die
 }
 
 src_test() {
