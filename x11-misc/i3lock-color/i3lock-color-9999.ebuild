@@ -23,5 +23,6 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
+	sed -i -e 's#default_sanitizers=address#default_sanitizers=#' configure.ac || die
 	eautoreconf
 }
