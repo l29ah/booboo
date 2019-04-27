@@ -16,6 +16,7 @@ IUSE="dbus garmin gles gles2 gps gtk nls python qt sdl speechd svg"
 
 # gps: http://trac.navit-project.org/ticket/1284
 RDEPEND="dev-libs/glib:2
+	dev-libs/protobuf-c
 	garmin? ( dev-libs/libgarmin )
 	gles? ( virtual/opengl )
 	gles2? ( virtual/opengl )
@@ -52,5 +53,5 @@ src_configure() {
 src_install () {
 	cmake-utils_src_install
 
-	dodoc AUTHORS ChangeLog README.md || die "dodoc failed"
+	dodoc AUTHORS CHANGELOG.md README.md || die "dodoc failed"
 }
