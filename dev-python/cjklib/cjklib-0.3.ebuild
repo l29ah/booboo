@@ -12,7 +12,7 @@ DESCRIPTION="Cjklib provides language routines related to Han characters (charac
 HOMEPAGE="https://pypi.python.org/pypi/cjklib"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
-LICENSE="LGPL"
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
