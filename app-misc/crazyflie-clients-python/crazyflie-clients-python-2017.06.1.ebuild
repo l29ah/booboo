@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5} )
+PYTHON_COMPAT=( python3_{4,5,6} )
 
 inherit git-r3 distutils-r1
 
@@ -24,3 +24,8 @@ DEPEND="
 	dev-python/pyzmq[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	default
+	eapply "${FILESDIR}/0001-Update-appdirs-dependency-to-1.4.0.patch"
+}
