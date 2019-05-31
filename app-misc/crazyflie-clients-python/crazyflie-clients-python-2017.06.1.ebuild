@@ -17,8 +17,9 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
+# cflib is pinned since it doesn't provide positional feedback on the latter versions
 DEPEND="
-	dev-python/cflib[${PYTHON_USEDEP}]
+	=dev-python/cflib-0.1.3[${PYTHON_USEDEP}]
 	dev-python/pyqtgraph[${PYTHON_USEDEP}]
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	dev-python/pyzmq[${PYTHON_USEDEP}]
