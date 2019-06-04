@@ -22,7 +22,10 @@ QT4_TARGET_DIRECTORIES="src/script"
 QCONFIG_ADD="script"
 QCONFIG_DEFINE="QT_SCRIPT"
 
-PATCHES=( "${FILESDIR}/4.8.6-javascriptcore-x32.patch" )
+PATCHES=(
+	"${FILESDIR}/4.8.6-javascriptcore-x32.patch" 
+	"${FILESDIR}/gcc-asm-volatile-deprecated.patch" 
+)
 
 multilib_src_configure() {
 	local myconf=(
