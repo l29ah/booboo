@@ -24,6 +24,8 @@ DEPEND="${RDEPEND}
 	~app-text/docbook-sgml-dtd-4.2 )"
 
 src_prepare() {
+	default
+
 	sed -i -e 's:-Werror::' Makefile.am
 	sed -i 's:AC_LANG_CPLUSPLUS:AC_PROG_CXX:' configure.in #213800
 	epatch "${FILESDIR}"/${PV}-fbsd.patch
