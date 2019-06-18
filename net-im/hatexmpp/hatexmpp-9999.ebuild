@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
-inherit git-2
+EAPI=7
+inherit git-r3
 
 DESCRIPTION="hatexmpp is a xmpp-client featuring ii-like interface"
 HOMEPAGE="http://github.com/l29ah/hatexmpp"
@@ -24,23 +24,10 @@ DEPEND="${RDEPEND}
 		screen? ( app-misc/screen )
 "
 
-src_compile()
-{
-	emake || die "emake filed"
-}
-
 src_install()
 {
 	use screen	&& dobin frontends/hatescreen.sh
 	dobin hatexmpp
-	dodoc README
-}
-
-pkg_postinst()
-{
-	einfo "hatexmpp is a xmpp-client featuring ii-like interface"
-	einfo "to run: hatexmpp <mountpoint> -d"
-	einfo "to configure: echo 'username' > <mountpoint>/config/username"
-	einfo "The same operation you need to do with other settings like"
-	einfo "server, password, resource, muc_default_nick, jiv_name, jiv_os, jiv_version"
+	mkdir -p "${D}/usr/share/doc/${PF}/"
+	cp ADVENTURE "${D}/usr/share/doc/${PF}/README"
 }
