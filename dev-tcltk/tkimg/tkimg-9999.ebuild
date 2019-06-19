@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-tcltk/tkimg/tkimg-1.4.20100510.ebuild,v 1.2 2010/06/15 12:41:28 jlec Exp $
 
-EAPI="3"
-inherit base eutils prefix
+EAPI=6
+inherit eutils prefix
 
 DESCRIPTION="Adds a lot of image formats to Tcl/Tk"
 HOMEPAGE="http://sourceforge.net/projects/tkimg/"
 if [[ ${PV} == *9999* ]]; then
 	inherit subversion
-	ESVN_REPO_URI="https://tkimg.svn.sourceforge.net/svnroot/tkimg/trunk"
+	ESVN_REPO_URI="https://svn.code.sf.net/p/tkimg/code/trunk"
 else
 	inherit versionator
 	SRC_URI="mirror://sourceforge/${PN}/Img-Source-$PV.tar.gz"
