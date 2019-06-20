@@ -1,9 +1,9 @@
---- qt-everywhere-opensource-src-4.8.7/src/3rdparty/javascriptcore/JavaScriptCore/jit/JITStubs.cpp.orig 2015-05-07 17:14:48.000000000 +0300
-+++ qt-everywhere-opensource-src-4.8.7/src/3rdparty/javascriptcore/JavaScriptCore/jit/JITStubs.cpp      2019-06-05 00:29:46.079140276 +0300
+--- qt-everywhere-opensource-src-4.8.7/src/3rdparty/javascriptcore/JavaScriptCore/jit/JITStubs.cpp.orig	2019-06-19 19:57:44.687902544 +0200
++++ qt-everywhere-opensource-src-4.8.7/src/3rdparty/javascriptcore/JavaScriptCore/jit/JITStubs.cpp	2019-06-19 19:58:21.330726525 +0200
 @@ -116,7 +116,7 @@
  COMPILE_ASSERT(offsetof(struct JITStackFrame, callFrame) == 0x58, JITStackFrame_callFrame_offset_matches_ctiTrampoline);
  COMPILE_ASSERT(offsetof(struct JITStackFrame, code) == 0x50, JITStackFrame_code_offset_matches_ctiTrampoline);
-
+ 
 -asm volatile (
 +asm (
  ".text\n"
@@ -12,7 +12,7 @@
 @@ -138,7 +138,7 @@
      "ret" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
@@ -21,7 +21,7 @@
 @@ -154,7 +154,7 @@
      "ret" "\n"
  );
-
+     
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiOpThrowNotCaught) "\n"
@@ -30,7 +30,7 @@
 @@ -179,7 +179,7 @@
  COMPILE_ASSERT(offsetof(struct JITStackFrame, callFrame) == 0x90, JITStackFrame_callFrame_offset_matches_ctiTrampoline);
  COMPILE_ASSERT(offsetof(struct JITStackFrame, code) == 0x80, JITStackFrame_code_offset_matches_ctiTrampoline);
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiTrampoline) "\n"
@@ -39,7 +39,7 @@
 @@ -206,7 +206,7 @@
      "ret" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
@@ -48,7 +48,7 @@
 @@ -222,7 +222,7 @@
      "ret" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiOpThrowNotCaught) "\n"
@@ -57,7 +57,7 @@
 @@ -242,7 +242,7 @@
  #error "JIT_STUB_ARGUMENT_VA_LIST not supported on ARMv7."
  #endif
-
+ 
 -asm volatile (
 +asm (
  ".text" "\n"
@@ -66,7 +66,7 @@
 @@ -269,7 +269,7 @@
      "bx lr" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".text" "\n"
@@ -75,16 +75,16 @@
 @@ -287,7 +287,7 @@
      "bx lr" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".text" "\n"
  ".align 2" "\n"
  ".globl " SYMBOL_STRING(ctiOpThrowNotCaught) "\n"
 @@ -305,7 +305,7 @@
-
+ 
  #elif COMPILER(GCC) && CPU(ARM_TRADITIONAL)
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiTrampoline) "\n"
@@ -93,7 +93,7 @@
 @@ -323,7 +323,7 @@
      "mov pc, lr" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
@@ -102,7 +102,7 @@
 @@ -418,7 +418,7 @@
  COMPILE_ASSERT(offsetof(struct JITStackFrame, code) == 0x30, JITStackFrame_code_offset_matches_ctiTrampoline);
  COMPILE_ASSERT(offsetof(struct JITStackFrame, savedEBX) == 0x1c, JITStackFrame_stub_argument_space_matches_ctiTrampoline);
-
+ 
 -asm volatile (
 +asm (
  ".text\n"
@@ -111,7 +111,7 @@
 @@ -440,7 +440,7 @@
      "ret" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
@@ -120,7 +120,7 @@
 @@ -456,7 +456,7 @@
      "ret" "\n"
  );
-
+     
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiOpThrowNotCaught) "\n"
@@ -129,7 +129,7 @@
 @@ -480,7 +480,7 @@
  COMPILE_ASSERT(offsetof(struct JITStackFrame, code) == 0x48, JITStackFrame_code_offset_matches_ctiTrampoline);
  COMPILE_ASSERT(offsetof(struct JITStackFrame, savedRBX) == 0x78, JITStackFrame_stub_argument_space_matches_ctiTrampoline);
-
+ 
 -asm volatile (
 +asm (
  ".text\n"
@@ -138,7 +138,7 @@
 @@ -515,7 +515,7 @@
      "ret" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
@@ -147,7 +147,7 @@
 @@ -531,7 +531,7 @@
      "ret" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiOpThrowNotCaught) "\n"
@@ -156,7 +156,7 @@
 @@ -551,7 +551,7 @@
  #error "JIT_STUB_ARGUMENT_VA_LIST not supported on ARMv7."
  #endif
-
+ 
 -asm volatile (
 +asm (
  ".text" "\n"
@@ -165,7 +165,7 @@
 @@ -578,7 +578,7 @@
      "bx lr" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".text" "\n"
@@ -174,16 +174,16 @@
 @@ -596,7 +596,7 @@
      "bx lr" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".text" "\n"
  ".align 2" "\n"
  ".globl " SYMBOL_STRING(ctiOpThrowNotCaught) "\n"
 @@ -614,7 +614,7 @@
-
+ 
  #elif COMPILER(GCC) && CPU(ARM_TRADITIONAL)
-
+ 
 -asm volatile (
 +asm (
  ".text\n"
@@ -192,9 +192,27 @@
 @@ -632,7 +632,7 @@
      "mov pc, lr" "\n"
  );
-
+ 
 -asm volatile (
 +asm (
  ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
  HIDE_SYMBOL(ctiVMThrowTrampoline) "\n"
  SYMBOL_STRING(ctiVMThrowTrampoline) ":" "\n"
+@@ -1024,7 +1024,7 @@
+     extern "C" { \
+         rtype JITStubThunked_##op(STUB_ARGS_DECLARATION); \
+     }; \
+-    asm volatile ( \
++    asm ( \
+         ".text" "\n" \
+         ".align 2" "\n" \
+         ".globl " SYMBOL_STRING(cti_##op) "\n" \
+@@ -1053,7 +1053,7 @@
+     extern "C" { \
+         rtype JITStubThunked_##op(STUB_ARGS_DECLARATION); \
+     }; \
+-    asm volatile ( \
++    asm ( \
+         ".globl " SYMBOL_STRING(cti_##op) "\n" \
+         HIDE_SYMBOL(cti_##op) "\n"             \
+         SYMBOL_STRING(cti_##op) ":" "\n" \
