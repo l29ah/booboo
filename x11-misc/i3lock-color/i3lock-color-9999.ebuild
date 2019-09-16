@@ -17,6 +17,7 @@ RDEPEND="x11-libs/libxcb[xkb]
 		x11-libs/xcb-util
 		x11-libs/cairo[xcb]
 		x11-libs/libxkbcommon[X]
+		x11-libs/xcb-util-xrm
 		!x11-misc/i3lock"
 
 DEPEND="${RDEPEND}"
