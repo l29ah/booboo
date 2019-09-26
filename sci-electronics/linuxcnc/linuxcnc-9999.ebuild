@@ -63,8 +63,8 @@ RDEPEND="
 		gnome-base/libgnomeprintui
 	)
 	gstreamer? (
-		dev-python/gst-python:0.10
-		media-libs/gst-plugins-base:0.10
+		dev-python/gst-python:1.0
+		media-libs/gst-plugins-base:1.0
 	)
 	|| (
 		net-analyzer/netcat
