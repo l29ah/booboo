@@ -10,7 +10,7 @@ DESCRIPTION="vim plugin: rc shell script syntax highlighting"
 HOMEPAGE="http://www.vim.org/scripts/script.php?script_id=2880"
 SRC_URI="http://www.vim.org/scripts/download_script.php?src_id=11861
 	-> $P.vim"
-LICENSE="as-is"
+LICENSE="public-domain"
 KEYWORDS="alpha amd64 ia64 mips ppc ppc64 sparc x86"
 IUSE=""
 
