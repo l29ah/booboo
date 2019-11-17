@@ -19,10 +19,9 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	unset CFLAGS	# https://github.com/AltraMayor/f3/issues/34
-	emake all experimental
+	emake all extra
 }
 
 src_install() {
-	emake install install-experimental PREFIX="$D/usr/"
+	emake install install-extra PREFIX="$D/usr/"
 }
