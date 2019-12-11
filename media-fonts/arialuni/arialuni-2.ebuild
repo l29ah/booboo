@@ -1,8 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-fonts/liberation-fonts/liberation-fonts-1.04.ebuild,v 1.1 2008/09/30 00:47:30 je_fro Exp $
-
-EAPI=2
+EAPI=7
 
 inherit font
 
