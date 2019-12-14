@@ -1,1 +1,2 @@
 move app-admin/f3 sys-block/f3
+move net-im/communi net-im/libcommuni
