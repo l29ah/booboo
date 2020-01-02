@@ -11,11 +11,10 @@ IUSE="contrib -gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg
 trayicon +udp vanilla fix-site-plugins-path remote-controlling"
 
 RDEPEND="
-	>=dev-lang/tcl-8.3.3
-	>=dev-lang/tk-8.3.3
+	>=dev-lang/tcl-8.5
+	>=dev-lang/tk-8.5
 	>=dev-tcltk/tcllib-1.6
 	>=dev-tcltk/bwidget-1.3
-	>=dev-tcltk/tkXwin-1.0
 	gpg? ( dev-tcltk/tclgpg )
 	ssl? ( >=dev-tcltk/tls-1.4.1 )
 	sound? ( dev-tcltk/snack )
