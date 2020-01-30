@@ -22,7 +22,7 @@ HOMEPAGE="https://github.com/prusa3d/PrusaSlicer"
 LICENSE="AGPL-3 CC-BY-3.0"
 SLOT="0"
 
-RDEPEND="!media-gfx/slic3r
+RDEPEND="
 	>=dev-libs/boost-1.55[threads]
 	dev-cpp/eigen
 	dev-cpp/gtest
