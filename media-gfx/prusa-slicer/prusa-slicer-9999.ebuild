@@ -34,6 +34,8 @@ RDEPEND="
 	net-misc/curl
 	sci-libs/nlopt
 	x11-libs/wxGTK:3.0-gtk3
+	media-gfx/openvdb
+	sci-mathematics/cgal
 "
 
 DEPEND="${RDEPEND}"
