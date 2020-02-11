@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-vim/gentoo-syntax/gentoo-syntax-99999999.ebuild,v 1.6 2013/06/01 09:32:03 radhermit Exp $
 
-EAPI=5
+EAPI=7
 
-inherit vim-plugin git-2
+inherit vim-plugin git-r3
 
 EGIT_REPO_URI="https://github.com/ledger/vim-ledger"
 
