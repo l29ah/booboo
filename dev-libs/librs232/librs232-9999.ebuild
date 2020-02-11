@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=7
 
-inherit git-2 autotools
+inherit git-r3 autotools
 
 DESCRIPTION="multiplatform library for serial communications over RS-232 (serial port)"
-HOMEPAGE="https://github.com/ynezz/librs232"
-EGIT_REPO_URI="https://github.com/ynezz/librs232.git"
+HOMEPAGE="https://github.com/srdgame/librs232"
+EGIT_REPO_URI="https://github.com/srdgame/librs232"
 
 LICENSE="MIT"
 SLOT="0"
@@ -20,6 +20,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
