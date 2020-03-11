@@ -29,6 +29,7 @@ IUSE=""
 RDEPEND="sci-libs/oce
 	>=dev-lang/swig-2.0.10
 	>=dev-util/cmake-2.8
+	>=sci-libs/opencascade-7.4.0
 "
 DEPEND="${RDEPEND}
 	dev-lang/swig"
