@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{5,6,7,8} )
 
 inherit distutils-r1 git-r3
 
@@ -18,10 +18,10 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	>=dev-python/pythonocc-0.18.2"
+	>=dev-python/pythonocc-cadquery-0.18.2"
 BDEPEND=""
 
 src_prepare() {
-	sed -i -e "s#,'tests'##" setup.py
+	sed -i -e '/ "tests"/d' setup.py || die
 	default
 }
