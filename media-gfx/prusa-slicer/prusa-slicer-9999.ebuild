@@ -22,6 +22,7 @@ HOMEPAGE="https://github.com/prusa3d/PrusaSlicer"
 LICENSE="AGPL-3 CC-BY-3.0"
 SLOT="0"
 
+# hangs in cmake with openvdb-7.0
 RDEPEND="
 	>=dev-libs/boost-1.55[threads]
 	dev-cpp/eigen
@@ -35,6 +36,7 @@ RDEPEND="
 	sci-libs/nlopt
 	x11-libs/wxGTK:3.0-gtk3
 	>=media-gfx/openvdb-5.0
+	<media-gfx/openvdb-7.0
 	>=sci-mathematics/cgal-5.0
 "
 
