@@ -17,6 +17,8 @@ esac
 
 EXPORT_FUNCTIONS src_unpack
 
+PROPERTIES+=" live"
+
 [[ -z ${EFOSSIL_STORE_DIR} ]] && EFOSSIL_STORE_DIR="${PORTAGE_ACTUAL_DISTDIR:-${DISTDIR}}/fossil-src"
 
 
@@ -35,9 +37,9 @@ fossil_fetch() {
 	mkdir -m 775 -p "${EFOSSIL_PROJECT}" || die "${EFOSSIL}: can't mkdir ${EFOSSIL_PROJECT}."
 	cloned_repo="${EFOSSIL_STORE_DIR}/${EFOSSIL_PROJECT}/${repo_uri##*/}"
 	if [[ -e "$cloned_repo" ]]; then
-		fossil pull -R "$cloned_repo" "$repo_uri"
+		fossil --user portage pull -R "$cloned_repo" "$repo_uri" || die "${EFOSSIL}: can't pull ${repo_uri}."
 	else
-		fossil clone "$repo_uri" "$cloned_repo"
+		fossil --user portage clone "$repo_uri" "$cloned_repo" || die "${EFOSSIL}: can't clone ${repo_uri}."
 	fi
 
 	if ! has "export" ${EFOSSIL_RESTRICT}; then
