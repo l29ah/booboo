@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index 89378e2..f4e7144 100644
+index 89378e2..46e6135 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -47,7 +47,7 @@ spectrogram.o: spectrogram.c sonic.h
@@ -11,3 +11,33 @@ index 89378e2..f4e7144 100644
  	ln -sf libsonic.so.$(LIB_TAG) libsonic.so
  	ln -sf libsonic.so.$(LIB_TAG) libsonic.so.0
  
+@@ -55,21 +55,20 @@ libsonic.a: $(OBJ)
+ 	$(AR) cqs libsonic.a $(OBJ)
+ 
+ install: sonic libsonic.so.$(LIB_TAG) sonic.h
+-	install -d $(DESTDIR)$(PREFIX)/bin $(DESTDIR)$(PREFIX)/include $(DESTDIR)$(PREFIX)/lib
++	install -d $(DESTDIR)$(PREFIX)/bin $(DESTDIR)$(PREFIX)/include $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}
+ 	install sonic $(DESTDIR)$(PREFIX)/bin
+ 	install sonic.h $(DESTDIR)$(PREFIX)/include
+-	install libsonic.so.$(LIB_TAG) $(DESTDIR)$(PREFIX)/lib
+-	install libsonic.a $(DESTDIR)$(LIBDIR)
+-	ln -sf libsonic.so.$(LIB_TAG) $(DESTDIR)$(PREFIX)/lib/libsonic.so
+-	ln -sf libsonic.so.$(LIB_TAG) $(DESTDIR)$(PREFIX)/lib/libsonic.so.0
++	install libsonic.so.$(LIB_TAG) $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}
++	install libsonic.a $(DESTDIR)$(PREFIX)/$(SONIC_LIBDIR)
++	ln -sf libsonic.so.$(LIB_TAG) $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}/libsonic.so
++	ln -sf libsonic.so.$(LIB_TAG) $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}/libsonic.so.0
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(PREFIX)/bin/sonic
+ 	rm -f $(DESTDIR)$(PREFIX)/include/sonic.h
+-	rm -f $(DESTDIR)$(PREFIX)/lib/libsonic.so.$(LIB_TAG)
+-	rm -f $(DESTDIR)$(PREFIX)/lib/libsonic.so
+-	rm -f $(DESTDIR)$(PREFIX)/lib/libsonic.so.0
+-	rm -f $(DESTDIR)$(LIBDIR)/libsonic.a
++	rm -f $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}/libsonic64.so.$(LIB_TAG)
++	rm -f $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}/libsonic64.so
++	rm -f $(DESTDIR)$(PREFIX)/${SONIC_LIBDIR}/libsonic64.so.0
+ 
+ clean:
+ 	rm -f *.o sonic libsonic.so* libsonic.a
