@@ -21,4 +21,10 @@ DEPEND="${RDEPEND}"
 src_prepare() {
     cd "${WORKDIR}"/${P} || die
 	epatch "${FILESDIR}"/${P}-fix-lib.patch
+
+	eapply_user
+}
+
+src_install() {
+	emake DESTDIR="${D}" SONIC_LIBDIR="$(get_libdir)" install
 }
