@@ -1,0 +1,55 @@
+From 2d1e63d0e42a4b4af80366593c43440dfa15a304 Mon Sep 17 00:00:00 2001
+From: Kristoffer Richardsson <kristoffer@bitcraze.io>
+Date: Wed, 5 Feb 2020 13:51:14 +0100
+Subject: [PATCH] #386 PyQt seems to have changed the API of QActionGroup() in
+ 5.14 (!) and the "exclusive" parameter has been replaced. Using
+ setExclusive() instead that seems to exist in booth older and newer versions.
+
+---
+ src/cfclient/ui/main.py | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/src/cfclient/ui/main.py b/src/cfclient/ui/main.py
+index 64f5929a..b19f8181 100644
+--- a/src/cfclient/ui/main.py
++++ b/src/cfclient/ui/main.py
+@@ -198,7 +198,8 @@ def __init__(self, *args):
+         self._active_device = ""
+         # self.configGroup = QActionGroup(self._menu_mappings, exclusive=True)
+ 
+-        self._mux_group = QActionGroup(self._menu_inputdevice, exclusive=True)
++        self._mux_group = QActionGroup(self._menu_inputdevice)
++        self._mux_group.setExclusive(True)
+ 
+         # TODO: Need to reload configs
+         # ConfigManager().conf_needs_reload.add_callback(self._reload_configs)
+@@ -375,7 +376,8 @@ def __init__(self, *args):
+         self._all_mux_nodes = ()
+ 
+         # Check which Input muxes are available
+-        self._mux_group = QActionGroup(self._menu_inputdevice, exclusive=True)
++        self._mux_group = QActionGroup(self._menu_inputdevice)
++        self._mux_group.setExclusive(True)
+         for m in self.joystickReader.available_mux():
+             node = QAction(m.name,
+                            self._menu_inputdevice,
+@@ -761,7 +763,8 @@ def device_discovery(self, devs):
+         for menu in self._all_role_menus:
+             role_menu = menu["rolemenu"]
+             mux_menu = menu["muxmenu"]
+-            dev_group = QActionGroup(role_menu, exclusive=True)
++            dev_group = QActionGroup(role_menu)
++            dev_group.setExclusive(True)
+             for d in devs:
+                 dev_node = QAction(d.name, role_menu, checkable=True,
+                                    enabled=True)
+@@ -772,7 +775,8 @@ def device_discovery(self, devs):
+                 map_node = None
+                 if d.supports_mapping:
+                     map_node = QMenu("    Input map", role_menu, enabled=False)
+-                    map_group = QActionGroup(role_menu, exclusive=True)
++                    map_group = QActionGroup(role_menu)
++                    map_group.setExclusive(True)
+                     # Connect device node to map node for easy
+                     # enabling/disabling when selection changes and device
+                     # to easily enable it

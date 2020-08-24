@@ -3,31 +3,26 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{6,7,8,9} )
+PYTHON_COMPAT=( python3_{5,6} )
 
 inherit git-r3 distutils-r1
 
 DESCRIPTION="Host applications and library for Crazyflie written in Python."
 HOMEPAGE="https://github.com/bitcraze/crazyflie-clients-python"
 EGIT_REPO_URI="https://github.com/bitcraze/crazyflie-clients-python"
-EGIT_COMMIT=2017.06.1
+EGIT_COMMIT="$PV"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-# cflib is pinned since it doesn't provide positional feedback on the latter versions
 DEPEND="
-	=dev-python/cflib-0.1.3[${PYTHON_USEDEP}]
+	dev-python/cflib[${PYTHON_USEDEP}]
 	dev-python/pyqtgraph[${PYTHON_USEDEP}]
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	dev-python/pyzmq[${PYTHON_USEDEP}]
+	dev-python/cx_Freeze[${PYTHON_USEDEP}]
+	dev-python/qtm[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}"
-
-src_prepare() {
-	default
-	eapply "${FILESDIR}/0001-Update-appdirs-dependency-to-1.4.0.patch"
-	eapply "${FILESDIR}/2d1e63d0e42a4b4af80366593c43440dfa15a304.patch"
-}
