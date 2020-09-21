@@ -9,7 +9,7 @@ inherit git-r3 cmake-utils
 DESCRIPTION="Parametric 2d/3d CAD"
 HOMEPAGE="http://solvespace.com/"
 EGIT_REPO_URI="https://github.com/solvespace/solvespace"
-EGIT_SUBMODULES=( '*libdxfrw' 'extlib/flatbuffers' 'extlib/q3d' )
+EGIT_SUBMODULES=( '*libdxfrw' 'extlib/flatbuffers' 'extlib/q3d' 'extlib/mimalloc' )
 
 LICENSE="GPL-3"
 SLOT="0"
