@@ -49,9 +49,6 @@ src_prepare() {
 	# FIXME
 	sed -i -e '/install(CODE/d' src/CMakeLists.txt || die
 
-	# https://github.com/prusa3d/PrusaSlicer/issues/4973
-	eapply -R "$FILESDIR/7531da603bb2d8a29be92695df26625c023927f3.patch"
-
 	cmake-utils_src_prepare
 }
 
