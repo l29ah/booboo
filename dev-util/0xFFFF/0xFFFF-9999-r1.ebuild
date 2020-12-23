@@ -17,10 +17,10 @@ IUSE=""
 
 DEPEND="
 	sys-devel/make
-	dev-libs/libusb:0
+	dev-libs/libusb:1
 "
 RDEPEND="
-	dev-libs/libusb:0
+	dev-libs/libusb:1
 "
 
 src_prepare() {
