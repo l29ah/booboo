@@ -31,6 +31,7 @@ DEPEND="
 
 src_compile() {
 	emake || die
+	distutils-r1_src_compile
 }
 
 python_test() {
