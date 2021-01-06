@@ -2,37 +2,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-description="Reference implementation of Matrix homeserver"
-description_reload="Reload configuration and reopen log files."
-
-su=/bin/su
-shell=/bin/bash
 user=${SYNAPSE_USER:-synapse}
-command=/usr/bin/synctl
-conf=${SYNAPSE_CONFIG:-/etc/synapse/homeserver.yaml}
-
-depend() {
-	use dns
-	need net
-	provide matrix-server
-}
-
-checkconfig() {
-	if [ ! -e $SYNAPSE_CONFIG ] ; then
-		eerror "You need a $SYNAPSE_CONFIG file to run synapse"
-		return 1
-	fi
-}
-
-start() {
-	checkconfig || return 1
-	ebegin "Starting Synapse Matrix homeserver"
-	"${su}" "${user}" -c "${command} start ${conf}" -s "${shell}"
-	eend $?
-}
-
-stop() {
-	ebegin "Stopping Synapse Matrix homeserver"
-	"${su}" "${user}" -c "${command} stop ${conf}" -s "${shell}"
-	eend $?
-}
+group=${SYNAPSE_GROUP:-synapse}
+pidfile="/var/run/synapse/synapse.pid"
+command="/usr/bin/synctl"
+command_args="${SYNAPSE_OPTS:-start /etc/synapse}"
+start_stop_daemon_args="--user ${user} --group ${group} --pidfile ${pidfile}"

@@ -1,7 +1,0 @@
-# /etc/conf.d/synapse: config file for /etc/init.d/synapse
-
-# Synapse config file
-SYNAPSE_CONFIG="/etc/synapse/homeserver.yaml"
-
-# Synapse user
-SYNAPSE_USER="synapse"
