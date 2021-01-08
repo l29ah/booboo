@@ -44,10 +44,11 @@ CDEPEND=">=dev-python/jsonschema-2.5.1
 		>=dev-python/bcrypt-3.1.0
 		>=dev-python/pillow-4.3.0[jpeg]
 		>=dev-python/sortedcontainers-1.4.4
-		>=dev-python/pymacaroons-pynacl-0.13.0
+		>=dev-python/pymacaroons-0.13.0
 		>=dev-python/msgpack-0.5.2
 		>=dev-python/phonenumbers-8.2.0
 		>=dev-python/prometheus_client-0.4.0
+		<dev-python/prometheus_client-0.9.0
 		>=dev-python/attrs-19.1.0
 		>=dev-python/netaddr-0.7.18
 		>=dev-python/jinja-2.9
