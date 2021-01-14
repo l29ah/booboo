@@ -16,7 +16,9 @@ IUSE="+caps"
 
 RDEPEND="sys-apps/iproute2
 	dev-libs/judy
-	caps? ( sys-libs/libcap )"
+	caps? ( sys-libs/libcap )
+	acct-user/miredo
+	acct-group/miredo"
 DEPEND="${RDEPEND}
 	app-arch/xz-utils"
 
@@ -52,9 +54,4 @@ src_install() {
 
 	insinto /etc/miredo
 	doins misc/miredo-server.conf
-}
-
-pkg_preinst() {
-	enewgroup miredo
-	enewuser miredo -1 -1 /var/empty miredo
 }
