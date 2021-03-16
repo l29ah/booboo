@@ -1,7 +1,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit eutils cmake-utils git-r3
+EAPI=7
+inherit eutils cmake-utils git-r3 xdg
 
 DESCRIPTION="Linux SDL/ImGui edition software for viewing .brd files, intended as a drop-in replacement for the \"Test_Link\" software and \"Landrex\""
 HOMEPAGE="http://openboardview.org/"
@@ -24,6 +24,11 @@ DEPEND="
 	media-libs/fontconfig
 "
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	default
+	cmake-utils_src_prepare
+}
 
 src_compile() {
 	cp "${DISTDIR}/gl.xml" src/glad/ || die
