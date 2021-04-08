@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{3_4,3_5,3_6} )
+PYTHON_COMPAT=( python3_{4,5,6,7,8,9} )
 
 inherit distutils-r1 eutils git-r3 desktop
 
