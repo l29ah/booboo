@@ -13,12 +13,12 @@ EGIT_REPO_URI="https://github.com/crosstool-ng/crosstool-ng"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc bash-completion"
+IUSE="doc bash-completion subversion cvs"
 
 RDEPEND="net-misc/curl
 	dev-util/gperf
-	dev-vcs/cvs
-	dev-vcs/subversion"
+	cvs? ( dev-vcs/cvs )
+	subversion? ( dev-vcs/subversion )"
 
 src_prepare() {
 	./bootstrap
