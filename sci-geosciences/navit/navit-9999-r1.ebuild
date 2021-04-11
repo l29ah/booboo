@@ -34,7 +34,6 @@ RDEPEND="dev-libs/glib:2
 
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	dev-vcs/cvs
 	svg? ( || ( gnome-base/librsvg media-gfx/imagemagick[png,svg] ) )"
 
 src_configure() {
