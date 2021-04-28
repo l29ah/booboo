@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
-inherit autotools-utils flag-o-matic toolchain-funcs
+inherit flag-o-matic toolchain-funcs
 
 DESCRIPTION="Quite Universal Circuit Simulator in Qt4"
 HOMEPAGE="http://qucs.sourceforge.net/"
@@ -40,9 +40,7 @@ src_configure() {
 	append-ldflags $( $(tc-getPKG_CONFIG) --libs-only-L \
 			QtCore QtGui QtXml Qt3Support )
 
-	local myeconfargs=(
-		$(use_enable doc)	# https://github.com/Qucs/qucs/issues/582
-	)
+	econf $(use_enable doc)	# https://github.com/Qucs/qucs/issues/582
 
 	autotools-utils_src_configure
 }
