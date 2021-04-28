@@ -2,10 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
 if [[ ${PV} == "9999" ]] ; then
-	inherit eutils autotools autotools-utils git-r3 user
+	inherit eutils autotools git-r3 user
 	EGIT_REPO_URI="https://gnunet.org/git/gnunet.git"
 	WANT_AUTOCONF="2.59"
 	WANT_AUTOMAKE="1.11"
@@ -62,8 +62,9 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	if [[ ${PV} == "9999" ]] ; then
-		autotools-utils_src_prepare
+		eautoreconf
 	fi
 }
 
