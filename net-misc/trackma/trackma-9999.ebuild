@@ -31,14 +31,14 @@ RDEPEND="sys-process/lsof
 
 python_configure_all() {
 	sed -i -e '/trackma-qt4/d' "${S}/setup.py" || die
-	rm "${S}/trackma/ui/qt4ui.py" || die
+	rm "${S}/trackma/ui/qt/qt4ui.py" || die
 	if ! use qt5; then
 		sed -i -e '/trackma-qt/d' "${S}/setup.py" || die
-		rm "${S}/trackma/ui/qtui.py" || die
+		rm -R "${S}/trackma/ui/qt" || die
 	fi
 	if ! use gtk; then
 		sed -i -e '/trackma-gtk/d' "${S}/setup.py" || die
-		rm "${S}/trackma/ui/gtkui.py" || die
+		rm -R "${S}/trackma/ui/gtk" || die
 	fi
 	if ! use ncurses; then
 		sed -i -e '/trackma-curses/d' "${S}/setup.py" || die
