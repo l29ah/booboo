@@ -36,7 +36,7 @@ RDEPEND="
 	sci-libs/nlopt
 	x11-libs/wxGTK:3.0-gtk3
 	>=media-gfx/openvdb-5.0
-	<media-gfx/openvdb-6.2.1
+	<media-gfx/openvdb-6.2.1 || >=media-gfx/openvdb-8.0.1
 	>=sci-mathematics/cgal-5.0
 "
 
