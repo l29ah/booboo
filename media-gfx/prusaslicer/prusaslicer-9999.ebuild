@@ -42,9 +42,9 @@ RDEPEND="
 
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	default
+PATCHES=( "$FILESDIR/prusaslicer-2.3.0-miniz-zip-header.patch" )
 
+src_prepare() {
 	# don't try to write to /
 	# FIXME
 	sed -i -e '/install(CODE/d' src/CMakeLists.txt || die
