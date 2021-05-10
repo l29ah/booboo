@@ -1,6 +1,6 @@
-EAPI=5
+EAPI=7
 
-inherit base git-r3
+inherit git-r3
 
 DESCRIPTION="Lightweight C Jabber library"
 HOMEPAGE="https://github.com/mcabber/loudmouth"
@@ -15,7 +15,7 @@ KEYWORDS=""
 IUSE="openssl gnutls doc"
 
 RDEPEND=">=dev-libs/glib-2.4
-    gnutls? ( >=net-libs/gnutls-1.4.0 )
+	gnutls? ( >=net-libs/gnutls-1.4.0 )
 	openssl? ( dev-libs/openssl )"
 
 DEPEND="${RDEPEND}
@@ -26,6 +26,7 @@ DEPEND="${RDEPEND}
 	)"	# Dunno why, but it fails w/ recent versions
 
 src_prepare() {
+	default
 	sed -i -e 's/-Werror//' acinclude.m4
 	use doc && {
 		./autogen.sh
