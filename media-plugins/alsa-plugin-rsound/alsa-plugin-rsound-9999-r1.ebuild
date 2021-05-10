@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
-inherit autotools base git-r3
+EAPI=7
+inherit autotools git-r3
 
 DESCRIPTION="RSound plugin for ALSA"
 HOMEPAGE="http://themaister.net/rsound.html"
@@ -24,6 +24,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
