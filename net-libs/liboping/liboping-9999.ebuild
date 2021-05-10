@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
-inherit base autotools git-r3 fcaps
+inherit autotools git-r3 fcaps
 
 DESCRIPTION="C library and ncurses based program to generate ICMP echo requests and ping multiple hosts at once"
 HOMEPAGE="http://noping.cc/"
@@ -24,7 +24,7 @@ RDEPEND=${DEPEND}
 PATCHES=( "${FILESDIR}/${PN}-1.6.2-nouidmagic.patch" )
 
 src_prepare() {
-	base_src_prepare
+	default
 	eautoreconf
 }
 
