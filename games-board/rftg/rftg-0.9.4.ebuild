@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=7
 
-inherit games autotools
+inherit autotools
 
 DESCRIPTION="\"Race for the Galaxy\" card game."
 HOMEPAGE="http://keldon.net/rftg/"
@@ -17,19 +17,4 @@ IUSE=""
 
 DEPEND="x11-libs/gtk+:2"
 RDEPEND="${DEPEND}"
-
-src_prepare()
-{
-	eautoreconf
-}
-
-src_compile()
-{
-	games_src_compile
-}
-
-src_install()
-{
-	emake DESTDIR="${D}" install || die
-}
 
