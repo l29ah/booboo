@@ -4,8 +4,8 @@
 EAPI=7
 
 DESCRIPTION="Run a program specified in the mailcap file based on a mime type"
-HOMEPAGE="https://salsa.debian.org/debian/mime-support"
-SRC_URI="http://deb.debian.org/debian/pool/main/m/mime-support/mime-support_${PV}.tar.xz"
+HOMEPAGE="https://salsa.debian.org/debian/mailcap"
+SRC_URI="http://deb.debian.org/debian/pool/main/m/mailcap/mailcap_${PV}.tar.xz"
 
 LICENSE="public-domain"
 SLOT="0"
@@ -17,7 +17,7 @@ RDEPEND="${DEPEND}
 	dev-lang/perl"
 BDEPEND=""
 
-S="$WORKDIR/mime-support"
+S="$WORKDIR/mailcap"
 
 src_install() {
 	dobin run-mailcap
