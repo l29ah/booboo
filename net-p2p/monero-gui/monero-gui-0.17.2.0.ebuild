@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="hw-wallet qrcode smartcard unwind"
 
-COMMON_DEPEND="net-p2p/monero:=
+COMMON_DEPEND="net-p2p/monero:=[daemon]
 	dev-db/lmdb:=
 	dev-qt/qtconcurrent:5
 	dev-qt/qtcore:5
