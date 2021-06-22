@@ -1,13 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/zebedee/Attic/zebedee-2.5.3-r1.ebuild,v 1.5 2015/04/26 12:58:38 pacho dead $
 
-EAPI="2"
+EAPI=7
 
 inherit toolchain-funcs
 
 DESCRIPTION="A simple, free, secure TCP and UDP tunnel program"
-HOMEPAGE="http://www.winton.org.uk/zebedee/"
+HOMEPAGE="https://sourceforge.net/projects/zebedee/"
 SRC_URI="mirror://sourceforge/zebedee/${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -28,6 +27,8 @@ src_prepare() {
 
 	# FIXME
 	sed -i Makefile -e '/^all/{s/zebedee\.1//;s/zebedee\.html//;s/ftpgw\.tcl\.1//;s/ftpgw\.tcl\.html//;s/zebedee\.ja_JP\.html//}' || die
+
+	default
 }
 
 src_compile() {
@@ -55,8 +56,6 @@ src_install() {
 	#dohtml *.html
 
 	dobin zebedee ftpgw.tcl
-
-	doinitd "${FILESDIR}"/zebedee
 }
 
 pkg_postinst() {
