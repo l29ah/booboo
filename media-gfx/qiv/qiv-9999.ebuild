@@ -1,13 +1,12 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/qiv/qiv-2.2.3.ebuild,v 1.1 2010/03/12 09:17:59 ssuominen Exp $
 
-EAPI=5
-inherit toolchain-funcs mercurial
+EAPI=7
+inherit toolchain-funcs git-r3
 
 DESCRIPTION="Quick Image Viewer"
 HOMEPAGE="http://spiegl.de/qiv/"
-EHG_REPO_URI='http://bitbucket.org/ciberandy/qiv/'
+EGIT_REPO_URI='https://codeberg.org/ciberandy/qiv'
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,8 +20,6 @@ RDEPEND="x11-libs/gtk+:2
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-S="${WORKDIR}/$PN"
-
 src_prepare() {
 	sed -i \
 		-e 's:$(CC) $(CFLAGS):$(CC) $(LDFLAGS) $(CFLAGS):' \
@@ -33,6 +30,7 @@ src_prepare() {
 			-e 's:-DGTD_XINERAMA::' \
 			Makefile || die
 	fi
+	default
 }
 
 src_compile() {
