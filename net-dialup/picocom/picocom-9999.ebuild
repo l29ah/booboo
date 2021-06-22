@@ -1,8 +1,7 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=4
+EAPI=7
 
 inherit eutils toolchain-funcs git-r3
 
@@ -23,6 +22,8 @@ IUSE=""
 DEPEND=""
 
 src_prepare() {
+	default
+
 	sed -i -e 's:\./picocom:picocom:' pcasc || die
 
 	# Custom baud rates
@@ -40,6 +41,6 @@ src_compile() {
 src_install() {
 	dobin picocom pc{asc,xm,ym,zm}
 	doman picocom.1
-	dohtml picocom.1.html
+	dodoc picocom.1.html
 	dodoc CONTRIBUTORS README.md TODO
 }
