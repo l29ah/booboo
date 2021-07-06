@@ -14,7 +14,6 @@ SLOT="0"
 KEYWORDS=""
 IUSE="dbus garmin gles gles2 gps gtk nls python qt sdl speechd svg"
 
-# gps: http://trac.navit-project.org/ticket/1284
 RDEPEND="dev-libs/glib:2
 	dev-libs/protobuf-c
 	garmin? ( dev-libs/libgarmin )
@@ -29,7 +28,7 @@ RDEPEND="dev-libs/glib:2
 		media-libs/quesoglc )
 	python? ( dev-lang/python )
 	dbus? ( sys-apps/dbus )
-	gps? ( <sci-geosciences/gpsd-3.12 )
+	gps? ( sci-geosciences/gpsd )
 	speechd? ( app-accessibility/speech-dispatcher )"
 
 DEPEND="${RDEPEND}
