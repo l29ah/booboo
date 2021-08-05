@@ -31,7 +31,7 @@ RESTRICT="mirror"
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	gconf? ( gnome-base/gconf )
 	jack? ( virtual/jack )
 	system-zlib? ( sys-libs/zlib )

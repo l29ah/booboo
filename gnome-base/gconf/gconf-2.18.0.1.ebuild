@@ -27,7 +27,7 @@ RDEPEND=">=dev-libs/glib-2.10
 	dev-libs/popt"
 
 DEPEND="${RDEPEND}
-	>=dev-util/pkgconfig-0.9
+	>=virtual/pkgconfig-0.9
 	doc? ( >=dev-util/gtk-doc-1 )"
 
 # FIXME : consider merging the tree (?)
