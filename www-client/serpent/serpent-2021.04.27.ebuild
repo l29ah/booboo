@@ -31,7 +31,6 @@ RESTRICT="mirror"
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
-	virtual/pkgconfig
 	gconf? ( gnome-base/gconf )
 	jack? ( virtual/jack )
 	system-zlib? ( sys-libs/zlib )
@@ -44,6 +43,7 @@ RDEPEND="
 	selinux? ( sec-policy/selinux-mozilla )"
 
 DEPEND="${RDEPEND}
+	virtual/pkgconfig
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
