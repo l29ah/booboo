@@ -1,6 +1,7 @@
 # Copyright 1999-2005 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+
+EAPI=7
 
 S="${WORKDIR}/${PN}${PV}"
 DESCRIPTION="Kanji quiz and a lookup tool for X, helps in memorizing
@@ -15,9 +16,11 @@ IUSE=""
 
 DEPEND="x11-base/xorg-server
 		x11-misc/imake"
-
-src_unpack() {
-	unpack ${A}
+	
+src_prepare() {
+	# getline is already defined by libc
+	sed -i -e 's#getline(#my_&#g' *.c *.h
+	default
 }
 
 src_compile() {
@@ -47,7 +50,7 @@ src_install() {
 	insinto /usr/share/kdrill
 	gzip kanjidic
 	doins makedic/*.edic kanjidic.gz
-    rm ${D}/usr/lib/X11/app-defaults
+	rm ${D}/usr/lib/X11/app-defaults
 }
 
 pkg_postinst() {
