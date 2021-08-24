@@ -15,6 +15,12 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	# respect CFLAGS
+	sed -i -e 's#CFLAGS =#CFLAGS +=#;s# -O2 -fomit-frame-pointer##;s# -g##' Makefile
+	default
+}
+
 src_install() {
 	dobin serproxy
 	dodoc AUTHORS ChangeLog README TODO serproxy.cfg
