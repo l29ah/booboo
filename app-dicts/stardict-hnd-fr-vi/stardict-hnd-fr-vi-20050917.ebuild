@@ -10,7 +10,7 @@ TO_LANG="Vietnamese"
 inherit stardict
 
 HOMEPAGE="https://sourceforge.net/projects/ovdp/"
-SRC_URI="mirror://gentoo/PhapViet47K.zip"
+SRC_URI="http://ftp.gunadarma.ac.id/mirrors/gentoo/distfiles/PhapViet47K.zip"
 
 KEYWORDS="~amd64 ~x86"
 IUSE=""
