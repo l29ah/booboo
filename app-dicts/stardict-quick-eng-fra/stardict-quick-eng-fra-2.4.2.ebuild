@@ -11,6 +11,7 @@ DICT_PREFIX="quick_"
 inherit stardict
 
 HOMEPAGE="http://download.huzheng.org/Quick/"
+SRC_URI="https://ftp.tw.freebsd.org/distfiles/stardict/${DICT_P}.tar.bz2"
 
 KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE=""
