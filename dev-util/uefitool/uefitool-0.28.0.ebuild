@@ -18,6 +18,8 @@ RDEPEND=""
 DEPEND="
 	${RDEPEND}
 	dev-qt/qtcore:5
+	dev-qt/qtgui:5
+	dev-qt/qtwidgets:5
 "
 
 S="${WORKDIR}/UEFITool-${PV}"
