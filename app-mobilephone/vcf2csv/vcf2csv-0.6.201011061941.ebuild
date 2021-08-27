@@ -19,6 +19,8 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+PATCHES=( "${FILESDIR}/vcf2csv-respect-cflags.patch" )
+
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {

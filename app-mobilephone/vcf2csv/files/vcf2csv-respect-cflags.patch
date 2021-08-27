@@ -1,0 +1,11 @@
+--- vcf2csv-0.6-201011061941-src-bin/src/Makefile	2021-08-27 18:10:34.390459103 +0300
++++ vcf2csv-0.6-201011061941-src-bin/src/Makefile	2021-08-27 18:10:43.523354158 +0300
+@@ -1,7 +1,7 @@
+ PREFIX =
+ BINDIR = $(PREFIX)/usr/local/bin
+ MANDIR = $(PREFIX)/usr/man
+-CFLAGS = -Wall -Wno-unused -pedantic 
++CFLAGS += -Wall -Wno-unused -pedantic 
+ 
+ CC=gcc
+ 
