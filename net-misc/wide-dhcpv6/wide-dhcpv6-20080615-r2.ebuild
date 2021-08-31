@@ -31,7 +31,9 @@ src_configure() {
 		epatch "$FILESDIR/0015-a-bit-info-to-logger-when-get-OPTION_RECONF_ACCEPT.patch"
 		epatch "$FILESDIR/wide-dhcpv6-disable-extra-cflags.patch"
 	}
-	default
+	
+	# defaults to `bin`
+	econf --with-user=root --with-group=root
 }
 
 src_compile() {
