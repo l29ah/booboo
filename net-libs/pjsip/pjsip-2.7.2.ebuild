@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	ESVN_REPO_URI="http://svn.pjsip.org/repos/pjproject/trunk"
 	KEYWORDS=""
 else
-	SRC_URI="http://www.pjsip.org/release/${PV}/pjproject-${PV}.tar.bz2"
+	SRC_URI="https://github.com/pjsip/pjproject/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
