@@ -1,4 +1,4 @@
-#!/sbin/runscript
+#!/sbin/openrc-run
 PIDFILE=/var/run/co2mond.pid
 start() {
 	ebegin "Starting co2mond"
