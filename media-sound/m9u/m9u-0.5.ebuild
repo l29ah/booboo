@@ -18,7 +18,8 @@ RDEPEND="$DEPEND"
 
 src_prepare() {
 	# Support never versions of libixp
-	sed -i -e 's#^\(CFLAGS=.*\)$#\1 -DIXP_NEEDAPI=126#' Makefile
+	sed -i -e 's#^CFLAGS=\(.*\)$#CFLAGS+=\1 -DIXP_NEEDAPI=126#' Makefile
+	
 }
 
 src_install() {
