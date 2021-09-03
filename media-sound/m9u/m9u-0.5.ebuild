@@ -5,10 +5,10 @@
 EAPI=4
 
 DESCRIPTION="m9u is designed to be a music server, much like mpd or xmms2. It sits in the background playing music, exporting an interface that one or more clients can connect to to control playback."
-HOMEPAGE="http://sqweek.dnsdojo.org/code/m9u/"
+HOMEPAGE="http://sqweek.net/code/m9u/"
 SRC_URI="http://sqweek.net/9p/$P.tar.gz"
 
-LICENSE="as-is"
+LICENSE="ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
