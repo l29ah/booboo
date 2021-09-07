@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+# Copyright 2021 Your Mom
+# Distributed under the terms of the GNU General Public License v3
+
+description="udev dummy from udev-zero"
+
+depend() {
+	provide udev dev
+}
+
+start() {
+	return
+}
