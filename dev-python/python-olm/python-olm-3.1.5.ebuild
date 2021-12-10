@@ -22,5 +22,6 @@ IUSE=""
 S="${WORKDIR}/olm-${PV}/python"
 
 DEPEND="dev-python/cffi
-	dev-libs/olm"
+	dev-libs/olm
+	dev-python/pip[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
