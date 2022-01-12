@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
-<pkgmetadata>
-  <upstream>
-    <remote-id type="pypi">ansi2html</remote-id>
-    <remote-id type="github">ralphbean/ansi2html</remote-id>
-  </upstream>
-</pkgmetadata>
