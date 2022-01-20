@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/MTG/acousticbrainz-gui/"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/MTG/acousticbrainz-gui.git"
 
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
