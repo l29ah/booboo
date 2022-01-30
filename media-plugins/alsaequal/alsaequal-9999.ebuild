@@ -1,8 +1,7 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/alsaequal/alsaequal-0.6-r2.ebuild,v 1.4 2014/08/10 12:59:02 nativemad Exp $
 
-EAPI=5
+EAPI=7
 inherit eutils multilib toolchain-funcs multilib-minimal git-r3
 
 DESCRIPTION="a real-time adjustable equalizer plugin for ALSA"
@@ -23,7 +22,8 @@ DEPEND="${RDEPEND}"
 DOCS=( README )
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}*-asneeded.patch
+	eapply -p0 "${FILESDIR}"/${PN}*-asneeded.patch
+	default
 	multilib_copy_sources
 }
 
