@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
 inherit eutils java-pkg-2 java-ant-2 systemd versionator user
 MAJOR_PV="$(get_version_component_range 1-2)"
