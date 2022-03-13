@@ -1,9 +1,0 @@
-diff --git a/config.mk b/config.mk
-index b6c0f6a..bcd1ee3 100644
---- a/config.mk
-+++ b/config.mk
-@@ -1,4 +1,2 @@
--CXX = clang
--CC = $(CXX)
- DESTDIR =
- PREFIX = /usr/local
