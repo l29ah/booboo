@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<use>
+		<flag name="enchant">Enable the app-text/aspell spell-checking backend</flag>
+		<flag name="hunspell">Enable the app-text/hunspell spell-checking backend</flag>
+		<flag name="screencast">Enable support for remote desktop and screen cast using <pkg>media-video/pipewire</pkg></flag>
+	</use>
+</pkgmetadata>
