@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 inherit git-r3 cmake-utils
 
@@ -16,7 +15,8 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND="
-	>=dev-libs/msgpack-1.2.0[cxx]"
+	>=dev-libs/msgpack-1.2.0[cxx]
+	dev-cpp/asio"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
