@@ -7,8 +7,8 @@ PYTHON_COMPAT=( python3_{8..10} )
 
 inherit xdg cmake python-any-r1 optfeature flag-o-matic
 
-DESCRIPTION="Official desktop client for Telegram"
-HOMEPAGE="https://desktop.telegram.org"
+DESCRIPTION="Experimental Telegram Desktop fork"
+HOMEPAGE="https://github.com/kotatogram/kotatogram-desktop/"
 
 MY_P="kotatogram-desktop-${PV}-full"
 SRC_URI="https://github.com/kotatogram/kotatogram-desktop/releases/download/k${PV}/${MY_P}.tar.gz"
@@ -25,7 +25,6 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	!net-im/telegram-desktop-bin
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
 	dev-libs/libdispatch
