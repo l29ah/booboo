@@ -24,6 +24,9 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
-	sed -i -e 's#default_sanitizers=address#default_sanitizers=#' configure.ac || die
 	eautoreconf
+}
+
+src_configure() {
+	econf --with-zsh-completion-dir="/usr/share/zsh/site-functions"
 }
