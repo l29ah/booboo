@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit meson systemd multilib git-r3 patches
+inherit meson systemd multilib git-r3
 
 DESCRIPTION="tinc is an easy to configure VPN implementation"
 HOMEPAGE="https://tinc-vpn.org/"
@@ -39,10 +39,6 @@ BDEPEND="
 "
 
 #REQUIRED_USE="^^ ( ssl gcrypt )"
-
-src_prepare() {
-	patches_src_prepare
-}
 
 src_configure() {
 	local emesonargs=(
