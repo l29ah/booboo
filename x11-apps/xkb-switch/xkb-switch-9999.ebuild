@@ -1,10 +1,9 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=8
 
-inherit cmake-utils git-r3 multilib
+inherit cmake git-r3 multilib
 
 DESCRIPTION="Switch your X keyboard layouts from the command line"
 HOMEPAGE="https://github.com/ierton/xkb-switch"
@@ -21,5 +20,5 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	# multilib-strict
 	sed -i -e "s/DESTINATION lib/DESTINATION $(get_libdir)/" CMakeLists.txt
-	default
+	cmake_src_prepare
 }
