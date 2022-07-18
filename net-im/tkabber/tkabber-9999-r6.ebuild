@@ -1,9 +1,9 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-EAPI=5
+EAPI=7
 
-inherit fossil eutils
+inherit fossil eutils desktop
 
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
@@ -58,7 +58,7 @@ src_prepare() {
 			tkabber.tcl || die "Failed to fix default site plugins path in tkabber.tcl"
 	fi
 
-	epatch_user
+	default
 }
 
 src_compile() {
