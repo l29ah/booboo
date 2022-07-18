@@ -1,11 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=8
 WANT_AUTOMAKE=none
 
-inherit autotools eutils git-r3
+inherit autotools git-r3
 
 DESCRIPTION="Converter for Microsoft Word, Excel, PowerPoint and RTF files to text"
 HOMEPAGE="http://www.wagner.pp.ru/~vitus/software/catdoc/"
@@ -21,6 +20,7 @@ DEPEND="tk? ( >=dev-lang/tk-8.1 )"
 DOCS="CODING.STD CREDITS NEWS README TODO"
 
 src_prepare() {
+	default
 	# only install wordview.desktop when tk is enabled (bug #522766)
 	if ! use tk ; then
 		sed -i 's/ desktop//' Makefile.in || die
