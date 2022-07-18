@@ -37,9 +37,9 @@ fossil_fetch() {
 	mkdir -m 775 -p "${EFOSSIL_PROJECT}" || die "${EFOSSIL}: can't mkdir ${EFOSSIL_PROJECT}."
 	cloned_repo="${EFOSSIL_STORE_DIR}/${EFOSSIL_PROJECT}/${repo_uri##*/}"
 	if [[ -e "$cloned_repo" ]]; then
-		fossil --user portage pull -R "$cloned_repo" "$repo_uri" || die "${EFOSSIL}: can't pull ${repo_uri}."
+		fossil pull -R "$cloned_repo" "$repo_uri" || die "${EFOSSIL}: can't pull ${repo_uri}."
 	else
-		fossil --user portage clone "$repo_uri" "$cloned_repo" || die "${EFOSSIL}: can't clone ${repo_uri}."
+		fossil clone "$repo_uri" "$cloned_repo" || die "${EFOSSIL}: can't clone ${repo_uri}."
 	fi
 
 	if ! has "export" ${EFOSSIL_RESTRICT}; then
