@@ -1,10 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
+EAPI=8
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="Use external locker as X screen saver."
 HOMEPAGE="https://bitbucket.org/raymonad/xss-lock"
@@ -21,7 +20,7 @@ RDEPEND="${DEPEND}
 	dev-python/docutils"
 
 src_install() {
-	cmake-utils_src_install
+	cmake_src_install
 
 	dodoc  "${D}"/usr/share/doc/xss-lock/*
 	rm -rf "${D}/usr/share"/{doc/xss-lock,zsh}
