@@ -1,9 +1,9 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=8
 
-inherit versionator git-r3 autotools
+inherit git-r3 autotools
 
 DESCRIPTION="Serial port logging utility"
 HOMEPAGE=https://github.com/aeruder/slsnif
@@ -18,5 +18,6 @@ DEPEND=""
 RDEPEND=""
 
 src_prepare() {
+	default
 	eautoreconf
 }
