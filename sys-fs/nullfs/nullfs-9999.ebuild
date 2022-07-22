@@ -1,10 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=8
 
-inherit git-r3 eutils
+inherit git-r3
 
 DESCRIPTION="FUSE /dev/null equivalent for directories"
 HOMEPAGE="https://github.com/xrgtn/nullfs"
