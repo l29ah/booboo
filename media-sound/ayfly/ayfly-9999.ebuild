@@ -1,9 +1,8 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
-EAPI="5"
+EAPI=8
 
-inherit eutils git-r3 autotools
+inherit git-r3 autotools
 
 DESCRIPTION="Ayfly is a AY-891x emulator and player."
 HOMEPAGE="https://github.com/l29ah/ayfly"
@@ -21,6 +20,7 @@ DEPEND="$RDEPEND
 
 
 src_prepare() {
+	default
 	use arm && epatch ${FILESDIR}/disable_filters.patch
 	eautoreconf
 }
