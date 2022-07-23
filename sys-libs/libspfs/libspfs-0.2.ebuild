@@ -1,6 +1,7 @@
 # Copyright 1999-2007 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libixp/libixp-0.4.ebuild,v 1.1 2007/11/18 05:44:12 omp Exp $
+
+EAPI=8
 
 inherit toolchain-funcs
 
@@ -17,22 +18,19 @@ IUSE=""
 DEPEND=""
 RDEPEND=""
 
-src_unpack() {
-	unpack ${A}
-	cd "${WORKDIR}/spfs/libspfs"
+S="${WORKDIR}/spfs/libspfs"
 
+src_prepare() {
 	sed "s#\/usr\/local#${D}\/usr#; s#cp#cp -P#" Makefile -i
+	default
 }
 
 src_compile() {
-	cd "${WORKDIR}/spfs/libspfs"
 	emake || die "emake failed"
 }
 
 src_install() {
-	cd "${WORKDIR}/spfs/libspfs"
-	# I WANT DOHEADER!!
 	mkdir -p "${D}/usr/include"
 	cp "../include/spfs.h" "${D}/usr/include"
-	dolib libspfs.a
+	dolib.a libspfs.a
 }
