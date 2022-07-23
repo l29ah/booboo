@@ -1,4 +1,0 @@
-# /etc/conf.d/dhcp6x
-
-# Options to give to dhcp6x
-DHCP6X_OPTS=""
