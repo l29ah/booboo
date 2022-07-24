@@ -67,7 +67,7 @@ src_install() {
 	sed -i 's/Exec=qcad/Exec=qcad -platform xcb/g' qcad-wayland.desktop
 	sed -i 's/Name=QCAD/Name=QCAD (Wayland)/g' qcad-wayland.desktop
 
-	domenu "${S}/*.desktop"
+	domenu "${S}"/*.desktop
 	doicon "${S}/scripts/${PN}_icon.svg"
 	doicon --size 256 "${S}/scripts/${PN}_icon.png"
 
