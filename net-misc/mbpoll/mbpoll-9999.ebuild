@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="command line utility to communicate with ModBus slave (RTU or TCP)"
 HOMEPAGE="https://github.com/epsilonrt/mbpoll"
