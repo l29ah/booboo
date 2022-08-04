@@ -1,12 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{3,4,5,6,7,8,9,10} )
 
-inherit git-r3 cmake-utils python-single-r1
+inherit git-r3 cmake python-single-r1
 
 
 DESCRIPTION="CAD from a parallel universe"
@@ -39,6 +38,6 @@ pkg_setup() {
 src_prepare() {
 	# stumbles upon the highest installed python version otherwise
 	sed -i -e "s/Python 3\.3 /Python ${EPYTHON/python/} EXACT /" CMakeLists.txt
-	cmake-utils_src_prepare
+	cmake_src_prepare
 	default
 }
