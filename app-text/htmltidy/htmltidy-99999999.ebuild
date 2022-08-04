@@ -1,10 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=7
+EAPI=8
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="The granddaddy of HTML tools, with support for modern standards"
 HOMEPAGE="http://www.html-tidy.org/"
