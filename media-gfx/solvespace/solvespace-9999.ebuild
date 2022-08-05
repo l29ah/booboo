@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="Parametric 2d/3d CAD"
 HOMEPAGE="http://solvespace.com/"
@@ -33,5 +33,5 @@ CMAKE_BUILD_TYPE="Release"
 
 src_configure() {
 	local mycmakeargs=("-DENABLE_TESTS=OFF")
-	cmake-utils_src_configure
+	cmake_src_configure
 }
