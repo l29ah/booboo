@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="an open-source software-defined GNSS receiver"
 HOMEPAGE="https://github.com/gnss-sdr/gnss-sdr"
@@ -34,5 +34,5 @@ src_configure() {
 		-DENABLE_UNIT_TESTING=0
 		-DENABLE_OSMOSDR=$(usex osmosdr)
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
