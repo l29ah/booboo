@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="Generic CAM is an open source tool path generator for CNC machines."
 HOMEPAGE="http://genericcam.sourceforge.net/"
@@ -25,6 +25,7 @@ CMAKE_IN_SOURCE_BUILD=yeah
 
 src_prepare() {
 	sed -i -e 's/lua5\.1/lua/;s/GLU/& GL/;s/xml/html &/' CMakeLists.txt
+	cmake_src_prepare
 }
 
 src_install() {
