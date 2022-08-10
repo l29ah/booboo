@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="HeeksCAD-based CAM"
 HOMEPAGE="https://github.com/Heeks/heekscnc"
@@ -25,5 +25,5 @@ src_configure() {
 	local mycmakeargs=(
 		-DLIB_INSTALL_DIR="$(get_libdir)"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
