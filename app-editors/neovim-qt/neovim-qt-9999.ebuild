@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2202 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 EGIT_REPO_URI="https://github.com/equalsraf/neovim-qt.git"
 
