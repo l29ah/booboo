@@ -45,6 +45,11 @@ RDEPEND="${COMMON_DEPEND}
 	media-fonts/fontawesome"
 
 src_configure () {
+	# FIXME?
+	cd src/zxcvbn-c
+	cmake .
+	cd -
+
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DMANUAL_SUBMODULES=ON
