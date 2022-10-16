@@ -1,9 +1,9 @@
 # Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit desktop xdg eutils qmake-utils #git-r3
+inherit desktop xdg qmake-utils wrapper #git-r3
 
 DESCRIPTION="Open Source 2D CAD"
 HOMEPAGE="http://www.qcad.org/"
@@ -84,7 +84,7 @@ src_install() {
 	doins -r scripts fonts patterns linetypes themes
 	insopts -m0755
 	doins release/*
-	make_wrapper ${PN} /usr/lib/${PN}/qcad-bin "" /usr/lib/${PN}:/usr/lib/${PN}/plugins
+	make_wrapper ${PN} /usr/lib/${PN}/qcad-bin "" /usr/lib/${PN}:/usr/lib/${PN}/plugins || die
 	doins -r plugins
 
 	docinto examples
