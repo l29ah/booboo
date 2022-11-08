@@ -39,6 +39,6 @@ src_install() {
 	doins -r sounds
 	doins -r music
 	doins hyperrogue-music.txt
-    doins DejaVuSans-Bold.ttf
+	doins DejaVuSans-Bold.ttf
 }
 
