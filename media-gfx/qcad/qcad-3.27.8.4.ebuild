@@ -40,8 +40,7 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	# This is the latest known src/3rdparty/qt-labs-qtscriptgenerator-<qtversion>
-	local myqtvsrc="5.14.0"	# available since 3.24.2.3
-	#local myqtvsrc="5.14.2"	# in git master on 2020 Apr 8 (ie after 3.24.3.0)
+	local myqtvsrc="5.15.3"	# available since 3.27.6.10
 
 	local myqt=$(best_version dev-qt/qtcore:5)
 	local myqtv=${myqt#dev-qt/qtcore-}
