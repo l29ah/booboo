@@ -114,6 +114,8 @@ src_install() {
 	docinto examples
 	dodoc -r examples/*
 	docompress -x /usr/share/doc/${PF}/examples
+
+	doman ${PN}.1
 }
 
 pkg_postinst() {
