@@ -69,6 +69,15 @@ src_prepare() {
 	# we call qmake in src_configure
 	sed -i '/qmake/d' src/scripts/update_qrc.sh
 	src/scripts/update_qrc.sh || die
+
+	# drop readme files that do not need to be installed
+	find plugins platform* xcb* -type f -name readme.txt -delete
+
+	# qcad cannot load plugins from the system QT plugins dir, as described
+	# in this comment from qcad's src/run/main.cpp:
+	#   // disable Qt library paths to avoid plugins for Qt designer from being found:
+	# By default qcad copies the QT libs and plugins. We symlink them instead.
+	sed -i -e 's/system(cp \(-r \)\?/system(ln -s /' -e 's/copying file/symlinking file/' src/run/run.pri
 }
 
 src_configure() {
@@ -93,7 +102,9 @@ src_install() {
 	insopts -m0755
 	doins release/*
 	make_wrapper ${PN} /usr/lib/${PN}/qcad-bin "" /usr/lib/${PN}:/usr/lib/${PN}/plugins || die
-	doins -r plugins
+
+	# this mirrors src/run/run.pri
+	doins -r plugins platform* xcb* wayland-*
 
 	docinto examples
 	dodoc -r examples/*
