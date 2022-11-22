@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-L10N=( de en es fr it ja nl pl pt ru sl sk sv fi hr hu zh_CN cs TW lt )
+L10N=( ar bg ca cs da de el en es et fa fi fr gl he hr hu id it ja ko lt lv nl pl pt ro ru sk sl sv th tr uk zh_CN zh_TW )
 
 IUSE=""
 
@@ -54,6 +54,21 @@ src_prepare() {
 	fi
 
 	default
+
+	cd "${S}"
+	for lingua in "${L10N[@]}"
+	do
+		if ! use l10n_${lingua}
+		then
+			find -type f -name "*_${lingua}.*" -delete
+			# drop translation but leave the line continuation mark at the end of each line
+			sed -i "s|\$\$.*/\$\${NAME}_${lingua}\.ts||" shared_ts.pri scripts/Misc/translations.pri
+		fi
+	done
+
+	# we call qmake in src_configure
+	sed -i '/qmake/d' src/scripts/update_qrc.sh
+	src/scripts/update_qrc.sh || die
 }
 
 src_configure() {
@@ -71,16 +86,10 @@ src_install() {
 	doicon --size 256 "${S}/scripts/${PN}_icon.png"
 
 	cd "${S}"
-	for lingua in "${L10N[@]}"
-	do
-		if ! use l10n_${lingua}
-		then
-			find -type f -name "*_${lingua}.*" -delete
-		fi
-	done
+	rm -f ts/*.pro
 
 	insinto /usr/lib/${PN}/
-	doins -r scripts fonts patterns linetypes themes
+	doins -r scripts fonts patterns linetypes themes ts
 	insopts -m0755
 	doins release/*
 	make_wrapper ${PN} /usr/lib/${PN}/qcad-bin "" /usr/lib/${PN}:/usr/lib/${PN}/plugins || die
