@@ -101,7 +101,15 @@ src_install() {
 
 	insinto ${qcad_dir}/
 	doins -r fonts libraries linetypes patterns themes ts
-	doins -r scripts
+
+	# do not install build files under scripts/
+	find scripts -type f -name '.gitignore' -or -name '*.pro' -or -name '*.pri' -delete
+	# scripts get compiled into plugins/libqcadscripts.so (which is faster)
+	# we also install them as documentation and to allow modification if desired
+	keepdir ${qcad_dir}/scripts
+	docinto scripts
+	dodoc -r scripts/*
+	docompress -x /usr/share/doc/${PF}/scripts
 
 	insopts -m0755
 	doins release/*
