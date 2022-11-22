@@ -100,7 +100,9 @@ src_install() {
 	local qcad_dir=$(qt5_get_libdir)/${PN}
 
 	insinto ${qcad_dir}/
-	doins -r scripts fonts patterns linetypes themes ts
+	doins -r fonts libraries linetypes patterns themes ts
+	doins -r scripts
+
 	insopts -m0755
 	doins release/*
 
