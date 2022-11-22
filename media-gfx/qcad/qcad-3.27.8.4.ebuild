@@ -97,11 +97,16 @@ src_install() {
 	cd "${S}"
 	rm -f ts/*.pro
 
-	insinto /usr/lib/${PN}/
+	local qcad_dir=$(qt5_get_libdir)/${PN}
+
+	insinto ${qcad_dir}/
 	doins -r scripts fonts patterns linetypes themes ts
 	insopts -m0755
 	doins release/*
-	make_wrapper ${PN} /usr/lib/${PN}/qcad-bin "" /usr/lib/${PN}:/usr/lib/${PN}/plugins || die
+
+	# qcad plugins can only be installed in ${qcad_dir}/plugin.
+	# Setting ldpath allows qcad to find/load any libs required by those plugins.
+	make_wrapper ${PN} ${qcad_dir}/qcad-bin "" ${qcad_dir}:${qcad_dir}/plugins || die
 
 	# this mirrors src/run/run.pri
 	doins -r plugins platform* xcb* wayland-*
