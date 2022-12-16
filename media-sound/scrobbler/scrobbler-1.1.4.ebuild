@@ -1,11 +1,10 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=6
+EAPI=8
 
-PYTHON_COMPAT=( python3_{4,5,6,7,8,9,10} )
-inherit distutils-r1 versionator
+PYTHON_COMPAT=( python3_{4..11} )
+inherit distutils-r1
 
 DESCRIPTION="A command-line Last.fm scrobbler and a now-playing status updater."
 HOMEPAGE="https://pypi.python.org/pypi/scrobblerh/"
