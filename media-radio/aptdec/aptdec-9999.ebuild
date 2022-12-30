@@ -18,3 +18,10 @@ DEPEND="
 	media-libs/libpng
 	media-libs/libsndfile"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	# https://github.com/Xerbo/aptdec/issues/22
+	sed -i -e 's#DESTINATION lib#DESTINATION ${CMAKE_INSTALL_LIBDIR}#' CMakeLists.txt || die
+
+	cmake_src_prepare
+}
