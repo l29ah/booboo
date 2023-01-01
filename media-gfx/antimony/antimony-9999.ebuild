@@ -24,7 +24,7 @@ IUSE=""
 DEPEND="
 	>dev-util/lemon-3.8.11 <dev-util/lemon-3.24.0
 	sys-devel/flex
-	dev-libs/boost[python]
+	dev-libs/boost:=[python]
 	media-libs/libpng
 	dev-qt/qtcore:5
 	${PYTHON_DEPS}
