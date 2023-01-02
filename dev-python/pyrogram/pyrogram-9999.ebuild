@@ -7,7 +7,7 @@ DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{9..11} )
 inherit distutils-r1 git-r3
 
-DESCRIPTION=""
+DESCRIPTION="Telegram MTProto API framework for users and bots"
 HOMEPAGE="
 	https://pypi.org/project/pyrogram/
 "
