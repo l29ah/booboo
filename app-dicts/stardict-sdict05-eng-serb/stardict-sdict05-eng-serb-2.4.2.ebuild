@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=8
 
 DICT_P="stardict-comn_sdict_axm05_eng_serb-$PV"
-FROM_LANG=Czech
-TO_LANG=Russian
+FROM_LANG=English
+TO_LANG=Serbian
 
 inherit stardict
 
