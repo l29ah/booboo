@@ -8,6 +8,7 @@ DESCRIPTION="GUI for net-p2p/monero"
 HOMEPAGE="https://getmonero.org"
 EGIT_REPO_URI="https://github.com/monero-project/${PN}"
 EGIT_COMMIT="v${PV}"
+SRC_URI="https://github.com/monero-project/monero/commit/96677fffcd436c5c108718b85419c5dbf5da9df2.patch -> monero-8682.patch"
 
 LICENSE="NEWLIB"
 SLOT="0"
@@ -43,6 +44,12 @@ RDEPEND="${COMMON_DEPEND}
 	dev-qt/qtquickcontrols2:5
 	dev-qt/qtgraphicaleffects:5
 	media-fonts/fontawesome"
+
+src_prepare() {
+	cd monero
+	eapply "${DISTDIR}/monero-8682.patch"
+	cmake_src_prepare
+}
 
 src_configure () {
 	# FIXME?
