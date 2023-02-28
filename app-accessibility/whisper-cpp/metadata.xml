@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <use>
+    <flag name="command">Installs the example spoken-command interface</flag>
+    <flag name="models">Adds a runtime dependency on <pkg>app-accessibility/whisepr-ggml-models</pkg></flag>
+    <flag name="stream">Installs the example of speech-to-text from microphone audio stream</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">ggerganov/whisper.cpp</remote-id>
+  </upstream>
+</pkgmetadata>
