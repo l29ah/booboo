@@ -1,8 +1,7 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tcltk/tkimg/tkimg-1.4.20100510.ebuild,v 1.2 2010/06/15 12:41:28 jlec Exp $
 
-EAPI=6
+EAPI=7
 inherit eutils prefix
 
 DESCRIPTION="Adds a lot of image formats to Tcl/Tk"
