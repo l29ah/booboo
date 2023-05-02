@@ -4,7 +4,7 @@
 EAPI=7
 
 LUA_COMPAT=( lua5-3 )
-PYTHON_COMPAT=( python3_{8..10} )
+PYTHON_COMPAT=( python3_{8..11} )
 
 inherit autotools eutils gnome2-utils lua-single python-any-r1 xdg git-r3
 
