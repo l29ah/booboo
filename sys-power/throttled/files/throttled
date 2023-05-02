@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+pidfile="/var/run/throttled.pid"
+command="/usr/bin/throttled"
+description="Stop Intel throttling"
+start_stop_daemon_args="-b -m -p ${pidfile}"
+
+depend() {
+	need localmount
+	use logger
+}
