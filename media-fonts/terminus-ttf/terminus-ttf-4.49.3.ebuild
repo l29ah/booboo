@@ -6,7 +6,7 @@ EAPI=8
 inherit font
 
 DESCRIPTION="TTF version of media-fonts/terminus-font"
-HOMEPAGE="https://files.ax86.net/terminus-ttf/"
+HOMEPAGE="https://files.ax86.net/terminus-ttf/ https://files.ax86.net/terminus-ttf/files/"
 SRC_URI="https://files.ax86.net/${PN}/files/$PV/${P}.zip"
 
 SLOT="0"
