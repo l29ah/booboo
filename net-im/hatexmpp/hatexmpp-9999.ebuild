@@ -15,7 +15,7 @@ IUSE="screen"
 EGIT_REPO_URI="https://github.com/l29ah/hatexmpp.git"
 RDEPEND="
 		>=dev-libs/glib-2.18.4
-		>=sys-fs/fuse-2.7.4
+		>=sys-fs/fuse-2.7.4:0
 		>=net-libs/loudmouth-1.4.3
 "
 DEPEND="${RDEPEND}
@@ -23,6 +23,10 @@ DEPEND="${RDEPEND}
 		screen? ( dev-perl/TimeDate )
 		screen? ( app-misc/screen )
 "
+
+src_compile() {
+	emake hatexmpp
+}
 
 src_install()
 {
