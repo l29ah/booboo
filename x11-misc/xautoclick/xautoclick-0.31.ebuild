@@ -1,9 +1,7 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="xAutoClick is an application to reduce RSI by simulating multiple mouse clicks"
 HOMEPAGE="http://xautoclick.sourceforge.net/"
@@ -31,4 +29,9 @@ src_configure() {
 	echo HAVE_GTK2=$(usex gtk yes no) >> config.mak
 	echo HAVE_QT4=no >> config.mak
 	echo HAVE_FLTK=$(usex fltk yes no) >> config.mak
+}
+
+src_install() {
+	default
+	mv "$D/usr/man" "$D/usr/share/man"
 }
