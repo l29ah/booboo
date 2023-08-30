@@ -7,12 +7,11 @@
 # Purpose: fuck you
 #
 
-inherit eutils
-
 EFOSSIL="$ECLASS"
 
 case "${EAPI:-0}" in
 	0|1|2|3|4) die "this eclass doesn't support older EAPIs" ;;
+	5|6|7) inherit eutils ;;
 esac
 
 EXPORT_FUNCTIONS src_unpack
