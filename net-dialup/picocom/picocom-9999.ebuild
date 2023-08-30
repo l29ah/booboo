@@ -1,9 +1,9 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit eutils toolchain-funcs git-r3
+inherit toolchain-funcs git-r3
 
 DESCRIPTION="minimal dumb-terminal emulation program"
 HOMEPAGE="https://github.com/npat-efault/picocom"
