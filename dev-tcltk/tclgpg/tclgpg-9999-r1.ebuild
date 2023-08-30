@@ -1,7 +1,7 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 EFOSSIL_REPO_URI='https://chiselapp.com/user/sgolovan/repository/tclgpg'
 
