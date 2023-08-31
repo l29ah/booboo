@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit git-r3 eutils
+inherit git-r3 wrapper
 
 DESCRIPTION="4X Space Strategy game"
 HOMEPAGE="https://github.com/BlindMindStudios/StarRuler2-Source"
@@ -49,7 +49,6 @@ src_compile() {
 }
 
 src_install() {
-	ls -la
 	local dir="/opt/${PN}"
 	dodir "$dir"
 
