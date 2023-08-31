@@ -1,8 +1,8 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-inherit eutils multilib toolchain-funcs multilib-minimal git-r3
+EAPI=8
+inherit multilib toolchain-funcs multilib-minimal git-r3
 
 DESCRIPTION="a real-time adjustable equalizer plugin for ALSA"
 HOMEPAGE="https://github.com/raedwulf/alsaequal"
