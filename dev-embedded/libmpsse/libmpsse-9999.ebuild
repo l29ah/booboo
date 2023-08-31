@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit eutils autotools
+inherit autotools
 
 DESCRIPTION="Open source library for SPI/I2C control via FTDI chips"
 HOMEPAGE="https://github.com/l29ah/libmpsse"
