@@ -1,7 +1,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-inherit eutils cmake git-r3 xdg
+EAPI=8
+inherit cmake git-r3 xdg
 
 DESCRIPTION="Linux SDL/ImGui edition software for viewing .brd files, intended as a drop-in replacement for the \"Test_Link\" software and \"Landrex\""
 HOMEPAGE="http://openboardview.org/"
