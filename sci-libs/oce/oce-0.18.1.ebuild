@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake eutils check-reqs multilib java-pkg-opt-2 flag-o-matic
+inherit cmake check-reqs multilib java-pkg-opt-2 flag-o-matic
 
 DESCRIPTION="Development platform for CAD/CAE, 3D surface/solid modeling and data exchange"
 HOMEPAGE="https://github.com/tpaviot/oce"
