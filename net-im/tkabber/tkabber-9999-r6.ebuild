@@ -53,7 +53,7 @@ src_prepare() {
 	# Fix default official and third party plugins directory
 	if use fix-site-plugins-path; then
 		cd "${S}/tkabber" || die "Can't chdir to ${S}/tkabber"
-		epatch "${FILESDIR}/tkabber.tcl.site.plugins.patch"
+		eapply "${FILESDIR}/tkabber.tcl.site.plugins.patch"
 		sed -i -e 's#TKABBER_SITE_PLUGINS_PATH_PLACEHOLDER#'"${TKABBER_SITE_PLUGINS}"'#' \
 			tkabber.tcl || die "Failed to fix default site plugins path in tkabber.tcl"
 	fi
