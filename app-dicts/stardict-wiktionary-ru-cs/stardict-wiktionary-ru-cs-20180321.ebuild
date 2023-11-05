@@ -1,8 +1,7 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=4
+EAPI=8
 
 DICT_P="wiktionary_ru-cs_stardict_2018-03-21"
 FROM_LANG=Russian
