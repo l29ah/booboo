@@ -13,11 +13,14 @@ HOMEPAGE="https://github.com/zenorogue/hyperrogue/"
 LICENSE="GPL-2"
 SLOT="0"
 
+IUSE="+glew +png"
+
 RDEPEND="
 	media-libs/sdl-gfx
 	media-libs/sdl-mixer
 	media-libs/sdl-ttf
-	media-libs/glew
+	glew? ( media-libs/glew )
+	png? ( media-libs/libpng )
 "
 
 DEPEND="${RDEPEND}"
@@ -28,6 +31,8 @@ src_prepare() {
 }
 
 src_compile() {
+	use glew && export HYPERROGUE_USE_GLEW=1
+	use png && export HYPERROGUE_USE_PNG=1
 	emake mymake
 	./mymake
 }
