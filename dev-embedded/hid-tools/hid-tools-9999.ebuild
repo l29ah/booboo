@@ -3,7 +3,8 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{5..11} )
+PYTHON_COMPAT=( python3_{5..12} )
+DISTUTILS_USE_PEP517=hatchling
 
 inherit git-r3 distutils-r1
 
@@ -14,9 +15,6 @@ HOMEPAGE="https://gitlab.freedesktop.org/bentiss/hid-tools"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 
-DEPEND=""
 RDEPEND="
 	dev-python/parse[${PYTHON_USEDEP}]"
-BDEPEND=""
