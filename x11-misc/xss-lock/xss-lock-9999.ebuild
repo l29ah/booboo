@@ -11,12 +11,9 @@ EGIT_REPO_URI="https://bitbucket.org/raymonad/xss-lock.git"
 
 LICENSE="MIT-with-advertising"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
 
 RDEPEND="dev-libs/glib
-	x11-libs/libxcb"
-RDEPEND="${DEPEND}
+	x11-libs/libxcb
 	dev-python/docutils"
 
 src_install() {
