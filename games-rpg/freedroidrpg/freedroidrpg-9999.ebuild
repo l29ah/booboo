@@ -1,12 +1,12 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 LUA_COMPAT=( lua5-3 )
-PYTHON_COMPAT=( python3_{8..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
-inherit autotools eutils gnome2-utils lua-single python-any-r1 xdg git-r3
+inherit autotools gnome2-utils lua-single python-any-r1 xdg git-r3
 
 DESCRIPTION="Modification of the classical Freedroid engine into an RPG"
 HOMEPAGE="https://www.freedroid.org"
