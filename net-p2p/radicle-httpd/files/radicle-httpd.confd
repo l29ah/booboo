@@ -1,0 +1,24 @@
+# /etc/conf.d/radicle-httpd: config file for /etc/init.d/radicle-httpd
+
+# User and group as which to run
+#RADICLE_HTTPD_USER="radicle"
+#RADICLE_HTTPD_GROUP="radicle"
+
+# Log file
+#RADICLE_HTTPD_LOGFILE="/var/lib/radicle/radicle-httpd.log"
+
+# I/O nice level of radicle-httpd
+#RADICLE_HTTPD_IONICE="0"
+
+# Nice level of radicle-httpd
+#RADICLE_HTTPD_NICE="0"
+
+# umask used to create files
+# The default allows group access
+#RADICLE_HTTPD_UMASK=007
+
+# Listen addess for seed httpd
+#RADICLE_HTTPD_LISTEN="0.0.0.0:8776"
+
+# Extra options for radicle-httpd
+#RADICLE_HTTPD_OPTS=""

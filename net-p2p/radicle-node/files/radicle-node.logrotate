@@ -1,0 +1,6 @@
+/var/log/radicle/radicle-node.log {
+    missingok
+    notifempty
+    sharedscripts
+    copytruncate
+}

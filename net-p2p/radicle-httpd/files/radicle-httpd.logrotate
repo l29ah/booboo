@@ -1,0 +1,6 @@
+/var/log/radicle/radicle-httpd.log {
+    missingok
+    notifempty
+    sharedscripts
+    copytruncate
+}

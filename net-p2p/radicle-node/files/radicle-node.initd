@@ -1,0 +1,32 @@
+#!/sbin/openrc-run
+# Copyright 2024 Your Mom
+# Distributed under the terms of the GNU General Public License v2
+
+RADICLE_NODE_USER=${RADICLE_NODE_USER:-radicle}
+RADICLE_NODE_GROUP=${RADICLE_NODE_GROUP:-radicle}
+RADICLE_NODE_LOGFILE=${RADICLE_NODE_LOGFILE:-/var/lib/radicle/radicle-node.log}
+RADICLE_NODE_IONICE=${RADICLE_NODE_IONICE:-0}
+RADICLE_NODE_NICE=${RADICLE_NODE_NICE:-0}
+RADICLE_NODE_UMASK=${RADICLE_NODE_UMASK:-007}
+RADICLE_NODE_LISTEN=${RADICLE_NODE_LISTEN:+--listen ${RADICLE_NODE_LISTEN}}
+
+description="Radicle is an open source, peer-to-peer code collaboration stack built on Git"
+command="/usr/bin/radicle-node"
+command_args="${RADICLE_NODE_LISTEN} ${RADICLE_NODE_OPTS}"
+pidfile="/run/${RC_SVCNAME}.pid"
+command_background="yes"
+command_user="${RADICLE_NODE_USER}:${RADICLE_NODE_GROUP}"
+umask="${RADICLE_NODE_UMASK}"
+start_stop_daemon_args="--ionice ${RADICLE_NODE_IONICE} \
+  --nicelevel ${RADICLE_NODE_NICE}"
+output_log="\"${RADICLE_NODE_LOGFILE}\""
+error_log="\"${RADICLE_NODE_LOGFILE}\""
+
+
+depend() {
+  need localmount net
+}
+
+start_pre() {
+  checkpath -q -f -o ${RADICLE_NODE_USER}:${RADICLE_NODE_GROUP} ${RADICLE_NODE_LOGFILE}
+}

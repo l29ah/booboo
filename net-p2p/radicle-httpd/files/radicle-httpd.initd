@@ -1,0 +1,32 @@
+#!/sbin/openrc-run
+# Copyright 2024 Your Mom
+# Distributed under the terms of the GNU General Public License v2
+
+RADICLE_HTTPD_USER=${RADICLE_HTTPD_USER:-radicle}
+RADICLE_HTTPD_GROUP=${RADICLE_HTTPD_GROUP:-radicle}
+RADICLE_HTTPD_LOGFILE=${RADICLE_HTTPD_LOGFILE:-/var/lib/radicle/radicle-httpd.log}
+RADICLE_HTTPD_IONICE=${RADICLE_HTTPD_IONICE:-0}
+RADICLE_HTTPD_NICE=${RADICLE_HTTPD_NICE:-0}
+RADICLE_HTTPD_UMASK=${RADICLE_HTTPD_UMASK:-007}
+RADICLE_HTTPD_LISTEN=${RADICLE_HTTPD_LISTEN:+--listen ${RADICLE_HTTPD_LISTEN}}
+
+description="Radicle is an open source, peer-to-peer code collaboration stack built on Git"
+command="/usr/bin/radicle-httpd"
+command_args="${RADICLE_HTTPD_LISTEN} ${RADICLE_HTTPD_OPTS}"
+pidfile="/run/${RC_SVCNAME}.pid"
+command_background="yes"
+command_user="${RADICLE_HTTPD_USER}:${RADICLE_HTTPD_GROUP}"
+umask="${RADICLE_HTTPD_UMASK}"
+start_stop_daemon_args="--ionice ${RADICLE_HTTPD_IONICE} \
+  --nicelevel ${RADICLE_HTTPD_NICE}"
+output_log="\"${RADICLE_HTTPD_LOGFILE}\""
+error_log="\"${RADICLE_HTTPD_LOGFILE}\""
+
+
+depend() {
+  need localmount net
+}
+
+start_pre() {
+  checkpath -q -f -o ${RADICLE_HTTPD_USER}:${RADICLE_HTTPD_GROUP} ${RADICLE_HTTPD_LOGFILE}
+}

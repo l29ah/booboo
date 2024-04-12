@@ -1,0 +1,24 @@
+# /etc/conf.d/radicle-node: config file for /etc/init.d/radicle-node
+
+# User and group as which to run
+#RADICLE_NODE_USER="radicle"
+#RADICLE_NODE_GROUP="radicle"
+
+# Log file
+#RADICLE_NODE_LOGFILE="/var/lib/radicle/radicle-node.log"
+
+# I/O nice level of radicle-node
+#RADICLE_NODE_IONICE="0"
+
+# Nice level of radicle-node
+#RADICLE_NODE_NICE="0"
+
+# umask used to create files
+# The default allows group access
+#RADICLE_NODE_UMASK=007
+
+# Listen addess for seed node
+#RADICLE_NODE_LISTEN="0.0.0.0:8776"
+
+# Extra options for radicle-node
+#RADICLE_NODE_OPTS=""
