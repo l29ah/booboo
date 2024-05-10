@@ -1,0 +1,15 @@
+#!/sbin/openrc-run
+# Copyright 2024 Your Mom
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	need sysfs dev-mount
+}
+
+THD_SOCKET=${THD_SOCKET:-/var/run/triggerhappy.socket}
+THD_CONFIG=${THD_CONFIG:-/etc/triggerhappy.conf}
+
+description="thd start script"
+command="/usr/sbin/thd"
+pidfile="/run/${RC_SVCNAME}.pid"
+command_args="--triggers ${THD_CONFIG} --socket ${THD_SOCKET} --daemon ${THD_OPTS} --pidfile ${pidfile} ${THD_DEVICES}"

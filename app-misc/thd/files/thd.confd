@@ -1,0 +1,4 @@
+THD_CONFIG="/etc/triggerhappy.conf"
+THD_SOCKET="/var/run/triggerhappy.socket"
+THD_DEVICES="/dev/input/event0"
+THD_OPTS=""
