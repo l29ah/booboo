@@ -1,0 +1,15 @@
+diff --git a/casadi/interfaces/mumps/mumps_interface.hpp b/casadi/interfaces/mumps/mumps_interface.hpp
+index b92770f11..d1836077d 100644
+--- a/casadi/interfaces/mumps/mumps_interface.hpp
++++ b/casadi/interfaces/mumps/mumps_interface.hpp
+@@ -29,8 +29,8 @@
+ #include "casadi/core/linsol_internal.hpp"
+ #include <casadi/interfaces/mumps/casadi_linsol_mumps_export.h>
+
+-#include <mumps/mumps_mpi.h>
+-#include <mumps/dmumps_c.h>
++#include <mpiseq/mpi.h>
++#include <dmumps_c.h>
+
+ /** \defgroup plugin_Linsol_mumps Title
+     \par
