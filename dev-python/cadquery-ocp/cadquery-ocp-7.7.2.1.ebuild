@@ -33,6 +33,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 BDEPEND="
 	$(python_gen_cond_dep '
 		>=dev-util/lief-0.11.5[python,${PYTHON_USEDEP}]')
+	dev-python/clang-python
 "
 RDEPEND="
 	${PYTHON_DEPS}
