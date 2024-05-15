@@ -25,6 +25,7 @@ RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
 		dev-python/anytree[${PYTHON_USEDEP}]
 		dev-python/ezdxf[${PYTHON_USEDEP}]
+		dev-python/ocpsvg[${PYTHON_USEDEP}]
 		dev-python/py-lib3mf[${PYTHON_USEDEP}]
 		dev-python/svgpathtools[${PYTHON_USEDEP}]
 		dev-python/trianglesolver[${PYTHON_USEDEP}]
