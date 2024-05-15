@@ -85,7 +85,7 @@ RDEPEND="
 		${PYTHON_DEPS}
 	)
 	system-sundials? ( sci-libs/sundials[lapack?] )
-	system-xml? ( dev-libs/tinyxml )
+	system-xml? ( dev-libs/tinyxml2 )
 	"
 DEPEND="${RDEPEND}"
 BDEPEND="python? ( dev-lang/swig )"
