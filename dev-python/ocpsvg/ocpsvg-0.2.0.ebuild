@@ -11,7 +11,7 @@ inherit distutils-r1 pypi
 DESCRIPTION=""
 HOMEPAGE="https://pypi.org/project/ocpsvg/"
 
-LICENSE=""
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
