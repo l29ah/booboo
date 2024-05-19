@@ -24,6 +24,8 @@ BDEPEND="
 DEPEND="
 	dev-python/typing-extensions[${PYTHON_USEDEP}]
 	>=dev-python/pyparsing-2.0.1[${PYTHON_USEDEP}]
+	dev-python/fonttools[${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}
 	matplotlib? ( dev-python/matplotlib[${PYTHON_USEDEP}] )
