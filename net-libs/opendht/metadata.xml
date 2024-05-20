@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+ <use>
+    <flag name="python">
+      Install Python bindings. Requires <pkg>dev-python/cython</pkg>.
+    </flag>
+    <flag name="tools">
+      Install extra opendht tools (dhtchat, dhtnode and dhtscanner).
+    </flag>
+ </use>
+</pkgmetadata>
