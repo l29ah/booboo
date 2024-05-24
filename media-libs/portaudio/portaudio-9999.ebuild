@@ -6,7 +6,7 @@ inherit ltprune multilib-minimal
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://git.assembla.com/portaudio.git"
+	EGIT_REPO_URI="https://github.com/PortAudio/portaudio"
 else
 	SRC_URI="http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz"
 	KEYWORDS="alpha amd64 ~arm ~arm64 ~hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~amd64-linux ~x86-linux"
@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	virtual/pkgconfig"
 
-DOCS=( README.txt )
+DOCS=( README.md )
 
 multilib_src_configure() {
 	local myeconfargs=(
