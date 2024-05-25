@@ -3,22 +3,18 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{3..11} )
+PYTHON_COMPAT=( python3_{3..13} )
 
 inherit git-r3 cmake python-single-r1
-
 
 DESCRIPTION="CAD from a parallel universe"
 HOMEPAGE="http://www.mattkeeter.com/projects/antimony/3/"
 EGIT_REPO_URI="https://github.com/mkeeter/antimony.git"
 
 LICENSE="MIT"
-
 SLOT="0"
 
-KEYWORDS=""
-
-IUSE=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # https://github.com/mkeeter/antimony/issues/196
 DEPEND="
