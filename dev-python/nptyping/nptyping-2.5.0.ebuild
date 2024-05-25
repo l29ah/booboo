@@ -16,14 +16,17 @@ HOMEPAGE="
 SRC_URI="
 	https://github.com/ramonhagenaars/nptyping/archive/v${PV}.tar.gz
 		-> ${P}.gh.tar.gz
+	https://github.com/ramonhagenaars/nptyping/pull/114.patch -> ${PN}-114.patch
 "
+PATCHES=( "${DISTDIR}/${PN}-114.patch" )
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
+# https://github.com/ramonhagenaars/nptyping/issues/113
 RDEPEND="
-	dev-python/numpy[${PYTHON_USEDEP}]
+	<dev-python/numpy-2[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	test? (
