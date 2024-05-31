@@ -11,11 +11,6 @@ EGIT_REPO_URI="https://github.com/AltraMayor/f3"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND}"
 
 src_compile() {
 	emake all extra
