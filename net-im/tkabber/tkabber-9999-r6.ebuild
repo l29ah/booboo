@@ -7,8 +7,6 @@ inherit fossil desktop
 
 DESCRIPTION="GUI client for XMPP (Jabber) instant messaging protocol, written in Tcl/Tk."
 HOMEPAGE="http://tkabber.jabber.ru/"
-IUSE="contrib -gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg
-trayicon +udp vanilla fix-site-plugins-path remote-controlling"
 
 RDEPEND="
 	>=dev-lang/tcl-8.5
@@ -25,8 +23,8 @@ DEPEND="${DEPEND}
 	doc? ( app-text/xml2rfc )"
 
 LICENSE="GPL-2"
-KEYWORDS=""
 SLOT="0"
+IUSE="contrib gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg trayicon +udp vanilla fix-site-plugins-path remote-controlling"
 
 OFFICIAL_TKABBER_PLUGINS_DIR="${S}/plugins/official"
 THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
