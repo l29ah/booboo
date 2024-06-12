@@ -1,10 +1,9 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{3..11}} pypy pypy3 )
+PYTHON_COMPAT=( python{2_7,3_{3..13}} pypy pypy3 )
 
 inherit distutils-r1
 
