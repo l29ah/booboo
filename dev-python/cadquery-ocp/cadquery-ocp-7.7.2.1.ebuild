@@ -7,7 +7,7 @@ DISTUTILS_EXT=1
 PYTHON_COMPAT=( python3_1{0..2} )
 
 # OCP uses "python-single-r1" only because VTK uses "python-single-r1".
-inherit check-reqs cmake llvm multiprocessing python-single-r1 toolchain-funcs
+inherit check-reqs cmake llvm python-single-r1 toolchain-funcs #multiprocessing
 
 MY_PN=OCP
 MY_PV="${PV//_/-}"
@@ -20,10 +20,11 @@ HOMEPAGE="https://github.com/CadQuery/OCP"
 PREBUILT_STUBS_NAME="OCP_src_stubs_ubuntu-20.04"
 SRC_URI="https://github.com/CadQuery/OCP/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz
 	https://github.com/CadQuery/OCP/releases/download/${MY_PV}/${PREBUILT_STUBS_NAME}.zip"
+S="${WORKDIR}/${MY_P}"
 
 LICENSE="Apache-2.0"
-KEYWORDS="~amd64 ~x86"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # CMake and VTK requirements derive from the "OCP/CMakeLists.txt" file
@@ -31,6 +32,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 # (OCCT) to be built with "-DUSE_GLES2=OFF" and thus "-gles2". See also:
 #     https://github.com/CadQuery/OCP/issues/46#issuecomment-808920994
 BDEPEND="
+	app-arch/unzip
 	$(python_gen_cond_dep '
 		>=dev-util/lief-0.11.5[python,${PYTHON_USEDEP}]')
 	dev-python/clang-python
@@ -44,8 +46,6 @@ RDEPEND="
 #	$(python_gen_cond_dep '
 #		>=dev-python/cadquery-pywrap-'${OCCT_PV}'_rc0[${PYTHON_USEDEP}]')
 #"
-
-S="${WORKDIR}/${MY_P}"
 
 # The source "OCP/CMakeLists.txt" file is output by "bindgen" in src_prepare().
 CMAKE_IN_SOURCE_BUILD=True
