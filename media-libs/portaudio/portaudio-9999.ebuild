@@ -1,8 +1,8 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit ltprune multilib-minimal
+EAPI=7
+inherit multilib-minimal
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -75,5 +75,5 @@ multilib_src_install() {
 multilib_src_install_all() {
 	einstalldocs
 	use doc && dodoc -r doc/html
-	prune_libtool_files
+	find "${ED}" -name "*.la" -delete || die
 }
