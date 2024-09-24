@@ -1,0 +1,43 @@
+commit b21c65de23140b0a3b70024a51ac3eb9f9ec87b8
+Author: David Kocik <kocikdav@gmail.com>
+Date:   Wed Mar 6 12:33:07 2024 +0100
+
+    Added missed includes
+
+diff --git a/src/libslic3r/Config.cpp b/src/libslic3r/Config.cpp
+index c68588032..1ad7e44c7 100644
+--- a/src/libslic3r/Config.cpp
++++ b/src/libslic3r/Config.cpp
+@@ -39,6 +39,7 @@
+ #include <boost/nowide/cstdlib.hpp>
+ #include <boost/nowide/iostream.hpp>
+ #include <boost/nowide/fstream.hpp>
++#include <boost/nowide/cstdio.hpp>
+ #include <boost/property_tree/ini_parser.hpp>
+ #include <boost/format.hpp>
+ #include <string.h>
+diff --git a/src/slic3r/GUI/DownloaderFileGet.cpp b/src/slic3r/GUI/DownloaderFileGet.cpp
+index ef9b0256e..7a7c7044c 100644
+--- a/src/slic3r/GUI/DownloaderFileGet.cpp
++++ b/src/slic3r/GUI/DownloaderFileGet.cpp
+@@ -170,7 +170,7 @@ void FileGet::priv::get_perform()
+ 		m_tmp_path = m_dest_folder / (m_filename + "." + std::to_string(get_current_pid()) + ".download");
+ 
+ 		wxCommandEvent* evt = new wxCommandEvent(EVT_DWNLDR_FILE_NAME_CHANGE);
+-		evt->SetString(boost::nowide::widen(m_filename));
++		evt->SetString(from_u8(m_filename));
+ 		evt->SetInt(m_id);
+ 		m_evt_handler->QueueEvent(evt);
+ 	}
+diff --git a/src/slic3r/GUI/wxExtensions.hpp b/src/slic3r/GUI/wxExtensions.hpp
+index 87b26c6b4..621d34691 100644
+--- a/src/slic3r/GUI/wxExtensions.hpp
++++ b/src/slic3r/GUI/wxExtensions.hpp
+@@ -18,6 +18,7 @@
+ 
+ #include <vector>
+ #include <functional>
++#include <boost/filesystem.hpp>
+ 
+ 
+ #ifndef __linux__

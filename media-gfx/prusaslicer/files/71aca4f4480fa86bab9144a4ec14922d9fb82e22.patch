@@ -1,0 +1,74 @@
+From 71aca4f4480fa86bab9144a4ec14922d9fb82e22 Mon Sep 17 00:00:00 2001
+From: tamasmeszaros <meszaros.q@gmail.com>
+Date: Mon, 24 Jul 2023 11:34:19 +0200
+Subject: [PATCH] Fix problems with finding libexpat
+
+fixes #9581
+fixes #10390
+---
+ CMakeLists.txt                |  6 ++++--
+ cmake/modules/FindEXPAT.cmake | 36 -----------------------------------
+ 2 files changed, 4 insertions(+), 38 deletions(-)
+ delete mode 100644 cmake/modules/FindEXPAT.cmake
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dcfe0ca67b8..9556a652f12 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -465,10 +465,12 @@ find_package(EXPAT REQUIRED)
+ 
+ add_library(libexpat INTERFACE)
+ 
+-if (TARGET EXPAT::EXPAT )
++if (TARGET EXPAT::EXPAT ) # found by a newer Find script
+     target_link_libraries(libexpat INTERFACE EXPAT::EXPAT)
+-elseif(TARGET expat::expat)
++elseif(TARGET expat::expat) # found by a config script
+     target_link_libraries(libexpat INTERFACE expat::expat)
++else() # found by an older Find script
++    target_link_libraries(libexpat INTERFACE ${EXPAT_LIBRARIES})
+ endif ()
+ 
+ find_package(PNG REQUIRED)
+diff --git a/cmake/modules/FindEXPAT.cmake b/cmake/modules/FindEXPAT.cmake
+deleted file mode 100644
+index de204c60f7e..00000000000
+--- a/cmake/modules/FindEXPAT.cmake
++++ /dev/null
+@@ -1,36 +0,0 @@
+-set(_q "")
+-if(EXPAT_FIND_QUIETLY)
+-    set(_q QUIET)
+-endif()
+-find_package(EXPAT ${EXPAT_FIND_VERSION} CONFIG ${_q})
+-
+-if(NOT EXPAT_FIND_QUIETLY)
+-    if (NOT EXPAT_FOUND)
+-        message(STATUS "Falling back to MODULE search for EXPAT...")
+-    else()
+-        message(STATUS "EXPAT found in ${EXPAT_DIR}")
+-    endif()
+-endif()
+-
+-if (NOT EXPAT_FOUND)
+-    set(_modpath ${CMAKE_MODULE_PATH})
+-    set(CMAKE_MODULE_PATH "")
+-    include(FindEXPAT)
+-    set(CMAKE_MODULE_PATH ${_modpath})
+-
+-    if (NOT TARGET EXPAT::EXPAT)
+-        add_library(EXPAT::EXPAT INTERFACE)
+-        target_link_libraries(EXPAT::EXPAT INTERFACE ${EXPAT_LIBRARIES})
+-        target_include_directories(EXPAT::EXPAT INTERFACE ${EXPAT_INCLUDE_DIRS})
+-    endif ()
+-endif()
+-
+-if (EXPAT_FOUND AND NOT TARGET EXPAT::EXPAT)
+-    add_library(libexpat INTERFACE)
+-    add_library(EXPAT::EXPAT ALIAS libexpat)
+-    target_link_libraries(libexpat INTERFACE expat::expat)
+-    if (NOT EXPAT_LIBRARIES)
+-        set(EXPAT_LIBRARIES expat::expat CACHE STRING "")
+-    endif ()
+-endif ()
+-
