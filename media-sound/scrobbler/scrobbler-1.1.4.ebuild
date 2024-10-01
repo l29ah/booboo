@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{4..11} )
+PYTHON_COMPAT=( python3_{4..13} )
 inherit distutils-r1
 
 DESCRIPTION="A command-line Last.fm scrobbler and a now-playing status updater."
