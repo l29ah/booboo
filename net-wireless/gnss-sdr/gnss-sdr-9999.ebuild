@@ -34,10 +34,10 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-src_prepare() {
-	eapply "${FILESDIR}/protobuf.patch"
-	cmake_src_prepare
-}
+PATCHES=(
+	"${FILESDIR}/fixup-docs.patch"
+	"${FILESDIR}/protobuf.patch"
+)
 
 src_configure() {
 	local mycmakeargs=(

@@ -1,0 +1,65 @@
+diff --git a/src/main/CMakeLists.txt b/src/main/CMakeLists.txt
+index c58266231..2eacb2152 100644
+--- a/src/main/CMakeLists.txt
++++ b/src/main/CMakeLists.txt
+@@ -120,51 +120,19 @@ if(NOT VOLKGNSSSDR_FOUND)
+     )
+ endif()
+ 
+-find_program(GZIP
+-    gzip
+-    /bin
+-    /usr/bin
+-    /usr/local/bin
+-    /opt/local/bin
+-    /sbin
++install(FILES ${GNSSSDR_SOURCE_DIR}/docs/manpage/gnss-sdr-manpage
++    DESTINATION share/man/man1
++    RENAME gnss-sdr.1
+ )
+ 
+-if(NOT GZIP_NOTFOUND)
+-    execute_process(COMMAND gzip -9 -c ${GNSSSDR_SOURCE_DIR}/docs/manpage/gnss-sdr-manpage
+-        WORKING_DIRECTORY ${GNSSSDR_BINARY_DIR}
+-        OUTPUT_FILE "${GNSSSDR_BINARY_DIR}/gnss-sdr.1.gz"
+-    )
+-
+-    install(FILES ${GNSSSDR_BINARY_DIR}/gnss-sdr.1.gz
++if(NOT VOLKGNSSSDR_FOUND)
++    install(FILES ${GNSSSDR_SOURCE_DIR}/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/cmake/Packaging/volk_gnsssdr_profile-manpage
+         DESTINATION share/man/man1
++        RENAME volk_gnsssdr_profile.1
+     )
+ 
+-    execute_process(COMMAND gzip -9 -c ${GNSSSDR_SOURCE_DIR}/docs/CHANGELOG.md
+-        WORKING_DIRECTORY ${GNSSSDR_BINARY_DIR}
+-        OUTPUT_FILE "${GNSSSDR_BINARY_DIR}/changelog.gz"
+-    )
+-
+-    install(FILES ${GNSSSDR_BINARY_DIR}/changelog.gz
+-        DESTINATION share/doc/gnss-sdr
++    install(FILES ${GNSSSDR_SOURCE_DIR}/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/cmake/Packaging/volk_gnsssdr-config-info-manpage
++        DESTINATION share/man/man1
++        RENAME volk_gnsssdr-config-info.1
+     )
+-
+-    if(NOT VOLKGNSSSDR_FOUND)
+-        execute_process(COMMAND gzip -9 -c ${GNSSSDR_SOURCE_DIR}/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/cmake/Packaging/volk_gnsssdr_profile-manpage
+-            WORKING_DIRECTORY ${GNSSSDR_BINARY_DIR}
+-            OUTPUT_FILE "${GNSSSDR_BINARY_DIR}/volk_gnsssdr_profile.1.gz"
+-        )
+-
+-        execute_process(COMMAND gzip -9 -c ${GNSSSDR_SOURCE_DIR}/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/cmake/Packaging/volk_gnsssdr-config-info-manpage
+-            WORKING_DIRECTORY ${GNSSSDR_BINARY_DIR}
+-            OUTPUT_FILE "${GNSSSDR_BINARY_DIR}/volk_gnsssdr-config-info.1.gz"
+-        )
+-
+-        install(FILES ${GNSSSDR_BINARY_DIR}/volk_gnsssdr_profile.1.gz
+-            DESTINATION share/man/man1
+-        )
+-
+-        install(FILES ${GNSSSDR_BINARY_DIR}/volk_gnsssdr-config-info.1.gz
+-            DESTINATION share/man/man1
+-        )
+-    endif()
+ endif()
