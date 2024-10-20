@@ -45,7 +45,7 @@ fossil_fetch() {
 		local S="${S}/${S_dest}"
 		mkdir -p "${S}"
 		cd "$S"
-		fossil open --nested "$cloned_repo"
+		fossil open --nested "$cloned_repo" || die
 	fi
 
 	popd >/dev/null
