@@ -42,7 +42,7 @@ RDEPEND="
 	sci-libs/libigl
 	sci-libs/nlopt
 	sci-libs/opencascade:=
-	sci-mathematics/cgal:=
+	<sci-mathematics/cgal-6.0:=
 	sys-apps/dbus
 	sys-libs/zlib:=
 	virtual/opengl
