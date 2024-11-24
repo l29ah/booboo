@@ -32,7 +32,7 @@ DEPEND="
 		dev-python/tomli[${PYTHON_USEDEP}]
 		dev-python/tomli-w[${PYTHON_USEDEP}]
 		sys-libs/libseccomp[${PYTHON_USEDEP}]
-		gui? ( dev-python/PyQt6[${PYTHON_USEDEP}] )
+		gui? ( dev-python/pyqt6[${PYTHON_USEDEP}] )
 	')
 "
 

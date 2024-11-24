@@ -24,7 +24,7 @@ DEPEND="$(python_gen_cond_dep '
 RDEPEND="
 	media-gfx/cadquery[${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
-		dev-python/PyQt5[${PYTHON_USEDEP},gui,widgets]
+		dev-python/pyqt5[${PYTHON_USEDEP},gui,widgets]
 		dev-python/spyder[${PYTHON_USEDEP}]
 		dev-python/logbook[${PYTHON_USEDEP}]
 	')
