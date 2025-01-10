@@ -5,7 +5,7 @@ EAPI=8
 
 # due to cadquery
 DISTUTILS_SINGLE_IMPL=1
-PYTHON_COMPAT=( python3_1{1..2} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 git-r3
 
