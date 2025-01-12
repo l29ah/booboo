@@ -35,7 +35,7 @@ BDEPEND="
 	app-arch/unzip
 	$(python_gen_cond_dep '
 		>=dev-util/lief-0.11.5[python,${PYTHON_USEDEP}]')
-	dev-python/clang-python
+	dev-python/clang
 "
 RDEPEND="
 	${PYTHON_DEPS}
