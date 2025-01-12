@@ -108,10 +108,10 @@ src_prepare() {
 	test -d "${_OCCT_LIB_DIR}"      || die "${_OCCT_LIB_DIR} not found."
 	test -d "${_VTK_INCLUDE_DIR}"   || die "${_VTK_INCLUDE_DIR} not found."
 
-	# "dev-python/clang-python" atom targeting this Clang version.
-	local _CLANG_PYTHON_ATOM="dev-python/clang-python-${_CLANG_VERSION}"
+	# "dev-python/clang" atom targeting this Clang version.
+	local _CLANG_PYTHON_ATOM="dev-python/clang-${_CLANG_VERSION}"
 
-	# Ensure "dev-python/clang-python" targets this Clang version.
+	# Ensure "dev-python/clang" targets this Clang version.
 	has_version -r "=${_CLANG_PYTHON_ATOM}" ||
 		die "${_CLANG_PYTHON_ATOM} not installed."
 
