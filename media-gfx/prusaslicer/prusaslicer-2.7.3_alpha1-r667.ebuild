@@ -16,6 +16,7 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 
 DESCRIPTION="A mesh slicer to generate G-code for fused-filament-fabrication (3D printers)"
 HOMEPAGE="https://www.prusa3d.com/prusaslicer/"
+SRC_URI="https://github.com/prusa3d/PrusaSlicer/commit/6c6f90fe4b9a059adde93b7cd32c8b2ba98e555a.patch"
 
 LICENSE="AGPL-3 Boost-1.0 GPL-2 LGPL-3 MIT"
 SLOT="0"
@@ -54,6 +55,8 @@ DEPEND="${RDEPEND}
 	media-libs/qhull[static-libs]
 	test? ( =dev-cpp/catch-2* )
 "
+
+PATCHES=( "${DISTDIR}/6c6f90fe4b9a059adde93b7cd32c8b2ba98e555a.patch" )
 
 src_prepare() {
 	eapply "${FILESDIR}/prusaslicer-2.7.4-boost-1.85.patch"
