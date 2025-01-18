@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit git-r3 autotools
+inherit git-r3
 
 DESCRIPTION="ADMS is a code generator for the Verilog-AMS language"
 HOMEPAGE="https://github.com/Qucs/ADMS"
@@ -13,7 +13,6 @@ EGIT_BRANCH=develop
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
 
 RDEPEND="
 	sys-devel/flex
@@ -25,12 +24,4 @@ DEPEND="
 src_prepare() {
 	default
 	./bootstrap.sh
-}
-
-src_configure() {
-	local myeconfargs=(
-		--enable-maintainer-mode
-	)
-
-	econf $myeconfargs
 }
