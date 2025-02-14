@@ -70,7 +70,7 @@ pkg_pretend() {
 
 pkg_setup() {
 	cadquery-ocp_check_reqs
-	llvm_pkg_setup
+	llvm-r1_pkg_setup
 	python-single-r1_pkg_setup
 }
 
