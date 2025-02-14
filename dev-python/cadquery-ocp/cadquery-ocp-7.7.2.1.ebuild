@@ -5,9 +5,10 @@ EAPI=8
 
 DISTUTILS_EXT=1
 PYTHON_COMPAT=( python3_{10..13} )
+LLVM_COMPAT=( {17..19} )
 
 # OCP uses "python-single-r1" only because VTK uses "python-single-r1".
-inherit check-reqs cmake llvm python-single-r1 toolchain-funcs #multiprocessing
+inherit check-reqs cmake llvm-r1 python-single-r1 toolchain-funcs #multiprocessing
 
 MY_PN=OCP
 MY_PV="${PV//_/-}"
@@ -35,6 +36,10 @@ BDEPEND="
 	app-arch/unzip
 	$(python_gen_cond_dep '
 		>=dev-util/lief-0.11.5[python,${PYTHON_USEDEP}]')
+	$(llvm_gen_dep '
+		llvm-core/clang:${LLVM_SLOT}
+		llvm-core/llvm:${LLVM_SLOT}
+	')
 	dev-python/clang
 "
 RDEPEND="
