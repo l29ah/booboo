@@ -5,7 +5,7 @@ EAPI=7
 
 DESCRIPTION="A Linux utility to change the FSB frequency without having to reboot"
 HOMEPAGE="https://sourceforge.net/projects/lfsb"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

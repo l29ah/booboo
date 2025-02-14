@@ -6,7 +6,7 @@
 MY_PKG_NAME="Vuurmuur"
 DESCRIPTION="Iptables frontend. Ncurses GUI, for administration and monitoring."
 HOMEPAGE="http://www.vuurmuur.org"
-SRC_URI="mirror://sourceforge/vuurmuur/${MY_PKG_NAME}-${PV}.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/vuurmuur/${MY_PKG_NAME}-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

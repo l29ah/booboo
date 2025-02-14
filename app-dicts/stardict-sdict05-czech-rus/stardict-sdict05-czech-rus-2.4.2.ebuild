@@ -11,7 +11,7 @@ TO_LANG=Russian
 inherit stardict
 
 HOMEPAGE="https://sourceforge.net/projects/xdxf/"
-SRC_URI="mirror://sourceforge/project/xdxf/dicts-stardict-form-xdxf/002c/${DICT_P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/project/xdxf/dicts-stardict-form-xdxf/002c/${DICT_P}.tar.bz2"
 KEYWORDS="~x86 ~amd64 ~ppc ~sparc"
 
 S="$WORKDIR/stardict-czech-rus-$PV"

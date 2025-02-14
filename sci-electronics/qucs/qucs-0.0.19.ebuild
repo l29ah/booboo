@@ -9,7 +9,7 @@ inherit flag-o-matic toolchain-funcs
 DESCRIPTION="Quite Universal Circuit Simulator in Qt4"
 HOMEPAGE="http://qucs.sourceforge.net/"
 fn="${PN}-$PV"
-SRC_URI="mirror://sourceforge/${PN}/${fn}.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${fn}.tar.gz"
 S="$WORKDIR/$fn"
 
 LICENSE="GPL-2"

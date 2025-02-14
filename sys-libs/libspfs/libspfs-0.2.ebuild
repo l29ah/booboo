@@ -8,7 +8,7 @@ inherit toolchain-funcs
 DESCRIPTION="Library for writing 9P2000 compliant user-space file servers that
 can be mounted using v9fs file system."
 HOMEPAGE="http://sourceforge.net/projects/npfs/"
-SRC_URI="mirror://sourceforge/npfs/spfs-0.2.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/npfs/spfs-0.2.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

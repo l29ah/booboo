@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION=""
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.xz"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${P}.tar.xz"
 HOMEPAGE="https://sourceforge.net/projects/njconnect/"
 
 LICENSE="GPL-2"

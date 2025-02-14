@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="The Tcl UDP extension provides a simple library to support UDP socket in Tcl."
 HOMEPAGE="http://sourceforge.net/projects/tcludp/"
-SRC_URI="mirror://sourceforge/tcludp/$PV/${P}.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/tcludp/$PV/${P}.tar.gz"
 
 LICENSE="MIT-with-advertising"
 SLOT="0"

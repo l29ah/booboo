@@ -9,7 +9,7 @@ HOMEPAGE="http://vcf2csv.sourceforge.net/"
 MY_PV=$(ver_rs 2 '-')
 MY_PV2=$(ver_cut 1-2)
 MY_P="${PN}-${MY_PV}-src-bin"
-SRC_URI="mirror://sourceforge/${PN}/${PN}/${PN}-${MY_PV2}/${MY_P}.tgz"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${PN}/${PN}-${MY_PV2}/${MY_P}.tgz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -11,7 +11,7 @@ TO_LANG=Serbian
 inherit stardict
 
 HOMEPAGE="https://sourceforge.net/projects/xdxf/"
-SRC_URI="mirror://sourceforge/xdxf/${DICT_P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/xdxf/${DICT_P}.tar.bz2"
 KEYWORDS="~x86 ~amd64 ~ppc ~sparc"
 
 S="$WORKDIR/stardict-eng_serb-$PV"

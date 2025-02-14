@@ -6,7 +6,7 @@ EAPI=6
 
 DESCRIPTION="libspfs-based daemon that shares the local filesystem over 9P"
 HOMEPAGE="http://sourceforge.net/projects/npfs/"
-SRC_URI="mirror://sourceforge/npfs/spfs-0.2.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/npfs/spfs-0.2.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

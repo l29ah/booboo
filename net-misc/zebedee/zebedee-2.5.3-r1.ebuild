@@ -7,7 +7,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="A simple, free, secure TCP and UDP tunnel program"
 HOMEPAGE="https://sourceforge.net/projects/zebedee/"
-SRC_URI="mirror://sourceforge/zebedee/${P}.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/zebedee/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

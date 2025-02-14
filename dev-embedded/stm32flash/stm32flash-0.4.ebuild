@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="Open source flash program for STM32 using the ST serial bootloader"
 HOMEPAGE="http://sourceforge.net/projects/stm32flash/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+SRC_URI="https://downloads.sourceforge.net/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
