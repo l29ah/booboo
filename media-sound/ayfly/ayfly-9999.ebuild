@@ -10,18 +10,16 @@ EGIT_REPO_URI="https://github.com/l29ah/ayfly"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~arm"
 IUSE="wxwidgets"
 
 RDEPEND="wxwidgets? ( x11-libs/wxGTK )"
 DEPEND="$RDEPEND
 	media-libs/libsdl
-	sys-devel/automake"
-
+	dev-build/automake"
 
 src_prepare() {
 	default
-	use arm && epatch ${FILESDIR}/disable_filters.patch
+	use arm && epatch "${FILESDIR}/disable_filters.patch"
 	eautoreconf
 }
 
