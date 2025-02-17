@@ -11,15 +11,6 @@ EGIT_REPO_URI="https://github.com/npat-efault/picocom"
 
 LICENSE="GPL-2"
 SLOT="0"
-if [[ ${PV} == "9999" ]] ; then
-	KEYWORDS=""
-else
-	KEYWORDS="~amd64 ~ppc ~sparc ~x86 ~x86-fbsd"
-	EGIT_COMMIT="$PV"
-fi
-IUSE=""
-
-DEPEND=""
 
 src_prepare() {
 	default
