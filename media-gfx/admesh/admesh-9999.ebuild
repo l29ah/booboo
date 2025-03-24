@@ -3,16 +3,18 @@
 
 EAPI=8
 
-inherit git-r3 cmake
+inherit cmake
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/admesh/admesh/"
+else
+	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://github.com/admesh/admesh/releases/download/v${PV}/${P}.tar.gz"
+fi
 
 DESCRIPTION="CLI and C library for processing triangulated solid meshes"
 HOMEPAGE="https://admesh.readthedocs.io/"
-EGIT_REPO_URI="https://github.com/admesh/admesh/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND}"
