@@ -2,12 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit git-r3 cmake
+inherit git-r3 cmake xdg
 
 DESCRIPTION="An open-source car navigation system with a routing engine"
 HOMEPAGE="http://www.navit-project.org"
 EGIT_REPO_URI="https://github.com/navit-gps/navit"
-SRC_URI="https://patch-diff.githubusercontent.com/raw/navit-gps/navit/pull/647.patch -> $PN-647.patch"
+SRC_URI="https://patch-diff.githubusercontent.com/raw/navit-gps/navit/pull/647.patch -> $PN-647.patch
+	https://github.com/navit-gps/navit/commit/e601a8d9a6f45dea3abd9b77638dc55926d223b2.patch"
 
 LICENSE="LGPL-2"
 SLOT="0"
@@ -35,7 +36,11 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	svg? ( || ( gnome-base/librsvg media-gfx/imagemagick[png,svg] ) )"
 
-PATCHES=( "$DISTDIR/$PN-647.patch" )
+PATCHES=(
+	"${DISTDIR}/${PN}-647.patch"
+	"${DISTDIR}/e601a8d9a6f45dea3abd9b77638dc55926d223b2.patch"
+	"${FILESDIR}/python.patch" # https://github.com/navit-gps/navit/issues/1287#issuecomment-2756444776
+)
 
 src_configure() {
 	mycmakeargs=(
