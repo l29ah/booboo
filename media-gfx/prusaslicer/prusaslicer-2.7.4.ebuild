@@ -59,6 +59,7 @@ PATCHES=(
 	"${FILESDIR}/b21c65de23140b0a3b70024a51ac3eb9f9ec87b8.patch"
 	"${FILESDIR}/71aca4f4480fa86bab9144a4ec14922d9fb82e22.patch"
 	"${FILESDIR}/11769.patch"
+	"${FILESDIR}/${PN}-2.8.0-cgal-6.0.patch"
 )
 
 src_prepare() {
