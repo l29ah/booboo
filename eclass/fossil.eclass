@@ -22,6 +22,7 @@ PROPERTIES+=" live"
 
 
 EFOSSIL_PROJECT="${EFOSSIL_PROJECT:-${PN/-fossil}}"
+EFOSSIL_BRANCH="${EFOSSIL_BRANCH:-trunk}"
 
 fossil_fetch() {
 	local repo_uri="${1:-${EFOSSIL_REPO_URI}}"
@@ -46,6 +47,7 @@ fossil_fetch() {
 		mkdir -p "${S}"
 		cd "$S"
 		fossil open --nested "$cloned_repo" || die
+		fossil up "${EFOSSIL_BRANCH}" || die
 	fi
 
 	popd >/dev/null
