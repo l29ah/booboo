@@ -16,4 +16,5 @@ KEYWORDS="~amd64 ~x86 ~arm64"
 src_install() {
         dobin usbwarden
         dodoc README.md LICENSE
+        keepdir /etc/usbwarden
 }
