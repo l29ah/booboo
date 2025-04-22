@@ -18,13 +18,19 @@ RDEPEND="
 	sound? ( dev-tcltk/snack )
 	trayicon? ( >=dev-tcltk/tktray-1.1 )
 	tkimg? ( >=dev-tcltk/tkimg-1.4.6 )
-	udp? ( dev-tcltk/tcludp )"
+	udp? ( dev-tcltk/tcludp )
+	!minimal? (
+		dev-tcltk/tdom
+		dev-tcltk/tclx
+		dev-tcltk/critcl
+	)
+	"
 DEPEND="${DEPEND}
 	doc? ( app-text/xml2rfc )"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="contrib gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg trayicon +udp vanilla fix-site-plugins-path remote-controlling"
+IUSE="contrib gpg +doc examples plugins 3rd-party-plugins ssl sound tkimg trayicon +udp vanilla fix-site-plugins-path remote-controlling minimal"
 
 OFFICIAL_TKABBER_PLUGINS_DIR="${S}/plugins/official"
 THIRD_PARTY_TKABBER_PLUGINS_DIR="${S}/plugins/3rd-party"
