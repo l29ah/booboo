@@ -38,12 +38,11 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${DISTDIR}/${PN}-647.patch"
-	"${DISTDIR}/e601a8d9a6f45dea3abd9b77638dc55926d223b2.patch"
-	"${FILESDIR}/python.patch" # https://github.com/navit-gps/navit/issues/1287#issuecomment-2756444776
 )
 
 src_configure() {
 	mycmakeargs=(
+		-DUSE_PLUGINS=FALSE
 		-DSAMPLE_MAP=OFF
 		-DUSE_SVG=$(usex svg)
 		-DUSE_OPENGLES=$(usex gles)
