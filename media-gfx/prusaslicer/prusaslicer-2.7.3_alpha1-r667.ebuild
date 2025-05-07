@@ -27,7 +27,7 @@ RESTRICT="!test? ( test )"
 RDEPEND="
 	dev-cpp/eigen:3
 	dev-cpp/tbb:=
-	dev-libs/boost:=[nls]
+	<dev-libs/boost-1.88.0:=[nls]
 	dev-libs/cereal
 	dev-libs/expat
 	dev-libs/glib:2
