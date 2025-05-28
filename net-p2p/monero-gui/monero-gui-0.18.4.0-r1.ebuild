@@ -1,8 +1,8 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-inherit cmake toolchain-funcs git-r3
+EAPI=8
+inherit cmake toolchain-funcs git-r3 desktop xdg
 
 DESCRIPTION="GUI for net-p2p/monero"
 HOMEPAGE="https://getmonero.org"
@@ -69,4 +69,11 @@ src_compile () {
 src_install() {
 	cd "${WORKDIR}/monero-gui-${PV}_build"
 	dobin bin/monero-wallet-gui
+
+	domenu "${FILESDIR}"/monero-gui.desktop
+
+	local x
+	for x in 16 24 32 48 64 96 128 256; do
+		newicon -s ${x} "${FILESDIR}"/${x}x${x}.png monero-gui.png
+	done
 }
