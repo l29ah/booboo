@@ -69,11 +69,8 @@ src_compile () {
 src_install() {
 	cd "${WORKDIR}/monero-gui-${PV}_build"
 	dobin bin/monero-wallet-gui
+	cd -
 
 	domenu "${FILESDIR}"/monero-gui.desktop
-
-	local x
-	for x in 16 24 32 48 64 96 128 256; do
-		newicon -s ${x} "${FILESDIR}"/${x}x${x}.png monero-gui.png
-	done
+	newicon images/monero-vector.svg monero-gui.svg
 }
