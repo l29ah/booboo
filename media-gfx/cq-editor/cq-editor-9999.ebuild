@@ -6,6 +6,7 @@ EAPI=8
 # due to cadquery
 DISTUTILS_SINGLE_IMPL=1
 PYTHON_COMPAT=( python3_{11..13} )
+DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 git-r3
 
