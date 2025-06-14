@@ -38,12 +38,13 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 BDEPEND="
 	app-arch/unzip
 	$(python_gen_cond_dep '
-		>=dev-util/lief-0.11.5[python,${PYTHON_USEDEP}]')
+		>=dev-util/lief-0.11.5[python,${PYTHON_USEDEP}]
+		<dev-python/clang-20[${PYTHON_USEDEP}]
+	')
 	$(llvm_gen_dep '
 		llvm-core/clang:${LLVM_SLOT}
 		llvm-core/llvm:${LLVM_SLOT}
 	')
-	<dev-python/clang-20
 "
 RDEPEND="
 	${PYTHON_DEPS}
