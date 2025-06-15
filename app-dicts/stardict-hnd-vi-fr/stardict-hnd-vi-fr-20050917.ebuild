@@ -10,7 +10,7 @@ TO_LANG="French"
 inherit stardict
 
 HOMEPAGE="https://sourceforge.net/projects/ovdp/"
-SRC_URI="http://ftp.gunadarma.ac.id/mirrors/gentoo/distfiles/VietPhap38K.zip"
+SRC_URI="http://mirror.noris.net/gentoo/distfiles/VietPhap38K.zip"
 
 KEYWORDS="~amd64 ~x86"
 IUSE=""
