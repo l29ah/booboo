@@ -25,7 +25,7 @@ RESTRICT="!test? ( test )"
 RDEPEND="
 	dev-cpp/eigen:3
 	dev-cpp/tbb:=
-	<dev-libs/boost-1.88.0:=[nls]
+	dev-libs/boost:=[nls]
 	dev-libs/cereal
 	dev-libs/expat
 	dev-libs/glib:2
@@ -60,6 +60,8 @@ PATCHES=(
 	"${FILESDIR}/71aca4f4480fa86bab9144a4ec14922d9fb82e22.patch"
 	"${FILESDIR}/11769.patch"
 	"${FILESDIR}/${PN}-2.8.0-cgal-6.0.patch"
+	"${FILESDIR}/${PN}-2.8.1-boost-1.87.patch"
+	"${FILESDIR}/${PN}-2.9.2-boost-1.88.patch"
 )
 
 src_prepare() {
