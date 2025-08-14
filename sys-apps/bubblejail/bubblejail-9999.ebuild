@@ -20,7 +20,7 @@ IUSE="doc gui fish-completion bash-completion"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 BDEPEND="
-	>=dev-python/jinja-2
+	dev-python/jinja2
 	doc? ( app-text/scdoc )
 "
 
