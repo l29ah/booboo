@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}
 		dev-python/typish[${PYTHON_USEDEP}]
 		<dev-python/multimethod-2[${PYTHON_USEDEP}]
 		dev-python/ezdxf[${PYTHON_USEDEP}]
-		dev-python/nptyping[${PYTHON_USEDEP}]
+		dev-python/typish[${PYTHON_USEDEP}]
 		sci-libs/nlopt[python,${PYTHON_USEDEP}]
 	')
 	"
