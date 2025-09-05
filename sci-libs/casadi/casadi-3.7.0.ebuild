@@ -3,13 +3,20 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{11..14} )
 
 CMAKE_MAKEFILE_GENERATOR=emake
 
 inherit python-single-r1 cmake git-r3
 
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
+
+if [[ ${PV} == *9999* ]]; then
+	:
+else
+	EGIT_COMMIT="${PV}"
+	KEYWORDS="~amd64"
+fi
 
 EGIT_BLASFEO_REPO_URI="https://github.com/giaf/blasfeo.git"
 EGIT_BLASFEO_COMMIT="edf92b396adddd9e548b9786f87ad290a0971329"
@@ -91,22 +98,22 @@ DEPEND="${RDEPEND}"
 BDEPEND="python? ( dev-lang/swig )"
 
 REQUIRED_USE="
-    hpipm? ( blasfeo )
-    fatrop? ( blasfeo )
-    proxqp? ( eigen3 simde )
-    ipopt? ( mumps )
-    bonmin? ( ipopt cbc )
-    cbc? ( clp )
-    clp? ( mumps lapack )
+	hpipm? ( blasfeo )
+	fatrop? ( blasfeo )
+	proxqp? ( eigen3 simde )
+	ipopt? ( mumps )
+	bonmin? ( ipopt cbc )
+	cbc? ( clp )
+	clp? ( mumps lapack )
 	mumps? ( lapack )
-    spral? ( lapack )
-    hsl? ( lapack )
-    alpaqa? ( eigen3 )
+	spral? ( lapack )
+	hsl? ( lapack )
+	alpaqa? ( eigen3 )
 	system-mumps? ( system-metis )
 "
 
 pkg_setup() {
-    use python && python-single-r1_pkg_setup
+	use python && python-single-r1_pkg_setup
 }
 
 src_unpack() {
@@ -235,7 +242,7 @@ src_configure() {
 }
 
 src_install() {
-    cmake_src_install
+	cmake_src_install
 
-    use python && python_optimize
+	use python && python_optimize
 }
