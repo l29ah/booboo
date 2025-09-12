@@ -13,7 +13,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_BRANCH="next"
 else
 	SRC_URI="https://github.com/gnss-sdr/gnss-sdr/archive/refs/tags/v${PV}.tar.gz -> $P.tar.gz"
-	KEYWORDS="~x86 ~amd64"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-3"
@@ -32,10 +32,8 @@ DEPEND="
 	dev-libs/protobuf:=
 	sci-libs/armadillo:="
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 PATCHES=(
-	"${FILESDIR}/fixup-docs.patch"
 	"${FILESDIR}/protobuf.patch"
 )
 
