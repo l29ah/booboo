@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+# Copyright 1999-2025 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="A simple, minimalistic ActivityPub instance"
+command="/usr/bin/snac"
+
+command_background="yes"
+pidfile="/run/${SVCNAME}.pid"
+command_args="httpd ${SNAC2_BASEDIR}"
+command_user="${SNAC2_USER}:${SNAC2_GROUP}"
+directory="${SNAC2_BASEDIR}"
+start_stop_daemon_args='--stdout-logger /usr/bin/logger --stderr-logger /usr/bin/logger'

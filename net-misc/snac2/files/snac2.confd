@@ -1,0 +1,10 @@
+# /etc/conf.d/snac2: config file for /etc/init.d/snac2
+
+# snac2 user
+SNAC2_USER="snac2"
+
+# snac2 group
+SNAC2_GROUP="snac2"
+
+# snac2 base directory
+SNAC2_BASEDIR="/var/lib/snac2/data"
