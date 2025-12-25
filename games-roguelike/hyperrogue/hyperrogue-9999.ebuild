@@ -27,7 +27,8 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
-	sed -i 's#HYPERPATH ""#HYPERPATH "/usr/share/hyperrogue/"#' sysconfig.h
+	sed -i 's#HYPERPATH ""#HYPERPATH "/usr/share/hyperrogue/"#' sysconfig.h || die
+	sed -i "s#g++ #&${CXXFLAGS} #" mymake.cpp || die
 }
 
 src_compile() {
