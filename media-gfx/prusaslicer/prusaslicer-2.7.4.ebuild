@@ -62,6 +62,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.8.0-cgal-6.0.patch"
 	"${FILESDIR}/${PN}-2.8.1-boost-1.87.patch"
 	"${FILESDIR}/${PN}-2.9.2-boost-1.88.patch"
+	"${FILESDIR}/${PN}-2.7.4-boost-1.89.patch"
 )
 
 src_prepare() {
