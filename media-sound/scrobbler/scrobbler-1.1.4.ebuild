@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{4..13} )
+PYTHON_COMPAT=( python3_{4..14} )
 inherit distutils-r1
 
 DESCRIPTION="A command-line Last.fm scrobbler and a now-playing status updater."

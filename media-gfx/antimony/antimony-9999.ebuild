@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{3..13} )
+PYTHON_COMPAT=( python3_{3..14} )
 
 inherit git-r3 cmake python-single-r1
 
