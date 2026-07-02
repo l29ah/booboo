@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<use>
+		<flag name="ncurses">Build console (ncurses) variant</flag>
+		<flag name="tiles">Build graphical (tiles) variant</flag>
+		<flag name="soundpack">Install complete soundpack
+			(as opposed to only menu sounds) </flag>
+	</use>
+</pkgmetadata>
