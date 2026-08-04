@@ -34,10 +34,6 @@ DEPEND="
 	sci-libs/armadillo:="
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}/${P}-protobuf.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_UNIT_TESTING=0
