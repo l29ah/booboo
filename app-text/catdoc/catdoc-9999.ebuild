@@ -8,7 +8,7 @@ inherit autotools git-r3
 
 DESCRIPTION="Converter for Microsoft Word, Excel, PowerPoint and RTF files to text"
 HOMEPAGE="http://www.wagner.pp.ru/~vitus/software/catdoc/"
-EGIT_REPO_URI="http://www.wagner.pp.ru/git/oss/catdoc.git"
+EGIT_REPO_URI="https://github.com/vbwagner/catdoc"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -18,6 +18,12 @@ IUSE="tk"
 DEPEND="tk? ( >=dev-lang/tk-8.1 )"
 
 DOCS="CODING.STD CREDITS NEWS README TODO"
+
+pkg_setup() {
+	ewarn "This project is known to contain multiple unaddressed vulnerabilities:"
+	ewarn "https://bugs.gentoo.org/916866#c2"
+	ewarn "https://github.com/vbwagner/catdoc/issues"
+}
 
 src_prepare() {
 	default
