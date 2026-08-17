@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/vbwagner/catdoc"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="tk"
+IUSE="apparmor tk"
 
 DEPEND="tk? ( >=dev-lang/tk-8.1 )"
 
@@ -57,4 +57,9 @@ src_install() {
 	fi
 
 	dodoc ${DOCS}
+
+	if use apparmor; then
+		mkdir -p "${ED}"/etc/apparmor.d
+		cp "${FILESDIR}/${PN}-apparmor" "${ED}"/etc/apparmor.d/${PN} || die
+	fi
 }

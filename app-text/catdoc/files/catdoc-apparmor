@@ -1,0 +1,11 @@
+# Last Modified: Mon Jul  6 04:16:49 2026
+abi <abi/4.0>,
+
+include <tunables/global>
+
+profile catdoc /usr/bin/{catdoc,catppt,xls2csv-catdoc} {
+  include <abstractions/base>
+
+  /usr/share/catdoc/* r,
+  /**/*.{doc,ppt,xls,DOC,PPT,XLS} r,
+}
