@@ -113,7 +113,7 @@ src_configure() {
 		-DLLAMA_CURL=$(usex curl)
 		-DLLAMA_OPENSSL=$(usex openssl)
 		-DBUILD_NUMBER="1"
-		-DGENTOO_REMOVE_CMAKE_BLAS_HACK=ON
+		-DGENTOO_REMOVE_CMAKE_BLAS_HACK=ON # purge when <cmake-4.2.4 are purged
 		-DGGML_CUDA=$(usex cuda)
 		-DGGML_OPENCL=$(usex opencl)
 		-DGGML_OPENMP=$(usex openmp)
@@ -162,7 +162,6 @@ src_configure() {
 
 src_install() {
 	cmake_src_install
-	dobin "${BUILD_DIR}/bin/rpc-server"
 
 	# avoid clashing with whisper.cpp
 	rm -rf "${ED}/usr/include"
