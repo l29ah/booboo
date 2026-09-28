@@ -16,9 +16,9 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ggml-org/llama.cpp.git"
 else
-	MY_PV="b${PV#0_pre}"
+	MY_PV="v${PV}"
 	SRC_URI="https://github.com/ggml-org/llama.cpp/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/llama.cpp-${MY_PV}"
+	S="${WORKDIR}/llama.cpp-${PV}"
 	KEYWORDS="~amd64"
 fi
 
@@ -102,8 +102,9 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DLLAMA_BUILD_UI=OFF
+		-DLLAMA_USE_PREBUILT_UI=OFF
 		-DLLAMA_BUILD_TESTS=OFF
-		-DLLAMA_BUILD_WEBUI=OFF
 		-DLLAMA_BUILD_EXAMPLES=$(usex examples)
 		-DLLAMA_BUILD_SERVER=ON
 		-DCMAKE_SKIP_BUILD_RPATH=ON
@@ -112,7 +113,7 @@ src_configure() {
 		-DLLAMA_CURL=$(usex curl)
 		-DLLAMA_OPENSSL=$(usex openssl)
 		-DBUILD_NUMBER="1"
-		-DGENTOO_REMOVE_CMAKE_BLAS_HACK=ON
+		-DGENTOO_REMOVE_CMAKE_BLAS_HACK=ON # purge when <cmake-4.2.4 are purged
 		-DGGML_CUDA=$(usex cuda)
 		-DGGML_OPENCL=$(usex opencl)
 		-DGGML_OPENMP=$(usex openmp)
@@ -161,7 +162,6 @@ src_configure() {
 
 src_install() {
 	cmake_src_install
-	dobin "${BUILD_DIR}/bin/rpc-server"
 
 	# avoid clashing with whisper.cpp
 	rm -rf "${ED}/usr/include"
