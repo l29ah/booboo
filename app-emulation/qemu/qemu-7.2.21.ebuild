@@ -198,7 +198,7 @@ SOFTMMU_TOOLS_DEPEND="
 		sys-libs/ncurses:=[unicode(+)]
 		sys-libs/ncurses:=[static-libs(+)]
 	)
-	nfs? ( >=net-fs/libnfs-1.9.3:=[static-libs(+)] )
+	nfs? ( <net-fs/libnfs-6:=[static-libs(+)] )
 	numa? ( sys-process/numactl[static-libs(+)] )
 	opengl? (
 		virtual/opengl
