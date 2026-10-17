@@ -3,6 +3,7 @@
 <pkgmetadata>
 	<use>
 		<flag name="blis">Build a BLIS backend</flag>
+		<flag name="debug">Build test binaries</flag>
 		<flag name="flexiblas">Build a FlexiBLAS backend</flag>
 		<flag name="rocm">Build a HIP (ROCm) backend</flag>
 		<flag name="hip">Build a HIP (ROCm) backend</flag>

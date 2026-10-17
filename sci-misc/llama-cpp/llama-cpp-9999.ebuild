@@ -34,7 +34,7 @@ SLOT="0"
 CPU_FLAGS_X86=( avx avx2 f16c )
 
 # wwma USE explained here: https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md#hip
-IUSE="curl openblas +openmp blis rocm cuda opencl openssl vulkan flexiblas wmma examples"
+IUSE="curl debug openblas +openmp blis rocm cuda opencl openssl vulkan flexiblas wmma examples"
 
 REQUIRED_USE="
 	?? (
@@ -104,7 +104,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DLLAMA_BUILD_UI=OFF
 		-DLLAMA_USE_PREBUILT_UI=OFF
-		-DLLAMA_BUILD_TESTS=OFF
+		-DLLAMA_BUILD_TESTS=$(usex debug)
 		-DLLAMA_BUILD_EXAMPLES=$(usex examples)
 		-DLLAMA_BUILD_SERVER=ON
 		-DCMAKE_SKIP_BUILD_RPATH=ON
