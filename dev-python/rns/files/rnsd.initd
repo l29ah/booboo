@@ -1,0 +1,24 @@
+#!/sbin/openrc-run
+# Copyright 2024-2025 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="Reticulum Network Stack Daemon"
+description="Cryptography-based networking stack daemon"
+
+configfile="${RNSD_CONFIG:-/etc/reticulum}"
+
+command=/usr/bin/rnsd
+command_args="--config ${configfile} --service ${RNSD_OPTS}"
+command_background=yes
+command_user=reticulum:reticulum
+pidfile=/run/rnsd.pid
+
+depend() {
+	need net
+	use logger
+}
+
+start_pre() {
+	checkpath -d -m 0750 -o reticulum:reticulum /etc/reticulum
+	checkpath -d -m 0750 -o reticulum:reticulum /var/log/reticulum
+}

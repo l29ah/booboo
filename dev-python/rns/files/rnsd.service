@@ -1,0 +1,24 @@
+[Unit]
+Description=Reticulum Network Stack Daemon
+Documentation=https://reticulum.network/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=reticulum
+Group=reticulum
+Restart=on-failure
+EnvironmentFile=-/etc/conf.d/rnsd
+Environment=RNSD_CONFIG=/etc/reticulum
+ExecStart=/usr/bin/rnsd --config ${RNSD_CONFIG} --service ${RNSD_OPTS}
+PIDFile=/run/rnsd.pid
+
+# Create directories
+RuntimeDirectory=reticulum
+LogsDirectory=reticulum
+StateDirectory=reticulum
+ConfigurationDirectory=reticulum
+
+[Install]
+WantedBy=multi-user.target

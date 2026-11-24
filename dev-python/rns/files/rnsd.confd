@@ -1,0 +1,9 @@
+# Copyright 2024-2025 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+# The reticulum config directory
+RNSD_CONFIG="/etc/reticulum"
+
+# Add any extra options to pass to rnsd to this setting.
+# Example: RNSD_OPTS="--verbose"
+#RNSD_OPTS=""
