@@ -16,9 +16,14 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ggml-org/llama.cpp.git"
 else
-	MY_PV="v${PV}"
+	if [[ $(ver_cut 2) == "pre" ]]; then
+		MY_PV="b${PV#0_pre}"
+		S="${WORKDIR}/llama.cpp-${MY_PV}"
+	else
+		MY_PV="v${PV}"
+		S="${WORKDIR}/llama.cpp-${PV}"
+	fi
 	SRC_URI="https://github.com/ggml-org/llama.cpp/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/llama.cpp-${PV}"
 	KEYWORDS="~amd64"
 fi
 
@@ -34,7 +39,7 @@ SLOT="0"
 CPU_FLAGS_X86=( avx avx2 f16c )
 
 # wwma USE explained here: https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md#hip
-IUSE="curl openblas +openmp blis rocm cuda opencl openssl vulkan flexiblas wmma examples"
+IUSE="curl debug openblas +openmp blis rocm cuda opencl openssl vulkan flexiblas wmma examples"
 
 REQUIRED_USE="
 	?? (
@@ -104,7 +109,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DLLAMA_BUILD_UI=OFF
 		-DLLAMA_USE_PREBUILT_UI=OFF
-		-DLLAMA_BUILD_TESTS=OFF
+		-DLLAMA_BUILD_TESTS=$(usex debug)
 		-DLLAMA_BUILD_EXAMPLES=$(usex examples)
 		-DLLAMA_BUILD_SERVER=ON
 		-DCMAKE_SKIP_BUILD_RPATH=ON
